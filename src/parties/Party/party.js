@@ -1,6 +1,7 @@
 import { AMaaSModel } from '../../core'
 import { Address, Email } from '../Children'
-import { Comment, PartyLink, Reference } from '../../children'
+import { Comment, Reference } from '../../children'
+import PartyLink from '../../children/Link/PartyLink'
 import { PARTY_STATUSES, PARTY_TYPES } from '../enums'
 
 // Some changes to the file

@@ -1,6 +1,7 @@
 import Party from './party.js'
 import { Address, Email } from '../Children'
-import { Comment, PartyLink, Reference } from '../../children'
+import { Comment, Reference } from '../../children'
+import PartyLink from '../../children/Link/PartyLink'
 
 describe('Party', () => {
   describe('serialization', () => {

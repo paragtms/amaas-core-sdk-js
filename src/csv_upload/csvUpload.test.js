@@ -1,6 +1,7 @@
 import * as csv from './csvUpload'
 import { Address } from '../parties/Children/address'
-import {Charge, Code, Comment, Link, Reference} from '../children'
+import {Charge, Code, Comment, Reference} from '../children'
+import Link from '../children/Link/TransactionLink'
 import {Transaction} from '../transactions'
 import {Book} from '../books'
 import {Party} from '../parties'
@@ -39,9 +40,9 @@ describe('csvUpload', () => {
     expect(result).toEqual(expectedResult)
   })
 
-  it('should convert child headings to nested objects', () => {
+  it.only('should convert child headings to nested objects', () => {
     const param2 = {
-      csv: 'links.MyLink.0.linked_id,comments.MyComments.comment_value'
+      csv: 'links.MyLink.0.linked_transaction_id,comments.MyComments.comment_value'
       +'\n'+'1,PAID'
       +'\n'+'2,REFUND'
       +'\n'+'3,'
@@ -56,17 +57,17 @@ describe('csvUpload', () => {
     var commentObject2 = {}
     commentObject2["MyComments"] = comment2;
 
-    const link1 = new Link({linkedId: 1})
+    const link1 = new Link({linkedTransactionId: 1})
     var linkedObject1 = {}
     var linkArray1 = []
     linkArray1.push(link1)
     linkedObject1["MyLink"] = linkArray1
-    const link2 = new Link({linkedId: 2})
+    const link2 = new Link({linkedTransactionId: 2})
     var linkedObject2 = {}
     var linkArray2 = []
     linkArray2.push(link2)
     linkedObject2["MyLink"] = linkArray2
-    const link3 = new Link({linkedId: 3})
+    const link3 = new Link({linkedTransactionId: 3})
     var linkedObject3 = {}
     var linkArray3 = []
     linkArray3.push(link3)

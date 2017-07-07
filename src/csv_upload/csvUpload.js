@@ -1,5 +1,8 @@
 import {Address, Email} from '../parties/Children/index'
-import {Charge, Code, Comment, Link, Reference} from '../children/index'
+import {Charge, Code, Comment, Reference} from '../children/index'
+import TransactionLink from '../children/Link/TransactionLink'
+import AssetLink from '../children/Link/AssetLink'
+import PartyLink from '../children/Link/PartyLink'
 import {camelCase} from 'lodash'
 import {Transaction} from '../transactions'
 import {Book} from '../books'
@@ -90,7 +93,23 @@ export function parseString({csv, type}) {
              var linkObjectParam = {};
 
              linkObjectParam[newHeaderElements[2]] = currentValue;
-             const testLink = new Link(linkObjectParam);
+
+             let testLink
+             switch(type) {
+               case 'transactions':
+                testLink = new TransactionLink(linkObjectParam)
+                break
+               case 'assets':
+                testLink = new AssetLink(linkObjectParam)
+                break
+               case 'parties':
+                testLink = new PartyLink(linkObjectParam)
+                break
+               case 'books':
+               default:
+                null
+             }
+
              linkTypeArray.push(testLink);
              linkObject[newHeaderElements[1]] = linkTypeArray;
              finalObject[newHeaderElements[0]] = linkObject;
@@ -98,7 +117,21 @@ export function parseString({csv, type}) {
              var linkObjectParam = {};
              var linkTypeArray = [];
              linkObjectParam[newHeaderElements[2]] = currentValue;
-             const testLink = new Link(linkObjectParam);
+             let testLink
+             switch(type) {
+               case 'transactions':
+                testLink = new TransactionLink(linkObjectParam)
+                break
+               case 'assets':
+                testLink = new AssetLink(linkObjectParam)
+                break
+               case 'parties':
+                testLink = new PartyLink(linkObjectParam)
+                break
+               case 'books':
+               default:
+                null
+             }
              linkTypeArray.push(testLink);
              finalObject[newHeaderElements[0]][newHeaderElements[1]] = linkTypeArray;
            } else if (references.includes(newHeaderElements[0]) && references.includes(newHeaderElements[1]) && references.includes(newHeaderElements[3])) {
@@ -106,7 +139,21 @@ export function parseString({csv, type}) {
            } else if(references.includes(newHeaderElements[0]) && references.includes(newHeaderElements[1]) && !references.includes(newHeaderElements[3])) {
              var anotherLinkObject = {};
              anotherLinkObject[headerElements[2]]=currentValue;
-             const testLink = new Link(anotherLinkObject);
+             let testLink
+             switch(type) {
+               case 'transactions':
+                testLink = new TransactionLink(anotherLinkObject)
+                break
+               case 'assets':
+                testLink = new AssetLink(anotherLinkObject)
+                break
+               case 'parties':
+                testLink = new PartyLink(anotherLinkObject)
+                break
+               case 'books':
+               default:
+                null
+             }
              finalObject[newHeaderElements[0]][newHeaderElements[1]].push(testLink);
            }
            references = newHeaderElements; // update references

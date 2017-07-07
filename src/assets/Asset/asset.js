@@ -1,5 +1,6 @@
 import { AMaaSModel } from '../../core'
-import { Comment, AssetLink, Reference } from '../../children'
+import { Comment, Reference } from '../../children'
+import AssetLink from '../../children/Link/AssetLink'
 
 /**
  * Class representing an Asset
