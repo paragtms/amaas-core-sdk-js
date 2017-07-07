@@ -1,4 +1,4 @@
-import Transaction from './Transaction.js'
+import Transaction from './transaction.js'
 import { Charge, Code, Comment, Party, Rate, Reference } from '../../children'
 import TransactionLink from '../../children/Link/TransactionLink'
 
