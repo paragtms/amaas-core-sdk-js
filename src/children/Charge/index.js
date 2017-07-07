@@ -5,7 +5,6 @@ class Charge extends AMaaSModel {
   constructor({
     chargeValue,
     currency,
-    active,
     netAffecting,
     createdBy,
     updatedBy,
@@ -38,7 +37,6 @@ class Charge extends AMaaSModel {
 
     this.chargeValue = chargeValue
     this.currency = currency
-    this.active = active === false ? false : true
     this.netAffecting = netAffecting === false ? false : true
   }
 }

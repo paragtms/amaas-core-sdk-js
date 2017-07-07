@@ -3,21 +3,6 @@ import Decimal from 'decimal.js'
 
 describe('Charge class', () => {
   describe('constructor', () => {
-    it('should set this.active to false if given false', () => {
-      const testCharge = new Charge({ active: false })
-      expect(testCharge.active).toBeFalsy()
-    })
-
-    it('should set this.active to true if given true', () => {
-      const testCharge = new Charge({ active: true })
-      expect(testCharge.active).toBeTruthy()
-    })
-
-    it('should set this.active to true if not passed', () => {
-      const testCharge = new Charge({})
-      expect(testCharge.active).toBeTruthy()
-    })
-
     it('should set this.netAffecting to false if given false', () => {
       const testCharge = new Charge({ netAffecting: false })
       expect(testCharge.netAffecting).toBeFalsy()

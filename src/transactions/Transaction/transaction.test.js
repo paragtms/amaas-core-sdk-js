@@ -1,5 +1,5 @@
-import Transaction from './transaction.js'
-import { Charge, Code, Comment, TransactionLink, Reference, Party } from '../../children'
+import Transaction from './Transaction.js'
+import { Charge, Code, Comment, Link, Party, Rate, Reference, TransactionLink } from '../../children'
 
 const Decimal = require('decimal.js')
 
@@ -97,6 +97,16 @@ describe('Transaction class', () => {
       expect(testTrans.parties.LEGAL.partyId).toEqual('legalId')
     })
 
+    it('should set Rates correctly', () => {
+      const rates = {
+        TAX: { rateValue: 10 },
+        COMMISSION: new Rate({ rateValue: 5 })
+      }
+      testTrans.rates = rates
+      expect(testTrans.rates.TAX).toBeInstanceOf(Rate)
+      expect(testTrans.rates.COMMISSION).toBeInstanceOf(Rate)
+    })
+
     it('should set transactionType to Trade if undefined', () => {
       expect(testTrans.transactionType).toEqual('Trade')
     })
@@ -116,7 +126,7 @@ describe('Transaction class', () => {
       const price = new Decimal(data.price)
       expect(testTrans.netSettlement).toEqual(quantity.times(price))
       testTrans.charges = {
-        TAX: new Charge({ chargeValue: 10, active: true, netAffecting: true })
+        TAX: new Charge({ chargeValue: 10, netAffecting: true })
       }
       expect(testTrans.netSettlement).toEqual(quantity.times(price).minus(new Decimal(10)))
     })
@@ -156,8 +166,8 @@ describe('Transaction class', () => {
     const data = {
       price: 45.66,
       charges: {
-        TAX : new Charge({ chargeValue: 10, currency: 'SGD', active: true, netAffecting: true }),
-        COMMISSION : new Charge({ chargeValue: 20, currency: 'SGD', active: true, netAffecting: true })
+        TAX : new Charge({ chargeValue: 10, currency: 'SGD', netAffecting: true }),
+        COMMISSION : new Charge({ chargeValue: 20, currency: 'SGD', netAffecting: true })
       },
       codes: {
         INT: new Code({ codeValue: 'InternalCode1' })
@@ -173,7 +183,7 @@ describe('Transaction class', () => {
     beforeEach(() => {
       trans = new Transaction(data)
     })
-    it('chargesNetEffect should return all active and netAffecting charges', () => {
+    it('chargesNetEffect should return all netAffecting charges', () => {
       trans.chargesNetEffect()
       expect(trans.chargesNetEffect()).toEqual(new Decimal(30))
     })

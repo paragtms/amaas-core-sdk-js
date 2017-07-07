@@ -2,19 +2,10 @@ import Link from './Link.js'
 
 describe('Link class', () => {
   describe('constructor', () => {
-    it('should set active to false if given false', () => {
-      const testLink = new Link({ active: false })
-      expect(testLink.active).toBeFalsy()
-    })
-
-    it('should set active to true if given true', () => {
-      const testLink = new Link({ active: true })
-      expect(testLink.active).toBeTruthy()
-    })
-
-    it('should set active to true if not given', () => {
-      const testLink = new Link({})
-      expect(testLink.active).toBeTruthy()
-    })
+    it('it should set linkedId correctly', () => {
+        const value = 'AJTOJT3J'
+        const link = new Link({ linkedId: value })
+        expect(link.linkedId).toEqual(value)
+      })
   })
 })
