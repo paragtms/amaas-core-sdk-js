@@ -5,12 +5,12 @@ import {
   Charge,
   Code,
   Comment,
-  TransactionLink,
   Link,
   Party,
   Reference,
   Rate
 } from '../../children'
+import TransactionLink from '../../children/Link/TransactionLink'
 import * as types from '../enums'
 
 /**
