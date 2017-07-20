@@ -9,6 +9,15 @@ declare module '@amaas/amaas-core-sdk-js' {
       function deactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
       function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
     }
+    namespace Parties {
+      function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<parties.PartiesClassType[]> | void
+      function insert({ AMId, party }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType }, callback?: Function): Promise<parties.PartiesClassType> | void
+      function amend({ AMId, party, resourceId }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType, resourceId: string }): Promise<parties.PartiesClassType> | void
+      function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
+      function search({ AMId, query }: { AMId: number, query: { assetManagerIds?: number[], clientIds?: number[], partyStatuses?: string[], partyIds?: string[], partyClasses?: string[], partyTypes?: string[] } }, callback?: Function): Promise<parties.PartiesClassType[]> | void
+      function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
+      function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
+    }
     function config({ stage, credentialsPath, token }: { stage: string, credentialsPath: string, token: string }): void
   }
   // CLASSES
@@ -97,6 +106,10 @@ declare module '@amaas/amaas-core-sdk-js' {
   }
 
   namespace parties {
+
+    type PartiesClassType = parties.AssetManager | parties.Broker | parties.Company | parties.Exchange | parties.Fund | parties.GovernmentAgency | parties.Individual | parties.Organisation | parties.Party | parties.SubFund
+    type PartiesInterfaceType = parties.IAssetManager | parties.IBroker | parties.ICompany | parties.IExchange | parties.IFund | parties.IGovernmentAgency | parties.IIndividual | parties.IOrganisation | parties.IParty | parties.ISubFund
+
     interface IParty {
       assetManagerId: number
       partyId: string
