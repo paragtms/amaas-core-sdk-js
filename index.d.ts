@@ -108,17 +108,17 @@ declare module '@amaas/amaas-core-sdk-js' {
       version?: number
       constructor({
         assetManagerId,
-        bookId=uuid(),
-        bookType='Trading',
-        bookStatus='Active',
+        bookId,
+        bookType,
+        bookStatus,
         ownerId,
         partyId,
-        closeTime='17:30:00',
-        timezone='UTC',
-        baseCurrency='USD',
-        businessUnit='',
-        description='',
-        positions=[],
+        closeTime,
+        timezone,
+        baseCurrency,
+        businessUnit,
+        description,
+        positions,
         createdBy,
         updatedBy,
         createdTime,
@@ -132,17 +132,29 @@ declare module '@amaas/amaas-core-sdk-js' {
 
     interface ITransaction {
       assetManagerId: number
-      bookId: string
-      bookType?: 'Counterparty' | 'Management' | 'Trading' | 'Wash'
-      bookStatus?: string
-      ownerId?: number
-      partyId?: string
-      closeTime?: string
-      timezone?: string
-      baseCurrency?: string
-      businessUnit?: string
-      description?: string
-      positions?: any[]
+      assetBookId?: string
+      counterpartyBookId?: string
+      transactionAction?: 'Buy' | 'Sell' | 'Short Sell' | 'Deliver' | 'Receive' | 'Subscription' | 'Redemption' | 'Acquire' | 'Remove'
+      assetId?: string
+      quantity?: any
+      transactionDate?: string
+      settlementDate?: string
+      price?: any
+      transactionCurrency?: string
+      settlementCurrency?: string
+      asset?: any
+      executionTime?: string
+      transactionType?: 'Allocation' | 'Block' | 'Cashflow' | 'Coupon' | 'Dividend' | 'Exercise' | 'Expiry' | 'Payment' | 'Journal' | 'Maturity' | 'Net' | 'Novation' | 'Split' | 'Trade' | 'Transfer'
+      transactionId?: string
+      transactionStatus?: 'New' | 'Amended' | 'Superseded' | 'Cancelled' | 'Netted' | 'Novated'
+      charges?: any
+      codes?: any
+      comments?: any
+      links?: any
+      parties?: any
+      rates?: any
+      references?: any
+      postings?: any
       createdBy?: string
       updatedBy?: string
       createdTime?: string
