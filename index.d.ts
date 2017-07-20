@@ -18,6 +18,11 @@ declare module '@amaas/amaas-core-sdk-js' {
       function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
     }
+    namespace Relationships {
+      function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<relationships.Relationship> | void
+      function insert({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | relationships.IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
+      function amend({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | relationships.IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
+    }
     function config({ stage, credentialsPath, token }: { stage: string, credentialsPath: string, token: string }): void
   }
   // CLASSES
@@ -61,6 +66,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
   }
 
+  // books
   namespace books {
 
     interface IBook {
@@ -105,6 +111,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
   }
 
+  // parties
   namespace parties {
 
     type PartiesClassType = parties.AssetManager | parties.Broker | parties.Company | parties.Exchange | parties.Fund | parties.GovernmentAgency | parties.Individual | parties.Organisation | parties.Party | parties.SubFund
@@ -218,6 +225,34 @@ declare module '@amaas/amaas-core-sdk-js' {
 
   }
 
+  // relationships
+  namespace relationships {
+    interface IRelationship {
+      assetManagerId: number
+      relationshipId?: string
+      relatedId: number
+      relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee'
+      clientId?: number
+      relationshipStatus?: string
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+    }
+
+    class Relationship {
+      assetManagerId: number
+      relationshipId?: string
+      relatedId: number
+      relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee'
+      clientId?: number
+      relationshipStatus?: string
+      constructor(props: IRelationship)
+    }
+  }
+
+  // transactions
   namespace transactions {
 
     interface ITransaction {
@@ -252,7 +287,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       version?: number
     }
 
-    export class Transaction {
+    class Transaction {
       assetManagerId: number
       assetBookId?: string
       counterpartyBookId?: string
