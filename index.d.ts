@@ -3,11 +3,11 @@ declare module '@amaas/amaas-core-sdk-js' {
 
   namespace api {
     namespace AssetManagers {
-      export function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<any> | void
-      export function insert({ assetManager }: { assetManager: assetManagers.AssetManager | assetManagers.IAssetManager }, callback?: Function): Promise<assetManagers.AssetManager> | void
-      export function amend({ AMId, assetManager }: { AMId: number, assetManager: assetManagers.AssetManager | assetManagers.IAssetManager }, callback?: Function): Promise<assetManagers.AssetManager> | void
-      export function deactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
-      export function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
+      function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<any> | void
+      function insert({ assetManager }: { assetManager: assetManagers.AssetManager | assetManagers.IAssetManager }, callback?: Function): Promise<assetManagers.AssetManager> | void
+      function amend({ AMId, assetManager }: { AMId: number, assetManager: assetManagers.AssetManager | assetManagers.IAssetManager }, callback?: Function): Promise<assetManagers.AssetManager> | void
+      function deactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
+      function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
     }
     function config({ stage, credentialsPath, token }: { stage: string, credentialsPath: string, token: string }): void
   }
@@ -33,7 +33,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       version?: number
     }
 
-    export class AssetManager {
+    class AssetManager {
       assetManagerId?: number
       assetManagerType: 'Accredited Investor' | 'Bank' | 'Broker' | 'Corporate Treasury' | 'Family Office' | 'Fund Administrator' | 'Fund Manager' | 'Hedge Fund' | 'Private Equity' | 'Individual' | 'Venture Capital'
       assetManagerStatus?: string
@@ -48,22 +48,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       createdTime?: string
       updatedTime?: string
       version?: number
-      constructor({
-        assetManagerId,
-        assetManagerType,
-        assetManagerStatus,
-        accountType,
-        clientId,
-        partyId,
-        defaultBookOwnerId,
-        defaultTimezone,
-        defaultBookCloseTime,
-        createdBy,
-        updatedBy,
-        createdTime,
-        updatedTime,
-        version
-      }: IAssetManager)
+      constructor(props: IAssetManager)
     }
   }
 
@@ -89,7 +74,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       version?: number
     }
 
-    export class Book {
+    class Book {
       assetManagerId: number
       bookId: string
       bookType?: 'Counterparty' | 'Management' | 'Trading' | 'Wash'
@@ -107,26 +92,117 @@ declare module '@amaas/amaas-core-sdk-js' {
       createdTime?: string
       updatedTime?: string
       version?: number
-      constructor({
-        assetManagerId,
-        bookId,
-        bookType,
-        bookStatus,
-        ownerId,
-        partyId,
-        closeTime,
-        timezone,
-        baseCurrency,
-        businessUnit,
-        description,
-        positions,
-        createdBy,
-        updatedBy,
-        createdTime,
-        updatedTime,
-        version
-      }: IBook)
+      constructor(props: IBook)
     }
+  }
+
+  namespace parties {
+    interface IParty {
+      assetManagerId: number
+      partyId: string
+      partyStatus?: string
+      partyClass?: string
+      baseCurrency?: string
+      description?: string
+      addresses?: any
+      emails?: any
+      references?: any
+      comments?: any
+      links?: any
+      legalName?: string
+      displayName?: string
+      url?: string
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+    }
+
+    class Party {
+      assetManagerId: number
+      partyId: string
+      partyStatus?: string
+      partyClass?: string
+      baseCurrency?: string
+      description?: string
+      addresses?: any
+      emails?: any
+      references?: any
+      comments?: any
+      links?: any
+      legalName?: string
+      displayName?: string
+      url?: string
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+      constructor(props: IParty)
+    }
+
+    interface IIndividual extends IParty {
+      givenNames?: string
+      surname?: string
+      dateOfBirth?: string
+    }
+
+    class Individual extends Party {
+      givenNames?: string
+      surname?: string
+      dateOfBirth?: string
+      constructor(props: IIndividual)
+    }
+
+    interface IOrganisation extends IParty {}
+
+    class Organisation extends Party {
+      constructor(props: IOrganisation)
+    }
+
+    interface ISubFund extends IParty {}
+
+    class SubFund extends Party {
+      constructor(props: ISubFund)
+    }
+
+    interface IGovernmentAgency extends IOrganisation {}
+
+    class GovernmentAgency extends Organisation {
+      constructor(props: IGovernmentAgency)
+    }
+
+    interface ICompany extends IOrganisation {}
+
+    class Company extends Organisation {
+      constructor(props: ICompany)
+    }
+
+    interface IFund extends ICompany {}
+
+    class Fund extends Company {
+      constructor(props: IFund)
+    }
+
+    interface IExchange extends ICompany {}
+
+    class Exchange extends Company {
+      constructor(props: IExchange)
+    }
+
+    interface IBroker extends ICompany {}
+
+    class Broker extends Company {
+      constructor(props: IBroker)
+    }
+
+    interface IAssetManager extends ICompany {}
+
+    class AssetManager extends Company {
+      constructor(props: AssetManager)
+    }
+
   }
 
   namespace transactions {
@@ -193,37 +269,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       createdTime?: string
       updatedTime?: string
       version?: number
-      constructor({
-        assetManagerId,
-        assetBookId,
-        counterpartyBookId,
-        transactionAction,
-        assetId,
-        quantity,
-        transactionDate,
-        settlementDate,
-        price,
-        transactionCurrency,
-        settlementCurrency,
-        asset,
-        executionTime,
-        transactionType,
-        transactionId,
-        transactionStatus,
-        charges,
-        codes,
-        comments,
-        links,
-        parties,
-        rates,
-        references,
-        postings,
-        createdBy,
-        updatedBy,
-        createdTime,
-        updatedTime,
-        version
-      }: ITransaction)
+      constructor(props: ITransaction)
     }
   }
 }
