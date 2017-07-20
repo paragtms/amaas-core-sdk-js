@@ -115,6 +115,62 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
   }
 
+  //assets
+  namespace assets {
+
+    // base class
+    interface IAsset {}
+    // bonds
+    interface IBondBase extends IAsset {}
+    interface IBondCorporate extends IBondBase {}
+    interface IBondGovernment extends IBondBase {}
+    interface IBondMortgage extends IBondBase {}
+
+    interface ICurrency extends IAsset {}
+
+    interface ICustomAsset extends IAsset {}
+
+    interface IDerivative extends IAsset {}
+    interface IBondOption extends IDerivative {}
+    interface IContractForDifference extends IDerivative {}
+    interface IForeignExchangeOption extends IDerivative {}
+
+    interface IEquity extends IAsset {}
+
+    interface IFund extends IAsset {}
+    interface IExchangeTradedFund extends IFund {}
+
+    interface IForeignExchangeBase extends IAsset {}
+    interface IForeignExchange extends IForeignExchangeBase {}
+    interface INonDeliverableForward extends IForeignExchangeBase {}
+
+    interface IIndex extends IAsset {}
+
+    interface IListedDerivative extends IAsset {}
+    interface IFuture extends IListedDerivative {}
+    interface IBondFuture extends IFuture {}
+    interface IFutureOption extends IFuture {}
+    interface IBondFutureOption extends IFutureOption {}
+    interface IEnergyFuture extends IFuture {}
+    interface IEquityFuture extends IFuture {}
+    interface IIndexFuture extends IFuture {}
+    interface IInterestRateFuture extends IFuture {}
+    interface IListedContractForDifference extends IListedDerivative {}
+
+    interface IPrivateInvestment extends IAsset {}
+
+    interface IRealAsset extends IAsset {}
+    interface IRealEstate extends IRealAsset {}
+    interface IWine extends IRealAsset {}
+
+    interface ISukuk extends IAsset {}
+
+    interface ISynthetic extends IAsset {}
+    interface ISynethticFromBook extends ISynthetic {}
+    interface ISyntheticMultiLeg extends ISynthetic {}
+
+  }
+
   // parties
   namespace parties {
 
