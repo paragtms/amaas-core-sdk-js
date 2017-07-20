@@ -19,9 +19,13 @@ declare module '@amaas/amaas-core-sdk-js' {
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
     }
     namespace Relationships {
-      function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<relationships.Relationship> | void
+      function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<relationships.Relationship[]> | void
       function insert({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | relationships.IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
       function amend({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | relationships.IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
+    }
+    namespace Positions {
+      function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<transactions.Position> | void
+      function search({ AMId, query }: { AMId: number, query: { assetManagerIds?: number[], bookIds?: string[], assetIds?: string[], clientIds?: number[], accountIds?: string[], accountingTypes?: string[], positionDate?: string[] } }, callback?: Function): Promise<transactions.Position> | void
     }
     function config({ stage, credentialsPath, token }: { stage: string, credentialsPath: string, token: string }): void
   }
@@ -318,6 +322,43 @@ declare module '@amaas/amaas-core-sdk-js' {
       updatedTime?: string
       version?: number
       constructor(props: ITransaction)
+    }
+
+    interface IPosition {
+      assetManagerId: number
+      bookId?: string
+      assetId?: string
+      quantity?: any
+      validFrom?: string
+      internalId?: string
+      validTo?: string
+      clientId?: number
+      accountingType?: string
+      accountId?: string | number
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+    }
+
+    class Position {
+      assetManagerId: number
+      bookId?: string
+      assetId?: string
+      quantity?: any
+      validFrom?: string
+      internalId?: string
+      validTo?: string
+      clientId?: number
+      accountingType?: string
+      accountId?: string | number
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+      constructor(props: IPosition)
     }
   }
 }
