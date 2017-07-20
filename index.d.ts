@@ -9,6 +9,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       export function deactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
       export function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
     }
+    function config({ stage, credentialsPath, token }: { stage: string, credentialsPath: string, token: string }): void
   }
   // CLASSES
   
