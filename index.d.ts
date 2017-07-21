@@ -118,56 +118,422 @@ declare module '@amaas/amaas-core-sdk-js' {
   //assets
   namespace assets {
 
+    type IAssetTypes = IAsset | IBondTypes | ICurrencyTypes | ICustomAssetTypes | IDerivativesType | IEquityTypes | IFundTypes | IForeignExchangeTypes | IIndexTypes | IListedDerivativeTypes | IPrivateInvestmentTypes | IRealAssetTypes | ISukukTypes | ISyntheticTypes
+    type AssetClassTypes = Asset | BondClassTypes | CurrencyClassTypes | CustomAssetClassTypes | DerivativesClassType | EquityClassTypes | FundClassTypes | ForeignExchangeClassTypes | IndexClassTypes | ListedDerivativeClassTypes | PrivateInvestmentClassTypes | RealAssetClassTypes | SukukClassTypes | SyntheticClassTypes
+
     // base class
-    interface IAsset {}
+    interface IAsset {
+      assetManagerId: number
+      assetId: string
+      assetClass?: string
+      fungible: boolean
+      assetIssuerId?: string | number
+      assetStatus?: string
+      countryId?: string
+      venueId?: string
+      currency?: string
+      issueDate?: string
+      description?: string
+      displayName?: string
+      rollPrice?: boolean
+      clientId?: string | number
+      comments?: any
+      links?: any
+      references?: any
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+    }
+    class Asset {
+      assetManagerId: number
+      assetId: string
+      assetClass?: string
+      fungible: boolean
+      assetIssuerId?: string | number
+      assetStatus?: string
+      countryId?: string
+      venueId?: string
+      currency?: string
+      issueDate?: string
+      description?: string
+      displayName?: string
+      rollPrice?: boolean
+      clientId?: string | number
+      comments?: any
+      links?: any
+      references?: any
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+      constructor(props: IAsset)
+    }
+
     // bonds
-    interface IBondBase extends IAsset {}
+    type IBondTypes = IBondBase | IBondCorporate | IBondGovernment | IBondMortgage
+    type BondClassTypes = BondBase | BondCorporate | BondGovernment | BondMortgage
+    interface IBondBase extends IAsset {
+      maturityDate?: string
+      defaulted: boolean
+      coupon?: any
+      par?: any
+      payFrequency?: string
+    }
+    class BondBase extends Asset {
+      maturityDate?: string
+      defaulted: boolean
+      coupon?: any
+      par?: any
+      payFrequency?: string
+      constructor(props: IBondBase)
+    }
     interface IBondCorporate extends IBondBase {}
+    class BondCorporate extends BondBase {
+      constructor(props: IBondCorporate)
+    }
     interface IBondGovernment extends IBondBase {}
+    class BondGovernment extends BondBase {
+      constructor(props: IBondGovernment)
+    }
     interface IBondMortgage extends IBondBase {}
+    class BondMortgage extends BondBase {
+      constructor(props: IBondMortgage)
+    }
 
-    interface ICurrency extends IAsset {}
+    // currency
+    type ICurrencyTypes = ICurrency
+    type CurrencyClassTypes = Currency
+    interface ICurrency extends IAsset {
+      deliverable?: boolean
+      minorUnitPlaces?: string | number
+    }
+    class Currency extends Asset {
+      deliverable?: boolean
+      minorUnitPlaces?: string | number
+      constructor(props: ICurrency)
+    }
 
-    interface ICustomAsset extends IAsset {}
+    // custom asset
+    type ICustomAssetTypes = ICustomAsset
+    type CustomAssetClassTypes = CustomAsset
+    interface ICustomAsset extends IAsset {
+      maturityDate?: string
+      [propName: string]: any
+    }
+    class CustomAsset extends Asset {
+      maturityDate?: string
+      [propName: string]: any
+      constructor(props: ICustomAsset)
+    }
 
+    // derivatives
+    type IDerivativesType = IDerivative | IBondOption | IContractForDifference | IForeignExchangeOption
+    type DerivativesClassType = Derivative | BondOption | ContractForDifference | ForeignExchangeOption
     interface IDerivative extends IAsset {}
-    interface IBondOption extends IDerivative {}
+    class Derivative extends Asset {
+      constructor(props: IDerivative)
+    }
+    interface IBondOption extends IDerivative {
+      optionStyle?: 'American' | 'Bermudan' | 'European'
+      optionType?: 'Put' | 'Call'
+      strike?: any
+      expiryDate?: string
+      underlyingAssetId?: string | number
+    }
+    class BondOption extends Derivative {
+      optionStyle?: 'American' | 'Bermudan' | 'European'
+      optionType?: 'Put' | 'Call'
+      strike?: any
+      expiryDate?: string
+      underlyingAssetId?: string | number
+      constructor(props: IBondOption)
+    }
     interface IContractForDifference extends IDerivative {}
-    interface IForeignExchangeOption extends IDerivative {}
+    class ContractForDifference extends Derivative {
+      constructor(props: IContractForDifference)
+    }
+    interface IForeignExchangeOption extends IDerivative {
+      optionStyle?: 'American' | 'Bermudan' | 'European'
+      optionType?: 'Put' | 'Call'
+      strike?: any
+      expiryDate?: string
+      underlyingAssetId?: string | number
+    }
+    class ForeignExchangeOption extends Derivative {
+      optionStyle?: 'American' | 'Bermudan' | 'European'
+      optionType?: 'Put' | 'Call'
+      strike?: any
+      expiryDate?: string
+      underlyingAssetId?: string | number
+      constructor(props: IForeignExchangeOption)
+    }
 
+    // equity
+    type IEquityTypes = IEquity
+    type EquityClassTypes = Equity
     interface IEquity extends IAsset {}
+    class Equity extends Asset {
+      constructor(props: IEquity)
+    }
 
-    interface IFund extends IAsset {}
+    // funds
+    type IFundTypes = IFund | IExchangeTradedFund
+    type FundClassTypes = Fund | ExchangeTradedFund
+    interface IFund extends IAsset {
+      fundType?: 'Open' | 'Closed' | 'ETF'
+      creationDate?: string
+      nav?: any
+      expenseRatio?: any
+      netAssets?: any
+    }
+    class Fund extends Asset {
+      fundType?: 'Open' | 'Closed' | 'ETF'
+      creationDate?: string
+      nav?: any
+      expenseRatio?: any
+      netAssets?: any
+      constructor(props: IFund)
+    }
     interface IExchangeTradedFund extends IFund {}
+    class ExchangeTradedFund extends Fund {
+      constructor(props: IExchangeTradedFund)
+    }
 
+    // foreign exchange
+    type IForeignExchangeTypes = IForeignExchangeBase | IForeignExchange | INonDeliverableForward
+    type ForeignExchangeClassTypes = ForeignExchangeBase | ForeignExchange | NonDeliverableForward
     interface IForeignExchangeBase extends IAsset {}
+    class ForeignExchangeBase extends Asset {
+      constructor(props: IForeignExchangeBase)
+    }
     interface IForeignExchange extends IForeignExchangeBase {}
+    class ForeignExchange extends ForeignExchangeBase {
+      constructor(props: IForeignExchange)
+    }
     interface INonDeliverableForward extends IForeignExchangeBase {}
+    class NonDeliverableForward extends ForeignExchangeBase {
+      constructor(props: INonDeliverableForward)
+    }
 
+    // index
+    type IIndexTypes = IIndex
+    type IndexClassTypes = Index
     interface IIndex extends IAsset {}
+    class Index extends Asset {
+      constructor(props: IIndex)
+    }
 
+    // listed derivative
+    type IListedDerivativeTypes = IListedDerivative | IFuture | IBondFuture | IFutureOption | IBondFutureOption | IEnergyFuture | IEquityFuture | IIndexFuture | IInterestRateFuture | IListedContractForDifference
+    type ListedDerivativeClassTypes = ListedDerivative | Future | BondFuture | FutureOption | BondFutureOption | EnergyFuture | EquityFuture | IndexFuture | InterestRateFuture | ListedContractForDifference
     interface IListedDerivative extends IAsset {}
-    interface IFuture extends IListedDerivative {}
-    interface IBondFuture extends IFuture {}
-    interface IFutureOption extends IFuture {}
+    class ListedDerivative extends Asset {
+      constructor(props: IListedDerivative)
+    }
+    interface IFuture extends IListedDerivative {
+      settlementType?: 'Physical' | 'Cash'
+      contractSize?: any
+      pointValue?: any
+      tickSize?: any
+      quoteUnit?: any
+      underlyingAssetId?: string
+      expiryDate?: string
+    }
+    class Future extends ListedDerivative {
+      settlementType?: 'Physical' | 'Cash'
+      contractSize?: any
+      pointValue?: any
+      tickSize?: any
+      quoteUnit?: any
+      underlyingAssetId?: string
+      expiryDate?: string
+      constructor(props: IFuture)
+    }
+    interface IBondFuture extends IFuture {
+      cheapestToDeliverId?: string | number
+      underlyingBondTenor?: '1M' | '3M' | '6M' | '9M' | '1Y' | '2Y' | '5Y' | '10Y' | '15Y' | '20Y' | '30Y' | '40Y' | '50Y'
+      underlyingBondCoupon?: any
+    }
+    class BondFuture extends Future {
+      cheapestToDeliverId?: string | number
+      underlyingBondTenor?: '1M' | '3M' | '6M' | '9M' | '1Y' | '2Y' | '5Y' | '10Y' | '15Y' | '20Y' | '30Y' | '40Y' | '50Y'
+      underlyingBondCoupon?: any
+    }
+    interface IFutureOption extends IFuture {
+      optionType?: 'Put' | 'Call'
+      optionStyle?: 'American' | 'Bermudan' | 'European'
+      strike?: any
+    }
+    class FutureOption extends Future {
+      optionType?: 'Put' | 'Call'
+      optionStyle?: 'American' | 'Bermudan' | 'European'
+      strike?: any
+      constructor(props: IFutureOption)
+    }
     interface IBondFutureOption extends IFutureOption {}
+    class BondFutureOption extends FutureOption {
+      constructor(props: IBondFutureOption)
+    }
     interface IEnergyFuture extends IFuture {}
+    class EnergyFuture extends Future {
+      constructor(props: IEnergyFuture)
+    }
     interface IEquityFuture extends IFuture {}
+    class EquityFuture extends Future {
+      constructor(props: IEquityFuture)
+    }
     interface IIndexFuture extends IFuture {}
+    class IndexFuture extends Future {
+      constructor(props: IIndexFuture)
+    }
     interface IInterestRateFuture extends IFuture {}
+    class InterestRateFuture extends Future {
+      constructor(props: IInterestRateFuture)
+    }
     interface IListedContractForDifference extends IListedDerivative {}
+    class ListedContractForDifference extends ListedDerivative {
+      constructor(props: IListedContractForDifference)
+    }
 
-    interface IPrivateInvestment extends IAsset {}
+    // private investment
+    type IPrivateInvestmentTypes = IPrivateInvestment
+    type PrivateInvestmentClassTypes = PrivateInvestment
+    interface IPrivateInvestment extends IAsset {
+      category?: 'Private Equity' | 'Mutual Funds' | 'Hedge Funds' | 'Fund of Funds' | 'StartUp' | 'Private Company' | 'Others'
+      subCategory?: 'Money Market Funds' | 'Bond Funds' | 'Balanced Funds' | 'Equity Funds' | 'Speciality Funds' | 'Leverage Buyout Funds' | 'Growth Equity Funds' | 'Venture Capital Funds' | 'Real Estate Investment Funds' | 'Mezzanine Funds' | 'Distresses Debt Funds' | 'Special Situation Funds'| 'Market Neutral Funds' | 'Equity Long Funds' | 'Equity Short Funds' | 'Event-Driven Funds' | 'Macro Funds' | 'Currency Funds' | 'Equity Funds' | 'Commodity' | 'Credit' | 'Index Arbitrage' | 'Quant Funds' | 'Lifestyle Startup' | 'Small Business' | 'Silicon Valley Type Startup' | 'Startup to be Quickly Sold' | 'Large Company Startup' | 'Social Startups'
+      investmentDate?: string
+      numShares?: any
+      priceShare?: any
+      shareClass?: string
+      series?: string
+      shareType?: string
+      coupon?: any
+      couponFreq?: string | number
+      upfrontFee?: any
+      exitFee?: any
+      managementFee?: any
+      performanceFee?: any
+      hurdle?: any
+      margin?: any
+      highWaterMark?: any
+      maturityDate?: string
+      lockUpPeriod?: any
+      investmentTerm?: any
+      ownership?: any
+    }
+    class PrivateInvestment extends Asset {
+      category?: 'Private Equity' | 'Mutual Funds' | 'Hedge Funds' | 'Fund of Funds' | 'StartUp' | 'Private Company' | 'Others'
+      subCategory?: 'Money Market Funds' | 'Bond Funds' | 'Balanced Funds' | 'Equity Funds' | 'Speciality Funds' | 'Leverage Buyout Funds' | 'Growth Equity Funds' | 'Venture Capital Funds' | 'Real Estate Investment Funds' | 'Mezzanine Funds' | 'Distresses Debt Funds' | 'Special Situation Funds'| 'Market Neutral Funds' | 'Equity Long Funds' | 'Equity Short Funds' | 'Event-Driven Funds' | 'Macro Funds' | 'Currency Funds' | 'Equity Funds' | 'Commodity' | 'Credit' | 'Index Arbitrage' | 'Quant Funds' | 'Lifestyle Startup' | 'Small Business' | 'Silicon Valley Type Startup' | 'Startup to be Quickly Sold' | 'Large Company Startup' | 'Social Startups'
+      investmentDate?: string
+      numShares?: any
+      priceShare?: any
+      shareClass?: string
+      series?: string
+      shareType?: string
+      coupon?: any
+      couponFreq?: string | number
+      upfrontFee?: any
+      exitFee?: any
+      managementFee?: any
+      performanceFee?: any
+      hurdle?: any
+      margin?: any
+      highWaterMark?: any
+      maturityDate?: string
+      lockUpPeriod?: any
+      investmentTerm?: any
+      ownership?: any
+      constructor(props: IPrivateInvestment)
+    }
 
-    interface IRealAsset extends IAsset {}
+    // real assets
+    type IRealAssetTypes = IRealAsset | IRealEstate | IWine
+    type RealAssetClassTypes = RealAsset | RealEstate | Wine
+    interface IRealAsset extends IAsset {
+      ownership?: any
+    }
+    class RealAsset extends Asset {
+      ownership?: any
+      constructor(props: IRealAsset)
+    }
     interface IRealEstate extends IRealAsset {}
-    interface IWine extends IRealAsset {}
+    class RealEstate extends RealAsset {
+      constructor(props: IRealEstate)
+    }
+    interface IWine extends IRealAsset {
+      year?: any
+      producer?: string
+      region?: string
+      appellation?: string | number
+      classification?: string | number
+      color?: string
+      bottleSize?: string
+      bottleInCellar?: any
+      bottleLocation?: string
+      storageCost?: any
+      ratingType?: string
+      ratingValue?: any
+      packingType?: any
+      toDrinkStart?: string
+      toDrinkEnd?: string
+    }
+    class Wine extends RealAsset {
+      year?: any
+      producer?: string
+      region?: string
+      appellation?: string | number
+      classification?: string | number
+      color?: string
+      bottleSize?: string
+      bottleInCellar?: any
+      bottleLocation?: string
+      storageCost?: any
+      ratingType?: string
+      ratingValue?: any
+      packingType?: any
+      toDrinkStart?: string
+      toDrinkEnd?: string
+      constructor(props: IWine)
+    }
 
-    interface ISukuk extends IAsset {}
+    // sukuk
+    type ISukukTypes = ISukuk
+    type SukukClassTypes = Sukuk
+    interface ISukuk extends IAsset {
+      maturityDate?: string
+    }
+    class Sukuk extends Asset {
+      maturityDate?: string
+      constructor(props: ISukuk)
+    }
 
-    interface ISynthetic extends IAsset {}
-    interface ISynethticFromBook extends ISynthetic {}
-    interface ISyntheticMultiLeg extends ISynthetic {}
+    // synthetics
+    type ISyntheticTypes = ISynthetic | ISynethticFromBook | ISyntheticMultiLeg
+    type SyntheticClassTypes = Synthetic | SynethticFromBook | SyntheticMultiLeg
+    interface ISynthetic extends IAsset {
+      maturityDate?: string
+    }
+    class Synthetic extends Asset {
+      maturityDate?: string
+      constructor(props: ISynthetic)
+    }
+    interface ISynethticFromBook extends ISynthetic {
+      bookId?: string
+    }
+    class SynethticFromBook extends Synthetic {
+      bookId?: string
+      constructor(props: ISynethticFromBook)
+    }
+    interface ISyntheticMultiLeg extends ISynthetic {
+      legs?: any[]
+    }
+    class SyntheticMultiLeg extends Synthetic {
+      legs?: any[]
+      constructor(props: ISyntheticMultiLeg)
+    }
 
   }
 

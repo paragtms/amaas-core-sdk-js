@@ -30,7 +30,6 @@ class Asset extends AMaaSModel {
    * @param {object} [params.comments] - Object of Comments attached to the Asset
    * @param {object} [params.links] - Object of array of Links attached to the Asset
    * @param {object} [params.references={}] - Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated
-   * @param {object} [params.clientAdditional] - Object of custom properties for creating a Custom Asset (set in the Custom Asset class)
    * @param {string} [params.createdBy] - ID of the user that created the Asset
    * @param {string} [params.updatedBy] - ID of the user that updated the Asset
    * @param {date} [params.createdTime] - Time that the Asset was created
@@ -59,8 +58,7 @@ class Asset extends AMaaSModel {
     updatedBy,
     createdTime,
     updatedTime,
-    version,
-    ...clientAdditional,
+    version
   }) {
     super({
       createdBy,
