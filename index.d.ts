@@ -26,6 +26,13 @@ declare module '@amaas/amaas-core-sdk-js' {
       function retire({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
     }
+    namespace Monitor {
+      function retrieveItems({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
+      function insertNewItem({ AMId, item }: { AMId: number, item: monitor.IMonitorItem | monitor.Item }, callback?: Function): Promise<monitor.Item> | void
+      function resubmitItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
+      function searchItems({ AMId, query }: { AMId?: number, query: { assetManagerIds?: number[], itemIds: stringp[], assetBookIds: string[], itemStatuses: string[], itemClasses: string[], itemTypes: string[], itemLevels: string[], itemSources: string[], transactionIds: string[], assetIds: string[] } }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
+      function closeItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
+    }
     namespace Parties {
       function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<parties.PartiesClassType[]> | void
       function insert({ AMId, party }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType }, callback?: Function): Promise<parties.PartiesClassType> | void
@@ -691,6 +698,50 @@ declare module '@amaas/amaas-core-sdk-js' {
       clientId?: number
       relationshipStatus?: string
       constructor(props: IRelationship)
+    }
+  }
+
+  // monitor
+  namespace monitor {
+
+    interface IMonitorItem {
+      assetManagerId: number
+      itemId?: string
+      itemClass?: 'Exception' | 'Notification'
+      itemType?: string
+      itemLevel?: 'Info' | 'Warning' | 'Error' | 'Critical'
+      itemSource?: string
+      message?: string
+      itemStatus?: 'Open' | 'Closed' | 'Resubmitted' | 'Superseded'
+      assetBookId?: string
+      transactionId?: string
+      assetId?: string
+      itemDate?: string
+      createdBy?: string
+      createdTime?: string
+      updatedBy?: string
+      updatedTime?: string
+      version?: number
+    }
+    class Item {
+      assetManagerId: number
+      itemId?: string
+      itemClass?: 'Exception' | 'Notification'
+      itemType?: string
+      itemLevel?: 'Info' | 'Warning' | 'Error' | 'Critical'
+      itemSource?: string
+      message?: string
+      itemStatus?: 'Open' | 'Closed' | 'Resubmitted' | 'Superseded'
+      assetBookId?: string
+      transactionId?: string
+      assetId?: string
+      itemDate?: string
+      createdBy?: string
+      createdTime?: string
+      updatedBy?: string
+      updatedTime?: string
+      version?: number
+      constructor(props: IMonitorItem)
     }
   }
 
