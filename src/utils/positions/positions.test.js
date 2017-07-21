@@ -1,65 +1,60 @@
 import { retrieve, search } from './positions.js'
 import Position from '../../transactions/Positions/position.js'
 import * as api from '../../exports/api'
+import * as network from '../network'
 
-// jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000
+network.retrieveData = jest.fn()
+network.insertData = jest.fn()
+network.patchData = jest.fn()
+network.putData = jest.fn()
+network.searchData = jest.fn()
+network.deleteData = jest.fn()
+
 api.config({
   stage: 'staging',
   token: process.env.API_TOKEN
 })
 
-describe('utils/positions', () => {
-  describe('retrieve', () => {
-    it('retrieves', done => {
-      retrieve({ AMId: 1 })
-        .then(res => {
-          expect(res[0]).toBeDefined()
-          done()
-        })
-        .catch(err => console.error(err))
+const mockPos = {
+  assetManagerId: 1,
+  bookId: 'testID',
+  assetId: 'assetID',
+  quantity: 4,
+  validFrom: 'date',
+  internalId: 'ID',
+  validTo: 'date',
+  clientId: 3,
+  accountingType: 'type',
+  accountId: 'account'
+}
+
+describe('retrieve', () => {
+  beforeAll(() => {
+    network.retrieveData.mockImplementation(() => Promise.resolve(mockPos))
+  })
+  test('with promise', () => {
+    let promise = retrieve({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls retrieveData with correct params', done => {
+    retrieve({ AMId: 1 }, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'positions', AMId: 1 })
+      done()
     })
   })
+})
 
-  describe('search', () => {
-    test('with callback', callback => {
-      search({
-        AMId: 1,
-        query: { bookIds: ['GRGWGA'] }
-      }, (error, positions) => {
-        expect(Array.isArray(positions)).toBeTruthy()
-        if (positions.length > 0) {
-          expect(positions[0]).toBeInstanceOf(Position)
-        }
-        callback(error)
-      })
-    })
-
-    test('with promise', callback => {
-      let promise = search({
-        AMId: 1,
-        query: { bookIds: ['GRGWGA'] }
-      })
-      expect(promise).toBeInstanceOf(Promise)
-      promise.then(positions => {
-        expect(Array.isArray(positions)).toBeTruthy()
-        if (positions.length > 0) {
-          expect(positions[0]).toBeInstanceOf(Position)
-        }
-        callback()
-      })
-    })
-
-    it('should search', async done => {
-      const query = {
-        assetManagerIds: [1]
-      }
-      let res = await search({ query })
-      if (res.length === 0) {
-        console.error('search: Result is empty, force fail on timeout.')
-        return
-      }
-      res = res[0]
-      expect(res.assetManagerId).toEqual(1)
+describe('search', () => {
+  beforeAll(() => {
+    network.searchData.mockImplementation(() => Promise.resolve(mockPos))
+  })
+  test('with promise', () => {
+    let promise = search({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls searchData with correct params', done => {
+    search({ AMId: 1, query: { queryKey: ['queryValues'] } }, (error, result) => {
+      expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'positions', AMId: 1, query: { queryKey: ['queryValues'] } })
       done()
     })
   })
