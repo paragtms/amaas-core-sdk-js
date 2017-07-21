@@ -31,7 +31,7 @@ export function retrieveItem({ AMId, resourceId }, callback) {
   if (typeof callback !== 'function') {
     return promise
   }
-  promise.catch(err => callback(error))
+  promise.catch(error => callback(error))
 }
 
 /**
