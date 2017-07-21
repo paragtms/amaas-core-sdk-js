@@ -1,5 +1,5 @@
 import { retrieveData, insertData } from '../network'
-import { Link } from '../../children'
+import TransactionLink from '../../children/Link/TransactionLink'
 
 /**
  * Retrieve Allocations for a specific Transaction
@@ -25,9 +25,12 @@ export function retrieve({ AMId, resourceId }, callback) {
     resourceId
   }
   let promise = retrieveData(params).then(result => {
-    const allocations = result.map(link => {
-      return new Link(link)
-    })
+    let allocations
+    if (Array.isArray(result)) {
+      allocations = result.map(alloc => new TransactionLink(alloc))
+    } else {
+      allocations = new TransactionLink(result)
+    }
     if (typeof callback === 'function') {
       callback(null, allocations)
     }
@@ -62,7 +65,7 @@ export function send({ AMId, resourceId, data }, callback) {
     AMaaSClass: 'allocations',
     AMId,
     resourceId,
-    data
+    data: JSON.parse(JSON.stringify(data || {}))
   }
   let promise = insertData(params).then(result => {
     const allocated = result
