@@ -8,6 +8,7 @@ import * as AssetManagers from '../utils/assetManagers'
 import * as Assets from '../utils/assets'
 import * as Books from '../utils/books'
 import * as CorporateActions from '../utils/corporateActions'
+import * as Monitor from '../utils/monitor'
 import * as Netting from '../utils/netting'
 import * as Parties from '../utils/parties'
 import * as Positions from '../utils/positions'
@@ -23,6 +24,7 @@ export {
   Assets,
   Books,
   CorporateActions,
+  Monitor,
   Parties,
   Positions,
   Transactions,
