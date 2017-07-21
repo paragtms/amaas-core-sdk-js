@@ -8,8 +8,7 @@ All notable changes to this project will be documented in this file.
 - Added PrivateInvestment class (with ownership property).
 - Added ownership property to RealAsset and its subclasses.
 - Added `apiVersion` option to the api config. This will default to the latest stable version.
-- Added type declaration file
-- Added Monitor Item class.
+- Added type declaration file for AssetManager class and api.AssetManagers.*
 
 ### Changed
 - Removed `maturityDate` from the Asset base class and set either maturityDate or expiryDate on the relevant subclasses.

@@ -3,7 +3,6 @@ import { assets } from './exports/assets'
 import { books } from './exports/books'
 import { children } from './exports/children'
 import { corporateActions } from './exports/corporateActions'
-import { monitor } from './exports/monitor'
 import { parties } from './exports/parties'
 import { transactions } from './exports/transactions'
 
@@ -16,7 +15,6 @@ export {
   books,
   children,
   corporateActions,
-  monitor,
   parties,
   transactions
 }
