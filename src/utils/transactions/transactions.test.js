@@ -1,171 +1,131 @@
 import { retrieve, insert, amend, partialAmend, search, cancel } from './transactions'
 import * as api from '../../exports/api'
+import * as network from '../network'
+
+network.retrieveData = jest.fn()
+network.insertData = jest.fn()
+network.patchData = jest.fn()
+network.putData = jest.fn()
+network.searchData = jest.fn()
+network.deleteData = jest.fn()
 
 api.config({
   stage: 'staging',
   token: process.env.API_TOKEN
 })
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000
 
-describe('utils/transactions', () => {
-  describe('retrieve', () => {
-    test('with callback', done => {
-      const params = { AMId: 1 }
-      retrieve(params, (err, res) => {
-        expect(res).toBeDefined()
-        if (Array.isArray(res)) {
-          expect(res[0].transactionId).toBeDefined()
-          done()
-        } else {
-          expect(res.transactionId).toBeDefined()
-          done()
-        }
-      })
-    })
+const mockTransaction = {
+  settlementDate: "2017-03-17",
+  transactionDate: "2017-03-15",
+  assetManagerId: 1,
+  counterpartyBookId: "G95EIYQA6I",
+  assetId: 846,
+  settlementCurrency: "SGD",
+  transactionType: "Block",
+  transactionAction: "Remove",
+  price: 352,
+  netSettlement: 35269,
+  transactionCurrency: "SGD",
+  executionTime: "2017-03-15T05:02:18.928148+00:00",
+  clientId: 1,
+  grossSettlement: 35269,
+  transactionId: "testTransactionID",
+  assetBookId: "JWXWNSBABR",
+  quantity: 100
+}
 
-    test('with promise', done => {
-      let promise = retrieve({ AMId: 1 })
-      expect(promise).toBeInstanceOf(Promise)
-      promise.then(res => {
-        if (Array.isArray(res)) {
-          expect(res[0].transactionId).toBeDefined()
-          done()
-        } else {
-          expect(res.transactionId).toBeDefined()
-          done()
-        }
-      })
-      .catch(err => console.error(err))
-    })
-    it('retrieves', done => {
-      retrieve({ AMId: 1 })
-        .then(res => {
-          if (res.length === 0) {
-            console.error('amend: Result is empty, force fail on timeout')
-            return
-          }
-          res = res[0]
-          expect(res).toBeDefined()
-          expect(res.assetManagerId).toEqual(1)
-          done()
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    })
+describe('retrieve', () => {
+  beforeAll(() => {
+    network.retrieveData.mockImplementation(() => Promise.resolve(mockTransaction))
   })
-
-  describe('insert', () => {
-    it.skip('inserts', done => {
-      const transaction = {
-        settlementDate: "2017-03-17",
-        transactionDate: "2017-03-15",
-        assetManagerId: 1,
-        counterpartyBookId: "G95EIYQA6I",
-        assetId: 846,
-        settlementCurrency: "SGD",
-        transactionType: "Block",
-        transactionAction: "Remove",
-        price: 352,
-        netSettlement: 35269,
-        transactionCurrency: "SGD",
-        executionTime: "2017-03-15T05:02:18.928148+00:00",
-        clientId: 1,
-        grossSettlement: 35269,
-        transactionId: "testTransactionID",
-        assetBookId: "JWXWNSBABR",
-        quantity: 100
-      }
-      insert({ transaction })
-        .then(res => {
-          expect(res).toBeDefined()
-          expect(res.transactionId).toEqual('testTransactionID')
-          done()
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    })
+  test('with promise', () => {
+    let promise = retrieve({})
+    expect(promise).toBeInstanceOf(Promise)
   })
-
-  describe('amend', () => {
-    it('amends', async done => {
-      let q
-      let res = await retrieve({ AMId: 1 })
-      if (res.length === 0) {
-        console.error('amend: Result is empty, force fail on timeout')
-        return
-      }
-      res = res.filter(tr => tr.transactionStatus === 'New')
-      if (res.length === 0) {
-        console.error('amend: Result is empty, force fail on timeout')
-        return
-      }
-      res = res[0]
-      q = res.quantity
-      res.quantity = res.quantity.plus(1)
-      res = await amend({ transaction: res, AMId: 1, resourceId: res.transactionId })
-      expect(res.quantity).toEqual(q.plus(1))
+  it('calls retrieveData with correct params', done => {
+    retrieve({ AMId: 1, resourceId: 'testID' }, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMId: 1, resourceId: 'testID' })
       done()
     })
   })
+})
 
-  describe('partialAmend', () => {
-    it('partial amends', async done => {
-      let tC
-      let changes = {}
-      let res = await retrieve({ AMId: 1 })
-      if (res.length === 0) {
-        console.error('amend: Result is empty, force fail on timeout')
-        return
-      }
-      res = res.filter(tr => tr.transactionStatus === 'New')
-      if (res.length === 0) {
-        console.error('amend: Result is empty, force fail on timeout')
-        return
-      }
-      res = res[0]
-      if (res.transactionCurrency === 'USD') {
-        tC = 'USD'
-        changes.transactionCurrency = 'SGD'
-      } else {
-        tC = '!USD'
-        changes.transactionCurrency = 'USD'
-      }
-      res = await partialAmend({ changes, AMId: res.assetManagerId, resourceId: res.transactionId })
-      expect(res.transactionCurrency).toEqual(tC === 'USD' ? 'SGD' : 'USD')
+describe('insert', () => {
+  beforeAll(() => {
+    network.insertData.mockImplementation(() => Promise.resolve(mockTransaction))
+  })
+  test('with promise', () => {
+    let promise = insert({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls insertData with correct params', done => {
+    insert({ AMId: 1, transaction: mockTransaction }, (error, result) => {
+      expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMId: 1, data: JSON.parse(JSON.stringify(mockTransaction)) })
       done()
     })
   })
+})
 
-  describe('search', () => {
-    it('searches', async done => {
-      const query = {
-        assetManagerIds: [1]
-      }
-      let res = await search({ query })
-      if (res.length === 0) {
-        console.error('amend: Result is empty, force fail on timeout')
-        return
-      }
-      res = res[0]
-      expect(res.assetManagerId).toEqual(1)
+describe('amend', () => {
+  beforeAll(() => {
+    network.putData.mockImplementation(() => Promise.resolve(mockTransaction))
+  })
+  test('with promise', () => {
+    let promise = amend({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls putData with correct params', done => {
+    amend({ AMId: 1, resourceId: 'testID', transaction: mockTransaction }, (error, result) => {
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMId: 1, resourceId: 'testID', data: JSON.parse(JSON.stringify(mockTransaction)) })
       done()
     })
   })
+})
 
-  describe('cancel', () => {
-    it.skip('cancels', done => {
-      retrieve({ AMId: 1 })
-        .then(res => {
-          const tId = res[0].transactionId
-          return cancel({ AMId: res[0].assetManagerId, resourceId: tId })
-        })
-        .then(res => {
-          expect(res.transactionStatus).toEqual('Cancelled')
-          done()
-        })
-        .catch(err => console.error(err))
+describe('partialAmend', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockTransaction))
+  })
+  test('with promise', () => {
+    let promise = partialAmend({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with correct params', done => {
+    partialAmend({ AMId: 1, resourceId: 'testID', changes: { changed: 'changed' } }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMId: 1, resourceId: 'testID', data: { changed: 'changed' } })
+      done()
+    })
+  })
+})
+
+describe('search', () => {
+  beforeAll(() => {
+    network.searchData.mockImplementation(() => Promise.resolve(mockTransaction))
+  })
+  test('with promise', () => {
+    let promise = search({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls retrieveData with correct params', done => {
+    search({ AMId: 1, query: { queryKey: ['queryValues'] } }, (error, result) => {
+      expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMId: 1, query: { queryKey: ['queryValues'] } })
+      done()
+    })
+  })
+})
+
+describe('cancel', () => {
+  beforeAll(() => {
+    network.deleteData.mockImplementation(() => Promise.resolve(mockTransaction))
+  })
+  test('with promise', () => {
+    let promise = cancel({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls deleteData with correct params', done => {
+    cancel({ AMId: 1, resourceId: 'testID' }, (error, result) => {
+      expect(network.deleteData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMId: 1, resourceId: 'testID' })
+      done()
     })
   })
 })
