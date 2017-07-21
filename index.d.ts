@@ -18,6 +18,14 @@ declare module '@amaas/amaas-core-sdk-js' {
       function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
     }
+    namespace Books {
+      function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<books.Book[]> | void
+      function search({ AMId, query }: { AMId: number, query: { assetManagerIds?: number[], clientIds?: any[], bookStatuses?: string[], bookIds?: string[], ownerIds?: string[] } }, callback?: Function): Promise<books.Book[]> | void
+      function insert({ AMId, book }: { AMId: number, book: books.Book | books.IBook }, callback?: Function): Promise<books.Book> | void
+      function amend({ AMId, book, resourceId }: { AMId: number, book: books.Book | books.IBook, resourceId: string }, callback?: Function): Promise<books.Book> | void
+      function retire({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
+      function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
+    }
     namespace Parties {
       function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<parties.PartiesClassType[]> | void
       function insert({ AMId, party }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType }, callback?: Function): Promise<parties.PartiesClassType> | void
@@ -101,7 +109,6 @@ declare module '@amaas/amaas-core-sdk-js' {
       updatedTime?: string
       version?: number
     }
-
     class Book {
       assetManagerId: number
       bookId: string
