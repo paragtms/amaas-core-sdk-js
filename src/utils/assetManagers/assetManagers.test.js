@@ -96,7 +96,6 @@ describe('utils/assetManagers', () => {
     describe('returns correct result', () => {
       test('with callback', done => {
         insert({ assetManager: data }, (error, result) => {
-          console.log(error)
           expect(result).toEqual(new AssetManager(data))
           done()
         })

@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - Do not set the AMaaS Reference (ASset, Corporate Action, Transaction). This should be done server side where the default referenceValue can be generated.
 - Allow api version to be set on the production api option.
 - Subclass Link for the various classes that have them. This is because the properties vary depending on the parent class. E.g. Transaction Link has linkedTransactionId, Party Link has linkedPartyId.
+- Update and improve tests.
 
 ## 0.0.2 - 2017-05-09
 ### Changed
