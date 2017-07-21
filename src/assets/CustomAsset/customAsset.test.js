@@ -19,7 +19,6 @@ describe('CustomAsset class', () => {
   describe('constructor', () => {
     it('should set the clientAdditional properties', () => {
       let pizza = new Pizza({ description: 'Magherita', size: 'Large', toppings: 'Mozzarella' })
-      console.log(pizza)
       expect(pizza.size).toEqual('Large')
       expect(pizza.toppings).toEqual('Mozzarella')
     })

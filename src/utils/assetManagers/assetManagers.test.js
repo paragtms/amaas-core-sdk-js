@@ -2,6 +2,14 @@ import { _parseAM, getAssetManager } from './assetManagers.js'
 import { retrieve, insert, amend, deactivate, reactivate } from './assetManagers.js'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
 import * as api from '../../exports/api'
+import * as network from '../network'
+
+network.retrieveData = jest.fn()
+network.insertData = jest.fn()
+network.patchData = jest.fn()
+network.putData = jest.fn()
+network.searchData = jest.fn()
+network.deleteData = jest.fn()
 
 api.config({
   stage: 'staging',
@@ -31,22 +39,41 @@ describe('utils/assetManagers', () => {
 
 
   describe('retrieve', () => {
-    test('with promise', () => {
+    beforeAll(() => {
+      network.retrieveData.mockImplementation(() => Promise.resolve({ assetManagerId: 1 }))
+    })
+    it('returns promise', () => {
       let promise = retrieve({AMId: 1})
-        .catch(error => {})
       expect(promise).toBeInstanceOf(Promise)
+    })
+
+    it('calls retrieveData with the correct params', done => {
+      retrieve({ AMId: 1 }, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagers', AMId: 1 })
+        done()
+      })
+    })
+
+    describe('it returns the correct result', () => {
+      test('with callback', done => {
+        retrieve({ AMId: 1 }, (error, result) => {
+          expect(result).toEqual(new AssetManager({ assetManagerId: 1 }))
+          done()
+        })
+      })
+      test('with promise', () => {
+        retrieve({ AMId: 1 })
+          .then(result => {
+            expect(result).toEqual(new AssetManager({ assetManagerId: 1 }))
+          })
+      })
     })
   })
 
   describe('insert', () => {
-    test('with promise', () => {
-      let promise = insert({AMId: 1})
-        .catch(error => {})
-      expect(promise).toBeInstanceOf(Promise)
-    })
-
-    test.skip('should insert', () => {
-      const data = {
+    let data
+    beforeAll(() => {
+      data = {
         defaultBookCloseTime: "17:30:00",
         defaultTimezone: "UTC",
         assetManagerType: "Accredited Investor",
@@ -54,64 +81,150 @@ describe('utils/assetManagers', () => {
         assetManagerStatus: "Active",
         defaultBookOwnerId: 2
       }
-      insert({ assetManager: data })
-        .then(res => {
-          expect({ ...res }).toEqual(expect.objectContaining(data))
+      network.insertData.mockImplementation(() => Promise.resolve(data))
+    })
+    test('with promise', () => {
+      let promise = insert({AMId: 1})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+
+    test('calls insertData with correct params', done => {
+      insert({ assetManager: data }, (error, result) => {
+        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagers', data: JSON.parse(JSON.stringify(data)) })
+        done()
+      })
+    })
+
+    describe('returns correct result', () => {
+      test('with callback', done => {
+        insert({ assetManager: data }, (error, result) => {
+          expect(result).toEqual(new AssetManager(data))
+          done()
         })
-        .catch(err => {
-          expect(err).toBeUndefined()
-        })
+      })
+      test('with promise', () => {
+        insert({ assetManager: data })
+          .then(result => {
+            expect(result).toEqual(new AssetManager(data))
+          })
+      })
     })
   })
 
   describe('amend', () => {
+    let data
+    beforeAll(() => {
+      data = {
+        defaultBookCloseTime: "17:30:00",
+        defaultTimezone: "UTC",
+        assetManagerType: "Accredited Investor",
+        clientId: 1,
+        assetManagerStatus: "Active",
+        defaultBookOwnerId: 2
+      }
+      network.putData.mockImplementation(() => Promise.resolve(data))
+    })
     test('with promise', () => {
       let promise = amend({AMId: 1})
-        .catch(error => {})
       expect(promise).toBeInstanceOf(Promise)
     })
-    test('amends', async done => {
-      let dboi
-      let res = await retrieve({ AMId: 4 })
-      if (res.length === 0) {
-        console.error('amend: Results is empty, force fail after timeout.')
-        return
-      }
-      if (res.assetManagerStatus === 'Inactive') {
-        res = await reactivate({ AMId: res.assetManagerId })
-      }
-      dboi = res.defaultBookOwnerId
-      res.defaultBookOwnerId++
-      res = await amend({ assetManager: res, AMId: res.assetManagerId })
-      expect(res.defaultBookOwnerId).toEqual(dboi+1)
-      done()
+    it('calls putData with correct params', done => {
+      amend({ AMId: 1, assetManager: data }, (error, result) => {
+        expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagers', AMId: 1, data: JSON.parse(JSON.stringify(data)) })
+        done()
+      })
+    })
+    describe('returns correct result', () => {
+      test('with callback', done => {
+        amend({ AMId: 1, assetManager: data }, (error, result) => {
+          expect(result).toEqual(new AssetManager(data))
+          done()
+        })
+      })
+      test('with promise', () => {
+        amend({ AMId: 1, assetManager: data })
+          .then(result => {
+            expect(result).toEqual(new AssetManager(data))
+          })
+      })
     })
   })
 
   describe('deactivate', () => {
+    let data
+    beforeAll(() => {
+      data = {
+        defaultBookCloseTime: "17:30:00",
+        defaultTimezone: "UTC",
+        assetManagerType: "Accredited Investor",
+        clientId: 1,
+        assetManagerStatus: "Active",
+        defaultBookOwnerId: 2
+      }
+      network.patchData.mockImplementation(() => Promise.resolve(data))
+    })
     test('with promise', () => {
-      let promise = deactivate({AMId: 1}).catch(error => {})
+      let promise = deactivate({AMId: 1})
       expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls patchData with correctResult', done => {
+      deactivate({ AMId: 1 }, (error, result) => {
+        expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagers', AMId: 1, data: { assetManagerStatus: 'Inactive' } })
+        done()
+      })
+    })
+    describe('returns correct result', () => {
+      test('with callback', done => {
+        deactivate({ AMId: 1 }, (error, result) => {
+          expect(result).toEqual(new AssetManager(data))
+          done()
+        })
+      })
+      test('with promise', () => {
+        deactivate({ AMId: 1 })
+          .then(result => {
+            expect(result).toEqual(new AssetManager(data))
+          })
+      })
     })
   })
 
-  describe('reactivate and deactivate', () => {
-    // Get an Asset Manager. If it is inactive, reactivate, check then deactivate and check
-    it('reactivates an inactive AM and deactivates an active AM', async done => {
-      let res = await retrieve({ AMId: 1 })
-      if (res.length === 0) {
-        console.error('reactivate/deactivate: Results is empty, force fail after timeout.')
-        return
+  describe('reactivate', () => {
+    let data
+    beforeAll(() => {
+      data = {
+        defaultBookCloseTime: "17:30:00",
+        defaultTimezone: "UTC",
+        assetManagerType: "Accredited Investor",
+        clientId: 1,
+        assetManagerStatus: "Active",
+        defaultBookOwnerId: 2
       }
-      if (res.assetManagerStatus === 'Inactive') {
-        res = await reactivate({ AMId: res.assetManagerId })
-      }
-      expect(res.assetManagerStatus).toEqual('Active')
-      res = await deactivate({ AMId: res.assetManagerId })
-      expect(res.assetManagerStatus).toEqual('Inactive')
-      res = await reactivate({ AMId: res.assetManagerId })
-      expect(res.assetManagerStatus).toEqual('Active')
-      done()
+      network.patchData.mockImplementation(() => Promise.resolve(data))
+    })
+    test('with promise', () => {
+      let promise = reactivate({ AMId: 1 })
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls patchData with correct params', done => {
+      reactivate({ AMId: 1 }, (error, result) => {
+        expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagers', AMId: 1, data: { assetManagerStatus: 'Active' } })
+        done()
+      })
+    })
+    describe('returns correct result', () => {
+      test('with callback', done => {
+        reactivate({ AMId: 1 }, (error, result) => {
+          expect(result).toEqual(new AssetManager(data))
+          done()
+        })
+      })
+      test('with promise', () => {
+        reactivate({ AMId: 1 })
+          .then(result => {
+            expect(result).toEqual(new AssetManager(data))
+          })
+      })
     })
   })
 })
