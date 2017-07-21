@@ -88,7 +88,7 @@ class CustomAsset extends Asset {
       version
     })
     this.maturityDate = maturityDate
-    Object.assign(this, clientAdditional)
+    Object.assign(this, { ...clientAdditional })
   }
 }
 

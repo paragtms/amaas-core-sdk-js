@@ -166,6 +166,12 @@ export function buildURL({ AMaaSClass, AMId, resourceId }) {
     case 'allocations':
       baseURL = `${getEndpoint()}/transaction/allocations`
       break
+    case 'monitorItems':
+      baseURL = `${getEndpoint()}/monitor/items`
+      break
+    case 'monitorEvents':
+      baseURL = `${getEndpoint()}/monitor/events`
+      break
     case 'netting':
       baseURL = `${getEndpoint()}/transaction/netting`
       break
