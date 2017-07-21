@@ -27,7 +27,7 @@ describe('utils/assets', () => {
     beforeAll(() => {
       network.retrieveData.mockImplementation(() => Promise.resolve(mockAsset))
     })
-    test('with promise', async () => {
+    test('with promise', () => {
       let promise = retrieve({AMId: 1})
       expect(promise).toBeInstanceOf(Promise)
     })

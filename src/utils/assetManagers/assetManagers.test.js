@@ -61,9 +61,11 @@ describe('utils/assetManagers', () => {
           done()
         })
       })
-      test('with promise', async () => {
-        let result = await retrieve({ AMId: 1 })
-        expect(result).toEqual(new AssetManager({ assetManagerId: 1 }))
+      test('with promise', () => {
+        retrieve({ AMId: 1 })
+          .then(result => {
+            expect(result).toEqual(new AssetManager({ assetManagerId: 1 }))
+          })
       })
     })
   })
@@ -100,9 +102,11 @@ describe('utils/assetManagers', () => {
           done()
         })
       })
-      test('with promise', async () => {
-        let result = await insert({ assetManager: data })
-        expect(result).toEqual(new AssetManager(data))
+      test('with promise', () => {
+        insert({ assetManager: data })
+          .then(result => {
+            expect(result).toEqual(new AssetManager(data))
+          })
       })
     })
   })
@@ -137,9 +141,11 @@ describe('utils/assetManagers', () => {
           done()
         })
       })
-      test('with promise', async () => {
-        let result = await amend({ AMId: 1, assetManager: data })
-        expect(result).toEqual(new AssetManager(data))
+      test('with promise', () => {
+        amend({ AMId: 1, assetManager: data })
+          .then(result => {
+            expect(result).toEqual(new AssetManager(data))
+          })
       })
     })
   })
@@ -174,9 +180,11 @@ describe('utils/assetManagers', () => {
           done()
         })
       })
-      test('with promise', async () => {
-        let result = await deactivate({ AMId: 1 })
-        expect(result).toEqual(new AssetManager(data))
+      test('with promise', () => {
+        deactivate({ AMId: 1 })
+          .then(result => {
+            expect(result).toEqual(new AssetManager(data))
+          })
       })
     })
   })
@@ -211,9 +219,11 @@ describe('utils/assetManagers', () => {
           done()
         })
       })
-      test('with promise', async () => {
-        let result = await reactivate({ AMId: 1 })
-        expect(result).toEqual(new AssetManager(data))
+      test('with promise', () => {
+        reactivate({ AMId: 1 })
+          .then(result => {
+            expect(result).toEqual(new AssetManager(data))
+          })
       })
     })
   })

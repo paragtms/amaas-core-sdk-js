@@ -33,11 +33,13 @@ describe('retrieveItem', () => {
     })
   })
 
-  it('returns an Item instance', async () => {
+  it('returns an Item instance', () => {
     const expectedResult = new Item({ assetManagerId: 1 })
     network.retrieveData.mockImplementation(() => Promise.resolve(testItem))
-    let result = await api.retrieveItem({ AMId: 1, resourceId: 'testItemID' })
-    expect(result).toEqual(expectedResult)
+    api.retrieveItem({ AMId: 1, resourceId: 'testItemID' })
+      .then(result => {
+        expect(result).toEqual(expectedResult)
+      })
   })
 })
 
@@ -64,11 +66,13 @@ describe('insertNewItem', () => {
     })
   })
 
-  it('returns an Item instance', async () => {
+  it('returns an Item instance', () => {
     const expectedResult = new Item(testItem)
     network.insertData.mockImplementation(() => Promise.resolve({ assetManagerId: 1 }))
-    let result = await api.insertNewItem({ AMId: 1, item: testItem })
-    expect(result).toEqual(expectedResult)
+    api.insertNewItem({ AMId: 1, item: testItem })
+      .then(result => {
+        expect(result).toEqual(expectedResult)
+      })
   })
 })
 
@@ -95,11 +99,13 @@ describe('resubsmit Item', () => {
       done()
     })
 
-    it('returns an item instance', async () => {
+    it('returns an item instance', () => {
       const expectedResult = new Item(testItem)
       network.patchData.mockImplementation(() => Promise.resolve(testItem))
-      let result = await api.resubmitItem({ AMId: 1, resourceId: 'testID' })
-      expect(result).toEqual(expectedResult)
+      api.resubmitItem({ AMId: 1, resourceId: 'testID' })
+        .then(result => {
+          expect(result).toEqual(expectedResult)
+        })
     })
   })
 })
@@ -128,12 +134,14 @@ describe('searchItems', () => {
     })
   })
 
-  it('returns an array of items if resolved with array', async () => {
+  it('returns an array of items if resolved with array', () => {
     const expectedResult = new Item(testItem)
     network.searchData.mockImplementation(() => Promise.resolve([ testItem, testItem ]))
-    let result = await api.searchItems({ AMId: 1, query: {} })
-    expect(result).toBeInstanceOf(Array)
-    expect(result[0]).toEqual(expectedResult)
+    api.searchItems({ AMId: 1, query: {} })
+      .then(result => {
+        expect(result).toBeInstanceOf(Array)
+        expect(result[0]).toEqual(expectedResult)
+      })
   })
 })
 
@@ -163,10 +171,12 @@ describe('closeItem', () => {
     })
   })
 
-  it('returns an Item instance', async () => {
+  it('returns an Item instance', () => {
     const expectedResult = new Item(testItem)
     network.deleteData.mockImplementation(() => Promise.resolve(testItem))
-    const result = await api.closeItem({ AMId: 1, resourceId: 'testID' })
-    expect(result).toEqual(expectedResult)
+    api.closeItem({ AMId: 1, resourceId: 'testID' })
+      .then(result => {
+        expect(result).toEqual(expectedResult)
+      })
   })
 })
