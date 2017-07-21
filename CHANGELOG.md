@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Added `apiVersion` option to the api config. This will default to the latest stable version.
 - Added type declaration file for AssetManager class and api.AssetManagers.*
 - Add monitor item class.
+- Add monitor api calls (insertNewItem, resubmitItem, searchItems, closeItem).
 
 ### Changed
 - Removed `maturityDate` from the Asset base class and set either maturityDate or expiryDate on the relevant subclasses.
