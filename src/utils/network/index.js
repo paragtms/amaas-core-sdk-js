@@ -210,7 +210,7 @@ export function makeRequest({ method, url, data, query }) {
     .then(res => {
       switch (method) {
         case 'GET':
-          return request.get(url).set(setAuthorization(), res).query({ camelcase: true })
+          return request.get(url).set(setAuthorization(), res).query(query)
         case 'SEARCH':
           return request.get(url).set(setAuthorization(), res).query(data)
         case 'POST':
@@ -235,10 +235,13 @@ export function makeRequest({ method, url, data, query }) {
  * @param {object} anonymous: anonymous object with arguments:
  * @param {string} AMaaSClass: class being requested/sent (e.g. Transaction) (required)
  * @param {string} AMId: Asset Manager Id (required)
- * @param {string} resourceId: Id of the resource being requested (e.g. book_id)
+ * @param {string} [resourceId]: Id of the resource being requested (e.g. book_id)
+ * @param {object} [query] - Additional query parameters
 */
-export function retrieveData({ AMaaSClass, AMId, resourceId }, callback) {
+export function retrieveData({ AMaaSClass, AMId, resourceId, query }, callback) {
+  console.log(buildURL)
   let url
+  let data = {}
   // If resourceId is supplied, append to url. Otherwise, return all data for AMId
   try {
     url = buildURL({ AMaaSClass, AMId, resourceId })
@@ -249,7 +252,14 @@ export function retrieveData({ AMaaSClass, AMId, resourceId }, callback) {
     callback(e)
     return
   }
-  let promise = makeRequest({ method: 'GET', url })
+  if (typeof query === 'object' && Object.keys(query).length > 0) {
+    for (let q in query) {
+      if (query.hasOwnProperty(q)) {
+        data[q] = query[q].join()
+      }
+    }
+  }
+  let promise = makeRequest({ method: 'GET', url, query: { ...data, camelcase: true } })
   // let promise = request.get(url).set('x-api-key', token).query({ camelcase: true })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
