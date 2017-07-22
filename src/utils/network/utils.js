@@ -9,7 +9,7 @@ const userPool = new CognitoUserPool({
   ClientId: clientAppId
 })
 
-export function getEndpoint() {
+export function getEndpoint({ stage, apiVersion }) {
   switch (stage) {
     case 'staging':
       return `${endpoint.staging}/staging`
@@ -120,44 +120,44 @@ export function getToken() {
  * @param {string} AMId: Asset Manager Id (required)
  * @param {string} resourceId: Id of the resource being requested (e.g. book_id)
 */
-export function buildURL({ AMaaSClass, AMId, resourceId }) {
+export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
   let baseURL = ''
   switch (AMaaSClass) {
     case 'book':
-      baseURL = `${getEndpoint()}/book/books`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/book/books`
       break
     case 'parties':
-      baseURL = `${getEndpoint()}/party/parties`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/party/parties`
       break
     case 'assetManagers':
-      baseURL = `${getEndpoint()}/assetmanager/asset-managers`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/assetmanager/asset-managers`
       break
     case 'assets':
-      baseURL = `${getEndpoint()}/asset/assets`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/asset/assets`
       break
     case 'positions':
-      baseURL = `${getEndpoint()}/transaction/positions`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/transaction/positions`
       break
     case 'allocations':
-      baseURL = `${getEndpoint()}/transaction/allocations`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/transaction/allocations`
       break
     case 'monitorItems':
-      baseURL = `${getEndpoint()}/monitor/items`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/monitor/items`
       break
     case 'monitorEvents':
-      baseURL = `${getEndpoint()}/monitor/events`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/monitor/events`
       break
     case 'netting':
-      baseURL = `${getEndpoint()}/transaction/netting`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/transaction/netting`
       break
     case 'relationships':
-      baseURL = `${getEndpoint()}/assetmanager/asset-manager-relationships`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/assetmanager/asset-manager-relationships`
       break
     case 'transactions':
-      baseURL = `${getEndpoint()}/transaction/transactions`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/transaction/transactions`
       break
     case 'corporateActions':
-      baseURL = `${getEndpoint()}/corporateaction/corporate-actions`
+      baseURL = `${getEndpoint({ stage, apiVersion })}/corporateaction/corporate-actions`
       break
     default:
       throw new Error(`Invalid class type: ${AMaaSClass}`)

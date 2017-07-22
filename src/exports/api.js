@@ -33,7 +33,7 @@ export {
 }
 
 function config(config) {
-  const { stage, credentialsPath, token } = config
-  configureStage({ stage, credentialsPath })
+  const { stage, credentialsPath, token, apiVersion } = config
+  configureStage({ stage, credentialsPath, apiVersion })
   configureAuth({ token })
 }
