@@ -14,13 +14,17 @@ describe('retrieveData', () => {
     utils.buildURL.mockImplementation(() => 'testURL')
     utils.makeRequest.mockImplementation(() => Promise.resolve({ body: 'testBody' }))
   })
+  afterAll(() => {
+    api.config({ stage: 'staging', apiVersion: 'v1.0' })
+  })
   const testParams = {
     AMaaSClass: 'book',
     AMId: 1234
   }
   it('calls buildURL with correct params', callback => {
+    api.config({ stage: 'prod', apiVersion: 'v2.0' })
     network.retrieveData(testParams, (error, result) => {
-      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1234 })
+      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1234, stage: 'prod', apiVersion: 'v2.0' })
       callback()
     })
   })
@@ -50,7 +54,7 @@ describe('insertData', () => {
   }
   it('should call buildURL with correct params', callback => {
     network.insertData(testParams, (error, result) => {
-      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1234 })
+      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1234, stage: 'staging', apiVersion: 'v1.0' })
       callback()
     })
   })
@@ -76,7 +80,7 @@ describe('searchData', () => {
   }
   it('should call buildURL with correct params', done => {
     network.searchData({ AMaaSClass: 'monitorItems', AMId: 1, query }, (error, result) => {
-      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'monitorItems', AMId: 1 })
+      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'monitorItems', AMId: 1, stage: 'staging', apiVersion: 'v1.0' })
       done()
     })
   })
@@ -99,7 +103,7 @@ describe('putData', () => {
   })
   it('should call buildURL with correct params', done => {
     network.putData({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID', data: { test: 'testData' } }, (error, result) => {
-      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID' })
+      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID', stage: 'staging', apiVersion: 'v1.0' })
       done()
     })
   })
@@ -124,7 +128,7 @@ describe('patchData', () => {
   })
   it('should call buildURL with the correct params', done => {
     network.patchData(params, (error, result) => {
-      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'positions', AMId: 1, resourceId: 'testID' })
+      expect(utils.buildURL).toHaveBeenCalledWith({ AMaaSClass: 'positions', AMId: 1, resourceId: 'testID', stage: 'staging', apiVersion: 'v1.0' })
       done()
     })
   })

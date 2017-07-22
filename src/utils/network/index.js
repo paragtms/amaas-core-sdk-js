@@ -41,7 +41,7 @@ export function retrieveData({ AMaaSClass, AMId, resourceId, query }, callback) 
   let data = {}
   // If resourceId is supplied, append to url. Otherwise, return all data for AMId
   try {
-    url = utils.buildURL({ AMaaSClass, AMId, resourceId })
+    url = utils.buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion })
   } catch (e) {
     if (typeof callback !== 'function') {
       return Promise.reject(e)
@@ -95,7 +95,9 @@ export function insertData({ AMaaSClass, AMId, resourceId, data, queryParams }, 
     url = utils.buildURL({
       AMaaSClass,
       AMId,
-      resourceId
+      resourceId,
+      stage,
+      apiVersion
     })
   } catch (e) {
     if (typeof callback !== 'function') {
@@ -139,7 +141,9 @@ export function putData({ AMaaSClass, AMId, resourceId, data }, callback) {
     url = utils.buildURL({
       AMaaSClass,
       AMId,
-      resourceId
+      resourceId,
+      stage,
+      apiVersion
     })
   } catch (e) {
     if (typeof callback !== 'function') {
@@ -175,7 +179,9 @@ export function patchData({ AMaaSClass, AMId, resourceId, data }, callback) {
     url = utils.buildURL({
       AMaaSClass,
       AMId,
-      resourceId
+      resourceId,
+      stage,
+      apiVersion
     })
   } catch (e) {
     if (typeof callback !== 'function') {
@@ -211,7 +217,9 @@ export function deleteData({ AMaaSClass, AMId, resourceId }, callback) {
     url = utils.buildURL({
       AMaaSClass,
       AMId,
-      resourceId
+      resourceId,
+      stage,
+      apiVersion
     })
   } catch (e) {
     if (typeof callback !== 'function') {
@@ -248,7 +256,9 @@ export function searchData({ AMaaSClass, AMId, query }, callback) {
   try {
     url = utils.buildURL({
       AMaaSClass,
-      AMId
+      AMId,
+      stage,
+      apiVersion
     })
   } catch (e) {
     if (typeof callback !== 'function') {
