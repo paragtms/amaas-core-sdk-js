@@ -1,5 +1,5 @@
 import { _parseAM, getAssetManager } from './assetManagers.js'
-import { retrieve, insert, amend, deactivate, reactivate } from './assetManagers.js'
+import { retrieve, insert, amend, deactivate, reactivate, checkDomains, insertDomain } from './assetManagers.js'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -224,6 +224,50 @@ describe('utils/assetManagers', () => {
           .then(result => {
             expect(result).toEqual(new AssetManager(data))
           })
+      })
+    })
+  })
+
+  describe('checkDomains', () => {
+    let data
+    beforeAll(() => {
+      data = {
+        assetManagerId: 1,
+        domain: 'testDomain.com',
+        isPrimary: true
+      }
+      network.retrieveData.mockImplementation(() => Promise.resolve(data))
+    })
+    test('with promise', () => {
+      let promise = checkDomains({ domain: 'testDomain.com' })
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls retrieveData with correct params', done => {
+      checkDomains({ domain: 'testDomain.com' }, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', query: { domain: ['testDomain.com'] } })
+        done()
+      })
+    })
+  })
+
+  describe('insertDomain', () => {
+    let data
+    beforeAll(() => {
+      data = {
+        assetManagerId: 1,
+        domain: 'testDomain.com',
+        isPrimary: true
+      }
+      network.insertData.mockImplementation(() => Promise.resolve(data))
+    })
+    test('with promise', () => {
+      let promise = insertDomain({ domain: data })
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls insertData with correct params', done => {
+      insertDomain({ domain: data }, (error, result) => {
+        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', data, queryParams: { assetManagerId: 1 } })
+        done()
       })
     })
   })

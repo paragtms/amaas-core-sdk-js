@@ -30,7 +30,7 @@ describe('retrieveData', () => {
   })
   it('calls makeRequest with correct params', callback => {
     network.retrieveData(testParams, (error, result) => {
-      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'GET', url: 'testURL', query: { camelcase: true } })
+      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'GET', url: 'testURL', query: { camelcase: true }, stage: 'prod' })
       callback()
     })
   })
@@ -60,7 +60,7 @@ describe('insertData', () => {
   })
   it('should call makeRequest with correct params', callback => {
     network.insertData(testParams, (error, result) => {
-      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'POST', url: 'testURL', data: { price: 20 }, query: { camelcase: true } })
+      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'POST', url: 'testURL', data: { price: 20 }, query: { camelcase: true }, stage: 'staging' })
       callback()
     })
   })
@@ -86,7 +86,7 @@ describe('searchData', () => {
   })
   it('should call makeRequest with correct params', done => {
     network.searchData({ AMaaSClass: 'monitorItems', AMId: 1, query }, (error, result) => {
-      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'SEARCH', url: 'testURL', data: { camelcase: true, assetManagerIds: '1,2' } })
+      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'SEARCH', url: 'testURL', data: { camelcase: true, assetManagerIds: '1,2' }, stage: 'staging' })
       done()
     })
   })
@@ -109,7 +109,7 @@ describe('putData', () => {
   })
   it('should call makeRequest with correct params', done => {
     network.putData({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID', data: { test: 'testData' } }, (error, result) => {
-      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'PUT', url: 'testURL', data: { test: 'testData' } })
+      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'PUT', url: 'testURL', data: { test: 'testData' }, stage: 'staging' })
       done()
     })
   })
@@ -134,7 +134,7 @@ describe('patchData', () => {
   })
   it('should call makeRequest with the correct params', done => {
     network.patchData(params, (error, result) => {
-      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'PATCH', url: 'testURL', data: { change: 'changed' } })
+      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'PATCH', url: 'testURL', data: { change: 'changed' }, stage: 'staging' })
       done()
     })
   })

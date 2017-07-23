@@ -1,5 +1,6 @@
 import { retrieveData, insertData, putData, patchData, deleteData } from '../network'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
+import Domain from '../../assetManagers/Domain/domain'
 
 /**
  * Retrieve Asset Manager data for specified Asset Manager ID
@@ -170,6 +171,70 @@ export function reactivate({ AMId }, callback) {
     return promise
   }
   promise.catch(error => callback(error))
+}
+
+/**
+ * Check whether a domain has any AMIDs associated with it
+ * @function checkDomains
+ * @memberof module:api.AssetManagers
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {string} params.domain - domain to retrieve Asset Manager IDs for (not including '@')
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the Domain instance where the associated AMID is primary, or null. Omit to return promise.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the Domain instance containing an AMID which is primary for this domain, or null.
+ */
+export function checkDomains({ domain }, callback) {
+  const params = {
+    AMaaSClass: 'assetManagerDomains',
+    query: { domain: [domain] }
+  }
+  let promise = retrieveData(params).then(result => {
+    if (result) {
+      result = _parseDomain(result)
+    }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Insert a new Domain for a given AMID
+ * @param {object} params - object of parameters:
+ * @param {Domain} params.domain - Domain instance or object to insert.
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the inserted Domain instance.
+ */
+export function insertDomain({ domain }, callback) {
+  let data
+  if (domain) {
+    data = JSON.parse(JSON.stringify(domain))
+  }
+  const params = {
+    AMaaSClass: 'assetManagerDomains',
+    data,
+    queryParams: { assetManagerId: domain.assetManagerId }
+  }
+  let promise = insertData(params).then(result => {
+    result = _parseDomain(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(e => callback(e))
+}
+
+export function _parseDomain(object) {
+  return new Domain(object)
 }
 
 export function _parseAM(object) {
