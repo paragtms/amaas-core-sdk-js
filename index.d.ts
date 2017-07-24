@@ -8,6 +8,8 @@ declare module '@amaas/amaas-core-sdk-js' {
       function amend({ AMId, assetManager }: { AMId: number, assetManager: assetManagers.AssetManager | assetManagers.IAssetManager }, callback?: Function): Promise<assetManagers.AssetManager> | void
       function deactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
       function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
+      function checkDomains({ domain }: { domain: string }, callback?: Function): Promise<assetManagers.Domain | null> | void
+      function insertDomain({ domain }: { domain: string }, callback?: Function): Promise<assetManagers.Domain> | void
     }
     namespace Assets {
       function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<assets.AssetClassTypes[]> | void
@@ -91,6 +93,29 @@ declare module '@amaas/amaas-core-sdk-js' {
       updatedTime?: string
       version?: number
       constructor(props: IAssetManager)
+    }
+
+    interface IDomain {
+      assetManagerId: number
+      domain: string
+      isPrimary: boolean
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+    }
+
+    class Domain {
+      assetManagerId: number
+      domain: string
+      isPrimary: boolean
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+      constructor(props: IDomain)
     }
   }
 
