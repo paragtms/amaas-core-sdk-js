@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added type declaration file for AssetManager class and api.AssetManagers.*
 - Add monitor item class.
 - Add monitor api calls (insertNewItem, resubmitItem, searchItems, closeItem).
+- Add domains sub-service to AssetManagers.
 
 ### Changed
 - Removed `maturityDate` from the Asset base class and set either maturityDate or expiryDate on the relevant subclasses.
