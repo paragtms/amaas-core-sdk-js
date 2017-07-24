@@ -50,7 +50,8 @@ describe('insertData', () => {
     AMId: 1234,
     data: {
       price: 20
-    }
+    },
+    queryParams: { someQuery: ['someThing', 'anotherValue'] }
   }
   it('should call buildURL with correct params', callback => {
     network.insertData(testParams, (error, result) => {
@@ -60,7 +61,7 @@ describe('insertData', () => {
   })
   it('should call makeRequest with correct params', callback => {
     network.insertData(testParams, (error, result) => {
-      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'POST', url: 'testURL', data: { price: 20 }, query: { camelcase: true }, stage: 'staging' })
+      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'POST', url: 'testURL', data: { price: 20 }, query: { camelcase: true, someQuery: 'someThing,anotherValue' }, stage: 'staging' })
       callback()
     })
   })

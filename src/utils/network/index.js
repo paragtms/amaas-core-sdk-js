@@ -115,7 +115,7 @@ export function insertData({ AMaaSClass, AMId, resourceId, data, queryParams }, 
   if (queryParams) {
     for (let key in queryParams) {
       if (queryParams.hasOwnProperty(key)) {
-        query[queryParams[i].key] = queryParams[i].values.join()  
+        query[key] = queryParams[key].join()
       }
     }
   }
