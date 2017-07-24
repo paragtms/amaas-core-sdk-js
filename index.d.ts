@@ -9,7 +9,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function deactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
       function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
       function checkDomains({ domain }: { domain: string }, callback?: Function): Promise<assetManagers.Domain | null> | void
-      function insertDomain({ domain }: { domain: string }, callback?: Function): Promise<assetManagers.Domain> | void
+      function insertDomain({ domain }: { domain: assetManagers.Domain | assetManagers.IDomain }, callback?: Function): Promise<assetManagers.Domain> | void
     }
     namespace Assets {
       function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<assets.AssetClassTypes[]> | void
