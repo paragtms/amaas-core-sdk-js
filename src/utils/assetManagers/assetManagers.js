@@ -218,7 +218,7 @@ export function insertDomain({ domain }, callback) {
   const params = {
     AMaaSClass: 'assetManagerDomains',
     data,
-    queryParams: { assetManagerId: domain.assetManagerId }
+    queryParams: { assetManagerId: [domain.assetManagerId] }
   }
   let promise = insertData(params).then(result => {
     result = _parseDomain(result)

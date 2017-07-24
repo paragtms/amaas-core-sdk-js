@@ -266,7 +266,7 @@ describe('utils/assetManagers', () => {
     })
     it('calls insertData with correct params', done => {
       insertDomain({ domain: data }, (error, result) => {
-        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', data, queryParams: { assetManagerId: 1 } })
+        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', data, queryParams: { assetManagerId: [1] } })
         done()
       })
     })

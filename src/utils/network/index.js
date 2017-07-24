@@ -113,8 +113,10 @@ export function insertData({ AMaaSClass, AMId, resourceId, data, queryParams }, 
   }
   let query = { camelcase: true }
   if (queryParams) {
-    for (let i = 0; i < queryParams.length; i++) {
-      query[queryParams[i].key] = queryParams[i].values.join()
+    for (let key in queryParams) {
+      if (queryParams.hasOwnProperty(key)) {
+        query[queryParams[i].key] = queryParams[i].values.join()  
+      }
     }
   }
   let promise = utils.makeRequest({ method: 'POST', url, data, query, stage })
