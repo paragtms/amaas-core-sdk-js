@@ -30,7 +30,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function retrieveItems({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
       function insertNewItem({ AMId, item }: { AMId: number, item: monitor.IMonitorItem | monitor.Item }, callback?: Function): Promise<monitor.Item> | void
       function resubmitItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
-      function searchItems({ AMId, query }: { AMId?: number, query: { assetManagerIds?: number[], itemIds: stringp[], assetBookIds: string[], itemStatuses: string[], itemClasses: string[], itemTypes: string[], itemLevels: string[], itemSources: string[], transactionIds: string[], assetIds: string[] } }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
+      function searchItems({ AMId, query }: { AMId?: number, query: { assetManagerIds?: number[], itemIds: string[], assetBookIds: string[], itemStatuses: string[], itemClasses: string[], itemTypes: string[], itemLevels: string[], itemSources: string[], transactionIds: string[], assetIds: string[] } }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
       function closeItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
     }
     namespace Parties {
