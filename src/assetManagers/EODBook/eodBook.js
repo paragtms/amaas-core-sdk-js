@@ -2,7 +2,7 @@ import { AMaaSModel } from '../../core'
 
 class EODBook extends AMaaSModel {
    /**
-   * Construct a new Asset Manager Model
+   * Construct a new EODBoook Model
    * @param {object} params - Asset Manager creation options:
    * @param {number} [params.assetManagerId=generated server side] - Asset Manager's ID. Include to specifically set, if it does not already exist
    * @param {string} [params.utcCloseTime]
