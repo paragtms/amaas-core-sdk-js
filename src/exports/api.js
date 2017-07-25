@@ -27,6 +27,7 @@ export {
   Monitor,
   Parties,
   Positions,
+  Relationships,
   Transactions,
   csv,
   config

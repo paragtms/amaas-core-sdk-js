@@ -7,4 +7,4 @@
 import * as relationships from '../relationships'
 
 // Exports
-export { relationship }
+export { relationships }

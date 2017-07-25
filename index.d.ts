@@ -707,7 +707,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       relatedId: number
       relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee'
       clientId?: number
-      relationshipStatus?: string
+      relationshipStatus: 'Active' | 'Pending' | 'Superseded' | 'Inactive'
       createdBy?: string
       updatedBy?: string
       createdTime?: string
@@ -721,7 +721,12 @@ declare module '@amaas/amaas-core-sdk-js' {
       relatedId: number
       relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee'
       clientId?: number
-      relationshipStatus?: string
+      relationshipStatus: 'Active' | 'Pending' | 'Superseded' | 'Inactive'
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
       constructor(props: IRelationship)
     }
   }
