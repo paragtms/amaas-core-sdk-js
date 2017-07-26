@@ -237,10 +237,10 @@ export function insertDomain({ domain }, callback) {
 /**
  * Retrieve EOD Books
  * @param {object} params - object of parameters:
- * @param {Domain} params.AMID 
- * @param {Domain} params.bookID
+ * @param {EODBook} params.AMID 
+ * @param {EODBook} params.bookID
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise.
- * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the inserted Domain instance.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with an array of EODBooks or a single EODBook instance
  */
 export function retrieveEODBooks({ AMId, bookID }, callback) {
   const params = {
@@ -249,11 +249,15 @@ export function retrieveEODBooks({ AMId, bookID }, callback) {
     bookID
   }
   let promise = retrieveData(params).then(result => {
-    const eodBook = _parseEODBook(result)
-    if (typeof callback === 'function') {
-      callback(null, assetManager)
+    if(Array.isArray(result)) {
+      result = result.map(eodBook => _parseEODBook(eodBook))
+    } else {
+      result= _parseEODBook(result)
     }
-    return eodBook
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
   })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
