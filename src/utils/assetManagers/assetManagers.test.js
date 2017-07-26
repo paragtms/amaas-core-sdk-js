@@ -286,7 +286,6 @@ describe('utils/assetManagers', () => {
       let promise=retrieveEODBooks({AMId: 1, bookID: 'ABC'})
       expect(promise).toBeInstanceOf(Promise)
     })
-
     it('calls retrieveEODBooks with the correct params', done => {
       retrieveEODBooks({AMId: 1, bookID: 'ABC'}, (error, result) => {
         expect(network.retrieveData).toHaveBeenCalledWith({AMaaSClass: 'assetManagerEODBooks', AMId: 1, bookID: 'ABC'})
