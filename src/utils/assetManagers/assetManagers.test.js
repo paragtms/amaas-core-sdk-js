@@ -1,5 +1,5 @@
 import { _parseAM, getAssetManager } from './assetManagers.js'
-import { retrieve, insert, amend, deactivate, reactivate, checkDomains, insertDomain } from './assetManagers.js'
+import { retrieve, insert, amend, deactivate, reactivate, checkDomains, insertDomain, retrieveEODBooks } from './assetManagers.js'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -269,6 +269,29 @@ describe('utils/assetManagers', () => {
         expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', data, queryParams: { assetManagerId: [1] } })
         done()
       })
+    })
+  })
+
+  describe('retrieveEODBooks', () => {
+    beforeAll(() => {
+      network.insertData.mockImplementation(() => Promise.resolve(data))   
+    })
+    it('returns promise', () => {
+      let promise=retrieveEODBooks({AMId: 1, bookID: 'ABC'})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+
+    it('calls retrieveEODBooks with the correct params', done => {
+      retrieveEODBooks({AMId: 1, bookID: 'ABC'}, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({AMaaSClass: 'assetManagerEODBooks', AMId: 1, bookID: 'ABC'})
+        done()  
+    })
+    })
+    it('calls retrieveEODBooks with the correct params', done => {
+      retrieveEODBooks({AMId: 1}, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({AMaaSClass: 'assetManagerEODBooks', AMId: 1})
+        done()  
+    }) 
     })
   })
 })
