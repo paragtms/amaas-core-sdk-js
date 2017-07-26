@@ -235,12 +235,36 @@ export function insertDomain({ domain }, callback) {
 }
 
 /**
- * Insert a new Domain for a given AMID
+ * Retrieve EOD Books
  * @param {object} params - object of parameters:
- * @param {Domain} params.domain - Domain instance or object to insert.
+ * @param {Domain} params.AMID 
+ * @param {Domain} params.bookID
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise.
  * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the inserted Domain instance.
  */
+export function retrieveEODBooks({ AMId, bookID }, callback) {
+  const params = {
+    AMaaSClass: 'assetManagerEODBooks',
+    AMId,
+    bookID
+  }
+  let promise = retrieveData(params).then(result => {
+    const eodBook = _parseEODBook(result)
+    if (typeof callback === 'function') {
+      callback(null, assetManager)
+    }
+    return eodBook
+  })
+  if (typeof callback !== 'function') {
+    // return promise if callback is not provided
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+export function _parseEODBook(object){
+  return new EODBook(object)
+}
 
 export function _parseDomain(object) {
   return new Domain(object)
