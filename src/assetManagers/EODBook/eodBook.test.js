@@ -4,11 +4,12 @@ describe('EODBook', () => {
     describe('constructor', () =>{
         it('should construct', () => {
             const eodBookTest = new EODBook ({
-                assetManaherId: 'testAMId',
+                assetManagerId: 'testAMId',
                 utcCloseTime: 'testTime',
                 bookId: 'testBookId',
                 eodBookStatus: 'testStatus'
             })
+            
             expect(eodBookTest.assetManagerId).toEqual('testAMId')
             expect(eodBookTest.utcCloseTime).toEqual('testTime')
             expect(eodBookTest.bookId).toEqual('testBookId')

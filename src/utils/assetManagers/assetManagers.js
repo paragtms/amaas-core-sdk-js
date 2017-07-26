@@ -1,6 +1,7 @@
 import { retrieveData, insertData, putData, patchData, deleteData } from '../network'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
 import Domain from '../../assetManagers/Domain/domain'
+import EODBook from '../../assetManagers/EODBook/eodBook'
 
 /**
  * Retrieve Asset Manager data for specified Asset Manager ID
@@ -232,6 +233,14 @@ export function insertDomain({ domain }, callback) {
   }
   promise.catch(e => callback(e))
 }
+
+/**
+ * Insert a new Domain for a given AMID
+ * @param {object} params - object of parameters:
+ * @param {Domain} params.domain - Domain instance or object to insert.
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the inserted Domain instance.
+ */
 
 export function _parseDomain(object) {
   return new Domain(object)
