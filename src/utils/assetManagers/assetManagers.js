@@ -1,6 +1,7 @@
 import { retrieveData, insertData, putData, patchData, deleteData } from '../network'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
 import Domain from '../../assetManagers/Domain/domain'
+import EODBook from '../../assetManagers/EODBook/eodBook'
 
 /**
  * Retrieve Asset Manager data for specified Asset Manager ID
@@ -231,6 +232,42 @@ export function insertDomain({ domain }, callback) {
     return promise
   }
   promise.catch(e => callback(e))
+}
+
+/**
+ * Retrieve EOD Books
+ * @param {object} params - object of parameters:
+ * @param {EODBook} params.AMID 
+ * @param {EODBook} params.bookID
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with an array of EODBooks or a single EODBook instance
+ */
+export function retrieveEODBooks({ AMId, bookID }, callback) {
+  const params = {
+    AMaaSClass: 'assetManagerEODBooks',
+    AMId,
+    bookID
+  }
+  let promise = retrieveData(params).then(result => {
+    if(Array.isArray(result)) {
+      result = result.map(eodBook => _parseEODBook(eodBook))
+    } else {
+      result= _parseEODBook(result)
+    }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    // return promise if callback is not provided
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+export function _parseEODBook(object){
+  return new EODBook(object)
 }
 
 export function _parseDomain(object) {

@@ -136,6 +136,9 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
     case 'assetManagerDomains':
       baseURL = `${getEndpoint({ stage, apiVersion })}/assetmanager/domains`
       break
+    case 'assetManagerEODBooks':
+      baseURL = `${getEndpoint({ stage, apiVersion })}/assetmanager/eod-books`
+      break
     case 'assets':
       baseURL = `${getEndpoint({ stage, apiVersion })}/asset/assets`
       break
