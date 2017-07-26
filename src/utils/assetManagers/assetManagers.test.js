@@ -273,8 +273,14 @@ describe('utils/assetManagers', () => {
   })
 
   describe('retrieveEODBooks', () => {
+    const mockedEODBook = {
+          assetManagerId: 1,
+          utcCloseTime: '18:00:00',
+          bookId: 'testID',
+          eodBookStatus: 'testStatus'
+    }
     beforeAll(() => {
-      network.insertData.mockImplementation(() => Promise.resolve(data))   
+      network.retrieveData.mockImplementation(() => Promise.resolve(mockedEODBook))
     })
     it('returns promise', () => {
       let promise=retrieveEODBooks({AMId: 1, bookID: 'ABC'})
