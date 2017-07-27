@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Add monitor item class.
 - Add monitor api calls (insertNewItem, resubmitItem, searchItems, closeItem).
 - Add domains sub-service to AssetManagers.
+- Add EODBook class and retrieveEODBooks function to AssetManagers module.
 
 ### Changed
 - Removed `maturityDate` from the Asset base class and set either maturityDate or expiryDate on the relevant subclasses.
