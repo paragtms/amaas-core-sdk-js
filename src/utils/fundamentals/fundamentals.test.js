@@ -61,13 +61,13 @@ describe('utils/fundamentals', () => {
         })           
         it('calls searchData with the correct parameters', done => {
               fundamentals.calcBusinessDate( {date: '2017-6-30', codes: 'SG', offset: 1}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG'], offset: [1]} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG'], offset: [1], invalidDate: []} })
               done()
             })
         })
         it('calls searchData with the correct parameters', done => {
               fundamentals.calcBusinessDate( {date: '2017-6-30', codes: ['SG', 'CHN'], offset: 1}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG,CHN'], offset: [1]} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG','CHN'], offset: [1], invalidDate: []} })
               done()
             })
         })
@@ -79,7 +79,7 @@ describe('utils/fundamentals', () => {
         })
         it('calls searchData with the correct parameters', done => {
               fundamentals.calcBusinessDate( {date: '2017-6-30', codes: 'SG', offset: 1, invalidDates: ['2017-7-01', '2017-7-02']}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG'], offset: [1], invalidDate: ['2017-7-01,2017-7-02']} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG'], offset: [1], invalidDate: ['2017-7-01','2017-7-02']} })
               done()
             })
         })
@@ -101,7 +101,7 @@ describe('utils/fundamentals', () => {
         })
         it('calls searchData with the correct parameters', done => {
               fundamentals.processDateInfo( {date: '2017-7-03', codes: ['SG', 'CHN']}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalDateInfo', query: {startDate: ['2017-7-03'], countryCode: ['SG,CHN']} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalDateInfo', query: {startDate: ['2017-7-03'], countryCode: ['SG', 'CHN']} })
               done()
             })
         })
@@ -112,24 +112,24 @@ describe('utils/fundamentals', () => {
           network.searchData.mockImplementation(() => Promise.resolve(mockHoliday))
         })
         test('with promise', () => {
-            let promise = fundamentals.holidays({codes: 'SG', years: 2017})
+            let promise = fundamentals.holidays({codes: 'SG', years: '2017'})
             expect(promise).toBeInstanceOf(Promise)
         })
         it('calls searchData with the correct parameters', done => {
-              fundamentals.holidays( {codes: ['SG'], years: 2017}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalHoliday', query: {countryCode: ['SG'], year: [2017]} })
+              fundamentals.holidays( {codes: 'SG', years: '2017'}, (error, result) => {
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalHoliday', query: {countryCode: ['SG'], year: ['2017']} })
               done()
             })
         })           
         it('calls searchData with the correct parameters', done => {
-              fundamentals.holidays( {codes: ['SG','CHN'], years: 2017}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalHoliday', query: {countryCode: ['SG,CHN'], year: [2017]} })
+              fundamentals.holidays( {codes: ['SG','CHN'], years: '2017'}, (error, result) => {
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalHoliday', query: {countryCode: ['SG', 'CHN'], year: ['2017']} })
               done()
             })
         })       
         it('calls searchData with the correct parameters', done => {
-              fundamentals.holidays( {codes: ['SG'], years: [2017, 2018]}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalHoliday', query: {countryCode: ['SG'], year: ['2017,2018']} })
+              fundamentals.holidays( {codes: 'SG', years: ['2017', '2018']}, (error, result) => {
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalHoliday', query: {countryCode: ['SG'], year: ['2017', '2018']} })
               done()
             })
         })
