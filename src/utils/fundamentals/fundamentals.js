@@ -85,3 +85,24 @@ export function getDateInfo ({date, code}, callback)
    }
   promise.catch(error => callback(error))
 }
+
+export function holidays ({code, year}, callback)
+{
+   const params = {
+          AMaaSClass: 'fundamentalHoliday',
+          query: {countryCode: [code], year: [year]}
+    }
+    let promise = searchData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }console.log(result) //should retun true
+      return result //should return biz date!
+    }).catch((err) => {
+      console.log(err.message);
+    });
+   if (typeof callback !== 'function') {
+    // return promise if callback is not provided
+    return promise
+   }
+  promise.catch(error => callback(error))
+}
