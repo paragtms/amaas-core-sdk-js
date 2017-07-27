@@ -162,7 +162,7 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
       break
     case 'relationshipRequest':
       baseUrl = `${getEndpoint({ stage, apiVersion })}/assetmanager/relationship-request`
-      breal
+      break
     case 'transactions':
       baseURL = `${getEndpoint({ stage, apiVersion })}/transaction/transactions`
       break
