@@ -5,7 +5,7 @@ import { searchData } from '../network'
  * Make request and search data
  * @function countries
  * @param {object} params - object of parameters:
- * @param {string} params.countryCode 
+ * @param {string} params.code 
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is a country name returned or country names. Omit to return Promise
  * @returns {Promise|null} 
  */
@@ -20,9 +20,7 @@ export function countries({ code }, callback) {
       callback(null, result)
     }
     return result
-   }).catch((err) => {
-     console.log(err.message);
-  });
+   })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise
@@ -52,55 +50,31 @@ export function calcBusinessDate({date, codes, offset, invalidDates}, callback) 
     }else if(!Number.isInteger(offset)) {
          return "Offset must be an integer"
     }
-
-    let code=""
-    if(Array.isArray(codes)){
-      for(var i = 0; i < codes.length;i++) {
-            code+=codes[i]+","
-       } 
-     code = code.substring(0, code.length - 1);
-   }else{
-    code=codes
-   }
    
-   let invalidDate=""
    if(invalidDates){
-    if(Array.isArray(invalidDates)){
-      for(var i = 0; i < invalidDates.length;i++) {
-            invalidDate+=invalidDates[i]+","
-       } 
-     invalidDate = invalidDate.substring(0,invalidDate.length - 1);
-    }else{
-      invalidDate=invalidDates
-    }
-   }
-    
-   let params 
-   if(!invalidDates){
-          params = {
-          AMaaSClass: 'fundamentalBusinessDate',
-          query: {startDate: [date], countryCode: [code], offset: [offset]}
-          }
-   }else{
-         params = {
-          AMaaSClass: 'fundamentalBusinessDate',
-          query: {startDate: [date], countryCode: [code], offset: [offset], invalidDate: [invalidDate]}
-          }
+     if(!Array.isArray(invalidDates)){
+       invalidDates = invalidDates.split(',')
+     }
+   } 
+   if(!Array.isArray(codes)){
+     codes = codes.split(',')
    }
 
+    const params = {
+       AMaaSClass: 'fundamentalBusinessDate',
+       query: { startDate: [date], countryCode: codes, offset: [offset], invalidDate: invalidDates ? invalidDates : []  }
+    }
     let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
     } 
       return result 
-    }).catch((err) => {
-      console.log(err.message);
-    });
-   if (typeof callback !== 'function') {
+    })
+    if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise
    }
-  promise.catch(error => callback(error))
+   promise.catch(error => callback(error))
 }
 
 /**
@@ -114,33 +88,25 @@ export function calcBusinessDate({date, codes, offset, invalidDates}, callback) 
  */
 export function processDateInfo ({date, codes}, callback)
 {
-    let code=""
-    if(Array.isArray(codes)){
-      for(var i = 0; i < codes.length;i++) {
-            code+=codes[i]+","
-       } 
-     code = code.substring(0, code.length - 1);
-   }else{
-    code=codes
+   if(!Array.isArray(codes)){
+     codes = codes.split(',')
    }
 
     const params = {
           AMaaSClass: 'fundamentalDateInfo',
-          query: {startDate: [date], countryCode: [code]}
+          query: {startDate: [date], countryCode: codes}
     }
-   let promise = searchData(params).then(result => {
+    let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
     } 
       return result 
-    }).catch((err) => {
-      console.log(err.message);
-    });
-   if (typeof callback !== 'function') {
-    // return promise if callback is not provided
-    return promise
-   }
-  promise.catch(error => callback(error))
+     })
+    if (typeof callback !== 'function') {
+      // return promise if callback is not provided
+     return promise
+    }
+    promise.catch(error => callback(error))
 }
 
 /**
@@ -148,52 +114,36 @@ export function processDateInfo ({date, codes}, callback)
  * @function holidays
  * @param {object} params - object of parameters:
  * @param {string} params.codes - A country code string or an array of country codes strings 
- * @param {string} params.year - A year string or an array of 
+ * @param {string} params.years - A year string or an array of 
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is a country name returned or country names. Omit to return Promise
  * @returns {Promise|null} 
  */
 export function holidays ({codes, years}, callback)
 {
-    if(!codes) {
+   if(!codes) {
         return "Currently only country-based holiday calendars are supported"
-    }
-
-    let code=""
-    if(Array.isArray(codes)){
-      for(var i = 0; i < codes.length;i++) {
-            code+=codes[i]+","
-       } 
-     code = code.substring(0, code.length - 1);
-   }else{
-    code=codes
    }
 
-   let year=""
-   if(Array.isArray(years)){
-      for(var i = 0; i < years.length;i++) {
-            year+=years[i]+","
-       } 
-     year = year.substring(0, year.length - 1);
-   }else{
-    year=years
+   if(!Array.isArray(codes)){
+     codes = codes.split(',')
+   }
+   if(!Array.isArray(years)){
+     years = years.split(',')
    }
 
    const params = {
           AMaaSClass: 'fundamentalHoliday',
-          query: {countryCode: [code], year: [year]}
+          query: {countryCode: codes, year: years}
     }
-
     let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
     } 
       return result 
-    }).catch((err) => {
-      console.log(err.message);
-    });
-   if (typeof callback !== 'function') {
+    })
+    if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise
-   }
-  promise.catch(error => callback(error))
+    }
+    promise.catch(error => callback(error))
 }
