@@ -1,5 +1,10 @@
 import { AMaaSModel } from '../../core'
 
+/**
+ * Class representing an EOD Book
+ * @memberof module:assetManagers
+ * @extends module:core.AMaaSModel
+ */
 class EODBook extends AMaaSModel {
    /**
    * Construct a new EODBoook Model

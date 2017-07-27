@@ -206,6 +206,9 @@ export function checkDomains({ domain }, callback) {
 
 /**
  * Insert a new Domain for a given AMID
+ * @function insertDomain
+ * @memberof module:api.AssetManagers
+ * @static
  * @param {object} params - object of parameters:
  * @param {Domain} params.domain - Domain instance or object to insert.
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise.
@@ -236,11 +239,14 @@ export function insertDomain({ domain }, callback) {
 
 /**
  * Retrieve EOD Books
+ * @function retrieveEODBooks
+ * @memberof module:api.AssetManagers
+ * @static
  * @param {object} params - object of parameters:
- * @param {EODBook} params.AMID 
- * @param {EODBook} params.bookID
- * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise.
- * @returns {Promise|null} If no callback supplied, returns a promise that resolves with an array of EODBooks or a single EODBook instance
+ * @param {number} params.AMId - AMID of caller.
+ * @param {string} params.bookID - Book ID to retrieve.
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is an array of EODBooks or a single EODBook instance. Omit to return promise.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with an array of EODBooks or a single EODBook instance.
  */
 export function retrieveEODBooks({ AMId, bookID }, callback) {
   const params = {
