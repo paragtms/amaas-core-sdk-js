@@ -47,6 +47,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
     namespace Relationships {
       function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<relationships.Relationship[]> | void
+      function requestRelationship({ AMId, options }: { AMId: number, options: { relationshipId: string, relationshipType: string } }, callback?: Function): Promise<relationships.Relationship> | void
       function insert({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | relationships.IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
       function amend({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | relationships.IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
     }

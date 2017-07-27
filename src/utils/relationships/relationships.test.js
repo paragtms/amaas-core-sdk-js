@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, insert, amend } from './relationships'
+import { retrieve, requestRelationship, insert, amend } from './relationships'
 import Relationship from '../../relationships'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -35,6 +35,22 @@ describe('retrieve', () => {
   it('calls retrieveData with correct params', done => {
     retrieve({ AMId: 1, resourceId: 'testID' }, (error, result) => {
       expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1 })
+      done()
+    })
+  })
+})
+
+describe('requestRelationship', () => {
+  beforeAll(() => {
+    network.insertData.mockImplementation(() => Promise.resolve(mockRel))
+  })
+  test('with promise', () => {
+    let promise = requestRelationship({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls insertData with correct params', done => {
+    requestRelationship({ AMId: 1, options: { relationshipType: 'Employee', relationshipId: 'testID' } }, (error, result) => {
+      expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'relationshipRequest', AMId: 1, data: { relationshipType: 'Employee', relationshipId: 'testID' } })
       done()
     })
   })
