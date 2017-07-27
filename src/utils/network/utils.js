@@ -175,6 +175,9 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
     case 'fundamentalDateInfo':
       baseURL = `${getEndpoint({ stage, apiVersion })}/fundamental/date-info/`
       break
+    case 'fundamentalHoliday':
+      baseURL = `${getEndpoint({ stage, apiVersion })}/fundamental/holidays`
+      break
     default:
       throw new Error(`Invalid class type: ${AMaaSClass}`)
   }
