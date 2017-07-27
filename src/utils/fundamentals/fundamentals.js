@@ -60,7 +60,7 @@ export function calcBusinessDate({date, codes, offset, invalidDates}, callback) 
 
     const params = {
        AMaaSClass: 'fundamentalBusinessDate',
-       query: { startDate: [date], countryCode: codes, offset: [offset], invalidDate: invalidDates ? invalidDates : []  }
+       query: { startDate: [date], countryCodes: codes, offset: [offset], invalidDates: invalidDates ? invalidDates : []  }
     }
     let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
@@ -84,7 +84,7 @@ export function calcBusinessDate({date, codes, offset, invalidDates}, callback) 
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is a country name returned or country names. Omit to return Promise
  * @returns {Promise|null} 
  */
-export function processDateInfo ({date, codes}, callback)
+export function processDateInfo({date, codes}, callback)
 {
    if(!Array.isArray(codes)){
      codes = codes.split(',')
@@ -92,7 +92,8 @@ export function processDateInfo ({date, codes}, callback)
 
     const params = {
           AMaaSClass: 'fundamentalDateInfo',
-          query: {startDate: [date], countryCode: codes}
+          AMId: date,
+          query: { countryCodes: codes }
     }
     let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
@@ -135,7 +136,7 @@ export function holidays ({codes, years}, callback)
 
    const params = {
           AMaaSClass: 'fundamentalHoliday',
-          query: {countryCode: codes, year: years}
+          query: { countryCodes: codes, year: years }
     }
     let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
