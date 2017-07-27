@@ -4,20 +4,34 @@ import * as network from '../network'
 network.searchData = jest.fn()
 
 let mockCountry = {
-    countryCode: 'SG'
+    alpha2: "SG", 
+    alpha3: "SGP", 
+    name: "Singapore",
+    numeric: "702",
+    officalName: "Republic of Singapore"
 }
 let mockBizDate = {
-    date: '2017-6-30',
-    codes: 'SG',
-    offset: 1
+    business_date: '2017-07-03'
 }
 let mockDateInfo = {
-    date: '2017-7-03',
-    codes: 'SG'
+    SGP: {
+        working_day: true
+    }
 }
 let mockHoliday = {
-    codes: 'SG,CHN', 
-    years: '2017'
+    SGP: {
+        calendar: "WesternCalendar",
+        holidays: [
+            [
+                "2017-01-01",
+                "New year"
+            ]
+        ],
+        weekends: [
+            5,
+            6
+        ]
+    }
 }
 
 describe('utils/fundamentals', () => {
@@ -47,25 +61,25 @@ describe('utils/fundamentals', () => {
         })           
         it('calls searchData with the correct parameters', done => {
               fundamentals.calcBusinessDate( {date: '2017-6-30', codes: 'SG', offset: 1}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {stratDate: ['2017-6-30'], countryCode: ['SG'], offset: [1]} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG'], offset: [1]} })
               done()
             })
         })
         it('calls searchData with the correct parameters', done => {
               fundamentals.calcBusinessDate( {date: '2017-6-30', codes: ['SG', 'CHN'], offset: 1}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {stratDate: ['2017-6-30'], countryCode: ['SG,CHN'], offset: [1]} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG,CHN'], offset: [1]} })
               done()
             })
         })
         it('calls searchData with the correct parameters', done => {
               fundamentals.calcBusinessDate( {date: '2017-6-30', codes: 'SG', offset: 1, invalidDates: '2017-7-01'}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {stratDate: ['2017-6-30'], countryCode: ['SG'], offset: [1], invalidDate: ['2017-7-01']} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG'], offset: [1], invalidDate: ['2017-7-01']} })
               done()
             })
         })
         it('calls searchData with the correct parameters', done => {
               fundamentals.calcBusinessDate( {date: '2017-6-30', codes: 'SG', offset: 1, invalidDates: ['2017-7-01', '2017-7-02']}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {stratDate: ['2017-6-30'], countryCode: ['SG'], offset: [1], invalidDate: ['2017-7-01,2017-7-02']} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalBusinessDate', query: {startDate: ['2017-6-30'], countryCode: ['SG'], offset: [1], invalidDate: ['2017-7-01,2017-7-02']} })
               done()
             })
         })
@@ -81,13 +95,13 @@ describe('utils/fundamentals', () => {
         })           
         it('calls searchData with the correct parameters', done => {
               fundamentals.processDateInfo( {date: '2017-7-03', codes: 'SG'}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalDateInfo', query: {stratDate: ['2017-7-03'], countryCode: ['SG']} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalDateInfo', query: {startDate: ['2017-7-03'], countryCode: ['SG']} })
               done()
             })
         })
         it('calls searchData with the correct parameters', done => {
               fundamentals.processDateInfo( {date: '2017-7-03', codes: ['SG', 'CHN']}, (error, result) => {
-              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalDateInfo', query: {stratDate: ['2017-7-03'], countryCode: ['SG,CHN']} })
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalDateInfo', query: {startDate: ['2017-7-03'], countryCode: ['SG,CHN']} })
               done()
             })
         })
