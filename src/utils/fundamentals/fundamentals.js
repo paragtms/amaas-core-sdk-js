@@ -41,14 +41,12 @@ export function countries({ code }, callback) {
  */
 export function calcBusinessDate({date, codes, offset, invalidDates}, callback) //invalid dates
 {
-    if(!date){
-        return "Must specify start_date in querystring"
-    }else if(!codes){
-        return "Must specify at least one country_code in querystring"
-    }else if(!offset){
-        return "Must specify offset in querystring"
-    }else if(!Number.isInteger(offset)) {
-         return "Offset must be an integer"
+    if (!date || !codes || !offset) {
+      if (typeof callback === 'function') {
+           return callback('Error: missing parameters etc.')
+      } else {
+           return Promise.reject('Error: missing parameters etc.')
+      }
     }
    
    if(invalidDates){
@@ -121,7 +119,11 @@ export function processDateInfo ({date, codes}, callback)
 export function holidays ({codes, years}, callback)
 {
    if(!codes) {
-        return "Currently only country-based holiday calendars are supported"
+      if (typeof callback === 'function') {
+         return callback('Error: Currently only country-based holiday calendars are supported.')
+      } else {
+         return Promise.reject('Error: Currently only country-based holiday calendars are supported.')
+      }
    }
 
    if(!Array.isArray(codes)){
