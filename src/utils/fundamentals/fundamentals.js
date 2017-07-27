@@ -14,6 +14,7 @@ export function countries({ code }, callback) {
     AMaaSClass: 'fundamentalCountries',
     query: {countryCode: [code]}
   }
+  //if code is not specified, retun all countries 
   let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
@@ -29,26 +30,53 @@ export function countries({ code }, callback) {
   promise.catch(error => callback(error))
 }
 
-export function calcBusinessDate({date, code, offset}, callback) //invalid dates
+export function calcBusinessDate({date, codes, offset, invalidDates}, callback) //invalid dates
 {
-    if(!date)
-    {
+    if(!date){
         return "Must specify start_date in querystring"
-    }else if(!code)
-    {
+    }else if(!codes){
         return "Must specify at least one country_code in querystring"
-    }else if(!offset)
-    {
+    }else if(!offset){
         return "Must specify offset in querystring"
-    }else if(!Number.isInteger(offset))
-    {
+    }else if(!Number.isInteger(offset)) {
          return "Offset must be an integer"
     }
-    //var date = new Date().toISOString()
-    const params = {
+
+    let code=""
+    if(Array.isArray(codes)){
+      for(var i = 0; i < codes.length;i++) {
+            code+=codes[i]+","
+       } 
+     code = code.substring(0, code.length - 1);
+   }else{
+    code=codes
+   }
+   
+   let invalidDate=""
+   if(invalidDates){
+    if(Array.isArray(invalidDates)){
+      for(var i = 0; i < invalidDates.length;i++) {
+            invalidDate+=invalidDates[i]+","
+       } 
+     invalidDate = invalidDate.substring(0,invalidDate.length - 1);
+    }else{
+      invalidDate=invalidDates
+    }
+   }
+    
+   let params 
+   if(!invalidDates){
+          params = {
           AMaaSClass: 'fundamentalBusinessDate',
           query: {stratDate: [date], countryCode: [code], offset: [offset]}
-    }
+          }
+   }else{
+         params = {
+          AMaaSClass: 'fundamentalBusinessDate',
+          query: {stratDate: [date], countryCode: [code], offset: [offset], invalidDate: [invalidDate]}
+          }
+   }
+
     let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
@@ -64,9 +92,18 @@ export function calcBusinessDate({date, code, offset}, callback) //invalid dates
   promise.catch(error => callback(error))
 }
 
-export function getDateInfo ({date, code}, callback)
+export function processDateInfo ({date, codes}, callback)
 {
-  //fundamentalDateInfo
+    let code=""
+    if(Array.isArray(codes)){
+      for(var i = 0; i < codes.length;i++) {
+            code+=codes[i]+","
+       } 
+     code = code.substring(0, code.length - 1);
+   }else{
+    code=codes
+   }
+
     const params = {
           AMaaSClass: 'fundamentalDateInfo',
           query: {stratDate: [date], countryCode: [code]}
@@ -74,7 +111,7 @@ export function getDateInfo ({date, code}, callback)
    let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
-    }console.log(result) //should retun true
+    } //should retun true
       return result //should return biz date!
     }).catch((err) => {
       console.log(err.message);
@@ -86,16 +123,41 @@ export function getDateInfo ({date, code}, callback)
   promise.catch(error => callback(error))
 }
 
-export function holidays ({code, year}, callback)
+export function holidays ({codes, years}, callback)
 {
+    if(!codes) {
+        return "Currently only country-based holiday calendars are supported"
+    }
+
+    let code=""
+    if(Array.isArray(codes)){
+      for(var i = 0; i < codes.length;i++) {
+            code+=codes[i]+","
+       } 
+     code = code.substring(0, code.length - 1);
+   }else{
+    code=codes
+   }
+
+   let year=""
+   if(Array.isArray(years)){
+      for(var i = 0; i < years.length;i++) {
+            year+=years[i]+","
+       } 
+     year = year.substring(0, year.length - 1);
+   }else{
+    year=years
+   }
+
    const params = {
           AMaaSClass: 'fundamentalHoliday',
           query: {countryCode: [code], year: [year]}
     }
+
     let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
-    }console.log(result) //should retun true
+    } //should retun true
       return result //should return biz date!
     }).catch((err) => {
       console.log(err.message);
