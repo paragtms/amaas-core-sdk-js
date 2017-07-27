@@ -15,6 +15,10 @@ let mockDateInfo = {
     date: '2017-7-03',
     code: 'SG'
 }
+let mockHoliday = {
+    code: 'SG', 
+    year: '2017'
+}
 
 describe('utils/fundamentals', () => {
     describe('countries', () => {
@@ -60,6 +64,22 @@ describe('utils/fundamentals', () => {
         it('calls searchData with the correct parameters', done => {
               fundamentals.getDateInfo( {date: '2017-7-03', code: 'SG'}, (error, result) => {
               expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalDateInfo', query: {stratDate: ['2017-7-03'], countryCode: ['SG']} })
+              done()
+            })
+        })
+    })
+
+         describe('holidays', () => {
+        beforeAll(() => {
+          network.searchData.mockImplementation(() => Promise.resolve(mockHoliday))
+        })
+        test('with promise', () => {
+            let promise = fundamentals.holidays({code: 'SG', year: 2017})
+            expect(promise).toBeInstanceOf(Promise)
+        })           
+        it('calls searchData with the correct parameters', done => {
+              fundamentals.holidays( {code: 'SG', year: 2017}, (error, result) => {
+              expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'fundamentalHoliday', query: {countryCode: ['SG'], year: [2017]} })
               done()
             })
         })
