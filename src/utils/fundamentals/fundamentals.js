@@ -44,6 +44,7 @@ export function calcBusinessDate({date, code, offset}, callback) //invalid dates
     {
          return "Offset must be an integer"
     }
+    //var date = new Date().toISOString()
     const params = {
           AMaaSClass: 'fundamentalBusinessDate',
           query: {stratDate: [date], countryCode: [code], offset: [offset]}
@@ -63,7 +64,24 @@ export function calcBusinessDate({date, code, offset}, callback) //invalid dates
   promise.catch(error => callback(error))
 }
 
-export function  getDateInfo ({date, code}, callback)
+export function getDateInfo ({date, code}, callback)
 {
-    
+  //fundamentalDateInfo
+    const params = {
+          AMaaSClass: 'fundamentalDateInfo',
+          query: {stratDate: [date], countryCode: [code]}
+    }
+   let promise = searchData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }console.log(result) //should retun true
+      return result //should return biz date!
+    }).catch((err) => {
+      console.log(err.message);
+    });
+   if (typeof callback !== 'function') {
+    // return promise if callback is not provided
+    return promise
+   }
+  promise.catch(error => callback(error))
 }
