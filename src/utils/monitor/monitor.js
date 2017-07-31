@@ -3,7 +3,8 @@ import { Item } from '../../monitor'
 
 /**
  * Retrieve a Monitor Item
- * @function module:api.Monitor
+ * @function retrieveItem
+ * @memberof module:api.Monitor
  * @static
  * @param {object} params - object of parameters:
  * @param {number} params.assetManagerId - Asset Manager ID of the Item(s) to be retrieved
@@ -36,13 +37,14 @@ export function retrieveItem({ AMId, resourceId }, callback) {
 
 /**
  * Insert a new Monitor Item
- * @function module:api.Monitor
+ * @function insertNewItem
+ * @memberof module:api.Monitor
  * @static
  * @param {object} params - object of parameters:
  * @param {number} params.assetManagerId - Asset Manager ID of the Item
  * @param {Item|object} params.item - Monitor Item
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result ` is the inserted Item instance. Omit to return Promise
- * @param {Promise|null} - If no callback supplied, returns a Promise that resolves with the inserted Item instance
+ * @returns {Promise|null} - If no callback supplied, returns a Promise that resolves with the inserted Item instance
  */
 export function insertNewItem({ AMId, item }, callback) {
   let data
@@ -69,7 +71,8 @@ export function insertNewItem({ AMId, item }, callback) {
 
 /**
  * Resubmit a monitor item
- * @function module:api.Monitor
+ * @function resubmitItem
+ * @memberof module:api.Monitor
  * @static
  * @param {object} params - object of parameters:
  * @param {number} params.AMId - Asset Manager ID of the Item to be resubmitted
@@ -99,7 +102,8 @@ export function resubmitItem({ AMId, resourceId }, callback) {
 
 /**
  * Search Monitor Items
- * @function module:api.Monitor
+ * @function searchItems
+ * @memberof module:api.Monitor
  * @static
  * @param {object} params - object of parameters:
  * @param {number} [params.assetManagerId] - Asset Manager ID of the Items over which to search. If omitted, you must include `assetManagerIds` in the query
@@ -143,7 +147,8 @@ export function searchItems({ AMId, query }, callback) {
 
 /**
  * Close a monitor item
- * @function module:api.Monitor
+ * @function closeItem
+ * @memberof module:api.Monitor
  * @static
  * @param {object} params - object of parameters:
  * @param {number} params.assetManagerId - Asset Manager ID of the Item to close
