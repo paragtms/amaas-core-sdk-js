@@ -24,6 +24,7 @@ class RealAsset extends Asset {
    * @param {string} [params.displayName] - Display name of the Asset
    * @param {boolean} [params.rollPrice=true] - Whether to roll the price for the Asset
    * @param {string} [params.clientId] - ID of the associated client
+   * @param {object} [params.ownership] - Array of objects specifying the split of ownership of the Real Asset (it must sum to 1) (e.g. `[ {partyId: 'ABC', split: 0.3}, {partyId: 'DEF', split: 0.7} ]`
    * @param {object} [params.comments] - Object of Comments attached to the Real Asset
    * @param {object} [params.links] - Object of array of Links attached to the Real Asset
    * @param {object} [params.references={ AMaaS: Reference() }] - Object of References associated with the Real Asset. * The AMaaS Reference is auto-created and populated
@@ -36,13 +37,13 @@ class RealAsset extends Asset {
   constructor({
     assetManagerId,
     assetId,
-    assetClass='RealAsset',
+    assetClass = 'RealAsset',
     assetIssuerId,
-    assetStatus='Active',
+    assetStatus = 'Active',
     countryId,
     venueId,
     currency,
-    description='',
+    description = '',
     displayName,
     rollPrice,
     clientId,
@@ -53,7 +54,8 @@ class RealAsset extends Asset {
     updatedBy,
     createdTime,
     updatedTime,
-    version
+    version,
+    ownership
   }) {
     super({
       assetManagerId,
@@ -78,6 +80,38 @@ class RealAsset extends Asset {
       updatedTime,
       version
     })
+    
+    Object.defineProperties(this, {
+      _ownership: { writable: true, enumerable: false },
+      ownership: {
+        get: () => this._ownership,
+        set: (newOwnership) => {
+          if (newOwnership instanceof Array) {
+           var sum=0;
+           for (var i = 0; i < newOwnership.length; i++)
+           {
+                var value=newOwnership[i].split
+                var id=newOwnership[i].partyId
+                if(id==undefined)
+                {
+                  throw new Error('PartyId is missing')
+                }
+                sum+=value         
+           }     
+          if (sum==1 ) {
+            this._ownership = ownership
+          } else {
+            throw new Error('The sum of split should be 1')
+          }
+        }else
+        {
+          throw new Error('ownership should be an array')
+        }
+        },
+        enumerable: true
+      }
+    })
+    this.ownership = ownership
   }
 }
 

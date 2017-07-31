@@ -1,6 +1,7 @@
 import Party from './party.js'
 import { Address, Email } from '../Children'
-import { Comment, Link, Reference } from '../../children'
+import { Comment, Reference } from '../../children'
+import PartyLink from '../../children/Link/PartyLink'
 
 describe('Party', () => {
   describe('serialization', () => {
@@ -11,6 +12,21 @@ describe('Party', () => {
     })
   })
   describe('constructor', () => {
+
+    it('should set url', () => {
+      const party = new Party({url: 'testURL'})
+      expect(party.url).toEqual('testURL')
+    })
+
+    it('should set displayName', () => {
+      const party = new Party({displayName: 'testDisplayName'})
+      expect(party.displayName).toEqual('testDisplayName')
+    })
+
+    it('should set legalName', () => {
+      const party = new Party({legalName: 'testLegalName'})
+      expect(party.legalName).toEqual('testLegalName')
+    })
 
     it('should throw if attempting to set invalid partyStatus', () => {
       let party
@@ -54,21 +70,21 @@ describe('Party', () => {
     it('should set links correctly', () => {
       const party = new Party({})
       party.links = {
-        SINGLE1: [{ linkedId: 'ID-S1-1' }],
-        SINGLE2: [new Link({ linkedId: 'ID-S2-1' })],
+        SINGLE1: [{ linkedPartyId: 'ID-S1-1' }],
+        SINGLE2: [new PartyLink({ linkedPartyId: 'ID-S2-1' })],
         MULTI1: [
-          { linkedId: 'ID-M1-1' },
-          new Link({ linkedId: 'ID-M1-2' })
+          { linkedPartyId: 'ID-M1-1' },
+          new PartyLink({ linkedPartyId: 'ID-M1-2' })
         ]
       }
       expect(party.links.SINGLE1[0]).toBeDefined()
-      expect(party.links.SINGLE1[0].linkedId).toEqual('ID-S1-1')
+      expect(party.links.SINGLE1[0].linkedPartyId).toEqual('ID-S1-1')
       expect(party.links.SINGLE2[0]).toBeDefined()
-      expect(party.links.SINGLE2[0].linkedId).toEqual('ID-S2-1')
+      expect(party.links.SINGLE2[0].linkedPartyId).toEqual('ID-S2-1')
       expect(party.links.MULTI1[0]).toBeDefined()
-      expect(party.links.MULTI1[0].linkedId).toEqual('ID-M1-1')
+      expect(party.links.MULTI1[0].linkedPartyId).toEqual('ID-M1-1')
       expect(party.links.MULTI1[1]).toBeDefined()
-      expect(party.links.MULTI1[1].linkedId).toEqual('ID-M1-2')
+      expect(party.links.MULTI1[1].linkedPartyId).toEqual('ID-M1-2')
     })
 
   })

@@ -2,134 +2,124 @@ import uuid from 'uuid'
 
 import { retrieve, insert, amend, search, cancel, reopen } from './corporateActions'
 import * as api from '../../exports/api'
+import * as network from '../network'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000
+network.retrieveData = jest.fn()
+network.insertData = jest.fn()
+network.patchData = jest.fn()
+network.putData = jest.fn()
+network.searchData = jest.fn()
+network.deleteData = jest.fn()
+
 api.config({
   stage: 'staging',
   token: process.env.API_TOKEN
 })
 
+const mockCorpAct = {
+  assetManagerId: 338,
+  corporateActionId: uuid().substr(0, 10),
+  clientId: 1,
+  declaredDate: '2017-04-27',
+  settlementDate: '2017-04-28',
+  recordDate: '2017-04-28',
+  assetId: 'TEST',
+  partyId: '12',
+  corporateActionType: 'CorporateAction'
+}
+
 describe('retrieve', () => {
-  it('retrieves', done => {
-    retrieve({AMId: 338})
-      .then(res => {
-        if (Array.isArray(res)) {
-          expect(res[0]).toBeDefined()
-          expect(res[0].assetManagerId).toEqual(338)
-          done()
-        } else {
-          expect(res).toBeDefined()
-          expect(res.assetManagerId).toEqual(338)
-          done()
-        }
-      })
-      .catch(err => console.error(err))
+  beforeAll(() => {
+    network.retrieveData.mockImplementation(() => Promise.resolve(mockCorpAct))
+  })
+  test('with promise', () => {
+    let promise = retrieve({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls retrieveData with correct params', done => {
+    retrieve({ AMId: 1, resourceId: 'testID' }, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'corporateActions', AMId: 1, resourceId: 'testID' })
+      done()
+    })
   })
 })
 
 describe('insert', () => {
-  it.skip('inserts', done => {
-    const corporateAction = {
-      assetManagerId: 338,
-      corporateActionId: uuid().substr(0, 10),
-      clientId: 1,
-      declaredDate: '2017-04-27',
-      settlementDate: '2017-04-28',
-      recordDate: '2017-04-28',
-      assetId: 'TEST',
-      partyId: '12',
-      corporateActionType: 'CorporateAction'
-    }
-    insert({ AMId: 338, corporateAction})
-      .then(res => {
-        expect(res).toBeDefined()
-        expect(res.assetId).toEqual('TEST')
-        done()
-      })
-      .catch(err => console.error(err))
+  beforeAll(() => {
+    network.insertData.mockImplementation(() => Promise.resolve(mockCorpAct))
+  })
+  test('with promise', () => {
+    let promise = insert({ AMId: 1, corporateAction: mockCorpAct })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls insertData with correct params', done => {
+    insert({ AMId: 1, corporateAction: mockCorpAct }, (error, result) => {
+      expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'corporateActions', AMId: 1, data: JSON.parse(JSON.stringify(mockCorpAct)) })
+      done()
+    })
   })
 })
 
 describe('amend', () => {
-  it('amends', done => {
-    const nowish = new Date()
-    retrieve({ AMId: 338 })
-      .then(res => {
-        const id = res[0].corporateActionId
-        if (res[0].corporateActionStatus === 'Cancelled') {
-          console.log('Cancelled')
-          return reopen({ AMId: res[0].assetManagerId, resourceId: id })
-        }
-        return Promise.resolve(res[0])
-      })
-      .then(res => {
-        res.description = `Amended on ${nowish}`
-        return amend({ AMId: res.assetManagerId, resourceId: res.corporateActionId, corporateAction: res })
-      })
-      .then(res => {
-        expect(res.description).toEqual(`Amended on ${nowish}`)
-        done()
-      })
-      .catch(err => console.error(err))
+  beforeAll(() => {
+    network.putData.mockImplementation(() => Promise.resolve(mockCorpAct))
+  })
+  test('with promise', () => {
+    let promise = amend({ AMId: 1, resourceId: 'testID', corporateAction: mockCorpAct })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls putData with correct parasm', done => {
+    amend({ AMId: 1, resourceId: 'testID', corporateAction: mockCorpAct }, (error, result) => {
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'corporateActions', AMId: 1, resourceId: 'testID', data: JSON.parse(JSON.stringify(mockCorpAct)) })
+      done()
+    })
   })
 })
 
 describe('search', () => {
-  it('searches', done => {
-    const query = [{
-      key: 'corporate_action_statuses',
-      values: ['Open']
-    }]
-    search({ AMId: 338, query })
-      .then(res => {
-        if (Array.isArray(res)) {
-          if (res.length === 0) {
-            console.error('No arrays returned for this test, cannot test')
-          } else {
-            expect(res[0].corporateActionStatus).toEqual('Open')
-            done()
-          }
-        } else {
-          expect(res.corporateActionStatus).toEqual('Open')
-          done()
-        }
-      })
-      .catch(err => console.error(err))
+  beforeAll(() => {
+    network.searchData.mockImplementation(() => Promise.resolve(mockCorpAct))
+  })
+  test('with promise', () => {
+    let promise = search({ AMId: 1, query: {} })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls searchData with correct params', done => {
+    search({ AMId: 1, query: { queryKey: ['queryValues'] } }, (error, result) => {
+      expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'corporateActions', AMId: 1, query: { queryKey: ['queryValues'] } })
+      done()
+    })
   })
 })
 
-describe('cancel/reopen', () => {
-  it('cancels and reopens', done => {
-    let status
-    retrieve({ AMId: 338 })
-      .then(res => {
-        if (Array.isArray(res)) {
-          status = res[0].corporateActionStatus
-          if (status === 'Open') {
-            return cancel({ AMId: res[0].assetManagerId, resourceId: res[0].corporateActionId })
-          } else {
-            return reopen({ AMId: res[0].assetManagerId, resourceId: res[0].corporateActionId })
-          }
-        } else {
-          status = res.corporateActionStatus
-          if (status === 'Open') {
-            return cancel({ AMId: res.assetManagerId, resourceId: res.corporateActionId })
-          } else {
-            return reopen({ AMId: res.assetManagerId, resourceId: res.corporateActionId })
-          }
-        }
-      })
-      .then(res => {
-        if (res.corporateActionStatus === 'Open') {
-          return cancel({ AMId: res.assetManagerId, resourceId: res.corporateActionId })
-        } else {
-          return reopen({ AMId: res.assetManagerId, resourceId: res.corporateActionId })
-        }
-      })
-      .then(res => {
-        expect(res.corporateActionStatus).toEqual(status)
-        done()
-      })
-      .catch(err => console.error(err))
+describe('cancel', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockCorpAct))
+  })
+  test('with promise', () => {
+    let promise = cancel({ AMId: 1, resourceId: 'test' })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with correct params', done => {
+    cancel({ AMId: 1, resourceId: 'test' }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'corporateActions', AMId: 1, resourceId: 'test', data: { corporateActionStatus: 'Cancelled' } })
+      done()
+    })
+  })
+})
+
+describe('reopen', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockCorpAct))
+  })
+  test('with promise', () => {
+    let promise = reopen({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with correct params', done => {
+    reopen({ AMId: 1, resourceId: 'testID' }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'corporateActions', AMId: 1, resourceId: 'testID', data: { corporateActionStatus: 'Open' } })
+      done()
+    })
   })
 })

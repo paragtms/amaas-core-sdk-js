@@ -20,6 +20,9 @@ class GovernmentAgency extends Organisation {
    * @param {object} [params.references] - Object of References associated with the Government Agency
    * @param {object} [params.comments] - Object of Comments associated with the Government Agency
    * @param {object} [params.links] - Object of Links associated with the Government Agency
+   * @param {string} [params.legalName]- Legal name of the Asset Manager associated with this party
+   * @param {string} [params.displayName] - Display name of the Asset Manager associated with this party 
+   * @param {string} [params.url] - Url of this Party
    * @param {string} [params.createdBy] - ID of the user that created the Government Agency
    * @param {string} [params.updatedBy] - ID of the user that updated the Government Agency
    * @param {date} [params.createdTime] - Time that the Government Agency was created
@@ -38,6 +41,9 @@ class GovernmentAgency extends Organisation {
     references={},
     comments={},
     links={},
+    legalName,
+    displayName,
+    url,
     createdBy,
     updatedBy,
     createdTime,
@@ -55,6 +61,9 @@ class GovernmentAgency extends Organisation {
       references,
       comments,
       links,
+      legalName,
+      displayName,
+      url,
       createdBy,
       updatedBy,
       createdTime,

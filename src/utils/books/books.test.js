@@ -2,165 +2,133 @@ import uuid from 'uuid'
 import { retrieve, search, insert, amend, retire, reactivate } from './books'
 import Book from '../../books/Book/book'
 import * as api from '../../exports/api'
-import { getToken } from '../network'
+import * as network from '../network'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000
+network.retrieveData = jest.fn()
+network.insertData = jest.fn()
+network.patchData = jest.fn()
+network.putData = jest.fn()
+network.searchData = jest.fn()
+network.deleteData = jest.fn()
+
+// jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 api.config({
   stage: 'staging',
   token: process.env.API_TOKEN
 })
 
+const mockBook = {
+  bookId: 'bookId',
+  description: "RRN4WVXI1F3YA1IGMKZF",
+  bookType: "Trading",
+  businessUnit: null,
+  partyId: "A1UNKOYGGR",
+  closeTime: "18:00:00",
+  timezone: "Asia/Tokyo",
+  assetManagerId: 1,
+  ownerId: "50SJMSPK7A",
+  baseCurrency: "USD",
+}
+
 describe('utils/books', () => {
   describe('retrieve', () => {
+    beforeAll(() => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(mockBook))
+    })
     test('with callback', callback => {
       retrieve({AMId: 1}, (error, books) => {
-        expect(Array.isArray(books)).toBeTruthy()
-        expect(books[0]).toBeInstanceOf(Book)
-        callback(error)
-      })
-    })
-
-    test('with promise', callback => {
-      let promise = retrieve({AMId: 1})
-      expect(promise).toBeInstanceOf(Promise)
-      promise.then(books => {
-        expect(Array.isArray(books)).toBeTruthy()
-        expect(books[0]).toBeInstanceOf(Book)
+        expect(books).toEqual(new Book(mockBook))
         callback()
       })
     })
-
-    it('should retrieve', done => {
-      const params = {
-        AMId: 1
-      }
-      retrieve(params)
-        .then(res => {
-          if (Array.isArray(res) && res.length > 0) {
-            expect(res[0]).toBeDefined()
-            expect(res[0].assetManagerId).toEqual(1)
-          } else if (!Array.isArray(res)) {
-            expect(res.assetManagerId).toEqual(1)
-          }
-          done()
-        })
-        .catch(err => console.error(err))
+    test('with promise', () => {
+      let promise = retrieve({AMId: 1})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('should call network.retrieveData with correct params', done => {
+      retrieve({ AMId: 1 }, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1 })
+        done()
+      })
     })
   })
 
   describe('insert', () => {
-    test.skip('should insert', () => {
-      const data = {
-        description: "RRN4WVXI1F3YA1IGMKZF",
-        bookType: "Trading",
-        businessUnit: null,
-        partyId: "A1UNKOYGGR",
-        closeTime: "18:00:00",
-        timezone: "Asia/Tokyo",
-        assetManagerId: 1,
-        ownerId: "50SJMSPK7A",
-        baseCurrency: "USD",
-      }
-      insert({ book: data, AMId: 1 })
-        .then(res => {
-          expect(res).toEqual(expect.objectContaining(data))
-        })
-        .catch(err => {
-          console.error(err)
-        })
+    beforeAll(() => {
+      network.insertData.mockImplementation(() => Promise.resolve(mockBook))
     })
-  })
-
-  describe('retire/reactivate', () => {
-    test('should retire and reactivate', done => {
-      retrieve({ AMId: 1, resourceId: 'L9O3IWHCHP' })
-        .then(res => {
-          if (res.bookStatus === 'Active') {
-            return retire({ AMId: res.assetManagerId, resourceId: res.bookId })
-          }
-          return Promise.resolve(res)
-        })
-        .then(res => {
-          expect(res.bookStatus).toEqual('Retired')
-          return reactivate({ AMId: res.assetManagerId, resourceId: res.bookId })
-        })
-        .then(res => {
-          expect(res.bookStatus).toEqual('Active')
-          return retire(({ AMId: res.assetManagerId, resourceId: res.bookId }))
-        })
-        .then(res => {
-          expect(res.bookStatus).toEqual('Retired')
-          done()
-        })
-        .catch(err => {
-          console.error(err)
-        })
+    test('with promise', () => {
+      let promise = insert({ AMId: 1 })
+      expect(promise).toBeInstanceOf(Promise)
     })
-  })
-
-  describe('amend', () => {
-    test('amends', done => {
-      const bU = uuid().substring(0, 10)
-      retrieve({ AMId: 1, resourceId: 'L9O3IWHCHP' })
-        .then(res => {
-          if (res.bookStatus === 'Retired') {
-            return reactivate({ AMId: res.assetManagerId, resourceId: res.bookId })
-          } else {
-            return Promise.resolve(res)
-          }
-        })
-        .then(res => {
-          res.businessUnit = bU
-          return amend({ book: res, AMId: res.assetManagerId, resourceId: res.bookId })
-        })
-        .then(res => {
-          expect(res.businessUnit).toEqual(bU)
-          done()
-        })
-        .catch(err => {
-          console.error(err)
-        })
+    it('calls insertData with correct params', done => {
+      insert({ AMId: 1, book: mockBook }, (error, result) => {
+        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1, data: mockBook })
+        done()
+      })
     })
   })
 
   describe('search', () => {
-    test('with callback', callback => {
-      search({
-        AMId: 269,
-        query: [
-          { key: 'book_ids', values: ['35QIZ0'] }
-        ]
-      }, (error, books) => {
-        expect(Array.isArray(books)).toBeTruthy()
-        callback(error)
-      })
+    beforeAll(() => {
+      network.searchData.mockImplementation(() => Promise.resolve(mockBook))
     })
-
-    test('with promise', callback => {
-      let promise = search({
-        AMId: 269,
-        query: [{ key: 'book_ids', values: ['35QIZ0'] }]
-      })
+    test('with promise', () => {
+      let promise = search({ AMId: 1 })
       expect(promise).toBeInstanceOf(Promise)
-      promise.then(books => {
-        expect(Array.isArray(books)).toBeTruthy()
-        callback()
-      })
     })
-    it('searches', done => {
-      search({
-        query: [
-          { key: 'assetManagerIds', values: [269] },
-          { key: 'bookIds', values: ['35QIZ0'] }
-        ]
-      })
-      .then(res => {
-        expect(res[0]).toBeDefined()
-        expect(res[0].bookId).toEqual('35QIZ0')
-        expect(res[0].assetManagerId).toEqual(269)
+    it('calls searchData with correct params', done => {
+      search({ AMId: 1, query: { queryKey: ['queryValues'] } }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1, query: { queryKey: ['queryValues'] } })
         done()
       })
-      .catch(err => console.error(err))
+    })
+  })
+
+  describe('amend', () => {
+    beforeAll(() => {
+      network.putData.mockImplementation(() => Promise.resolve(mockBook))
+    })
+    test('with promise', () => {
+      let promise = amend({ AMId: 1 })
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('should call putdata with correct params', done => {
+      amend({ AMId: 1, book: mockBook, resourceId: 'testID' }, (error, result) => {
+        expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1, resourceId: 'testID', data: JSON.parse(JSON.stringify(mockBook)) })
+        done()
+      })
+    })
+  })
+
+  describe('retire', () => {
+    beforeAll(() => {
+      network.patchData.mockImplementation(() => Promise.resolve(mockBook))
+    })
+    test('with promise', () => {
+      let promise = retire({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls patchData with correct params', done => {
+      retire({ AMId: 1, resourceId: 'testID' }, (error, result) => {
+        expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1, resourceId: 'testID', data: { bookStatus: 'Retired' } })
+        done()
+      })
+    })
+  })
+
+  describe('reactivate', () => {
+    beforeAll(() => {
+      network.patchData.mockImplementation(() => Promise.resolve(mockBook))
+    })
+    test('with promise', () => {
+      let promise = reactivate({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls patchData with correct params', done => {
+      reactivate({ AMId: 1, resourceId: 'testId' })
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1, resourceId: 'testId', data: { bookStatus: 'Active' } })
+      done()
     })
   })
 })

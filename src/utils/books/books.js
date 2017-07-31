@@ -64,9 +64,12 @@ export function search({ AMId, query }, callback) {
     query
   }
   let promise = searchData(params).then(result => {
-    const books = result.map((book) => {
-      return _parseBook(book)
-    })
+    let books
+    if (Array.isArray(result)) {
+      books = result.map(book => _parseBook(book))
+    } else {
+      books = _parseBook(result)
+    }
     if (typeof callback === 'function') {
       callback(null, books)
     }

@@ -3,6 +3,6 @@
  * @memberof module:api
  */
 
-import { retrieve, insert, amend, deactivate, reactivate } from './assetManagers.js'
+import { retrieve, insert, amend, deactivate, reactivate, checkDomains, insertDomain, retrieveEODBooks } from './assetManagers.js'
 
-export { retrieve, insert, amend, deactivate, reactivate }
+export { retrieve, insert, amend, deactivate, reactivate, checkDomains, insertDomain, retrieveEODBooks }

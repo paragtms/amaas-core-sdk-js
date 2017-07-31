@@ -3,7 +3,6 @@ import { AMaaSModel } from '../../core'
 class Link extends AMaaSModel {
   constructor({
     linkedId,
-    active,
     createdBy,
     updatedBy,
     createdTime,
@@ -19,7 +18,6 @@ class Link extends AMaaSModel {
     })
 
     this.linkedId = linkedId
-    this.active = active === false ? false : true
   }
 }
 

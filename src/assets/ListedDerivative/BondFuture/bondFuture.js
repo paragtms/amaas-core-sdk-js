@@ -72,6 +72,7 @@ class BondFuture extends Future {
     venueId,
     currency,
     issueDate,
+    expiryDate,
     description='',
     displayName,
     clientId,
@@ -81,7 +82,6 @@ class BondFuture extends Future {
     tickSize,
     quoteUnit,
     underlyingAssetId,
-    expiryDate,
 
     cheapestToDeliverId,
     underlyingBondTenor,

@@ -1,5 +1,5 @@
 import { AMaaSModel } from '../../core'
-import { ASSET_MANAGER_TYPES } from '../enums'
+import { ASSET_MANAGER_TYPES, ACCOUNT_TYPES } from '../enums'
 
 /**
  * Class representing an Asset Manager
@@ -25,6 +25,7 @@ class AssetManager extends AMaaSModel {
    * <li>Retail</li>
    * <li>Venture Capital</li>
    * @param {string} [params.assetManagerStatus=Active] - Status of Asset Manager
+   * @param {string} [params.accountType=Basic] - Account Type reflecting the support level for the Asset Manager
    * @param {string} [params.clientId] - ID of the associated client
    * @param {string} [params.partyId='AMID'+assetManagerId] - ID of the Party that represents this Asset Manager. Defaults to e.g. AMID10 for assetManagerId 10
    * @param {string} [params.defaultBookOwnerId=assetManagerId] - Asset Manager ID of the default owner for any Books owned by this Asset Manager. Will be used if no `ownerId` is set on the Book. Defaults to e.g. 10 for assetManagerId 10
@@ -40,6 +41,7 @@ class AssetManager extends AMaaSModel {
     assetManagerId,
     assetManagerType,
     assetManagerStatus='Active',
+    accountType='Basic',
     clientId,
     partyId,
     defaultBookOwnerId,
@@ -71,11 +73,24 @@ class AssetManager extends AMaaSModel {
             }
           }
         }, enumerable: true
+      },
+      _accountType: { writable: true, enumerable: false },
+      accountType: {
+        get: () => this._accountType,
+        set: (newAccountType) => {
+          if (ACCOUNT_TYPES.indexOf(newAccountType) === -1) {
+            throw new Error(`Invalid Account Type: ${newAccountType}`)
+          } else {
+            this._accountType = newAccountType
+          }
+        },
+        enumerable: true
       }
     })
     this.assetManagerId = assetManagerId
     this.assetManagerType = assetManagerType
     this.assetManagerStatus = assetManagerStatus
+    this.accountType = accountType
     this.clientId = clientId
     this.partyId = partyId
     this.defaultBookOwnerId = defaultBookOwnerId

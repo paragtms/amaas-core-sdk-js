@@ -40,9 +40,7 @@ import { Reference } from '../../children'
          get: () => this._references,
          set: (newReferences) => {
            if (newReferences) {
-             let refClass = {
-               AMaaS: new Reference({ referenceValue: corporateActionId })
-             }
+             let refClass = {}
              for (let name in newReferences) {
                if (newReferences.hasOwnProperty(name)) {
                  refClass[name] = new Reference(newReferences[name])
@@ -50,9 +48,7 @@ import { Reference } from '../../children'
              }
              this._references = refClass
            } else {
-             this._references = {
-               AMaaS: new Reference({ referenceValue: corporateActionId })
-             }
+             this._references = {}
            }
          }, enumerable: true
        }

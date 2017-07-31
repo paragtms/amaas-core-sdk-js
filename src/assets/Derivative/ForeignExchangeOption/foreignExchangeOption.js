@@ -1,14 +1,14 @@
 import Decimal from 'decimal.js'
 
-import Asset from '../Asset/asset'
-import { OPTION_STYLES, OPTION_TYPES } from '../enums.js'
+import Derivative from '../../Derivative/Derivative/derivative'
+import { OPTION_STYLES, OPTION_TYPES } from '../../enums.js'
 
 /**
  * Class representing an FX Option
  * @memberof module:assets
- * @extends module:assets.Asset
+ * @extends module:assets.Derivative
  */
-class ForeignExchangeOption extends Asset {
+class ForeignExchangeOption extends Derivative {
   /**
    * Construct a new FX Option instance
    * @param {object} params - ForeignExchangeOption creation options:
@@ -63,7 +63,6 @@ class ForeignExchangeOption extends Asset {
     clientId,
     optionType,
     strike,
-    premium,
     underlyingAssetId,
     optionStyle,
     comments,

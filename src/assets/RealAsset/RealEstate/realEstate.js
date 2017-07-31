@@ -52,7 +52,8 @@ class RealEstate extends RealAsset {
     updatedBy,
     createdTime,
     updatedTime,
-    version
+    version,
+    ownership
   }) {
     super({
       assetManagerId,
@@ -76,7 +77,8 @@ class RealEstate extends RealAsset {
       updatedBy,
       createdTime,
       updatedTime,
-      version
+      version,
+      ownership
     })
   }
 }

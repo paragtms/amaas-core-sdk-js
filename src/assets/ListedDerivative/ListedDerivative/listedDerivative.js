@@ -21,7 +21,6 @@ class ListedDerivative extends Asset {
    * @param {string} [params.venueId] - ID of Listed Derivative's venue if applicable
    * @param {string} [params.currency] - Listed Derivative currency (e.g. USD, SGD)
    * @param {string} [params.issueDate] - Issue date if applicable (YYYY-MM-DD)
-   * @param {string} [params.maturityDate] - Maturity date if applicable (YYYY-MM-DD)
    * @param {string} [params.description] - Description of the Listed Derivative
    * @param {string} [params.displayName] - Display name of the Listed Derivative
    * @param {boolean} [params.rollPrice=false] - Auto-set to `false` __(read-only)__
@@ -45,7 +44,6 @@ class ListedDerivative extends Asset {
     venueId,
     currency,
     issueDate,
-    maturityDate,
     description='',
     displayName,
     clientId,
@@ -69,7 +67,6 @@ class ListedDerivative extends Asset {
       venueId,
       currency,
       issueDate,
-      maturityDate,
       description,
       displayName,
       rollPrice: false,

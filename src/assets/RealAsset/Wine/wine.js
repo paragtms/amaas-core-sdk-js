@@ -84,7 +84,8 @@ class Wine extends RealAsset {
     updatedBy,
     createdTime,
     updatedTime,
-    version
+    version, 
+    ownership
   }) {
     super({
       assetManagerId,
@@ -104,7 +105,8 @@ class Wine extends RealAsset {
       updatedBy,
       createdTime,
       updatedTime,
-      version
+      version, 
+      ownership
     })
     this.year = year
     this.producer = producer

@@ -48,10 +48,11 @@ Running tests that do not require API access
 $ npm test -- 'src\/(?!utils)'
 ```
 
-Running full tests (requires API_TOKEN)
+Running full tests (requires authentication)
 ```
-$ API_TOKEN=xxxxx npm test
+$ npm test
 ```
+Authentication requires a username and password. This is currently restricted to AMaaS employees - unauthenticated users may test and contribute to non-API functionality.
 
 ## Contribution
 

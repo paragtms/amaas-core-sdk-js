@@ -20,6 +20,9 @@ class Organisation extends Party {
    * @param {object} [params.references] - Object of References associated with the Organisation
    * @param {object} [params.comments] - Object of Comments associated with the Organisation
    * @param {object} [params.links] - Object of Links associated with the Organisation
+   * @param {string} [params.legalName]- Legal name of the Asset Manager associated with this party
+   * @param {string} [params.displayName] - Display name of the Asset Manager associated with this party 
+   * @param {string} [params.url] - Url of this Party
    * @param {string} [params.createdBy] - ID of the user that created the Organisation
    * @param {string} [params.updatedBy] - ID of the user that updated the Organisation
    * @param {date} [params.createdTime] - Time that the Organisation was created
@@ -38,6 +41,9 @@ class Organisation extends Party {
     references={},
     comments={},
     links={},
+    legalName,
+    displayName,
+    url,
     createdBy,
     updatedBy,
     createdTime,
@@ -56,6 +62,9 @@ class Organisation extends Party {
       references,
       comments,
       links,
+      legalName,
+      displayName,
+      url,
       createdBy,
       updatedBy,
       createdTime,

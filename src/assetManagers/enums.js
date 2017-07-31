@@ -8,6 +8,7 @@ export const ASSET_MANAGER_TYPES = [
   'Fund Manager',
   'Hedge Fund',
   'Private Equity',
-  'Retail',
+  'Individual',
   'Venture Capital'
 ]
+export const ACCOUNT_TYPES = [ 'Test', 'Basic', 'Professional' ]

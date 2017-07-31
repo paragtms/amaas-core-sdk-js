@@ -51,7 +51,7 @@ class BondBase extends Asset {
     venueId,
     currency,
     issueDate,
-    maturityDate,
+    maturityDate='9999-12-31',
     description='',
     displayName,
     rollPrice,
@@ -80,7 +80,6 @@ class BondBase extends Asset {
       venueId,
       currency,
       issueDate,
-      maturityDate,
       description,
       displayName,
       rollPrice,
@@ -110,6 +109,7 @@ class BondBase extends Asset {
         }, enumerable: true
       }
     })
+    this.maturityDate = maturityDate
     this.defaulted = defaulted === true ? true : false // Default to false
     this.coupon = coupon
     this.par = par

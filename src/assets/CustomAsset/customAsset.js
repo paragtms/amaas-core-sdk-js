@@ -47,7 +47,7 @@ class CustomAsset extends Asset {
     venueId,
     currency,
     issueDate,
-    maturityDate,
+    maturityDate='9999-12-31',
     description='',
     displayName,
     rollPrice,
@@ -73,7 +73,6 @@ class CustomAsset extends Asset {
       venueId,
       currency,
       issueDate,
-      maturityDate,
       description,
       displayName,
       rollPrice,
@@ -88,7 +87,8 @@ class CustomAsset extends Asset {
       updatedTime,
       version
     })
-    Object.assign(this, clientAdditional)
+    this.maturityDate = maturityDate
+    Object.assign(this, { ...clientAdditional })
   }
 }
 

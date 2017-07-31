@@ -5,7 +5,7 @@ describe('Address', () => {
     it('should throw if attempting to set invalid countryId (length > 3)', () => {
       let address
       function construct() {
-        address = new Address({ countryId: 'Singapore' })
+      address = new Address({ countryId: 'Singapore' })
       }
       expect(construct).toThrowError(new Error('Invalid Country ID: Singapore'))
     })

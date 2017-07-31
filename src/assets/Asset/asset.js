@@ -1,5 +1,6 @@
 import { AMaaSModel } from '../../core'
-import { Comment, Link, Reference } from '../../children'
+import { Comment, Reference } from '../../children'
+import AssetLink from '../../children/Link/AssetLink'
 
 /**
  * Class representing an Asset
@@ -22,21 +23,19 @@ class Asset extends AMaaSModel {
    * @param {string} [params.venueId] - ID of Asset's venue if applicable
    * @param {string} [params.currency] - Asset currency (e.g. USD, SGD)
    * @param {string} [params.issueDate=0001-01-01] - Issue date if applicable (YYYY-MM-DD)
-   * @param {string} [params.maturityDate=9999-12-31] - Maturity date if applicable (YYYY-MM-DD)
    * @param {string} [params.description] - Description of the Asset
    * @param {string} [params.displayName] - Display name of the Asset
    * @param {boolean} [params.rollPrice=true] - Whether to roll the price for the Asset
    * @param {string} [params.clientId] - ID of the associated client
    * @param {object} [params.comments] - Object of Comments attached to the Asset
    * @param {object} [params.links] - Object of array of Links attached to the Asset
-   * @param {object} [params.references={ AMaaS: Reference() }] - Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated
-   * @param {object} [params.clientAdditional] - Object of custom properties for creating a Custom Asset (set in the Custom Asset class)
+   * @param {object} [params.references={}] - Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated
    * @param {string} [params.createdBy] - ID of the user that created the Asset
    * @param {string} [params.updatedBy] - ID of the user that updated the Asset
    * @param {date} [params.createdTime] - Time that the Asset was created
    * @param {date} [params.updatedTime] - Time that the Asset was updated
    * @param {number} [params.version] - Version number
-  */
+   */
   constructor({
     assetManagerId,
     assetId,
@@ -48,7 +47,6 @@ class Asset extends AMaaSModel {
     venueId,
     currency,
     issueDate,
-    maturityDate,
     description='',
     displayName='',
     rollPrice=true,
@@ -60,8 +58,7 @@ class Asset extends AMaaSModel {
     updatedBy,
     createdTime,
     updatedTime,
-    version,
-    ...clientAdditional,
+    version
   }) {
     super({
       createdBy,
@@ -81,19 +78,6 @@ class Asset extends AMaaSModel {
             this._issueDate = newIssueDate
           } else {
             this._issueDate = '0001-01-01'
-          }
-        },
-        enumerable: true
-      },
-      _maturityDate: { writable: true, enumerable: false },
-      maturityDate: {
-        get: () => this._maturityDate,
-        set: (newMaturityDate) => {
-          // Accepts string 'YYYY-MM-DD'
-          if (newMaturityDate) {
-            this._maturityDate = newMaturityDate
-          } else {
-            this._maturityDate = '9999-12-31'
           }
         },
         enumerable: true
@@ -127,7 +111,7 @@ class Asset extends AMaaSModel {
                 // TODO: Remove this when the API returns Arrays for all Links
                 if (newLinks[name] instanceof Array) {
                   linksClass[name] = newLinks[name].map(link => {
-                    return new Link(link)
+                    return new AssetLink(link)
                   })
                 } else {
                   console.warn('All Links should be Arrays: if you are seeing this message then a non-Array link has been encountered and it will be skipped for now')
@@ -145,9 +129,7 @@ class Asset extends AMaaSModel {
         get: () => this._references,
         set: (newReferences) => {
           if (newReferences) {
-            let refClass = {
-              AMaaS: new Reference({ referenceValue: assetId })
-            }
+            let refClass = {}
             for (let name in newReferences) {
               if (newReferences.hasOwnProperty(name)) {
                 refClass[name] = new Reference(newReferences[name])
@@ -155,9 +137,7 @@ class Asset extends AMaaSModel {
             }
             this._references = refClass
           } else {
-            this._references = {
-              AMaaS: new Reference({ referenceValue: assetId })
-            }
+            this._references = {}
           }
         }, enumerable: true
       }
@@ -175,7 +155,6 @@ class Asset extends AMaaSModel {
     this.venueId = venueId
     this.currency = currency
     this.issueDate = issueDate
-    this.maturityDate = maturityDate
     this.description = description
     this.displayName = displayName
     this.rollPrice = rollPrice

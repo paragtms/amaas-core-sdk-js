@@ -197,7 +197,7 @@ export function search({ AMId, query }, callback) {
  * @param {string} params.AMId - AMId of the Party to be deactivated
  * @param {string} params.resourceId - Party ID of the Party to be deactivated
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the deactivated Party instance. Omit to return Promise
- * @erturns {PRomise|null} If no callback supplied, returns a Promise that resolves with the deactivated Party instance
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the deactivated Party instance
  */
 export function deactivate({ AMId, resourceId }, callback) {
   const params = {
@@ -229,7 +229,7 @@ export function deactivate({ AMId, resourceId }, callback) {
  * @param {string} params.AMId - AMId of the Party to be reactivated
  * @param {string} params.resourceId - Party ID of the Party to be reactivated
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the reactivated Party instance. Omit to return Promise
- * @erturns {Promise|null} If no callback supplied, returns a Promise that resolves with the reactivated Party instance
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the reactivated Party instance
  */
 export function reactivate({ AMId, resourceId }, callback) {
   const params = {

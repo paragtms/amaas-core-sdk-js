@@ -23,6 +23,9 @@ class Individual extends Party {
    * @param {object} [params.references] - Object of References associated with the Individual
    * @param {object} [params.comments] - Object of Comments associated with the Individual
    * @param {object} [params.links] - Object of Links associated with the Individual
+   * @param {string} [params.legalName]- Legal name of the Asset Manager associated with this party
+   * @param {string} [params.displayName] - Display name of the Asset Manager associated with this party 
+   * @param {string} [params.url] - Url of this Party
    * @param {string} [params.createdBy] - ID of the user that created the Individual
    * @param {string} [params.updatedBy] - ID of the user that updated the Individual
    * @param {date} [params.createdTime] - Time that the Individual was created
@@ -44,6 +47,9 @@ class Individual extends Party {
     references={},
     comments={},
     links={},
+    legalName,
+    displayName,
+    url,
     createdBy,
     updatedBy,
     createdTime,
@@ -62,6 +68,9 @@ class Individual extends Party {
       references,
       comments,
       links,
+      legalName,
+      displayName,
+      url,
       createdBy,
       updatedBy,
       createdTime,

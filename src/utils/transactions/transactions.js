@@ -226,3 +226,4 @@ export function search({ AMId, query }, callback) {
 function _parseTransaction(t) {
   return new Transaction(t)
 }
+

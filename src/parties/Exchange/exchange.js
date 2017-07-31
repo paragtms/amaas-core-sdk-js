@@ -19,6 +19,9 @@ class Exchange extends Company {
    * @param {object} [params.references] - Object of References associated with the Exchange
    * @param {object} [params.comments] - Object of Comments associated with the Exchange
    * @param {object} [params.links] - Object of Links associated with the Exchange
+   * @param {string} [params.legalName]- Legal name of the Asset Manager associated with this party
+   * @param {string} [params.displayName] - Display name of the Asset Manager associated with this party 
+   * @param {string} [params.url] - Url of this Party
    * @param {string} [params.createdBy] - ID of the user that created the Exchange
    * @param {string} [params.updatedBy] - ID of the user that updated the Exchange
    * @param {date} [params.createdTime] - Time that the Exchange was created
@@ -36,6 +39,9 @@ class Exchange extends Company {
     references={},
     comments={},
     links={},
+    legalName,
+    displayName,
+    url,
     createdBy,
     updatedBy,
     createdTime,
@@ -53,6 +59,9 @@ class Exchange extends Company {
       references,
       comments,
       links,
+      legalName,
+      displayName,
+      url,
       createdBy,
       updatedBy,
       createdTime,

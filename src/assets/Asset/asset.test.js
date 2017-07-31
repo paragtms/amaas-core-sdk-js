@@ -1,7 +1,7 @@
 import Asset from './asset.js'
 import Comment from '../../children/Comment'
-import Link from '../../children/Link'
 import { Reference } from '../../children'
+import AssetLink from '../../children/Link/AssetLink'
 
 describe('Asset', () => {
   describe('constructor', () => {
@@ -10,12 +10,6 @@ describe('Asset', () => {
       const testAsset = new Asset({})
       const issueDate = testAsset.issueDate
       expect(issueDate).toEqual('0001-01-01')
-    })
-
-    it('should set maturityDate correctly', () => {
-      const testAsset = new Asset({})
-      const maturityDate = testAsset.maturityDate
-      expect(maturityDate).toEqual('9999-12-31')
     })
 
     it('should set comments to empty object if no Comments', () => {
@@ -46,26 +40,19 @@ describe('Asset', () => {
     it('should set links as an object of <string, Link> type', () => {
       const links = {
         'Single': [{
-          linkedId: 'testId',
+          linkedAssetId: 'testId',
           active: true
         }],
         'Multiple': [{
-          linkedId: 'testId2',
+          linkedAssetId: 'testId2',
           active: true
         }, {
-          linkedId: 'testId3',
+          linkedAssetId: 'testId3',
           active: false
         }]
       }
       const testAsset = new Asset({ links })
-      expect(testAsset.links.Single[0]).toBeInstanceOf(Link)
-    })
-
-    it('should set references to the AMaaS reference even if no References are supplied', () => {
-      const testAsset = new Asset({ assetId: 'testId' })
-      const expectedRef = new Reference({ referenceValue: 'testId' })
-      expect(testAsset.references.AMaaS).toBeDefined()
-      expect(testAsset.references.AMaaS.referenceValue).toEqual('testId')
+      expect(testAsset.links.Single[0]).toBeInstanceOf(AssetLink)
     })
 
     it('should set references correctly (inclduing the AMaaS reference)', () => {
@@ -79,8 +66,6 @@ describe('Asset', () => {
       }
       const testAsset = new Asset({ assetId: 'assetId', references })
       const testRef = new Reference({ referenceValue: 't' })
-      expect(testAsset.references.AMaaS).toBeDefined()
-      expect(testAsset.references.AMaaS.referenceValue).toEqual('assetId')
       expect(testAsset.references.Office).toBeInstanceOf(Reference)
       expect(testAsset.references.Office.referenceValue).toEqual('testRef1')
     })

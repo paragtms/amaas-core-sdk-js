@@ -10,7 +10,6 @@ class PartyChild extends AMaaSModel {
    * Construct a new PartyChild object
    * @param {object} params - PartyChild creation options:
    * @param {string} params.partyId - ID of the linked Party
-   * @param {boolean} params.active - Whether this Party as a child is active (Note: NOT whether the linked Party itself is active)
    * @param {string} [params.createdBy] - ID of the user that created the linked Party
    * @param {string} [params.updatedBy] - ID of the user that updated the linked Party
    * @param {date} [params.createdTime] - Time that the linked Party was created
@@ -19,7 +18,6 @@ class PartyChild extends AMaaSModel {
    */
   constructor({
     partyId,
-    active,
     createdBy,
     createdTime,
     updatedBy,
@@ -34,7 +32,6 @@ class PartyChild extends AMaaSModel {
       version
     })
     this.partyId = partyId
-    this.active = active === false ? false : true
   }
 }
 

@@ -6,9 +6,11 @@ import {
   Code,
   Comment,
   Link,
+  Party,
   Reference,
-  Party
+  Rate
 } from '../../children'
+import TransactionLink from '../../children/Link/TransactionLink'
 import * as types from '../enums'
 
 /**
@@ -41,6 +43,7 @@ class Transaction extends AMaaSModel {
    * @param {object} params.comments - Object of all comments (Comment class)
    * @param {object} params.links - Object of all links (Link class)
    * @param {object} params.parties - Object of all parties as a Transaction child (PartyChild class)
+   * @param {object} params.rates - Object of all rates (Rate class)
    * @param {object} params.references - *
    * @param {*} params.postings - *
   */
@@ -66,6 +69,7 @@ class Transaction extends AMaaSModel {
     comments={},
     links={},
     parties={},
+    rates={},
     references,
     postings,
     createdBy,
@@ -153,9 +157,8 @@ class Transaction extends AMaaSModel {
       references: {
         get: () => this._references,
         set: (newReferences) => {
-          const AMaaSRef = { AMaaS: new Reference({ referenceValue: this.transactionId }) }
           if (!newReferences) {
-            this._references = AMaaSRef
+            this._references = {}
           } else {
             let newRefs = {}
             for (let ref in newReferences) {
@@ -163,10 +166,7 @@ class Transaction extends AMaaSModel {
                 newRefs[ref] = new Reference(Object.assign({}, newReferences[ref]))
               }
             }
-            this._references = {
-              AMaaS: new Reference({ referenceValue: this.transactionId }),
-              ...newRefs
-            }
+            this._references = newRefs
           }
         },
         enumerable: true
@@ -229,7 +229,7 @@ class Transaction extends AMaaSModel {
               // TODO: Remove this when the API returns Arrays for all Links
               if (newLinks[name] instanceof Array) {
                 links[name] = newLinks[name].map(link => {
-                  return new Link(link)
+                  return new TransactionLink(link)
                 })
               } else {
                 console.warn('All Links should be Arrays: if you are seeing this message then a non-Array link has been encountered and it will be skipped for now')
@@ -255,6 +255,22 @@ class Transaction extends AMaaSModel {
           }
         },
         enumerable: true
+      },
+      _rates: { writable: true, enumerable: false },
+      rates: {
+        get: () => this._rates,
+        set: (newRates) => {
+          if (newRates) {
+            let rates = {}
+            for (let ref in newRates) {
+              if (newRates.hasOwnProperty(ref)) {
+                rates[ref] = new Rate(Object.assign({}, newRates[ref]))
+              }
+            }
+            this._rates = rates
+          }
+        },
+        enumerable: true
       }
     })
     this.assetManagerId = assetManagerId
@@ -277,6 +293,7 @@ class Transaction extends AMaaSModel {
     this.comments = comments
     this.links = links
     this.parties = parties
+    this.rates = rates
     this.references = references
     this.postings = []
     this.asset = asset
@@ -288,7 +305,7 @@ class Transaction extends AMaaSModel {
     }
     let netCharges = new Decimal(0);
     for (let chargeType in this.charges) {
-      if (this.charges[chargeType].active && this.charges[chargeType].netAffecting) {
+      if (this.charges[chargeType].netAffecting) {
         netCharges = netCharges.plus(this.charges[chargeType].chargeValue)
       }
     }
@@ -302,7 +319,7 @@ class Transaction extends AMaaSModel {
   upsertLinkSet(type, links) {
     if (links) {
       const classLinks = links.map(link => {
-        return new Link(Object.assign({}, link))
+        return new TransactionLink(Object.assign({}, link))
       })
       this.links[type] = classLinks
     }
@@ -310,7 +327,7 @@ class Transaction extends AMaaSModel {
 
   addLink(type, link) {
     if (link) {
-      this.links[type].push(new Link(Object.assign({}, link)))
+      this.links[type].push(new TransactionLink(Object.assign({}, link)))
     }
   }
 
@@ -321,7 +338,7 @@ class Transaction extends AMaaSModel {
     const existingLinkCount = this.links[type].length
     if (linkedId) {
       const filtered = this.links[type].filter(link => {
-        return link.linkedId !== linkedId
+        return link.linkedTransactionId !== linkedId
       })
       if (filtered.length === existingLinkCount) {
         throw new Error(`Linked Transaction ID Not Found: ${linkedId}`)

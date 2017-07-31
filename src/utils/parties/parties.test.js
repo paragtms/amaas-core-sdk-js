@@ -5,223 +5,134 @@ import Individual from '../../parties/Individual/individual'
 import Broker from '../../parties/Broker/broker.js'
 import Address from '../../parties/Children/address.js'
 import * as api from '../../exports/api'
-import { getToken } from '../network'
+import * as network from '../network'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000
+network.retrieveData = jest.fn()
+network.insertData = jest.fn()
+network.patchData = jest.fn()
+network.putData = jest.fn()
+network.searchData = jest.fn()
+network.deleteData = jest.fn()
+
+
 api.config({
   stage: 'staging',
   token: process.env.API_TOKEN
 })
 
-describe('parties util functions', () => {
-  beforeAll(() => {
-    return getToken()
-  })
-  describe('insert function', () => {
-    test('with promise', () => {
-      let promise = insert({}).catch(error => {})
-      expect(promise).toBeInstanceOf(Promise)
-    })
-    test.skip('should insert', done => {
-      const party = {
-        description: "testParty",
-        partyType: "Broker",
-        assetManagerId: 516,
-        partyId: uuid().substring(0, 30)
-      }
-      insert({ party, AMId: 1 })
-        .then(res => {
-          expect(res).toEqual(expect.objectContaining(party))
-          done()
-        })
-        .catch(err => {
-          console.error(err)
-        })
-    })
-  })
+const mockParty = {
+  assetManagerId: 1,
+  partyType: 'Individual'
+}
 
-  describe('retrieve function', () => {
-    test('with promise', done => {
-      let promise = retrieve({
-        AMId: 1, partyId: 'party'
-      }).catch(error => {})
-      expect(promise).toBeInstanceOf(Promise)
+describe('retrieve', () => {
+  beforeAll(() => {
+    network.retrieveData.mockImplementation(() => Promise.resolve(mockParty))
+  })
+  test('with promise', () => {
+    let promise = retrieve({ AMId: 1 })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls retrieveData with the correct params', done => {
+    retrieve({ AMId: 1, resourceId: 'testID' }, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID' })
       done()
     })
   })
+})
 
-  describe('amend', () => {
-    test('with promise', () => {
-      let promise = amend({}).catch(error => {})
-      expect(promise).toBeInstanceOf(Promise)
-    })
-    test('should amend', done => {
-      let d
-      retrieve({ AMId: 516, resourceId: '39da5cef-08af-40f8-9c9a-b13856' })
-        .then(res => {
-          if (res.description === 'description') {
-            d = 'description'
-            res.description = 'Amended Description'
-          } else {
-            res.description = 'description'
-          }
-          return amend({ party: res, AMId: res.assetManagerId, resourceId: res.partyId })
-        })
-        .then(res => {
-          expect(res.description).toEqual(d === 'description' ? 'Amended Description' : 'description')
-          done()
-        })
-        .catch(err => {
-          console.error(err)
-        })
+describe('insert', () => {
+  beforeAll(() => {
+    network.insertData.mockImplementation(() => Promise.resolve(mockParty))
+  })
+  test('with promise', () => {
+    let promise = insert({ AMId: 1, party: mockParty })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls insertData with the correct params', done => {
+    insert({ AMId: 1, party: mockParty }, (error, result) => {
+      expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, data: JSON.parse(JSON.stringify(mockParty)) })
+      done()
     })
   })
+})
 
-  describe('partialAmend', () => {
-    test('with promise', () => {
-      let promise = partialAmend({}).catch(error => {})
-      expect(promise).toBeInstanceOf(Promise)
-    })
-    test('should partial amend', done => {
-      let bC
-      retrieve({ AMId: 516, resourceId: 'fa337e08-1363-47a8-95ba-6ebb55' })
-        .then(res => {
-          if (res.partyStatus === 'Inactive') {
-            return reactivate({ AMId: res.assetManagerId, resourceId: res.partyId })
-          } else {
-            return Promise.resolve(res)
-          }
-        })
-        .then(res => {
-          let changes = {}
-          if (res.baseCurrency === 'SGD') {
-            bC = 'SGD'
-            changes.baseCurrency = 'USD'
-          } else {
-            changes.baseCurrency = 'SGD'
-          }
-          return partialAmend({ changes, AMId: res.assetManagerId, resourceId: res.partyId })
-        })
-        .then(res => {
-          expect(res.baseCurrency).toEqual(bC === 'SGD' ? 'USD' : 'SGD')
-          done()
-        })
-        .catch(err => {
-          console.error(err)
-        })
-      })
+describe('amend', () => {
+  beforeAll(() => {
+    network.putData.mockImplementation(() => Promise.resolve(mockParty))
   })
-
-  describe('search', () => {
-    it('searches', done => {
-      const query = [
-        { key: 'party_types', values: ['Broker', 'Individual'] }
-      ]
-      search({ AMId: 516, query })
-        .then(res => {
-          if (Array.isArray(res)) {
-            const pT = res[0].partyType
-            expect(pT).toEqual(pT !== 'Broker' ? 'Individual' : 'Broker')
-            done()
-          } else {
-            const pT = res.partyType
-            expect(pT).toEqual(pT !== 'Broker' ? 'Individual' : 'Broker')
-            done()
-          }
-        })
-        .catch(err => console.error(err))
+  test('with promise', () => {
+    let promise = amend({ AMId: 1 })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls putData with the correct params', done => {
+    amend({ AMId: 1, party: mockParty, resourceId: 'testID' }, (error, result) => {
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID', data: JSON.parse(JSON.stringify(mockParty)) })
+      done()
     })
   })
+})
 
-  describe('deactivate', () => {
-    const testAMId = 516
-    const testId = 'fa337e08-1363-47a8-95ba-6ebb55'
-
-    afterAll(() => {
-      reactivate({ AMId: testAMId, resourceId: testId })
-        .then()
-        .catch(err => {
-          console.error(`Error in cleanup: Reactivating partyId ${testId} for Asset Manager ${testAMId}`)
-        })
-    })
-
-    test('with promise', () => {
-      let promise = deactivate({}).catch(error => {})
-      expect(promise).toBeInstanceOf(Promise)
-    })
-    test('deactivate/reactivate', done => {
-      let status
-      retrieve({ AMId: testAMId, resourceId: testId })
-        .then(res => {
-          if (res.partyStatus === 'Active') {
-            status = 'Active'
-            return deactivate({ AMId: res.assetManagerId, resourceId: res.partyId })
-          } else {
-            status = 'Inactive'
-            return reactivate({ AMId: res.assetManagerId, resourceId: res.partyId })
-          }
-        })
-        .then(res => {
-          if (res.partyStatus === 'Active') {
-            return deactivate({ AMId: res.assetManagerId, resourceId: res.partyId })
-          } else {
-            return reactivate({ AMId: res.assetManagerId, resourceId: res.partyId })
-          }
-        })
-        .then(res => {
-          expect(res.partyStatus).toEqual(status)
-          done()
-        })
-        .catch(err => {
-          console.error(err)
-        })
+describe('partial', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockParty))
+  })
+  test('with promise', () => {
+    let promise = partialAmend({ AMId: 1 })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with the correct params', done => {
+    partialAmend({ AMId: 1, resourceId: 'testID', changes: { changed: 'changed' } }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID', data: { changed: 'changed' } })
+      done()
     })
   })
+})
 
-  describe('_parseParty function', () => {
-    it('should parse the response to the appropriate class', () => {
-      const address = new Address({
-        addressPrimary: true,
-        lineOne: "VCF5H1W9KLAAN8DIJ0R4",
-        lineTwo: null,
-        city: "NODC740NZO",
-        region: "SX3JEVA03B",
-        postalCode: "YUIJDP",
-        countryId: "O21",
-        active: true,
-        createdBy: "TEMP",
-        updatedBy: "TEMP",
-        createdTime: "2017-01-27T00:31:02",
-        updatedTime: "2017-01-27T00:31:02",
-        version: 1,
-      })
-      const party = _parseParty({
-        partyType: 'Individual',
-        addresses: {
-          Registered: {
-           city: "NODC740NZO",
-           addressPrimary: true,
-           updatedBy: "TEMP",
-           internalId :4,
-           lineOne: "VCF5H1W9KLAAN8DIJ0R4",
-           region: "SX3JEVA03B",
-           countryId: "O21",
-           createdBy: "TEMP",
-           updatedTime: "2017-01-27T00:31:02",
-           createdTime: "2017-01-27T00:31:02",
-           version: 1,
-           postalCode: "YUIJDP",
-           lineTwo: null,
-           active: true
-          }
-        }
-      })
-      expect(party).toEqual(new Individual({ partyType: 'Individual', partyClass: 'Individual', addresses: { Registered: address } }))
+describe('search', () => {
+  beforeAll(() => {
+    network.searchData.mockImplementation(() => Promise.resolve(mockParty))
+  })
+  test('with promise', () => {
+    let promise = search({ AMId: 1 })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls searchData with the correct params', done => {
+    search({ AMId: 1, query: { queryKey: ['queryValues'] } }, (error, result) => {
+      expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, query: { queryKey: ['queryValues'] } })
+      done()
     })
-    it('should parse the response as Party class if no party_type is found', () => {
-      const party = _parseParty({})
-      expect(party).toBeInstanceOf(Party)
-      expect(party).toEqual(new Party({}))
+  })
+})
+
+describe('deactivate', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockParty))
+  })
+  test('with promise', () => {
+    let promise = deactivate({ AMId: 1 })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with the correct params', done => {
+    deactivate({ AMId: 1, resourceId: 'testID' }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID', data: { partyStatus: 'Inactive' } })
+      done()
+    })
+  })
+})
+
+describe('reactivate', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockParty))
+  })
+  test('with promise', () => {
+    let promise = reactivate({ AMId: 1 })
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with the correct params', done => {
+    reactivate({ AMId: 1, resourceId: 'testID' }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, resourceId: 'testID', data: { partyStatus: 'Active' } })
+      done()
     })
   })
 })

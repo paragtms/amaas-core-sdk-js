@@ -45,7 +45,7 @@ class Sukuk extends Asset {
     venueId,
     currency,
     issueDate,
-    maturityDate,
+    maturityDate='9999-12-31',
     description='',
     displayName,
     rollPrice,
@@ -69,7 +69,6 @@ class Sukuk extends Asset {
       venueId,
       currency,
       issueDate,
-      maturityDate,
       description,
       displayName,
       rollPrice,
@@ -83,6 +82,7 @@ class Sukuk extends Asset {
       updatedTime,
       version
     })
+    this.maturityDate = maturityDate
   }
 }
 

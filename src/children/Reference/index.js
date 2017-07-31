@@ -16,7 +16,7 @@ class Reference extends AMaaSModel {
     * @param {date} [params.updatedTime] - Time that the Reference was updated
     * @param {number} [params.version] - Version number of the Reference
   */
-  constructor({ referenceValue, active, createdBy, updatedBy, createdTime, updatedTime, version }) {
+  constructor({ referenceValue, createdBy, updatedBy, createdTime, updatedTime, version }) {
     super({
       createdBy,
       updatedBy,
@@ -24,26 +24,7 @@ class Reference extends AMaaSModel {
       updatedTime,
       version
     })
-    Object.defineProperties(this, {
-      _active: { writable: true, enumerable: false },
-      active: {
-        get: () => this._active,
-        set: (newActive) => {
-          switch (newActive) {
-            case false:
-              this._active = false
-              break
-            case undefined:
-              this._active = true
-              break
-            default:
-              this._active = newActive
-          }
-        }, enumerable: true
-      }
-    })
     this.referenceValue = referenceValue
-    this.active = active
   }
 
   // set active(newActive) {

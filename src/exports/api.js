@@ -8,11 +8,14 @@ import * as AssetManagers from '../utils/assetManagers'
 import * as Assets from '../utils/assets'
 import * as Books from '../utils/books'
 import * as CorporateActions from '../utils/corporateActions'
+import * as Fundamentals from '../utils/fundamentals'
+import * as Monitor from '../utils/monitor'
 import * as Netting from '../utils/netting'
 import * as Parties from '../utils/parties'
 import * as Positions from '../utils/positions'
 import * as Relationships from '../utils/relationships'
 import * as Transactions from '../utils/transactions'
+import * as csv from '../csv_upload/csvUpload.js'
 
 import { configureStage, configureAuth } from '../utils/network'
 
@@ -22,14 +25,18 @@ export {
   Assets,
   Books,
   CorporateActions,
+  Fundamentals,
+  Monitor,
   Parties,
   Positions,
+  Relationships,
   Transactions,
+  csv,
   config
 }
 
 function config(config) {
-  const { stage, credentialsPath, token } = config
-  configureStage({ stage, credentialsPath })
+  const { stage, credentialsPath, token, apiVersion } = config
+  configureStage({ stage, credentialsPath, apiVersion })
   configureAuth({ token })
 }

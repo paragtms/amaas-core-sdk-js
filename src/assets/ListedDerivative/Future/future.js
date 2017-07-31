@@ -36,7 +36,7 @@ class Future extends ListedDerivative {
    * @param {number} params.tickSize - Future tick size. Stored as a Decimal instance __(required)__
    * @param {string} [params.quoteUnit] - Future quote unit
    * @param {string} params.underlyingAssetId - ID of the underlying Asset __(required)__
-   * @param {string} [params.expiryDate] - Date of the Future's expiry (YYYY-MM-DD)
+   * @param {string} [params.expiryDate=9999-12-31] - Date of the Future's expiry (YYYY-MM-DD)
    * @param {object} [params.comments] - Object of Comments attached to the Future
    * @param {object} [params.links] - Object of array of Links attached to the Future
    * @param {object} [params.references={ AMaaS: Reference() }] - Object of References associated with the Future. * The AMaaS Reference is auto-created and populated

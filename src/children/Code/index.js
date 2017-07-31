@@ -3,7 +3,6 @@ import { AMaaSModel } from '../../core'
 class Code extends AMaaSModel {
   constructor({
     codeValue,
-    active,
     createdBy,
     updatedBy,
     createdTime,
@@ -19,7 +18,6 @@ class Code extends AMaaSModel {
     })
 
     this.codeValue = codeValue
-    this.active = active === false ? false : true
   }
 }
 
