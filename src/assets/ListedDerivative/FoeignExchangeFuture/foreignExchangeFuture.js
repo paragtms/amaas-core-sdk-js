@@ -9,7 +9,7 @@ import AssetLink from '../../../children/Link/AssetLink'
 class ForeignExchangeFuture extends Future {
       /**
    * Construct a new ForeignExchangeFuture instance
-   * @param {object} params - Asset creation options:
+   * @param {object} params - ForeignExchangeFuture creation options:
    * @param {number} params.assetManagerId - ID of Asset's Asset Manager __(required)__
    * @param {number} params.assetId - ID of the Asset __(required)__
    * @param {string} params.settlementType - A type of settlement

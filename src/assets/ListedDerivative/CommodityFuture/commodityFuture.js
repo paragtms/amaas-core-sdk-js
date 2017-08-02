@@ -9,7 +9,7 @@ import AssetLink from '../../../children/Link/AssetLink'
 class CommodityFuture extends Future {
       /**
    * Construct a new CommodityFuture instance
-   * @param {object} params - Asset creation options:
+   * @param {object} params - CommodityFuture creation options:
    * @param {number} params.assetManagerId - ID of Asset's Asset Manager __(required)__
    * @param {number} params.assetId - ID of the Asset __(required)__
    * @param {string} params.settlementType - A type of settlement
