@@ -2,13 +2,13 @@ import Future from '../Future/future'
 import { Comment, Reference } from '../../../children'
 import AssetLink from '../../../children/Link/AssetLink'
 /**
- * Class representing an Asset
+ * Class representing an CommodityFuture
  * @memberof module:assets
  * @extends module:ListDerivatives.Future
  */
 class CommodityFuture extends Future {
       /**
-   * Construct a new Asset instance
+   * Construct a new CommodityFuture instance
    * @param {object} params - Asset creation options:
    * @param {number} params.assetManagerId - ID of Asset's Asset Manager __(required)__
    * @param {number} params.assetId - ID of the Asset __(required)__
