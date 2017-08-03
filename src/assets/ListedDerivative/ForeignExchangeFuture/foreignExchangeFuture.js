@@ -37,15 +37,14 @@ class ForeignExchangeFuture extends Future {
   constructor({
           assetManagerId,
           assetId,
-          assetClass='Asset',
           assetIssuerId,
-          assetStatus='Active',
+          assetStatus,
           countryId,
           venueId,
           currency,
           issueDate,
-          description='',
-          displayName='',
+          description,
+          displayName,
           clientId,
           settlementType,
           contractSize, 
@@ -64,9 +63,8 @@ class ForeignExchangeFuture extends Future {
           version    
   }) {
       super({
-           assetManagerId,
+          assetManagerId,
           assetId,
-          assetClass,
           assetIssuerId,
           assetStatus,
           countryId,

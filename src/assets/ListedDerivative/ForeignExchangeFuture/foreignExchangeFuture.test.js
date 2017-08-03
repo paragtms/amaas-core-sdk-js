@@ -34,7 +34,7 @@ describe('ForeignExchangeFuture', () => {
             expect(testCommodityFuture.links.Single[0]).toBeInstanceOf(AssetLink)
         })
 
-        it('should set references correctly (inclduing the AMaaS reference)', () => {
+        it('should set references correctly', () => {
             const references = {
                 'Office': {
                     referenceValue: 'testRef1'
