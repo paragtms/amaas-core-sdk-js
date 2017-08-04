@@ -272,6 +272,33 @@ export function retrieveEODBooks({ AMId, bookID }, callback) {
   promise.catch(error => callback(error))
 }
 
+/**
+ * Retrieve temporary credentials for pub/sub connection
+ * @function getCredentialsForPubSub
+ * @memberof module:api.AssetManagers
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - AMId of user for whom you want to retrieve credentials
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the credentials object containing `AccessKeyId`, `SecretAccessKey` and `SessionToken`, along with an array of available subscription topics.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the credentials object as well as an array of available subscriptions.
+ */
+export function getCredentialsForPubSub ({ AMId }, callback) {
+  const params = {
+    AMaaSClass: 'assetManagerPubSubCredentials',
+    AMId
+  }
+  let promise = retrieveData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
 export function _parseEODBook(object){
   return new EODBook(object)
 }

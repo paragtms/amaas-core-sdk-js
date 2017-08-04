@@ -360,6 +360,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function checkDomains({ domain }: { domain: string }, callback?: Function): Promise<assetManagers.Domain | null> | void
       function insertDomain({ domain }: { domain: assetManagers.Domain | IDomain }, callback?: Function): Promise<assetManagers.Domain> | void
       function retrieveEODBooks({ AMId, bookID }: { AMId: number, bookID: string }, callback?: Function): Promise<assetManagers.EODBook | assetManagers.EODBook[]> | void
+      function getCredentialsForPubSub({ AMId }: { AMId: number }, callback?: Function): Promise<{ credentials: { AccessKeyId: string, SecretAccessKey: string, SessionToken: string }, topics: string[] }> | void
     }
     namespace Assets {
       function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<assets.AssetClassTypes[]> | void
