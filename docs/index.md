@@ -118,6 +118,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> \| <code>null</code>
         * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.getCredentialsForPubSub(params, [callback])](#module_api.AssetManagers.getCredentialsForPubSub) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Assets](#module_api.Assets) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Assets.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Assets.insert) ⇒ <code>Promise</code> \| <code>null</code>
@@ -251,6 +252,7 @@ Send Allocations for a specific Transaction
     * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> \| <code>null</code>
     * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.getCredentialsForPubSub(params, [callback])](#module_api.AssetManagers.getCredentialsForPubSub) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.AssetManagers.retrieve"></a>
 
@@ -365,6 +367,20 @@ Retrieve EOD Books
 | params.AMId | <code>number</code> | AMID of caller. |
 | params.bookID | <code>string</code> | Book ID to retrieve. |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of EODBooks or a single EODBook instance. Omit to return promise. |
+
+<a name="module_api.AssetManagers.getCredentialsForPubSub"></a>
+
+#### AssetManagers.getCredentialsForPubSub(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Retrieve temporary credentials for pub/sub connection
+
+**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with the credentials object as well as an array of available subscriptions.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | AMId of user for whom you want to retrieve credentials |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the credentials object containing `AccessKeyId`, `SecretAccessKey` and `SessionToken`, along with an array of available subscription topics. |
 
 <a name="module_api.Assets"></a>
 
@@ -1365,10 +1381,14 @@ Classes for the Assets service
         * [new BondFuture(params)](#new_module_assets.BondFuture_new)
     * [.BondFutureOption](#module_assets.BondFutureOption) ⇐ [<code>Future</code>](#module_assets.Future)
         * [new BondFutureOption(params)](#new_module_assets.BondFutureOption_new)
+    * [.CommodityFuture](#module_assets.CommodityFuture) ⇐ <code>module:ListDerivatives.Future</code>
+        * [new CommodityFuture(params)](#new_module_assets.CommodityFuture_new)
     * [.EnergyFuture](#module_assets.EnergyFuture) ⇐ [<code>Future</code>](#module_assets.Future)
         * [new EnergyFuture(params)](#new_module_assets.EnergyFuture_new)
     * [.EquityFuture](#module_assets.EquityFuture) ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
         * [new EquityFuture(params)](#new_module_assets.EquityFuture_new)
+    * [.ForeignExchangeFuture](#module_assets.ForeignExchangeFuture) ⇐ <code>module:ListDerivatives.Future</code>
+        * [new ForeignExchangeFuture(params)](#new_module_assets.ForeignExchangeFuture_new)
     * [.Future](#module_assets.Future) ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
         * [new Future(params)](#new_module_assets.Future_new)
     * [.FutureOption](#module_assets.FutureOption) ⇐ [<code>Future</code>](#module_assets.Future)
@@ -2258,6 +2278,46 @@ Construct a new Bond Future Option instance
 | [params.updatedTime] | <code>date</code> |  | Time that the Bond Future Option was updated |
 | [params.version] | <code>number</code> |  | Version number |
 
+<a name="module_assets.CommodityFuture"></a>
+
+### assets.CommodityFuture ⇐ <code>module:ListDerivatives.Future</code>
+Class representing an CommodityFuture
+
+**Kind**: static class of [<code>assets</code>](#module_assets)  
+**Extends**: <code>module:ListDerivatives.Future</code>  
+<a name="new_module_assets.CommodityFuture_new"></a>
+
+#### new CommodityFuture(params)
+Construct a new CommodityFuture instance
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| params | <code>object</code> |  | CommodityFuture creation options: |
+| params.assetManagerId | <code>number</code> |  | ID of Asset's Asset Manager __(required)__ |
+| params.assetId | <code>number</code> |  | ID of the Asset __(required)__ |
+| params.settlementType | <code>string</code> |  | A type of settlement |
+| params.contractSize | <code>number</code> |  | An integer, e.g. 10 barrels per contract |
+| params.pointValue | <code>string</code> |  | Value of 1 point |
+| params.tickSize | <code>number</code> |  | The minimum unit of price change |
+| params.quoteUnit | <code>number</code> |  | Contract unit, e.g. barrel |
+| [params.assetIssuerId] | <code>string</code> |  | ID of the Asset issuer |
+| [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Asset |
+| [params.countryId] | <code>string</code> |  | ID of Asset's country |
+| [params.venueId] | <code>string</code> |  | ID of Asset's venue if applicable |
+| [params.currency] | <code>string</code> |  | Asset currency (e.g. USD, SGD) |
+| [params.issueDate] | <code>string</code> | <code>&quot;0001-01-01&quot;</code> | Issue date if applicable (YYYY-MM-DD) |
+| [params.expiryDate] | <code>string</code> |  | Expiry date |
+| [params.description] | <code>string</code> |  | Description of the Asset |
+| [params.displayName] | <code>string</code> |  | Display name of the Asset |
+| [params.links] | <code>object</code> |  | Object of array of Links attached to the Asset |
+| [params.references] | <code>object</code> | <code>{}</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
+| [params.createdBy] | <code>string</code> |  | ID of the user that created the Asset |
+| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Asset |
+| [params.createdTime] | <code>date</code> |  | Time that the Asset was created |
+| [params.updatedTime] | <code>date</code> |  | Time that the Asset was updated |
+| [params.version] | <code>number</code> |  | Version number |
+
 <a name="module_assets.EnergyFuture"></a>
 
 ### assets.EnergyFuture ⇐ [<code>Future</code>](#module_assets.Future)
@@ -2350,6 +2410,46 @@ Construct a new Equity Future instance
 | [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Equity Future |
 | [params.createdTime] | <code>date</code> |  | Time that the Equity Future was created |
 | [params.updatedTime] | <code>date</code> |  | Time that the Equity Future was updated |
+| [params.version] | <code>number</code> |  | Version number |
+
+<a name="module_assets.ForeignExchangeFuture"></a>
+
+### assets.ForeignExchangeFuture ⇐ <code>module:ListDerivatives.Future</code>
+Class representing an ForeignExchangeFuture
+
+**Kind**: static class of [<code>assets</code>](#module_assets)  
+**Extends**: <code>module:ListDerivatives.Future</code>  
+<a name="new_module_assets.ForeignExchangeFuture_new"></a>
+
+#### new ForeignExchangeFuture(params)
+Construct a new ForeignExchangeFuture instance
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| params | <code>object</code> |  | ForeignExchangeFuture creation options: |
+| params.assetManagerId | <code>number</code> |  | ID of Asset's Asset Manager __(required)__ |
+| params.assetId | <code>number</code> |  | ID of the Asset __(required)__ |
+| params.settlementType | <code>string</code> |  | A type of settlement |
+| params.contractSize | <code>number</code> |  | An integer, e.g. 10 barrels per contract |
+| params.pointValue | <code>string</code> |  | Value of 1 point |
+| params.tickSize | <code>number</code> |  | The minimum unit of price change |
+| params.quoteUnit | <code>number</code> |  | Contract unit, e.g. barrel |
+| [params.assetIssuerId] | <code>string</code> |  | ID of the Asset issuer |
+| [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Asset |
+| [params.countryId] | <code>string</code> |  | ID of Asset's country |
+| [params.venueId] | <code>string</code> |  | ID of Asset's venue if applicable |
+| [params.currency] | <code>string</code> |  | Asset currency (e.g. USD, SGD) |
+| [params.issueDate] | <code>string</code> | <code>&quot;0001-01-01&quot;</code> | Issue date if applicable (YYYY-MM-DD) |
+| [params.expiryDate] | <code>string</code> |  | Expiry date |
+| [params.description] | <code>string</code> |  | Description of the Asset |
+| [params.displayName] | <code>string</code> |  | Display name of the Asset |
+| [params.links] | <code>object</code> |  | Object of array of Links attached to the Asset |
+| [params.references] | <code>object</code> | <code>{}</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
+| [params.createdBy] | <code>string</code> |  | ID of the user that created the Asset |
+| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Asset |
+| [params.createdTime] | <code>date</code> |  | Time that the Asset was created |
+| [params.updatedTime] | <code>date</code> |  | Time that the Asset was updated |
 | [params.version] | <code>number</code> |  | Version number |
 
 <a name="module_assets.Future"></a>
