@@ -189,7 +189,7 @@ export function search({ AMId, query }, callback) {
   promise.catch(error => callback(error))
 }
 /**
- * Search for Assets
+ * Search for Assets with specified fields
  * @function fieldsSearch
  * @memberof module:api.Assets
  * @static
