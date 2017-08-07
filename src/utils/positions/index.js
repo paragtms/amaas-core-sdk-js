@@ -3,6 +3,6 @@
  * @memberof module:api
  */
 
-import { retrieve, search } from './positions.js'
+import { retrieve, search, fieldsSearch} from './positions.js'
 
-export { retrieve, search }
+export { retrieve, search, fieldsSearch }
