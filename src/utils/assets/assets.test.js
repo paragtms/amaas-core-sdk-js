@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, insert, amend, partialAmend, search, deactivate, reactivate } from './assets.js'
+import { retrieve, insert, amend, partialAmend, search, fieldsSearch, deactivate, reactivate } from './assets.js'
 import Asset from '../../assets/Asset/asset.js'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -98,6 +98,22 @@ describe('utils/assets', () => {
     it('calls searchData with the correct params', done => {
       search({ AMId: 1, query: { queryKey: ['queryValue'] } }, (error, result) => {
         expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'assets', AMId: 1, query: { queryKey: ['queryValue'] } })
+        done()
+      })
+    })
+  })
+
+  describe ('fieldsSearch', () => {
+    beforeAll(() => {
+      network.searchData.mockImplementation(() => Promise.resolve(mockAsset))
+    })
+    test('with promise', () => {
+      let promise = search({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls searchData with the correct params', done => {
+      fieldsSearch({ AMIds: [1, 2], assetIds: [1, 2], fields: ["description", "assetType", "assetManagerId", "assetId"] }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'assets', AMIds: [1, 2], assetIds: [1, 2], fields: ["description", "assetType", "assetManagerId", "assetId"] })
         done()
       })
     })
