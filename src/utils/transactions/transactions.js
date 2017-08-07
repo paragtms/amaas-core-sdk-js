@@ -194,6 +194,69 @@ export function search({ AMId, query }, callback) {
 }
 
 /**
+ * Search for Transaction with specified fields
+ * @function fieldsSearch
+ * @memberof module:api.Positions
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} [params.AMId] - Asset Manager ID of the Assets to search over. If omitted, you must send assetManagerIds in the search query with at least one value
+ * @param {number} [params.assetId] -Asset ID of the asset
+ * @param {string} [params.field] -Fields should be returned 
+ * Available keys are:
+ * <li>assetManagerIds (Required if AMId param is omitted)</li>
+ * <li>bookIds</li>
+ * <li>counterpartyBookId</li>
+ * <li>transactionAction</li>
+ * <li>assetIds</li>
+ * <li>quantity</li>
+ * <li>transactionDate</li>
+ * <li>settlementDate</li>
+ * <li>price</li>
+ * <li>transactionCurrency</li>
+ * <li>settlementCurrency</li>
+ * <li>asset</li>
+ * <li>executionTime</li>
+ * <li>transactionType</li>
+ * <li>transactionId</li>
+ * <li>transactionStatus</li>
+ * <li>charges</li>
+ * <li>codes</li>
+ * <li>comments</li>
+ * <li>links</li>
+ * <li>parties</li>
+ * <li>rates</li>
+ * <li>references</li>
+ * <li>postings</li>
+ * e.g. `{ AMIds: [1], assetIds: [1, 2], fields: [assetManagerIds, assetIds, transactionType] }`
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance
+ */
+export function fieldsSearch({ AMIds, assetIds, fields }, callback) {
+  const params = {
+    AMaaSClass: 'transactions',
+    AMIds,
+    assetIds,
+    fields
+  }
+
+  let promise = searchData (params).then(result => {
+    if (Array.isArray(result)) {
+      result = result.map(tran => _parseTransaction(tran))
+    } else {
+      result = _parseTransaction(result)
+    }
+    if(typeof callback === 'function'){
+       callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
  * Cancel a Transaction
  * @function cancel
  * @memberof module:api.Transactions
