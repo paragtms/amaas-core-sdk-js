@@ -1,4 +1,4 @@
-import { retrieve, insert, amend, partialAmend, search, cancel } from './transactions'
+import { retrieve, insert, amend, partialAmend, search, fieldsSearch, cancel } from './transactions'
 import * as api from '../../exports/api'
 import * as network from '../network'
 
@@ -113,6 +113,22 @@ describe('search', () => {
     })
   })
 })
+
+describe ('fieldsSearch', () => {
+    beforeAll(() => {
+      network.searchData.mockImplementation(() => Promise.resolve(mockTransaction))
+    })
+    test('with promise', () => {
+      let promise = search({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls searchData with the correct params', done => {
+      fieldsSearch({ AMIds: [1, 2], assetIds: [1, 2], fields: [ "assetManagerId", "bookId", "assetId" ] }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMIds: [1, 2], assetIds: [1, 2], fields: ["assetManagerId", "bookId", "assetId"] })
+        done()
+      })
+    })
+  })
 
 describe('cancel', () => {
   beforeAll(() => {
