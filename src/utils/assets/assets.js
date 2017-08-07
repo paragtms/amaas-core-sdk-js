@@ -188,6 +188,7 @@ export function search({ AMId, query }, callback) {
   }
   promise.catch(error => callback(error))
 }
+
 /**
  * Search for Assets with specified fields
  * @function fieldsSearch
@@ -220,6 +221,11 @@ export function fieldsSearch({ AMIds, assetIds, fields }, callback) {
   }
 
   let promise = searchData (params).then(result => {
+    if (Array.isArray(result)) {
+      result = result.map(ass => _parseAsset(ass))
+    } else {
+      result = _parseAsset(result)
+    }
     if(typeof callback === 'function'){
        callback(null, result)
     }
