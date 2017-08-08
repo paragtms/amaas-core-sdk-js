@@ -10,16 +10,16 @@ network.deleteData = jest.fn()
 
 const testItem = { assetManagerId: 1 }
 
-describe('retrieveItem', () => {
+describe('retrieveItems', () => {
   it('should return a promise if no callback is supplied', () => {
     network.retrieveData.mockImplementation(() => Promise.resolve(testItem))
-    let result = api.retrieveItem({ AMId: 1, resourceId: 'testItemID' })
+    let result = api.retrieveItems({ AMId: 1, resourceId: 'testItemID' })
     expect(result).toBeInstanceOf(Promise)
   })
 
   it('should call callback if supplied', done => {
     network.retrieveData.mockImplementation(() => Promise.resolve(testItem))
-    api.retrieveItem({ AMId: 1, resourceId: 'testItemID' }, (error, result) => {
+    api.retrieveItems({ AMId: 1, resourceId: 'testItemID' }, (error, result) => {
       expect(result).toBeDefined()
       done()
     })
@@ -27,7 +27,7 @@ describe('retrieveItem', () => {
 
   it('callback error', done => {
     network.retrieveData.mockImplementation(() => Promise.reject('testError'))
-    api.retrieveItem({ AMId: 1, resourceId: 'testItemID' }, (error, result) => {
+    api.retrieveItems({ AMId: 1, resourceId: 'testItemID' }, (error, result) => {
       expect(error).toBeDefined()
       done()
     })
@@ -36,7 +36,7 @@ describe('retrieveItem', () => {
   it('returns an Item instance', () => {
     const expectedResult = new Item({ assetManagerId: 1 })
     network.retrieveData.mockImplementation(() => Promise.resolve(testItem))
-    api.retrieveItem({ AMId: 1, resourceId: 'testItemID' })
+    api.retrieveItems({ AMId: 1, resourceId: 'testItemID' })
       .then(result => {
         expect(result).toEqual(expectedResult)
       })
