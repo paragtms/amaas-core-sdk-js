@@ -12,7 +12,7 @@ import { Item } from '../../monitor'
  * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of Items or a single Item instance. Omit to return Promise
  * @returns {Promise|null} - If no callback supplied, returns a Promise that resolves with an array of Items or a single Item instance
  */
-export function retrieveItem({ AMId, resourceId }, callback) {
+export function retrieveItems({ AMId, resourceId }, callback) {
   const params = {
     AMaaSClass: 'monitorItems',
     AMId,
