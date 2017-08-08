@@ -3,6 +3,6 @@
  * @memberof module:api
  */
 
- import { insertNewItem, resubmitItem, searchItems, closeItem } from './monitor.js'
+ import { insertNewItem, resubmitItem, retrieveItem, searchItems, closeItem } from './monitor.js'
 
- export { insertNewItem, resubmitItem, searchItems, closeItem }
+ export { insertNewItem, resubmitItem, retrieveItem, searchItems, closeItem }
