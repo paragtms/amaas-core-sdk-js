@@ -411,6 +411,14 @@ declare module '@amaas/amaas-core-sdk-js' {
       function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<transactions.Position> | void
       function search({ AMId, query }: { AMId: number, query: { assetManagerIds?: number[], bookIds?: string[], assetIds?: string[], clientIds?: number[], accountIds?: string[], accountingTypes?: string[], positionDate?: string[] } }, callback?: Function): Promise<transactions.Position> | void
     }
+    namespace Transactions {
+      function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<transactions.Transaction[]> | void
+      function insert({ AMId, transaction }: { AMId: number, transaction: transactions.Transaction | ITransaction }, callback?: Function): Promise<transactions.Transaction> | void
+      function amend({ AMId, transaction, resourceId }: { AMId: number, transaction: transactions.Transaction | ITransaction, resourceId?: string }, callback?: Function): Promise<transactions.Transaction> | void
+      function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId?: string }, callback?: Function): Promise<transactions.Transaction> | void
+      function search({ AMId, query }: { AMId: number, query: { clientIds?: any[], transactionStatuses: string[], transactionIds: string[], assetBookIds: string[], counterpartyBookIds: string[], assetIds: string[], transactionDateStart: any, transactionDateEnd: any, codeTypes: any[], codeValues: any[], linkTypes: any[], linkedTransactionIds: string[], partyTypes: string[], partyIds: string[], referenceTypes: string[], referenceValues: string[] } }, callback?: Function): Promise<transactions.Transaction> | void
+      function cancel({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<transactions.Transaction> | void
+    }
     function config({ stage, credentialsPath, token }: { stage: string, credentialsPath: string, token: string }): void
   }
   // CLASSES
