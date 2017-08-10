@@ -19,10 +19,10 @@ export function retrieveItems({ AMId, resourceId }, callback) {
     resourceId
   }
   let promise = retrieveData(params).then(result => {
-    if (Array.isArray(result)) {
-      result = result.map(item => _parseItem(item))
+    if (Array.isArray(result.data)) {
+      result = result.data.map(item => _parseItem(item))
     } else {
-      result = _parseItem(result)
+      result = _parseItem(result.data)
     }
     if (typeof callback === 'function') {
       callback(null, result)
@@ -129,10 +129,10 @@ export function searchItems({ AMId, query }, callback) {
     query
   }
   let promise = searchData(params).then(result => {
-    if (Array.isArray(result)) {
-      result = result.map(item => _parseItem(item))
+    if (Array.isArray(result.data)) {
+      result = result.data.map(item => _parseItem(item))
     } else {
-      result = _parseItem(result)
+      result = _parseItem(result.data)
     }
     if (typeof callback === 'function') {
       callback(null, result)
