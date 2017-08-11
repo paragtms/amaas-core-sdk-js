@@ -199,10 +199,8 @@ export function search({ AMId, query }, callback) {
  * @memberof module:api.Positions
  * @static
  * @param {object} params - object of parameters:
- * @param {number} [params.AMId] - Asset Manager ID of the Assets to search over. If omitted, you must send assetManagerIds in the search query with at least one value
- * @param {number} [params.assetId] -Asset ID of the asset
- * @param {string} [params.field] -Fields should be returned 
- * Available keys are:
+ * @param {object} [params.query] - query object which contains AMIDs and fields, if no fields specified, return all fields
+ * Available fields keys are:
  * <li>assetManagerIds (Required if AMId param is omitted)</li>
  * <li>bookIds</li>
  * <li>counterpartyBookId</li>
@@ -227,24 +225,20 @@ export function search({ AMId, query }, callback) {
  * <li>rates</li>
  * <li>references</li>
  * <li>postings</li>
- * e.g. `{ AMIds: [1], assetIds: [1, 2], fields: [assetManagerIds, assetIds, transactionType] }`
- * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance
- * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance
+ * e.g.`{ query: { assetManagerIds: [1, 2], fields: ["assetId", "referenceTyes", "comments"]} }`
+ * @param {function} callback
+ * @returns {Promise|null} 
  */
-export function fieldsSearch({ AMIds, assetIds, fields }, callback) {
+export function fieldsSearch( query, callback) {
+  if(!query["assetManagerIds"]) 
+  {
+      throw new Error("Asset Manager Id is missing");
+  }    
   const params = {
     AMaaSClass: 'transactions',
-    AMIds,
-    assetIds,
-    fields
+    query
   }
-
   let promise = searchData (params).then(result => {
-    if (Array.isArray(result)) {
-      result = result.map(tran => _parseTransaction(tran))
-    } else {
-      result = _parseTransaction(result)
-    }
     if(typeof callback === 'function'){
        callback(null, result)
     }

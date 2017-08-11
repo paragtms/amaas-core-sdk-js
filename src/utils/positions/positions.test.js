@@ -69,8 +69,8 @@ describe ('fieldsSearch', () => {
       expect(promise).toBeInstanceOf(Promise)
     })
     it('calls searchData with the correct params', done => {
-      fieldsSearch({ AMIds: [1, 2], assetIds: [1, 2], fields: [ "assetManagerId", "bookId", "assetId", "quantity", "validFrom", "internalId", "validTo", "clientId", "accountingType", "accountId" ] }, (error, result) => {
-        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'positions', AMIds: [1, 2], assetIds: [1, 2], fields: ["assetManagerId", "bookId", "assetId", "quantity", "validFrom", "internalId", "validTo", "clientId", "accountingType", "accountId"] })
+      fieldsSearch({ assetManagerIds: [1, 2], fields: ["description", "comments", "settlementCurrency"] }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'positions', query:{ assetManagerIds:[1, 2], fields: ["description", "comments", "settlementCurrency"]} })
         done()
       })
     })

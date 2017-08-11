@@ -123,12 +123,12 @@ describe ('fieldsSearch', () => {
       expect(promise).toBeInstanceOf(Promise)
     })
     it('calls searchData with the correct params', done => {
-      fieldsSearch({ AMIds: [1, 2], assetIds: [1, 2], fields: [ "assetManagerId", "bookId", "assetId" ] }, (error, result) => {
-        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMIds: [1, 2], assetIds: [1, 2], fields: ["assetManagerId", "bookId", "assetId"] })
+      fieldsSearch({ assetManagerIds: [1, 2], fields: ["description", "comments", "settlementCurrency"] }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: "transactions", query:{ assetManagerIds:[1, 2], fields: ["description", "comments", "settlementCurrency"]} })
         done()
       })
     })
-  })
+})
 
 describe('cancel', () => {
   beforeAll(() => {
