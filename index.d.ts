@@ -419,7 +419,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function search({ AMId, query }: { AMId: number, query: { clientIds?: any[], transactionStatuses: string[], transactionIds: string[], assetBookIds: string[], counterpartyBookIds: string[], assetIds: string[], transactionDateStart: any, transactionDateEnd: any, codeTypes: any[], codeValues: any[], linkTypes: any[], linkedTransactionIds: string[], partyTypes: string[], partyIds: string[], referenceTypes: string[], referenceValues: string[] } }, callback?: Function): Promise<transactions.Transaction> | void
       function cancel({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<transactions.Transaction> | void
     }
-    function config({ stage, credentialsPath, token }: { stage: string, credentialsPath: string, token: string }): void
+    function config({ stage, credentialsPath, apiVersion, token }: { stage?: string, credentialsPath?: string, apiVersion?: string, token?: string }): void
   }
   // CLASSES
   
