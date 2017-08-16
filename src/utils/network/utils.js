@@ -11,13 +11,14 @@ const userPool = new CognitoUserPool({
 
 export function getEndpoint({ stage, apiVersion }) {
   switch (stage) {
+    case 'dev':
     case 'staging':
-      return `${endpoint.staging}/staging`
+      return `${endpoint.dev}/${apiVersion || 'v1.0'}`
     case 'prod':
-      return `${endpoint.prod}/${apiVersion}`
+      return `${endpoint.prod}/${apiVersion || 'sg1.0'}`
     default:
-      console.warn(`Unknown stage variable: ${stage}. Defaulting to /prod`)
-      return `${endpoint.prod}/${apiVersion}`
+      console.warn(`Unknown stage variable: ${stage}. Defaulting to dev`)
+      return `${endpoint.dev}/${apiVersion || 'v1.0'}`
   }
 }
 
@@ -187,6 +188,7 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
     default:
       throw new Error(`Invalid class type: ${AMaaSClass}`)
   }
+  console.log(baseURL)
   if (!AMId) {
     return `${baseURL}`
   } else if (!resourceId) {
