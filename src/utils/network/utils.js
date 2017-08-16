@@ -77,6 +77,7 @@ export function getToken(stage, credPath) {
     injectedResolve = resolve
     injectedReject = reject
     switch (stage) {
+      case 'dev':
       case 'staging':
       case 'prod':
         const cognitoUser = userPool.getCurrentUser()
@@ -188,7 +189,6 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
     default:
       throw new Error(`Invalid class type: ${AMaaSClass}`)
   }
-  console.log(baseURL)
   if (!AMId) {
     return `${baseURL}`
   } else if (!resourceId) {
@@ -200,6 +200,7 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
 
 export function setAuthorization(stage) {
   switch (stage) {
+    case 'dev':
     case 'staging':
     case 'prod':
     default:
