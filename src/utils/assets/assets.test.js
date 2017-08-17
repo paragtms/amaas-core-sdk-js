@@ -113,7 +113,7 @@ describe('utils/assets', () => {
     })
     it('calls searchData with the correct params', done => {
       fieldsSearch({ AMIds: [1, 2], assetIds: [1, 2], fields: ["description", "assetType", "assetManagerId", "assetId"] }, (error, result) => {
-        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'assets', AMIds: [1, 2], assetIds: [1, 2], fields: ["description", "assetType", "assetManagerId", "assetId"] })
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: "assets", query:{ AMIds: [1, 2], assetIds: [1, 2], fields: ["description", "assetType", "assetManagerId", "assetId"]} })
         done()
       })
     })

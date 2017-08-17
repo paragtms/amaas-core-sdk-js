@@ -215,7 +215,7 @@ export function search({ AMId, query }, callback) {
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance
  */
 export function fieldsSearch(query , callback) { 
-  if(!query["assetManagerIds"]) 
+  if(!query["AMIds"]) 
   {
       throw new Error("Asset Manager Id is missing");
   }
