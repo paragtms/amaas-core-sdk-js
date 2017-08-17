@@ -107,8 +107,8 @@ export function search({ AMId, query }, callback) {
  * <li>updatedTime</li>
  * <li>version</li>
  * e.g. `{ AMIds: [1], assetIds: [1, 2], fields: [assetManagerIds, assetIds] }`
- * @param {function} callback 
- * @returns {Promise|null} 
+ * @param {function} callback - Called with two arguments (error, result) on completion. Omit to return Promise 
+ * @returns {Promise|null} If no callback is supplied, returns promise that resolves with array of Positions 
  */
 export function fieldsSearch( query, callback) {
   if(!query["assetManagerIds"]) 

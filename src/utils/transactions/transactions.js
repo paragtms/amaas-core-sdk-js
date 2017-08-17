@@ -226,8 +226,8 @@ export function search({ AMId, query }, callback) {
  * <li>references</li>
  * <li>postings</li>
  * e.g.`{ query: { assetManagerIds: [1, 2], fields: ["assetId", "referenceTyes", "comments"]} }`
- * @param {function} callback
- * @returns {Promise|null} 
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of query data. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Transactions or a single Transaction instance
  */
 export function fieldsSearch( query, callback) {
   if(!query["assetManagerIds"]) 
