@@ -67,24 +67,28 @@ export function requestRelationship({ AMId, options }, callback) {
 }
 
 /**
- * Get relationship object for the requested AMID which has a relationship with
- * @function getRealtedAMID
+ * Get a list of relationships where the passed AMID is the relatedId
+ * @function getRelatedAMID
  * @memberof module:api.Relationships
  * @static
  * @param {object} params - object of parameters:
- * @param {number} params.AMId - Asset Manager ID of the AM you are requesting a relationship to (Not the caller's AMID!)
- * @param {object} params.params - Object of relationshipType and relationshipId.
- * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Relationship instance. Omit to return Promise
- * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the inserted Relationship instance.
+ * @param {number} params.AMId - Asset Manager ID of the AM that you want to see the parent Relationships for
+ * @param {object} params.options - `{ includeInactive: [true], relationshipType: ['Employee', 'External] }`
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the Relationship instance or list of Relationships. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the Relationship instance or list of Relationships.
  */
-export function getRealtedAMID({ AMId, options }, callback) {
+export function getRelatedAMID({ AMId, options }, callback) {
   const params = {
     AMaaSClass: 'relatedAssetManagerID',
     AMId,
-    data: options
+    query: options
   }
   let promise = retrieveData(params).then(result => {
-    result = _parseRelationship(result)
+    if (Array.isArray(result)) {
+      result = result.map(rel => _parseRelationship(rel))
+    } else {
+      result = _parseRelationship(result) 
+    }
     if (typeof callback === 'function') {
       callback(null, result)
     }

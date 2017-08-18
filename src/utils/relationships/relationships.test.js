@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, requestRelationship, getRealtedAMID, insert, amend } from './relationships'
+import { retrieve, requestRelationship, getRelatedAMID, insert, amend } from './relationships'
 import Relationship from '../../relationships'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -56,17 +56,17 @@ describe('requestRelationship', () => {
   })
 })
 
-describe('getRealtedAMID', () => {
+describe('getRelatedAMID', () => {
   beforeAll(() => {
     network.insertData.mockImplementation(() => Promise.resolve(mockRel))
   })
   test('with promise', () => {
-    let promise = getRealtedAMID({})
+    let promise = getRelatedAMID({})
     expect(promise).toBeInstanceOf(Promise)
   })
   it('calls retrieveData with correct params', done => {
-    getRealtedAMID({ AMId: 1, options: { includeInactive: true, relationshipType: 'Employee' } }, (error, result) => {
-      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'relatedAssetManagerID', AMId: 1, data: { includeInactive: true, relationshipType: 'Employee' } })
+    getRelatedAMID({ AMId: 1, options: { includeInactive: true, relationshipType: 'Employee' } }, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'relatedAssetManagerID', AMId: 1, query: { includeInactive: true, relationshipType: 'Employee' } })
       done()
     })
   })
