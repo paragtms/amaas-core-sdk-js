@@ -125,6 +125,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Books](#module_api.Books) : <code>object</code>
@@ -166,9 +167,12 @@ API Methods. These methods enable communication with the AMaaS Database. All met
     * [.Positions](#module_api.Positions) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Positions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, [callback])](#module_api.Positions.search) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Relationships](#module_api.Relationships) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Relationships.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.requestRelationship(params, [callback])](#module_api.Relationships.requestRelationship) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
         * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Transactions](#module_api.Transactions) : <code>object</code>
@@ -393,6 +397,7 @@ Retrieve temporary credentials for pub/sub connection
     * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
 
@@ -472,6 +477,19 @@ Search for Assets
 | [params.AMId] | <code>number</code> | Asset Manager ID of the Assets to search over. If omitted, you must send assetManagerIds in the search query with at least one value |
 | params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>assetStatuses</li> <li>assetIds</li> <li>referenceTypes</li> <li>referenceValues</li> <li>assetIssuerIds</li> <li>assetClasses</li> <li>assetTypes</li> e.g. `{ assetManagerIds: [1], assetClasses: ['ForeignExchange', 'Equity'] }` |
 | callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance |
+
+<a name="module_api.Assets.fieldsSearch"></a>
+
+#### Assets.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Search for Assets and return specified fields
+
+**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of plain objects or a single plain object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>object</code> | Query object of the form `{ assetManagerIds: number, fields: string[] }`. Any asset property may be specified as a field parameter. e.g. `{ query: { assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']} }` |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of plain objects or a single plain object |
 
 <a name="module_api.Assets.deactivate"></a>
 
@@ -1038,6 +1056,8 @@ Reactivate a Party. This will set the Party status to 'Active'
 * [.Positions](#module_api.Positions) : <code>object</code>
     * [.retrieve(params, [callback])](#module_api.Positions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, [callback])](#module_api.Positions.search) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Positions.retrieve"></a>
 
@@ -1068,6 +1088,32 @@ Search for Positions in the database
 | params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>bookIds</li> <li>assetIds</li> <li>clientIds</li> <li>accountIds</li> <li>accountingTypes</li> <li>positionDate</li> e.g. `{ assetManagerIds: [1], bookIds: ['LAXJ98', 'OXYW09', 'COSY45'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. Omit to return Promise |
 
+<a name="module_api.Positions.fieldsSearch"></a>
+
+#### Positions.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Search for Positions and return only specified fields
+
+**Kind**: static method of [<code>Positions</code>](#module_api.Positions)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback is supplied, returns promise that resolves with a plain object or array of plain objects.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>number</code> | query object of the form `{ assetManagerIds: number, fields: string[] }`. Any Position properties can be passed to `fields`. Note that you may include additional properties in this object corresponding to the available search keys as defined in the `search` function. e.g. `{ assetManagerIds: [1], assetIds: [1, 2], fields: ['displayName', 'assetId'] }` |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is a plain object or array of plain objects. Omit to return Promise |
+
+<a name="module_api.Positions.fieldsSearch"></a>
+
+#### Positions.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Search for Transaction with specified fields
+
+**Kind**: static method of [<code>Positions</code>](#module_api.Positions)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with a plain object or array of plain objects.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>object</code> | query object of the form `{ assetManagerIds: number, fields: string[] }`. Any Transaction properties can be passed to `fields`. Note that you may include additional properties in this object corresponding to the available search keys as defined in the `search` function. e.g.`{ assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']}` |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is a plain object or array of plain objects. Omit to return Promise |
+
 <a name="module_api.Relationships"></a>
 
 ### api.Relationships : <code>object</code>
@@ -1076,6 +1122,7 @@ Search for Positions in the database
 * [.Relationships](#module_api.Relationships) : <code>object</code>
     * [.retrieve(params, [callback])](#module_api.Relationships.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
     * [.requestRelationship(params, [callback])](#module_api.Relationships.requestRelationship) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
     * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
 
@@ -1107,6 +1154,21 @@ Request a new Relationship
 | params.AMId | <code>number</code> | Asset Manager ID of the AM you are requesting a relationship to (Not the caller's AMID!) |
 | params.params | <code>object</code> | Object of relationshipType and relationshipId. |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the inserted Relationship instance. Omit to return Promise |
+
+<a name="module_api.Relationships.getRelatedAMID"></a>
+
+#### Relationships.getRelatedAMID(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Get a list of relationships where the passed AMID is the relatedId
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the Relationship instance or list of Relationships.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the AM that you want to see the parent Relationships for |
+| params.options | <code>object</code> | `{ includeInactive: [true], relationshipType: ['Employee', 'External] }` |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the Relationship instance or list of Relationships. Omit to return Promise |
 
 <a name="module_api.Relationships.insert"></a>
 
