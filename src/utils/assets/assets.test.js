@@ -111,9 +111,15 @@ describe('utils/assets', () => {
       let promise = search({})
       expect(promise).toBeInstanceOf(Promise)
     })
+    it('throws if assetManagerIds is not supplied', () => {
+      const willThrow = () => {
+        fieldsSearch({ fields: ['description'] })
+      }
+      expect(willThrow).toThrowError(new Error('You must specificy at least one Asset Manager ID'))
+    })
     it('calls searchData with the correct params', done => {
-      fieldsSearch({ AMIds: [1, 2], assetIds: [1, 2], fields: ["description", "assetType", "assetManagerId", "assetId"] }, (error, result) => {
-        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: "assets", query:{ AMIds: [1, 2], assetIds: [1, 2], fields: ["description", "assetType", "assetManagerId", "assetId"]} })
+      fieldsSearch({ assetManagerIds: [1, 2], assetIds: [1, 2], fields: [ "description", "assetType", "assetManagerId", "assetId" ] }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: "assets", query: { assetManagerIds: [1, 2], assetIds: [1, 2], fields: [ "description", "assetType", "assetManagerId", "assetId" ] } })
         done()
       })
     })

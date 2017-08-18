@@ -190,42 +190,26 @@ export function search({ AMId, query }, callback) {
 }
 
 /**
- * Search for Assets with specified fields
+ * Search for Assets and return specified fields
  * @function fieldsSearch
  * @memberof module:api.Assets
  * @static
- * @param {object} params - object of parameters:
-<<<<<<< Updated upstream
- * @param {number} [params.AMId] - Asset Manager ID of the Assets to search over. If omitted, you must send assetManagerIds in the search query with at least one value
- * @param {number} [params.assetId] -Asset ID of the asset
- * @param {object} [params.query] - query object which contains AMIDs and fields, if no fields specified, return all fields 
->>>>>>> Stashed changes
- * Available fields are:
- * <li>assetManagerIds (Required if AMId param is omitted)</li>
- * <li>clientIds</li>
- * <li>assetStatuses</li>
- * <li>assetIds</li>
- * <li>referenceTypes</li>
- * <li>referenceValues</li>
- * <li>assetIssuerIds</li>
- * <li>assetClasses</li>
- * <li>assetTypes</li>
- * e.g. `{ query: { assetManagerIds: [1, 2], fields: ["assetId", "referenceTyes", "comments"]} }`
- * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance
- * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance
+ * @param {object} query - Query object of the form `{ assetManagerIds: number, fields: string[] }`. Any asset property may be specified as a field parameter.
+ * e.g. `{ query: { assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']} }`
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of plain objects or a single plain object
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of plain objects or a single plain object
  */
 export function fieldsSearch(query , callback) { 
-  if(!query["AMIds"]) 
-  {
-      throw new Error("Asset Manager Id is missing");
+  if (!query.assetManagerIds) {
+    throw new Error('You must specificy at least one Asset Manager ID')
   }
   const params = {
     AMaaSClass: 'assets',
     query
   }
-  let promise = searchData (params).then(result => {
-    if(typeof callback === 'function'){
-       callback(null, result)
+  let promise = searchData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
     }
     return result
   })
