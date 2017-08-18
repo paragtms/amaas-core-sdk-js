@@ -198,49 +198,23 @@ export function search({ AMId, query }, callback) {
  * @function fieldsSearch
  * @memberof module:api.Positions
  * @static
- * @param {object} params - object of parameters:
- * @param {object} [params.query] - query object which contains AMIDs and fields, if no fields specified, return all fields
- * Available fields keys are:
- * <li>assetManagerIds (Required if AMId param is omitted)</li>
- * <li>bookIds</li>
- * <li>counterpartyBookId</li>
- * <li>transactionAction</li>
- * <li>assetIds</li>
- * <li>quantity</li>
- * <li>transactionDate</li>
- * <li>settlementDate</li>
- * <li>price</li>
- * <li>transactionCurrency</li>
- * <li>settlementCurrency</li>
- * <li>asset</li>
- * <li>executionTime</li>
- * <li>transactionType</li>
- * <li>transactionId</li>
- * <li>transactionStatus</li>
- * <li>charges</li>
- * <li>codes</li>
- * <li>comments</li>
- * <li>links</li>
- * <li>parties</li>
- * <li>rates</li>
- * <li>references</li>
- * <li>postings</li>
- * e.g.`{ query: { assetManagerIds: [1, 2], fields: ["assetId", "referenceTyes", "comments"]} }`
- * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of query data. Omit to return Promise
- * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Transactions or a single Transaction instance
+ * @param {object} query - query object of the form `{ assetManagerIds: number, fields: string[] }`. Any Transaction properties can be passed to `fields`.
+ * Note that you may include additional properties in this object corresponding to the available search keys as defined in the `search` function.
+ * e.g.`{ assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']}`
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is a plain object or array of plain objects. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with a plain object or array of plain objects.
  */
-export function fieldsSearch( query, callback) {
-  if(!query["assetManagerIds"]) 
-  {
-      throw new Error("Asset Manager Id is missing");
+export function fieldsSearch(query, callback) {
+  if (!query.assetManagerIds) {
+    throw new Error('You must specify at least one Asset Manager ID')
   }    
   const params = {
     AMaaSClass: 'transactions',
     query
   }
-  let promise = searchData (params).then(result => {
-    if(typeof callback === 'function'){
-       callback(null, result)
+  let promise = searchData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
     }
     return result
   })

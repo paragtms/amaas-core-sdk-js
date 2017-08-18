@@ -122,9 +122,15 @@ describe ('fieldsSearch', () => {
       let promise = search({})
       expect(promise).toBeInstanceOf(Promise)
     })
+    it('throws if missing assetManagerIds', () => {
+      const willThrow = () => {
+        fieldsSearch({ fields: ['comments'] })
+      }
+      expect(willThrow).toThrowError(new Error('You must specify at least one Asset Manager ID'))
+    })
     it('calls searchData with the correct params', done => {
       fieldsSearch({ assetManagerIds: [1, 2], fields: ["description", "comments", "settlementCurrency"] }, (error, result) => {
-        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: "transactions", query:{ assetManagerIds:[1, 2], fields: ["description", "comments", "settlementCurrency"]} })
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: "transactions", query: { assetManagerIds: [1, 2], fields: ["description", "comments", "settlementCurrency"]} })
         done()
       })
     })
