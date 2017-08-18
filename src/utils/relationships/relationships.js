@@ -67,6 +67,36 @@ export function requestRelationship({ AMId, options }, callback) {
 }
 
 /**
+ * Get relationship object for the requested AMID which has a relationship with
+ * @function getRealtedAMID
+ * @memberof module:api.Relationships
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the AM you are requesting a relationship to (Not the caller's AMID!)
+ * @param {object} params.params - Object of relationshipType and relationshipId.
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Relationship instance. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the inserted Relationship instance.
+ */
+export function getRealtedAMID({ AMId, options }, callback) {
+  const params = {
+    AMaaSClass: 'relatedAssetManagerID',
+    AMId,
+    data: options
+  }
+  let promise = retrieveData(params).then(result => {
+    result = _parseRelationship(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
 * Insert a new Relationship
 * @function insert
 * @memberof module:api.Relationships
