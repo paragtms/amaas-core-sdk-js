@@ -1,25 +1,26 @@
 import ForeignExchangeBase from '../FXBase/fxBase.js'
 
 /**
- * Class representing FX
+ * Class representing FXForward
  * @memberof module:assets
  * @extends module:assets.ForeignExchangeBase
  */
 class ForeignExchangeForward extends ForeignExchangeBase {
   /**
-   * Construct a new Non Deliverable Forward instance
-   * @param {object} params - NonDeliverableForward creation options:
-   * @param {number} params.assetId - ID of the Non Deliverable Forward __(required)__
+   * Construct a new FXForward instance
+   * @param {object} params - FXForward creation options:
+   * @param {string} params.assetId - ID of the FXForward __(required)__
+   * @param {string} params.assetIssuerId - ID of the Issuer
+   * @param {number} params.assetManagerId - Asset Manager ID
    * @param {string} [params.assetClass=ForeignExchange] - Auto-set to `ForeignExchange` __(read-only)__
-   * @param {string} [params.assetManagerId] - ID if the asset manager
    * @param {string} [params.assetStatus] - Status of the asset 
    * @param {string} [params.description] - Description of the ForeignExchangeForward
    * @param {string} [params.clientId] - ID of the client
-   * @param {boolean} [params.major] - Is major currency or not 
-   * @param {object} [params.countryCodes] - An array of country codes
-   * @param {string} [params.settlementDate] - The date of exchange of ownership
+   * @param {boolean} params.major - Whether it is a major currency or not 
+   * @param {object} params.countryCodes - An array of country codes
+   * @param {string} params.settlementDate - The date of exchange of ownership
    * @param {string} [params.fixingDate] - The date of fixing exchange rate between two currencies 
-   * @param {string} [params.forwardRate] - Currency exchange rate
+   * @param {string} params.forwardRate - Currency exchange rate
    * @param {object} [params.comments] - Object of Comments attached to the Non Deliverable Forward
    * @param {object} [params.links] - Object of array of Links attached to the Non Deliverable Forward
    * @param {object} [params.references={ AMaaS: Reference() }] - Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated
@@ -31,17 +32,17 @@ class ForeignExchangeForward extends ForeignExchangeBase {
   */
   constructor({
     assetId,
-    assetManagerId,
     assetIssuerId,
+    assetManagerId,
     assetStatus='Active',
     description='',
+    displayName,    
     clientId,
     major,
     countryCodes,
     settlementDate,
     fixingDate,
     forwardRate,
-    displayName,    
     comments,
     links,
     references,
@@ -54,9 +55,12 @@ class ForeignExchangeForward extends ForeignExchangeBase {
     super({
       assetId,
       assetIssuerId,
+      assetManagerId,
       assetStatus,
       description,
       displayName,
+      countryCodes,
+      major,
       clientId,
       comments,
       links,
@@ -67,6 +71,9 @@ class ForeignExchangeForward extends ForeignExchangeBase {
       updatedTime,
       version
     })
+    this.settlementDate = settlementDate
+    this.fixingDate = fixingDate
+    this.forwardRate = forwardRate
   }
 }
 

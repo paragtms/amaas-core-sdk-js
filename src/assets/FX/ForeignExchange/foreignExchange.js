@@ -18,6 +18,8 @@ class ForeignExchange extends ForeignExchangeBase {
    * @param {string} [params.assetStatus=Active] - Status of the Foreign Exchange
    * @param {string} [params.description] - Description of the Foreign Exchange
    * @param {string} [params.displayName] - Display name of the ForeignExchange
+   * @param {array} params.countryCodes - Array of country codes __(required)__
+   * @param {boolean} params.major - Whether this FX is major __(required)__
    * @param {string} [params.clientId] - ID of the associated client
    * @param {object} [params.comments] - Object of Comments attached to the Foreign Exchange
    * @param {object} [params.links] - Object of array of Links attached to the Foreign Exchange
@@ -34,6 +36,8 @@ class ForeignExchange extends ForeignExchangeBase {
     assetStatus='Active',
     description='',
     displayName,
+    countryCodes,
+    major,
     clientId,
     comments,
     links,
@@ -50,6 +54,8 @@ class ForeignExchange extends ForeignExchangeBase {
       assetStatus,
       description,
       displayName,
+      countryCodes,
+      major,
       clientId,
       comments,
       links,
