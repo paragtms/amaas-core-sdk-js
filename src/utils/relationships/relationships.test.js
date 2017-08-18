@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, requestRelationship, insert, amend } from './relationships'
+import { retrieve, requestRelationship, getRelatedAMID, insert, amend } from './relationships'
 import Relationship from '../../relationships'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -51,6 +51,22 @@ describe('requestRelationship', () => {
   it('calls insertData with correct params', done => {
     requestRelationship({ AMId: 1, options: { relationshipType: 'Employee', relationshipId: 'testID' } }, (error, result) => {
       expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'relationshipRequest', AMId: 1, data: { relationshipType: 'Employee', relationshipId: 'testID' } })
+      done()
+    })
+  })
+})
+
+describe('getRelatedAMID', () => {
+  beforeAll(() => {
+    network.insertData.mockImplementation(() => Promise.resolve(mockRel))
+  })
+  test('with promise', () => {
+    let promise = getRelatedAMID({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls retrieveData with correct params', done => {
+    getRelatedAMID({ AMId: 1, options: { includeInactive: true, relationshipType: 'Employee' } }, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'relatedAssetManagerID', AMId: 1, query: { includeInactive: true, relationshipType: 'Employee' } })
       done()
     })
   })

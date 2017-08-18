@@ -406,6 +406,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function requestRelationship({ AMId, options }: { AMId: number, options: { relationshipId: string, relationshipType: string } }, callback?: Function): Promise<relationships.Relationship> | void
       function insert({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
       function amend({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
+      function getRelatedAMID({ AMId, options }: { AMId: number, options: { includeInactive : boolean[], relationshipType: string[] } }, callback?: Function): Promise<relationships.Relationship | relationships.Relationship[]> | void
     }
     namespace Positions {
       function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<transactions.Position> | void

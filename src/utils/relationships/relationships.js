@@ -67,6 +67,40 @@ export function requestRelationship({ AMId, options }, callback) {
 }
 
 /**
+ * Get a list of relationships where the passed AMID is the relatedId
+ * @function getRelatedAMID
+ * @memberof module:api.Relationships
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the AM that you want to see the parent Relationships for
+ * @param {object} params.options - `{ includeInactive: [true], relationshipType: ['Employee', 'External] }`
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the Relationship instance or list of Relationships. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the Relationship instance or list of Relationships.
+ */
+export function getRelatedAMID({ AMId, options }, callback) {
+  const params = {
+    AMaaSClass: 'relatedAssetManagerID',
+    AMId,
+    query: options
+  }
+  let promise = retrieveData(params).then(result => {
+    if (Array.isArray(result)) {
+      result = result.map(rel => _parseRelationship(rel))
+    } else {
+      result = _parseRelationship(result) 
+    }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
 * Insert a new Relationship
 * @function insert
 * @memberof module:api.Relationships
