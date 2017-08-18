@@ -3,6 +3,6 @@
  * @memberof module:api
  */
 
-import { retrieve, insert, amend, partialAMend, search, cancel } from './transactions'
+import { retrieve, insert, amend, partialAMend, search, fieldsSearch, cancel } from './transactions'
 
-export { retrieve, insert, amend, partialAMend, search, cancel }
+export { retrieve, insert, amend, partialAMend, search, fieldsSearch, cancel }

@@ -83,6 +83,37 @@ export function search({ AMId, query }, callback) {
   promise.catch(error => callback(error))
 }
 
+/**
+ * Search for Positions and return only specified fields
+ * @function fieldsSearch
+ * @memberof module:api.Positions
+ * @static
+ * @param {number} query - query object of the form `{ assetManagerIds: number, fields: string[] }`. Any Position properties can be passed to `fields`.
+ * Note that you may include additional properties in this object corresponding to the available search keys as defined in the `search` function.
+ * e.g. `{ assetManagerIds: [1], assetIds: [1, 2], fields: ['displayName', 'assetId'] }`
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is a plain object or array of plain objects. Omit to return Promise 
+ * @returns {Promise|null} If no callback is supplied, returns promise that resolves with a plain object or array of plain objects.
+ */
+export function fieldsSearch(query, callback) {
+  if (!query.assetManagerIds) {
+    throw new Error('You must specify at least one Asset Manager ID')
+  }
+  const params = {
+    AMaaSClass: 'positions',
+    query
+  }
+  let promise = searchData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
 export function _parsePos(pos) {
   return new Position(pos)
 }

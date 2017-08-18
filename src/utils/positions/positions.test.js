@@ -1,4 +1,4 @@
-import { retrieve, search } from './positions.js'
+import { retrieve, search, fieldsSearch } from './positions.js'
 import Position from '../../transactions/Positions/position.js'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -59,3 +59,25 @@ describe('search', () => {
     })
   })
 })
+
+describe ('fieldsSearch', () => {
+    beforeAll(() => {
+      network.searchData.mockImplementation(() => Promise.resolve(mockPos))
+    })
+    test('with promise', () => {
+      let promise = search({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('throws if called without assetManagerIds', () => {
+      const willThrow = () => {
+        fieldsSearch({ fields: ['description'] })
+      }
+      expect(willThrow).toThrowError(new Error('You must specify at least one Asset Manager ID'))
+    })
+    it('calls searchData with the correct params', done => {
+      fieldsSearch({ assetManagerIds: [1, 2], fields: ["description", "comments", "settlementCurrency"] }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'positions', query:{ assetManagerIds:[1, 2], fields: ["description", "comments", "settlementCurrency"]} })
+        done()
+      })
+    })
+  })

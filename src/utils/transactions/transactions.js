@@ -194,6 +194,37 @@ export function search({ AMId, query }, callback) {
 }
 
 /**
+ * Search for Transaction with specified fields
+ * @function fieldsSearch
+ * @memberof module:api.Positions
+ * @static
+ * @param {object} query - query object of the form `{ assetManagerIds: number, fields: string[] }`. Any Transaction properties can be passed to `fields`.
+ * Note that you may include additional properties in this object corresponding to the available search keys as defined in the `search` function.
+ * e.g.`{ assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']}`
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is a plain object or array of plain objects. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with a plain object or array of plain objects.
+ */
+export function fieldsSearch(query, callback) {
+  if (!query.assetManagerIds) {
+    throw new Error('You must specify at least one Asset Manager ID')
+  }    
+  const params = {
+    AMaaSClass: 'transactions',
+    query
+  }
+  let promise = searchData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
  * Cancel a Transaction
  * @function cancel
  * @memberof module:api.Transactions
