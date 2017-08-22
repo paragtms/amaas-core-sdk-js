@@ -1,5 +1,5 @@
 import { _parseAM, getAssetManager } from './assetManagers.js'
-import { retrieve, insert, amend, deactivate, reactivate, checkDomains, insertDomain, retrieveEODBooks, getCredentialsForPubSub } from './assetManagers.js'
+import { retrieve, insert, amend, deactivate, reactivate, searchDomains, checkDomains, insertDomain, retrieveEODBooks, getCredentialsForPubSub } from './assetManagers.js'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -228,6 +228,28 @@ describe('utils/assetManagers', () => {
     })
   })
 
+  describe('searchDomains', () => {
+    let data
+    beforeAll(() => {
+      data = {
+        assetManagerId: 1,
+        domain: 'testDomain.com',
+        isPrimary: true
+      }
+      network.searchData.mockImplementation(() => Promise.resolve(data))
+    })
+    test('with promise', () => {
+      let promise = searchDomains({ query: { isPrimary: true } })
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls searchData with the correct params', done => {
+      searchDomains({ query: { isPrimary: true } }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', query: { isPrimary: true } })
+        done()
+      })
+    })
+  })
+
   describe('checkDomains', () => {
     let data
     beforeAll(() => {
@@ -243,8 +265,8 @@ describe('utils/assetManagers', () => {
       expect(promise).toBeInstanceOf(Promise)
     })
     it('calls retrieveData with correct params', done => {
-      checkDomains({ domain: 'testDomain.com' }, (error, result) => {
-        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', query: { domain: ['testDomain.com'] } })
+      checkDomains({ domains: 'testDomain.com' }, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', query: { domains: ['testDomain.com'], isPrimary: true } })
         done()
       })
     })
@@ -261,12 +283,12 @@ describe('utils/assetManagers', () => {
       network.insertData.mockImplementation(() => Promise.resolve(data))
     })
     test('with promise', () => {
-      let promise = insertDomain({ domain: data })
+      let promise = insertDomain({ AMId: 1, domain: data })
       expect(promise).toBeInstanceOf(Promise)
     })
     it('calls insertData with correct params', done => {
       insertDomain({ domain: data }, (error, result) => {
-        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', data, queryParams: { assetManagerId: [1] } })
+        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', AMId: 1, data })
         done()
       })
     })

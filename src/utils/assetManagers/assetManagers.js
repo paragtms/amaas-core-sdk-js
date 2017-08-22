@@ -1,4 +1,4 @@
-import { retrieveData, insertData, putData, patchData, deleteData } from '../network'
+import { retrieveData, insertData, putData, patchData, deleteData, searchData } from '../network'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
 import Domain from '../../assetManagers/Domain/domain'
 import EODBook from '../../assetManagers/EODBook/eodBook'
@@ -175,6 +175,47 @@ export function reactivate({ AMId }, callback) {
 }
 
 /**
+ * Search domains
+ * @function searchDomains
+ * @memberof module:api.AssetManagers
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {string} params.query - search parameters for the domain search. Available keys are:
+ * <li>isPrimary</li>
+ * <li>domains</li>
+ * <li>domainStatuses</li>
+ * <li>fields</li>
+ * e.g. `query = { isPrimary: true, domains: ['amaas.com', 'argomi.com'], domainStatuses: 'Active' }`
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` are the matching Domain instances. Omit to return promise.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the matching Domain instances.
+ */
+export function searchDomains({ query }, callback) {
+  const params = {
+    AMaaSClass: 'assetManagerDomains',
+    query
+  }
+  let promise = searchData(params).then(result => {
+    if (result) {
+      if (Array.isArray(result)) {
+        result = result.map(domain => _parseDomain(domain))
+      } else {
+        result = _parseDomain(result)
+      }
+    } else {
+      result = []
+    }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
  * Check whether a domain has any AMIDs associated with it
  * @function checkDomains
  * @memberof module:api.AssetManagers
@@ -187,7 +228,7 @@ export function reactivate({ AMId }, callback) {
 export function checkDomains({ domain }, callback) {
   const params = {
     AMaaSClass: 'assetManagerDomains',
-    query: { domain: [domain] }
+    query: { domains: [domain], isPrimary: true }
   }
   let promise = retrieveData(params).then(result => {
     if (result) {
@@ -210,19 +251,20 @@ export function checkDomains({ domain }, callback) {
  * @memberof module:api.AssetManagers
  * @static
  * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the new Domain's owner.
  * @param {Domain} params.domain - Domain instance or object to insert.
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise.
  * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the inserted Domain instance.
  */
-export function insertDomain({ domain }, callback) {
+export function insertDomain({ AMId, domain }, callback) {
   let data
   if (domain) {
     data = JSON.parse(JSON.stringify(domain))
   }
   const params = {
     AMaaSClass: 'assetManagerDomains',
-    data,
-    queryParams: { assetManagerId: [domain.assetManagerId] }
+    AMId,
+    data
   }
   let promise = insertData(params).then(result => {
     result = _parseDomain(result)
@@ -282,7 +324,7 @@ export function retrieveEODBooks({ AMId, bookID }, callback) {
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the credentials object containing `AccessKeyId`, `SecretAccessKey` and `SessionToken`, along with an array of available subscription topics.
  * @returns {Promise|null} If no callback supplied, returns a promise that resolves with the credentials object as well as an array of available subscriptions.
  */
-export function getCredentialsForPubSub ({ AMId }, callback) {
+export function getCredentialsForPubSub({ AMId }, callback) {
   const params = {
     AMaaSClass: 'assetManagerPubSubCredentials',
     AMId

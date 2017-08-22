@@ -107,7 +107,7 @@ export function resubmitItem({ AMId, resourceId }, callback) {
  * @static
  * @param {object} params - object of parameters:
  * @param {number} [params.assetManagerId] - Asset Manager ID of the Items over which to search. If omitted, you must include `assetManagerIds` in the query
- * @param {object} params.query - Search parameters of the form { `key`: `[values]` }<br/>
+ * @param {object} params.query - Search parameters of the form { `key`: `value` | `[values]` }<br/>
  * Available keys are:
  * <li>assetManagerIds (required if AMId param is omitted)</li>
  * <li>itemIds</li>
