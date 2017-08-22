@@ -77,7 +77,9 @@ describe('searchData', () => {
     utils.makeRequest.mockImplementation(() => Promise.resolve({ body: 'testBody' }))
   })
   const query = {
-    assetManagerIds: [1, 2]
+    assetManagerIds: [1, 2],
+    numberParam: 62,
+    domains: 'amaas.com'
   }
   it('should call buildURL with correct params', done => {
     network.searchData({ AMaaSClass: 'monitorItems', AMId: 1, query }, (error, result) => {
@@ -87,7 +89,7 @@ describe('searchData', () => {
   })
   it('should call makeRequest with correct params', done => {
     network.searchData({ AMaaSClass: 'monitorItems', AMId: 1, query }, (error, result) => {
-      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'SEARCH', url: 'testURL', data: { camelcase: true, assetManagerIds: '1,2' }, stage: 'staging' })
+      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'SEARCH', url: 'testURL', data: { camelcase: true, assetManagerIds: '1,2', domains: 'amaas.com', numberParam: '62' }, stage: 'staging' })
       done()
     })
   })

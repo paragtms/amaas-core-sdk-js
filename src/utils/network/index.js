@@ -271,7 +271,12 @@ export function searchData({ AMaaSClass, AMId, query }, callback) {
   let data = { camelcase: true }
   for (let q in query) {
     if (query.hasOwnProperty(q)) {
-      data[q] = query[q].join()
+      let param = query[q]
+      if (Array.isArray(param)) {
+        data[q] = query[q].join()
+      } else {
+        data[q] = `${query[q]}`
+      }
     }
   }
   let promise = utils.makeRequest({ method: 'SEARCH', url, data, stage })

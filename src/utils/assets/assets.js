@@ -162,7 +162,7 @@ export function partialAmend({ AMId, changes, resourceId }, callback) {
  * <li>assetIssuerIds</li>
  * <li>assetClasses</li>
  * <li>assetTypes</li>
- * e.g. `{ assetManagerIds: [1], assetClasses: ['ForeignExchange', 'Equity'] }`
+ * e.g. `{ assetManagerIds: 1, assetClasses: ['ForeignExchange', 'Equity'] }`
  * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance
  */
