@@ -1,7 +1,21 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased (v0.1.2)
+## (v0.1.3) Unreleased
+### Added
+- Added CommodityFuture and ForeignExchangeFuture classes.
+- Added getCredentialsForPubSub function to api.AssetManagers.
+- Added retrieveItem function for api.Monitor.
+- Added getRelatedAMID function for api.Relationships.
+- Added fieldSearch functions to api.Assets, api.Positions and api.Transactions.
+- Added ForeignExchangeForward class.
+
+### Changed
+- Changed the handling of the retrieve and search functions in api.Monitor to accept an object with shape `{ data: [], totalPages: 1 }`.
+- Deleted the NonDeliverableForward class (replaced by ForeignExchangeForward).
+- Amend the `api.config` to reflect the changes in the endpoint naming.
+
+## v0.1.2 - 2017-07-31
 ### Added
 - Added accountType field to the AssetManager class.
 - Added a csv parser to convert csv strings into Assets, Books, Parties, Transactions. @JYL123

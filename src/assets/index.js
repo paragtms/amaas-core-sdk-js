@@ -13,7 +13,7 @@ export { default as ForeignExchangeOption } from './Derivative/ForeignExchangeOp
 export { default as Fund } from './Fund/Fund/fund'
 export { default as ExchangeTradedFund } from './Fund/ExchangeTradedFund/etf'
 export { default as ForeignExchange } from './FX/ForeignExchange/foreignExchange'
-export { default as NonDeliverableForward } from './FX/NonDeliverableForward/nonDeliverableForward'
+export { default as ForeignExchangeForward } from './FX/ForeignExchangeForward/foreignExchangeForward'
 export { default as Index } from './IndexAsset/IndexAsset/indexAsset'
 export { default as BondFuture } from './ListedDerivative/BondFuture/bondFuture'
 export { default as CommodityFuture } from './ListedDerivative/CommodityFuture/commodityFuture'

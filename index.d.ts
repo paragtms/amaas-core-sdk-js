@@ -132,9 +132,16 @@ declare module '@amaas/amaas-core-sdk-js' {
     netAssets?: any
   }
   export interface IExchangeTradedFund extends IFund {}
+  export interface IForeignExchangeBase extends IAsset {
+    countryCodes: any[]
+    major: boolean
+  }
   export interface IForeignExchange extends IForeignExchangeBase {}
-  export interface IForeignExchangeBase extends IAsset {}
-  export interface INonDeliverableForward extends IForeignExchangeBase {}
+  export interface IForeignExchangeForward extends IForeignExchangeBase {
+    settlementDate: string
+    fixingDate?: string
+    forwardRate: string | number
+  }
   export interface IIndex extends IAsset {}
   export interface IListedDerivative extends IAsset {}
   export interface IFuture extends IListedDerivative {
@@ -622,16 +629,16 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     // foreign exchange
-    type IForeignExchangeTypes = IForeignExchangeBase | IForeignExchange | INonDeliverableForward
-    type ForeignExchangeClassTypes = ForeignExchangeBase | ForeignExchange | NonDeliverableForward
+    type IForeignExchangeTypes = IForeignExchangeBase | IForeignExchange | IForeignExchangeForward
+    type ForeignExchangeClassTypes = ForeignExchangeBase | ForeignExchange | ForeignExchangeForward
     class ForeignExchangeBase extends Asset {
       constructor(props: IForeignExchangeBase)
     }
     class ForeignExchange extends ForeignExchangeBase {
       constructor(props: IForeignExchange)
     }
-    class NonDeliverableForward extends ForeignExchangeBase {
-      constructor(props: INonDeliverableForward)
+    class ForeignExchangeForward extends ForeignExchangeBase {
+      constructor(props: IForeignExchangeForward)
     }
 
     // index

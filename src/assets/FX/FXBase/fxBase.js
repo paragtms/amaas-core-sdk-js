@@ -10,7 +10,7 @@ class ForeignExchangeBase extends Asset {
   /**
    * Construct a new ForeignExchangeBase instance
    * @param {object} params - ForeignExchangeBase creation options:
-   * @param {number} [params.assetManagerId=0] - Auto-set to `0`. All FX classes and subclasses are treated as public Assets
+   * @param {number} [params.assetManagerId=0] - Auto-set to `0` except for ForeignExchangeForward. All FX classes and subclasses are treated as public Assets
    * @param {number} params.assetId - ID of the ForeignExchangeBase __(required)__
    * @param {string} [params.assetClass=ForeignExchange] - Auto-set to `ForeignExchange` __(read-only)__
    * @param {string} [params.assetType] - Type of the ForeignExchangeBase. Auto-set based on the class or subclass constructor
@@ -20,6 +20,8 @@ class ForeignExchangeBase extends Asset {
    * @param {string} [params.assetStatus=Active] - Status of the ForeignExchangeBase
    * @param {string} [params.description] - Description of the ForeignExchangeBase
    * @param {string} [params.displayName] - Display name of the ForeignExchangeBase
+   * @param {array} params.countryCodes - Array of country codes __(required)__
+   * @param {boolean} params.major - Whether this FX is major __(required)__
    * @param {boolean} [params.rollPrice=false] - Auto-set to `false` __(read-only)__
    * @param {string} [params.clientId] - ID of the associated client
    * @param {object} [params.comments] - Object of Comments attached to the ForeignExchangeBase
@@ -33,10 +35,13 @@ class ForeignExchangeBase extends Asset {
   */
   constructor({
     assetId,
+    assetManagerId=0,
     assetIssuerId,
     assetStatus='Active',
     description='',
     displayName,
+    countryCodes,
+    major=false,
     clientId,
     comments,
     links,
@@ -48,7 +53,7 @@ class ForeignExchangeBase extends Asset {
     version
   }) {
     super({
-      assetManagerId: 0,
+      assetManagerId,
       assetId,
       assetClass: 'ForeignExchange',
       fungible: true,
@@ -67,6 +72,8 @@ class ForeignExchangeBase extends Asset {
       updatedTime,
       version
     })
+    this.countryCodes = countryCodes
+    this.major = major
   }
 
   getBaseCurrency() {

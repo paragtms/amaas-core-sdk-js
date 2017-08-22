@@ -1433,10 +1433,10 @@ Classes for the Assets service
         * [new Fund(params)](#new_module_assets.Fund_new)
     * [.ForeignExchange](#module_assets.ForeignExchange) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
         * [new ForeignExchange(params)](#new_module_assets.ForeignExchange_new)
+    * [.ForeignExchangeForward](#module_assets.ForeignExchangeForward) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+        * [new ForeignExchangeForward(params)](#new_module_assets.ForeignExchangeForward_new)
     * [.ForeignExchangeBase](#module_assets.ForeignExchangeBase) ⇐ [<code>Asset</code>](#module_assets.Asset)
         * [new ForeignExchangeBase(params)](#new_module_assets.ForeignExchangeBase_new)
-    * [.NonDeliverableForward](#module_assets.NonDeliverableForward) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
-        * [new NonDeliverableForward(params)](#new_module_assets.NonDeliverableForward_new)
     * [.Index](#module_assets.Index) ⇐ [<code>Asset</code>](#module_assets.Asset)
         * [new Index(params)](#new_module_assets.Index_new)
     * [.BondFuture](#module_assets.BondFuture) ⇐ [<code>Future</code>](#module_assets.Future)
@@ -2117,6 +2117,8 @@ Construct a new Foreign Exchange instance
 | [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Foreign Exchange |
 | [params.description] | <code>string</code> |  | Description of the Foreign Exchange |
 | [params.displayName] | <code>string</code> |  | Display name of the ForeignExchange |
+| params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
+| params.major | <code>boolean</code> |  | Whether this FX is major __(required)__ |
 | [params.clientId] | <code>string</code> |  | ID of the associated client |
 | [params.comments] | <code>object</code> |  | Object of Comments attached to the Foreign Exchange |
 | [params.links] | <code>object</code> |  | Object of array of Links attached to the Foreign Exchange |
@@ -2125,6 +2127,43 @@ Construct a new Foreign Exchange instance
 | [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Foreign Exchange |
 | [params.createdTime] | <code>date</code> |  | Time that the Foreign Exchange was created |
 | [params.updatedTime] | <code>date</code> |  | Time that the Foreign Exchange was updated |
+| [params.version] | <code>number</code> |  | Version number |
+
+<a name="module_assets.ForeignExchangeForward"></a>
+
+### assets.ForeignExchangeForward ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+Class representing FXForward
+
+**Kind**: static class of [<code>assets</code>](#module_assets)  
+**Extends**: [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)  
+<a name="new_module_assets.ForeignExchangeForward_new"></a>
+
+#### new ForeignExchangeForward(params)
+Construct a new FXForward instance
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| params | <code>object</code> |  | FXForward creation options: |
+| params.assetId | <code>string</code> |  | ID of the FXForward __(required)__ |
+| params.assetIssuerId | <code>string</code> |  | ID of the Issuer |
+| params.assetManagerId | <code>number</code> |  | Asset Manager ID |
+| [params.assetClass] | <code>string</code> | <code>&quot;ForeignExchange&quot;</code> | Auto-set to `ForeignExchange` __(read-only)__ |
+| [params.assetStatus] | <code>string</code> |  | Status of the asset |
+| [params.description] | <code>string</code> |  | Description of the ForeignExchangeForward |
+| [params.clientId] | <code>string</code> |  | ID of the client |
+| params.major | <code>boolean</code> |  | Whether it is a major currency or not |
+| params.countryCodes | <code>object</code> |  | An array of country codes |
+| params.settlementDate | <code>string</code> |  | The date of exchange of ownership |
+| [params.fixingDate] | <code>string</code> |  | The date of fixing exchange rate between two currencies |
+| params.forwardRate | <code>string</code> |  | Currency exchange rate |
+| [params.comments] | <code>object</code> |  | Object of Comments attached to the Non Deliverable Forward |
+| [params.links] | <code>object</code> |  | Object of array of Links attached to the Non Deliverable Forward |
+| [params.references] | <code>object</code> | <code>{ AMaaS: Reference() }</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
+| [params.createdBy] | <code>string</code> |  | ID of the user that created the Non Deliverable Forward |
+| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Non Deliverable Forward |
+| [params.createdTime] | <code>date</code> |  | Time that the Non Deliverable Forward was created |
+| [params.updatedTime] | <code>date</code> |  | Time that the Non Deliverable Forward was updated |
 | [params.version] | <code>number</code> |  | Version number |
 
 <a name="module_assets.ForeignExchangeBase"></a>
@@ -2144,7 +2183,7 @@ Construct a new ForeignExchangeBase instance
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | params | <code>object</code> |  | ForeignExchangeBase creation options: |
-| [params.assetManagerId] | <code>number</code> | <code>0</code> | Auto-set to `0`. All FX classes and subclasses are treated as public Assets |
+| [params.assetManagerId] | <code>number</code> | <code>0</code> | Auto-set to `0` except for ForeignExchangeForward. All FX classes and subclasses are treated as public Assets |
 | params.assetId | <code>number</code> |  | ID of the ForeignExchangeBase __(required)__ |
 | [params.assetClass] | <code>string</code> | <code>&quot;ForeignExchange&quot;</code> | Auto-set to `ForeignExchange` __(read-only)__ |
 | [params.assetType] | <code>string</code> |  | Type of the ForeignExchangeBase. Auto-set based on the class or subclass constructor |
@@ -2154,6 +2193,8 @@ Construct a new ForeignExchangeBase instance
 | [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the ForeignExchangeBase |
 | [params.description] | <code>string</code> |  | Description of the ForeignExchangeBase |
 | [params.displayName] | <code>string</code> |  | Display name of the ForeignExchangeBase |
+| params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
+| params.major | <code>boolean</code> |  | Whether this FX is major __(required)__ |
 | [params.rollPrice] | <code>boolean</code> | <code>false</code> | Auto-set to `false` __(read-only)__ |
 | [params.clientId] | <code>string</code> |  | ID of the associated client |
 | [params.comments] | <code>object</code> |  | Object of Comments attached to the ForeignExchangeBase |
@@ -2164,41 +2205,6 @@ Construct a new ForeignExchangeBase instance
 | [params.createdTime] | <code>date</code> |  | Time that the ForeignExchangeBase was created |
 | [params.updatedTime] | <code>date</code> |  | Time that the ForeignExchangeBase was updated |
 | params.version | <code>number</code> |  | Version number |
-
-<a name="module_assets.NonDeliverableForward"></a>
-
-### assets.NonDeliverableForward ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
-Class representing FX
-
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)  
-<a name="new_module_assets.NonDeliverableForward_new"></a>
-
-#### new NonDeliverableForward(params)
-Construct a new Non Deliverable Forward instance
-
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| params | <code>object</code> |  | NonDeliverableForward creation options: |
-| params.assetId | <code>number</code> |  | ID of the Non Deliverable Forward __(required)__ |
-| [params.assetClass] | <code>string</code> | <code>&quot;ForeignExchange&quot;</code> | Auto-set to `ForeignExchange` __(read-only)__ |
-| [params.assetType] | <code>string</code> |  | Type of the Non Deliverable Forward. Auto-set based on the class or subclass constructor |
-| [params.assetTypeDisplay] | <code>string</code> |  | Auto-set to the spaced class name (e.g. `Listed Derivative` for `ListedDerivative()`) |
-| [params.fungible] | <code>boolean</code> | <code>true</code> | Auto-set to `true` __(read-only)__ |
-| [params.assetIssuerId] | <code>string</code> |  | ID of the Non Deliverable Forward's issuer |
-| [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Asset |
-| [params.description] | <code>string</code> |  | Description of the Non Deliverable Forward |
-| [params.displayName] | <code>string</code> |  | Display name of the Non Deliverable Forward |
-| [params.clientId] | <code>string</code> |  | ID of the associated client |
-| [params.comments] | <code>object</code> |  | Object of Comments attached to the Non Deliverable Forward |
-| [params.links] | <code>object</code> |  | Object of array of Links attached to the Non Deliverable Forward |
-| [params.references] | <code>object</code> | <code>{ AMaaS: Reference() }</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
-| [params.createdBy] | <code>string</code> |  | ID of the user that created the Non Deliverable Forward |
-| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Non Deliverable Forward |
-| [params.createdTime] | <code>date</code> |  | Time that the Non Deliverable Forward was created |
-| [params.updatedTime] | <code>date</code> |  | Time that the Non Deliverable Forward was updated |
-| [params.version] | <code>number</code> |  | Version number |
 
 <a name="module_assets.Index"></a>
 
