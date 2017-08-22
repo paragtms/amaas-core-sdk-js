@@ -366,7 +366,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
       function searchDomains({ query }: { query: { isPrimary: boolean, domains: string | string[], domainStatuses: string | string[], fields: string | string[] } }, callback?: Function): Promise<assetManagers.Domain | assetManagers.Domain[]> | void
       function checkDomains({ domain }: { domain: string }, callback?: Function): Promise<assetManagers.Domain | null> | void
-      function insertDomain({ domain }: { domain: assetManagers.Domain | IDomain }, callback?: Function): Promise<assetManagers.Domain> | void
+      function insertDomain({ AMId, domain }: { AMId: number, domain: assetManagers.Domain | IDomain }, callback?: Function): Promise<assetManagers.Domain> | void
       function retrieveEODBooks({ AMId, bookID }: { AMId: number, bookID: string }, callback?: Function): Promise<assetManagers.EODBook | assetManagers.EODBook[]> | void
       function getCredentialsForPubSub({ AMId }: { AMId: number }, callback?: Function): Promise<{ credentials: { AccessKeyId: string, SecretAccessKey: string, SessionToken: string }, topics: string[] }> | void
     }

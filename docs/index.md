@@ -115,6 +115,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.amend(params, [callback])](#module_api.AssetManagers.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.AssetManagers.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.AssetManagers.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.searchDomains(params, [callback])](#module_api.AssetManagers.searchDomains) ⇒ <code>Promise</code> \| <code>null</code>
         * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> \| <code>null</code>
         * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> \| <code>null</code>
@@ -253,6 +254,7 @@ Send Allocations for a specific Transaction
     * [.amend(params, [callback])](#module_api.AssetManagers.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.AssetManagers.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.AssetManagers.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.searchDomains(params, [callback])](#module_api.AssetManagers.searchDomains) ⇒ <code>Promise</code> \| <code>null</code>
     * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> \| <code>null</code>
     * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> \| <code>null</code>
@@ -329,6 +331,20 @@ Reactivate an Asset Manager
 | params.AMId | <code>number</code> | AMID of the Asset Manager to deactivate |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the reactivated AssetManager instance. Omit to return Promise |
 
+<a name="module_api.AssetManagers.searchDomains"></a>
+
+#### AssetManagers.searchDomains(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Search domains
+
+**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with the matching Domain instances.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.query | <code>string</code> | search parameters for the domain search. Available keys are: <li>isPrimary</li> <li>domains</li> <li>domainStatuses</li> <li>fields</li> e.g. `query = { isPrimary: true, domains: ['amaas.com', 'argomi.com'], domainStatuses: 'Active' }` |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` are the matching Domain instances. Omit to return promise. |
+
 <a name="module_api.AssetManagers.checkDomains"></a>
 
 #### AssetManagers.checkDomains(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
@@ -354,6 +370,7 @@ Insert a new Domain for a given AMID
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the new Domain's owner. |
 | params.domain | <code>Domain</code> | Domain instance or object to insert. |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise. |
 
@@ -475,7 +492,7 @@ Search for Assets
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.AMId] | <code>number</code> | Asset Manager ID of the Assets to search over. If omitted, you must send assetManagerIds in the search query with at least one value |
-| params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>assetStatuses</li> <li>assetIds</li> <li>referenceTypes</li> <li>referenceValues</li> <li>assetIssuerIds</li> <li>assetClasses</li> <li>assetTypes</li> e.g. `{ assetManagerIds: [1], assetClasses: ['ForeignExchange', 'Equity'] }` |
+| params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>assetStatuses</li> <li>assetIds</li> <li>referenceTypes</li> <li>referenceValues</li> <li>assetIssuerIds</li> <li>assetClasses</li> <li>assetTypes</li> e.g. `{ assetManagerIds: 1, assetClasses: ['ForeignExchange', 'Equity'] }` |
 | callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance |
 
 <a name="module_api.Assets.fieldsSearch"></a>
@@ -561,7 +578,7 @@ Search Books for specified AMId and bookId
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.AMId] | <code>number</code> | Asset Manager ID of the user calling the API. If omitted, you must pass assetManagerIds in the query |
-| params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>bookStatuses</li> <li>bookIds</li> <li>ownerIds</li> e.g. `{ assetManagerIds: [1], bookIds: [1, 2, 3] }` |
+| params.query | <code>object</code> | Search parameters of the form: { `key`: `value` | `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>bookStatuses</li> <li>bookIds</li> <li>ownerIds</li> e.g. `{ assetManagerIds: 1, bookIds: [1, 2, 3] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Books or a single Book instance. Omit to return Promise |
 
 <a name="module_api.Books.insert"></a>
@@ -696,7 +713,7 @@ Search for Corporate Actions
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.AMId] | <code>number</code> | AMId of the Asset Manager that owns the Corporate Action. If omitted you must pass assetManagerIds in the query |
-| params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>corporateActionIds</li> <li>corporateActionStatuses</li> <li>corporateActionTypes</li> <li>assetIds</li> <li>partyIds</li> <li>recordDateStart</li> <li>recordDateEnd</li> <li>declaredDateStart</li> <li>declaredDateEnd</li> <li>referenceTypes</li> <li>referenceValues</li> e.g. `{ assetManagerIds: [1], assetIds: ['ASKJ18', 'LKHB98'] }` |
+| params.query | <code>object</code> | Search parameters of the form { `key`: `value` | `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>corporateActionIds</li> <li>corporateActionStatuses</li> <li>corporateActionTypes</li> <li>assetIds</li> <li>partyIds</li> <li>recordDateStart</li> <li>recordDateEnd</li> <li>declaredDateStart</li> <li>declaredDateEnd</li> <li>referenceTypes</li> <li>referenceValues</li> e.g. `{ assetManagerIds: 1, assetIds: ['ASKJ18', 'LKHB98'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Corporate Actions or a single CorporateAction instance. Omit to return Promise |
 
 <a name="module_api.CorporateActions.cancel"></a>
@@ -867,7 +884,7 @@ Search Monitor Items
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.assetManagerId] | <code>number</code> | Asset Manager ID of the Items over which to search. If omitted, you must include `assetManagerIds` in the query |
-| params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br/> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>itemIds</li> <li>assetBookIds</li> <li>itemStatuses</li> <li>itemClasses</li> <li>itemTypes</li> <li>itemLevels</li> <li>itemSources</li> <li>transactionIds</li> <li>assetIds</li> |
+| params.query | <code>object</code> | Search parameters of the form { `key`: `value` | `[values]` }<br/> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>itemIds</li> <li>assetBookIds</li> <li>itemStatuses</li> <li>itemClasses</li> <li>itemTypes</li> <li>itemLevels</li> <li>itemSources</li> <li>transactionIds</li> <li>assetIds</li> |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Items or a single Item instance. |
 
 <a name="module_api.Monitor.closeItem"></a>
@@ -1015,7 +1032,7 @@ Search for Parties
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.AMId] | <code>number</code> | Asset Manager of the Parties to search over. If omitted you must pass assetManagerIds in the query |
-| params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>clientIds</li> <li>partyStatuses</li> <li>partyIds</li> <li>partyClasses</li> <li>partyTypes</li> e.g. `{ assetManagerIds: [1], partyTypes: ['Individual', 'Fund'] }` |
+| params.query | <code>object</code> | Search parameters of the form: { `key`: `value` | `[values]` }<br /> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>clientIds</li> <li>partyStatuses</li> <li>partyIds</li> <li>partyClasses</li> <li>partyTypes</li> e.g. `{ assetManagerIds: 1, partyTypes: ['Individual', 'Fund'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Parties or a single Party instance. Omit to return promise |
 
 <a name="module_api.Parties.deactivate"></a>
@@ -1085,7 +1102,7 @@ Search for Positions in the database
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters |
 | params.AMId | <code>number</code> | Asset Manager ID of the Asset Manager owning the Postions |
-| params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>bookIds</li> <li>assetIds</li> <li>clientIds</li> <li>accountIds</li> <li>accountingTypes</li> <li>positionDate</li> e.g. `{ assetManagerIds: [1], bookIds: ['LAXJ98', 'OXYW09', 'COSY45'] }` |
+| params.query | <code>object</code> | Search parameters of the form: { `key`: `values` | `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>bookIds</li> <li>assetIds</li> <li>clientIds</li> <li>accountIds</li> <li>accountingTypes</li> <li>positionDate</li> e.g. `{ assetManagerIds: 1, bookIds: ['LAXJ98', 'OXYW09', 'COSY45'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. Omit to return Promise |
 
 <a name="module_api.Positions.fieldsSearch"></a>
@@ -1287,7 +1304,7 @@ Search Transactions
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters |
 | [params.AMId] | <code>number</code> | Asset Manager ID of the Transactions to search over. If omitted you must pass assetManagerIds in the query |
-| params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>clientIds</li> <li>transactionStatuses</li> <li>transactionIds</li> <li>assetBookIds</li> <li>counterpartyBookIds</li> <li>assetIds</li> <li>transactionDateStart</li> <li>transactionDateEnd</li> <li>codeTypes</li> <li>codeValues</li> <li>linkTypes</li> <li>linkedTransactionIds</li> <li>partyTypes</li> <li>partyIds</li> <li>referenceTypes</li> <li>referenceValues</li> e.g. `{ assetManagerIds: [1], bookIds: [1, 2, 3] }` |
+| params.query | <code>object</code> | Search parameters of the form: { `key`: `value` | `[values]` }<br /> Available keys are: <li>clientIds</li> <li>transactionStatuses</li> <li>transactionIds</li> <li>assetBookIds</li> <li>counterpartyBookIds</li> <li>assetIds</li> <li>transactionDateStart</li> <li>transactionDateEnd</li> <li>codeTypes</li> <li>codeValues</li> <li>linkTypes</li> <li>linkedTransactionIds</li> <li>partyTypes</li> <li>partyIds</li> <li>referenceTypes</li> <li>referenceValues</li> e.g. `{ assetManagerIds: 1, bookIds: [1, 2, 3] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Transactions or a single Transaction instance. Omit to return Promise |
 
 <a name="module_api.Transactions.cancel"></a>
