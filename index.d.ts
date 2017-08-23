@@ -364,7 +364,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function amend({ AMId, assetManager }: { AMId: number, assetManager: assetManagers.AssetManager | IAssetManager }, callback?: Function): Promise<assetManagers.AssetManager> | void
       function deactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
       function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
-      function searchDomains({ query }: { query: { isPrimary: boolean, domains: string | string[], domainStatuses: string | string[], fields: string | string[] } }, callback?: Function): Promise<assetManagers.Domain | assetManagers.Domain[]> | void
+      function searchDomains({ query }: { query?: { assetManagerIds?: number | number[], isPrimary?: boolean, domains?: string | string[], domainStatuses?: string | string[], fields?: string | string[] } }, callback?: Function): Promise<assetManagers.Domain | assetManagers.Domain[]> | void
       function checkDomains({ domain }: { domain: string }, callback?: Function): Promise<assetManagers.Domain | null> | void
       function insertDomain({ AMId, domain }: { AMId: number, domain: assetManagers.Domain | IDomain }, callback?: Function): Promise<assetManagers.Domain> | void
       function retrieveEODBooks({ AMId, bookID }: { AMId: number, bookID: string }, callback?: Function): Promise<assetManagers.EODBook | assetManagers.EODBook[]> | void
@@ -375,14 +375,14 @@ declare module '@amaas/amaas-core-sdk-js' {
       function insert({ AMId, asset }: { AMId: number, asset: assets.AssetClassTypes | assets.IAssetTypes }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function amend({ AMId, asset, resourceId }: { AMId: number, asset: assets.AssetClassTypes | assets.IAssetTypes, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: { [keyName: string]: any }, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
-      function search({ AMId, query }: { AMId: number, query: { clientIds?: string | number | any[], assetStatuses?: string | string[], assetIds?: string | string[], referenceTypes?: string | string[], referenceValues?: string | string[], assetIssuerIds?: string | number | any[], assetClasses?: string | string[], assetTypes?: string | string[] } }, callback?: Function): Promise<assets.AssetClassTypes[]> | void
+      function search({ AMId, query }: { AMId: number, query?: { clientIds?: string | number | any[], assetStatuses?: string | string[], assetIds?: string | string[], referenceTypes?: string | string[], referenceValues?: string | string[], assetIssuerIds?: string | number | any[], assetClasses?: string | string[], assetTypes?: string | string[] } }, callback?: Function): Promise<assets.AssetClassTypes[]> | void
       function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function fieldSearch(query: { assetManagerIds: number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
     }
     namespace Books {
       function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<books.Book[]> | void
-      function search({ AMId, query }: { AMId: number, query: { assetManagerIds?: number | number[], clientIds?: string | number | any[], bookStatuses?: string | string[], bookIds?: string | string[], ownerIds?: string | string[] } }, callback?: Function): Promise<books.Book[]> | void
+      function search({ AMId, query }: { AMId: number, query?: { assetManagerIds?: number | number[], clientIds?: string | number | any[], bookStatuses?: string | string[], bookIds?: string | string[], ownerIds?: string | string[] } }, callback?: Function): Promise<books.Book[]> | void
       function insert({ AMId, book }: { AMId: number, book: books.Book | IBook }, callback?: Function): Promise<books.Book> | void
       function amend({ AMId, book, resourceId }: { AMId: number, book: books.Book | IBook, resourceId: string }, callback?: Function): Promise<books.Book> | void
       function retire({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
@@ -398,7 +398,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function retrieveItems({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
       function insertNewItem({ AMId, item }: { AMId: number, item: IMonitorItem | monitor.Item }, callback?: Function): Promise<monitor.Item> | void
       function resubmitItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
-      function searchItems({ AMId, query }: { AMId?: number, query: { assetManagerIds?: number | number[], itemIds: string | string[], assetBookIds: string | string[], itemStatuses: string | string[], itemClasses: string | string[], itemTypes: string | string[], itemLevels: string | string[], itemSources: string | string[], transactionIds: string | string[], assetIds: string | string[] } }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
+      function searchItems({ AMId, query }: { AMId?: number, query?: { assetManagerIds?: number | number[], itemIds?: string | string[], assetBookIds?: string | string[], itemStatuses?: string | string[], itemClasses?: string | string[], itemTypes?: string | string[], itemLevels?: string | string[], itemSources?: string | string[], transactionIds?: string | string[], assetIds?: string | string[] } }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
       function closeItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
     }
     namespace Parties {
@@ -406,7 +406,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function insert({ AMId, party }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType }, callback?: Function): Promise<parties.PartiesClassType> | void
       function amend({ AMId, party, resourceId }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType, resourceId: string }): Promise<parties.PartiesClassType> | void
       function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
-      function search({ AMId, query }: { AMId: number, query: { assetManagerIds?: number | number[], clientIds?: number | number[], partyStatuses?: string | string[], partyIds?: string | string[], partyClasses?: string | string[], partyTypes?: string | string[] } }, callback?: Function): Promise<parties.PartiesClassType[]> | void
+      function search({ AMId, query }: { AMId: number, query?: { assetManagerIds?: number | number[], clientIds?: number | number[], partyStatuses?: string | string[], partyIds?: string | string[], partyClasses?: string | string[], partyTypes?: string | string[] } }, callback?: Function): Promise<parties.PartiesClassType[]> | void
       function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
     }
@@ -419,7 +419,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
     namespace Positions {
       function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<transactions.Position> | void
-      function search({ AMId, query }: { AMId: number, query: { assetManagerIds?: number | number[], bookIds?: string | string[], assetIds?: string | string[], clientIds?: number | number[], accountIds?: string | string[], accountingTypes?: string | string[], positionDate?: string | string[] } }, callback?: Function): Promise<transactions.Position> | void
+      function search({ AMId, query }: { AMId: number, query?: { assetManagerIds?: number | number[], bookIds?: string | string[], assetIds?: string | string[], clientIds?: number | number[], accountIds?: string | string[], accountingTypes?: string | string[], positionDate?: string | string[] } }, callback?: Function): Promise<transactions.Position> | void
       function fieldSearch(query: { assetManagerIds: number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
     }
     namespace Transactions {
@@ -427,7 +427,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function insert({ AMId, transaction }: { AMId: number, transaction: transactions.Transaction | ITransaction }, callback?: Function): Promise<transactions.Transaction> | void
       function amend({ AMId, transaction, resourceId }: { AMId: number, transaction: transactions.Transaction | ITransaction, resourceId?: string }, callback?: Function): Promise<transactions.Transaction> | void
       function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId?: string }, callback?: Function): Promise<transactions.Transaction> | void
-      function search({ AMId, query }: { AMId: number, query: { clientIds?: string | number | any[], transactionStatuses: string | string[], transactionIds: string | string[], assetBookIds: string | string[], counterpartyBookIds: string | string[], assetIds: string | string[], transactionDateStart: any, transactionDateEnd: any, codeTypes: string | string[], codeValues: string | string[], linkTypes: string | string[], linkedTransactionIds: string | string[], partyTypes: string | string[], partyIds: string | string[], referenceTypes: string | string[], referenceValues: string | string[] } }, callback?: Function): Promise<transactions.Transaction> | void
+      function search({ AMId, query }: { AMId: number, query?: { clientIds?: string | number | any[], transactionStatuses?: string | string[], transactionIds?: string | string[], assetBookIds?: string | string[], counterpartyBookIds?: string | string[], assetIds?: string | string[], transactionDateStart?: any, transactionDateEnd?: any, codeTypes?: string | string[], codeValues?: string | string[], linkTypes?: string | string[], linkedTransactionIds?: string | string[], partyTypes?: string | string[], partyIds?: string | string[], referenceTypes?: string | string[], referenceValues?: string | string[] } }, callback?: Function): Promise<transactions.Transaction> | void
       function fieldSearch(query: { assetManagerIds: number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
       function cancel({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<transactions.Transaction> | void
     }

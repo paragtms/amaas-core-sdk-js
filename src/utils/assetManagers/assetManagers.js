@@ -181,6 +181,7 @@ export function reactivate({ AMId }, callback) {
  * @static
  * @param {object} params - object of parameters:
  * @param {string} params.query - search parameters for the domain search. Available keys are:
+ * <li>assetManagerIds</li>
  * <li>isPrimary</li>
  * <li>domains</li>
  * <li>domainStatuses</li>
