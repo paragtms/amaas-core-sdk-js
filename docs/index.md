@@ -342,7 +342,7 @@ Search domains
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.query | <code>string</code> | search parameters for the domain search. Available keys are: <li>isPrimary</li> <li>domains</li> <li>domainStatuses</li> <li>fields</li> e.g. `query = { isPrimary: true, domains: ['amaas.com', 'argomi.com'], domainStatuses: 'Active' }` |
+| params.query | <code>string</code> | search parameters for the domain search. Available keys are: <li>assetManagerIds</li> <li>isPrimary</li> <li>domains</li> <li>domainStatuses</li> <li>fields</li> e.g. `query = { isPrimary: true, domains: ['amaas.com', 'argomi.com'], domainStatuses: 'Active' }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` are the matching Domain instances. Omit to return promise. |
 
 <a name="module_api.AssetManagers.checkDomains"></a>
