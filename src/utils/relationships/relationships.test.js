@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, requestRelationship, getRelatedAMID, insert, amend } from './relationships'
+import { retrieve, requestRelationship, getRelatedAMID, insert, amend, sendInvitation } from './relationships'
 import Relationship from '../../relationships'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -99,6 +99,22 @@ describe('amend', () => {
   it('calls putData with correct params', done => {
     amend({ AMId: 1, relationship: mockRel }, (error, result) => {
       expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, data: JSON.parse(JSON.stringify(mockRel)) })
+      done()
+    })
+  })
+})
+
+describe('sendInvitation', () => {
+  beforeAll(() => {
+    network.putData.mockImplementation(() => Promise.resolve(true))
+  })
+  test('with promise', () => {
+    let promise = sendInvitation({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls putData with correct params', done => {
+    sendInvitation({ AMId: 1, toEmail: 'offboard@argomi.com', fromEmail: 'onboard@argomi.com', companyName: 'Argomi' }, (error, result) => {
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, resourceId: 'invitations', data: { userEmail: 'offboard@argomi.com', adminEmail: 'onboard@argomi.com', companyName: 'Argomi' } })
       done()
     })
   })

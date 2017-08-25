@@ -168,6 +168,42 @@ export function amend({ AMId, relationship }, callback) {
   promise.catch(error => callback(error))
 }
 
+/**
+ * Send invitation to join
+ * @function sendInvitation
+ * @memberof module:api.Relationships
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - AMID of company to join
+ * @param {string} params.toEmail - Email address to send to
+ * @param {string} params.fromEmail - Email address sent from
+ * @param {string} params.companyName - Company to Join
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is `true`.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves with `true`.
+ */
+export function sendInvitation({ AMId, toEmail, fromEmail, companyName }, callback) {
+  const params = {
+    AMaaSClass: 'relationships',
+    AMId,
+    resourceId: 'invitations',
+    data: {
+      userEmail: toEmail,
+      adminEmail: fromEmail,
+      companyName
+    }
+  }
+  let promise = putData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
  function _parseRelationship(rel) {
    return new Relationship(rel)
  }
