@@ -259,11 +259,22 @@ declare module '@amaas/amaas-core-sdk-js' {
     givenNames?: string
     surname?: string
     dateOfBirth?: string
+    title?: string
+    employer?: string
+    department?: string
+    contactNumber?: string
   }
   export interface IOrganisation extends IParty {}
   export interface ISubFund extends IParty {}
   export interface IGovernmentAgency extends IOrganisation {}
-  export interface ICompany extends IOrganisation {}
+  export interface ICompany extends IOrganisation {
+    licenseNumber?: string
+    licenseType?: string
+    assetsUnderManagement?: string
+    registrationNumber?: string
+    yearOfIncoporation?: string
+    contactNumber?: string
+  }
   export interface IFund extends ICompany {}
   export interface IExchange extends ICompany {}
   export interface IBroker extends ICompany {}
@@ -817,6 +828,10 @@ declare module '@amaas/amaas-core-sdk-js' {
       givenNames?: string
       surname?: string
       dateOfBirth?: string
+      title?: string
+      employer?: string
+      department?: string
+      contactNumber?: string
       constructor(props: IIndividual)
     }
 
@@ -833,6 +848,12 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     class Company extends Organisation {
+      licenseNumber?: string
+      licenseType?: string
+      assetsUnderManagement?: string
+      registrationNumber?: string
+      yearOfIncoporation?: string
+      contactNumber?: string
       constructor(props: ICompany)
     }
 
