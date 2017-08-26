@@ -14,6 +14,12 @@ class Broker extends Company {
    * @param {string} [params.partyStatus=Active] - Status of the Broker
    * @param {string} [params.baseCurrency] - Base Currency of the Broker (e.g. SGD, USD)
    * @param {string} [params.description] - Description of the Broker
+   * @param {string} [params.licenseNumber] - Company license number (if applicable)
+   * @param {string} [params.licenseType] - Company license type
+   * @param {string} [params.assetsUnderManagement] - Value of assets under management
+   * @param {string} [params.registrationNumber] - Business registration number (if applicable)
+   * @param {string} [params.yearOfIncorporation] - Year of incorporation
+   * @param {string} [params.contactNumber] - Contact number
    * @param {object} [params.addresses] - Object of Addresses associated with the Broker
    * @param {object} [params.emails] - Object of Emails associated with the Broker
    * @param {object} [params.references] - Object of References associated with the Broker
@@ -34,6 +40,12 @@ class Broker extends Company {
     partyStatus='Active',
     baseCurrency,
     description='',
+    licenseNumber,
+    licenseType,
+    assetsUnderManagement,
+    registrationNumber,
+    yearOfIncoporation,
+    contactNumber,
     addresses={},
     emails={},
     references={},
@@ -54,6 +66,12 @@ class Broker extends Company {
       partyStatus,
       baseCurrency,
       description,
+      licenseNumber,
+      licenseType,
+      assetsUnderManagement,
+      registrationNumber,
+      yearOfIncoporation,
+      contactNumber,
       addresses,
       emails,
       references,
