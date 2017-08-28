@@ -19,8 +19,8 @@ class Individual extends Party {
    * @param {string} params.surname - Individual's surname
    * @param {string} params.dateOfBirth - Individual's date of birth (YYYY-MM-DD)
    * @param {string} [params.title] - Individual's title (e.g. Mr, Mrs, Ms, etc.)
-   * @param {string} [params.employer] - Individual's employer name
    * @param {string} [params.department] - Individual's department
+   * @param {string} [params.role] - Individual's role
    * @param {string} [params.contactNumber] - Individual's contact number
    * @param {object} [params.addresses] - Object of Addresses associated with the Individual
    * @param {object} [params.emails] - Object of Emails associated with the Individual
@@ -47,8 +47,8 @@ class Individual extends Party {
     surname,
     dateOfBirth,
     title,
-    employer,
     department,
+    role,
     contactNumber,
     addresses={},
     emails={},
@@ -89,8 +89,8 @@ class Individual extends Party {
     this.surname = surname
     this.dateOfBirth = dateOfBirth
     this.title = title
-    this.employer = employer
     this.department = department
+    this.role = role
     this.contactNumber = contactNumber
   }
 }
