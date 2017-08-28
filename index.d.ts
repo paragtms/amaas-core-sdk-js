@@ -260,7 +260,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     surname?: string
     dateOfBirth?: string
     title?: string
-    employer?: string
+    role?: string
     department?: string
     contactNumber?: string
   }
@@ -829,7 +829,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       surname?: string
       dateOfBirth?: string
       title?: string
-      employer?: string
+      role?: string
       department?: string
       contactNumber?: string
       constructor(props: IIndividual)
