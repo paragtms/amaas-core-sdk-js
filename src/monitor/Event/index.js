@@ -31,7 +31,7 @@ class Event extends AMaaSModel {
    * @param {string} params.title - Title of the Event
    * @param {string} params.description - Description of the Event
    * @param {number} params.internalId - Internal ID of the Event *(set server side)*
-   * @param {string} params.clientId - Client ID *(set server side)*
+   * @param {number} params.clientId - Client ID *(set server side)*
    * @param {string} [params.createdBy] - Who the Event was created by *(set server side)*
    * @param {string} [params.createdTime] - When the Event was created *(set server side)*
    * @param {string} [params.updatedBy] - Who the Event was last updated by *(set server side)*

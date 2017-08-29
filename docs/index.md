@@ -3350,7 +3350,7 @@ Construct a new Monitor Event instance
 | params.title | <code>string</code> | Title of the Event |
 | params.description | <code>string</code> | Description of the Event |
 | params.internalId | <code>number</code> | Internal ID of the Event *(set server side)* |
-| params.clientId | <code>string</code> | Client ID *(set server side)* |
+| params.clientId | <code>number</code> | Client ID *(set server side)* |
 | [params.createdBy] | <code>string</code> | Who the Event was created by *(set server side)* |
 | [params.createdTime] | <code>string</code> | When the Event was created *(set server side)* |
 | [params.updatedBy] | <code>string</code> | Who the Event was last updated by *(set server side)* |

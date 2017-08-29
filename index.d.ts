@@ -316,6 +316,26 @@ declare module '@amaas/amaas-core-sdk-js' {
     version?: number
   }
 
+  export interface IMonitorEvent {
+    assetManagerId: number
+    eventId?: string
+    linkId?: string
+    linkSource?: string
+    eventType?: 'Internal' | 'External'
+    eventStart?: string
+    eventEnd?: string
+    eventStatus?: 'Open' | 'Closed'
+    title?: string
+    description?: string
+    internalId?: number
+    clientId?: number
+    createdBy?: string
+    createdTime?: string
+    updatedBy?: string
+    updatedTime?: string
+    version?: number
+  }
+
   // Transactions
   export interface ITransaction {
     assetManagerId: number
@@ -915,6 +935,27 @@ declare module '@amaas/amaas-core-sdk-js' {
       updatedTime?: string
       version?: number
       constructor(props: IMonitorItem)
+    }
+
+    class Event {
+      assetManagerId: number
+      eventId?: string
+      linkId?: string
+      linkSource?: string
+      eventType?: 'Internal' | 'External'
+      eventStart?: string
+      eventEnd?: string
+      eventStatus?: 'Open' | 'Closed'
+      title?: string
+      description?: string
+      internalId?: number
+      clientId?: number
+      createdBy?: string
+      createdTime?: string
+      updatedBy?: string
+      updatedTime?: string
+      version?: number
+      constructor(props: IMonitorEvent)
     }
   }
 
