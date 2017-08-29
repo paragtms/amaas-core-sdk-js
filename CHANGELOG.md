@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
 - Added fieldSearch functions to api.Assets, api.Positions and api.Transactions.
 - Added ForeignExchangeForward class.
 - Added the searchDomains function for generic search on Domains.
+- Add a `sendInviation()` function to Relationships.
+- Add fields to Individual class *(department, role, contactNumber, title)*.
+- Add fields to Company class *(licenseNumber, licenseType, registrationNumber, assetsUnderManagement, contactNumber, yearOfIncorporation)*.
 
 ### Changed
 - Changed the handling of the retrieve and search functions in api.Monitor to accept an object with shape `{ data: [], totalPages: 1 }`.
