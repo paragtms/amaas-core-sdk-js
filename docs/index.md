@@ -154,6 +154,9 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> \| <code>null</code>
         * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> \| <code>null</code>
         * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Netting](#module_api.Netting) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Netting.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.send(params, [callback])](#module_api.Netting.send) ⇒ <code>Promise</code> \| <code>null</code>
@@ -176,6 +179,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
         * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Transactions](#module_api.Transactions) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Transactions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Transactions.insert) ⇒ <code>Promise</code> \| <code>null</code>
@@ -826,6 +830,9 @@ Make request and search data
     * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> \| <code>null</code>
     * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> \| <code>null</code>
     * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Monitor.retrieveItem"></a>
 
@@ -898,9 +905,48 @@ Close a monitor item
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.assetManagerId | <code>number</code> | Asset Manager ID of the Item to close |
+| params.AMId | <code>number</code> | Asset Manager ID of the Item to close |
 | params.resourceId | <code>string</code> | itemId of the Item to close |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the closed Monitor Item instance. Omit to return promise |
+
+<a name="module_api.Monitor.retrieveEvent"></a>
+
+#### Monitor.retrieveEvent(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an Event or array of Events  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID of the Event to retrieve __(required)__ |
+| [params.resourceId] | <code>string</code> | Event ID. Omit to return all Events for the Asset Manager ID |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an Event or array of Events. Omit to return promise |
+
+<a name="module_api.Monitor.insertEvent"></a>
+
+#### Monitor.insertEvent(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the newly inserted Event  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID to insert to |
+| params.event | <code>Event</code> | Event instance or object to insert |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the inserted Event. Omit to return promise |
+
+<a name="module_api.Monitor.closeEvent"></a>
+
+#### Monitor.closeEvent(params, callback) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the closed Event  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID of the Event to close |
+| params.resourceId | <code>string</code> | Event ID to close |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the closed Event. Omit to return promise |
 
 <a name="module_api.Netting"></a>
 
@@ -1142,6 +1188,7 @@ Search for Transaction with specified fields
     * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
     * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Relationships.retrieve"></a>
 
@@ -1216,6 +1263,23 @@ Amend an existing Relationship
 | params.AMId | <code>number</code> | Asset Manager ID who owns the Relationship to amend |
 | params.relationship | <code>Relationship</code> | Amended Relationship instance |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the amended Relationship instance. Omit to return Promise |
+
+<a name="module_api.Relationships.sendInvitation"></a>
+
+#### Relationships.sendInvitation(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Send invitation to join
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with `true`.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | AMID of company to join |
+| params.toEmail | <code>string</code> | Email address to send to |
+| params.fromEmail | <code>string</code> | Email address sent from |
+| params.companyName | <code>string</code> | Company to Join |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is `true`. |
 
 <a name="module_api.Transactions"></a>
 
@@ -3299,8 +3363,44 @@ Classes for the Monitor Service
 
 
 * [monitor](#module_monitor)
+    * [.Event](#module_monitor.Event) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+        * [new Event(params)](#new_module_monitor.Event_new)
     * [.Item](#module_monitor.Item) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
         * [new Item(params)](#new_module_monitor.Item_new)
+
+<a name="module_monitor.Event"></a>
+
+### monitor.Event ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+Class representing a Monitor Event
+
+**Kind**: static class of [<code>monitor</code>](#module_monitor)  
+**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+<a name="new_module_monitor.Event_new"></a>
+
+#### new Event(params)
+Construct a new Monitor Event instance
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | Event creation options: |
+| params.assetManagerId | <code>number</code> | Asset Manager ID of the owner of the Event |
+| params.eventId | <code>string</code> | ID of the Event |
+| params.linkId | <code>string</code> | ID of the relevant resouce based on the `linkSource` (e.g. transactionId, assetId, partyId) |
+| params.linkSource | <code>string</code> | Service that the Event is from.<br /> Available Options: <li>Transactions</li> <li>Assets</li> <li>Parties</li> |
+| params.eventType | <code>string</code> | The Event type.<br /> Available Options: <li>Internal</li> <li>External</li> |
+| params.eventStart | <code>string</code> | Start date and time of the event |
+| params.eventEnd | <code>string</code> | End date and time of the event |
+| params.eventStatus | <code>string</code> | Status of the event.<br /> Available Options: <li>Open</li> <li>Closed</li> |
+| params.title | <code>string</code> | Title of the Event |
+| params.description | <code>string</code> | Description of the Event |
+| params.internalId | <code>number</code> | Internal ID of the Event *(set server side)* |
+| params.clientId | <code>number</code> | Client ID *(set server side)* |
+| [params.createdBy] | <code>string</code> | Who the Event was created by *(set server side)* |
+| [params.createdTime] | <code>string</code> | When the Event was created *(set server side)* |
+| [params.updatedBy] | <code>string</code> | Who the Event was last updated by *(set server side)* |
+| [params.updatedTime] | <code>string</code> | When the Event was last updated *(set server side)* |
+| [params.version] | <code>number</code> | version *(set server side)* |
 
 <a name="module_monitor.Item"></a>
 
@@ -3410,6 +3510,12 @@ Construct a new Asset Manager instance
 | params.partyStatus | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Asset Manager (e.g. 'Active') |
 | params.baseCurrency | <code>string</code> |  | Base Currency of the Asset Manager (e.g. SGD, USD) |
 | params.description | <code>string</code> |  | Description of the Asset Manager |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | params.addresses | <code>object</code> |  | Object of Addresses associated with this Asset Manager |
 | params.emails | <code>object</code> |  | Object of Emails associated with this Asset Manager |
 | params.references | <code>object</code> |  | Object of References associated with this Asset Manager |
@@ -3475,6 +3581,12 @@ Construct a new Broker instance
 | [params.partyStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Broker |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Broker (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Broker |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Broker |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Broker |
 | [params.references] | <code>object</code> |  | Object of References associated with the Broker |
@@ -3596,6 +3708,12 @@ Construct a new Company instance
 | [params.partyClass] | <code>string</code> | <code>&quot;Company&quot;</code> | Class of the Company (a subclass of Company may define its own partyClass) |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Company (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Company |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Company |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Company |
 | [params.references] | <code>object</code> |  | Object of References associated with the Company |
@@ -3661,6 +3779,12 @@ Construct a new Exchange instance
 | [params.partyStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Exchange |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Exchange (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Exchange |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Exchange |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Exchange |
 | [params.references] | <code>object</code> |  | Object of References associated with the Exchange |
@@ -3726,6 +3850,12 @@ Construct a new Fund instance
 | [params.partyStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Fund |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Fund (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Fund |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Fund |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Fund |
 | [params.references] | <code>object</code> |  | Object of References associated with the Fund |
@@ -3861,6 +3991,10 @@ Construct a new Individual instance
 | params.givenNames | <code>string</code> |  | Individual's given names |
 | params.surname | <code>string</code> |  | Individual's surname |
 | params.dateOfBirth | <code>string</code> |  | Individual's date of birth (YYYY-MM-DD) |
+| [params.title] | <code>string</code> |  | Individual's title (e.g. Mr, Mrs, Ms, etc.) |
+| [params.department] | <code>string</code> |  | Individual's department |
+| [params.role] | <code>string</code> |  | Individual's role |
+| [params.contactNumber] | <code>string</code> |  | Individual's contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Individual |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Individual |
 | [params.references] | <code>object</code> |  | Object of References associated with the Individual |

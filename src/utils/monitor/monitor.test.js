@@ -1,6 +1,6 @@
 import * as api from './monitor'
 import * as network from '../network'
-import { Item } from '../../monitor'
+import { Item, Event } from '../../monitor'
 
 network.retrieveData = jest.fn()
 network.insertData = jest.fn()
@@ -9,6 +9,7 @@ network.searchData = jest.fn()
 network.deleteData = jest.fn()
 
 const testItem = { assetManagerId: 1 }
+const testEvent = { assetManagerId: 1 }
 
 describe('retrieveItems', () => {
   it('should return a promise if no callback is supplied', () => {
@@ -177,6 +178,126 @@ describe('closeItem', () => {
     api.closeItem({ AMId: 1, resourceId: 'testID' })
       .then(result => {
         expect(result).toEqual(expectedResult)
+      })
+  })
+})
+
+describe('retrieveEvent', () => {
+  it('calls retrieveData with correct params', () => {
+    network.retrieveData.mockImplementation(() => Promise.resolve({ data: testEvent }))
+    let result = api.retrieveEvent({ AMId: 1, resourceId: 'testEventId' })
+    expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'monitorEvents', AMId: 1, resourceId: 'testEventId' })
+  })
+
+  it('returns a promise if no callback supplied', () => {
+    network.retrieveData.mockImplementation(() => Promise.resolve({ data: testEvent }))
+    let result = api.retrieveEvent({ AMId: 1, resourceId: 'testEventId' })
+    expect(result).toBeInstanceOf(Promise)
+  })
+
+  it('calls back if supplied', () => {
+    const expectedResult = new Event(testEvent)
+    network.retrieveData.mockImplementation(() => Promise.resolve({ data: testEvent }))
+    api.retrieveEvent({ AMId: 1 }, (error, result) => {
+      expect(result).toBeDefined()
+      expect(result).toEqual(expectedResult)
+    })
+  })
+
+  it('callback error', () => {
+    network.retrieveData.mockImplementation(() => Promise.reject('testError'))
+    api.retrieveEvent({ AMId: 1, resourceId: 'testEventID' }, (error, result) => {
+      expect(error).toBeDefined()
+      expect(error).toEqual('testError')
+    })
+  })
+
+  it('returns an Event instance', () => {
+    const expectedResult = new Event(testEvent)
+    network.retrieveData.mockImplementation(() => Promise.resolve({ data: testEvent }))
+    return api.retrieveEvent({ AMId: 1, resouceId: 'testID' })
+      .then(res => {
+        expect(res).toEqual(expectedResult)
+      })
+  })
+})
+
+describe('insertEvent', () => {
+  it('calls insertData with correct params', () => {
+    network.insertData.mockImplementation(() => Promise.resolve(testEvent))
+    let result = api.insertEvent({ AMId: 1, event: testEvent })
+    expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'monitorEvents', AMId: 1, data: testEvent })
+  })
+
+  it('returns a promise if no callback supplied', () => {
+    network.insertData.mockImplementation(() => Promise.resolve(testEvent))
+    let result = api.insertEvent({ AMId: 1 })
+    expect(result).toBeInstanceOf(Promise)
+  })
+
+  it('calls back if supplied', () => {
+    const expectedResult = new Event(testEvent)
+    network.insertData.mockImplementation(() => Promise.resolve(testEvent))
+    api.insertEvent({ AMId: 1 }, (error, result) => {
+      expect(result).toBeDefined()
+      expect(result).toEqual(expectedResult)
+    })
+  })
+
+  it('callback error', () => {
+    network.insertData.mockImplementation(() => Promise.reject('testError'))
+    api.insertEvent({ AMId: 1 }, (error, result) => {
+      expect(error).toBeDefined()
+      expect(error).toEqual('testError')
+    })
+  })
+
+  it('returns an Event instance', () => {
+    const expectedResult = new Event(testEvent)
+    network.insertData.mockImplementation(() => Promise.resolve(testEvent))
+    return api.insertEvent({ AMId: 1 })
+      .then(res => {
+        expect(res).toEqual(expectedResult)
+      })
+  })
+})
+
+describe('closeEvent', () => {
+  it('calls deleteData with correct params', () => {
+    network.deleteData.mockImplementation(() => Promise.resolve(testEvent))
+    let result = api.closeEvent({ AMId: 1, resourceId: 'testEventId' })
+    expect(network.deleteData).toHaveBeenCalledWith({ AMaaSClass: 'monitorEvents', AMId: 1, resourceId: 'testEventId' })
+  })
+
+  it('returns a promise if no callback supplied', () => {
+    network.deleteData.mockImplementation(() => Promise.resolve(testEvent))
+    let result = api.closeEvent({ AMId: 1, resourceId: 'testEventId' })
+    expect(result).toBeInstanceOf(Promise)
+  })
+
+  it('calls back if supplied', () => {
+    const expectedResult = new Event(testEvent)
+    network.deleteData.mockImplementation(() => Promise.resolve(testEvent))
+    api.closeEvent({ AMId: 1 }, (error, result) => {
+      expect(result).toBeDefined()
+      expect(result).toEqual(expectedResult)
+    })
+  })
+
+  it('callback error', () => {
+    network.deleteData.mockImplementation(() => Promise.reject('testError'))
+    api.closeEvent({ AMId: 1, resourceId: 'testEventID' }, (error, result) => {
+      expect(error).toBeDefined()
+      expect(error).toEqual('testError')
+    })
+  })
+
+  it('returns an Event instance', () => {
+    const expectedResult = new Event(testEvent)
+    network.deleteData.mockImplementation(() => Promise.resolve(testEvent))
+    return api.closeEvent({ AMId: 1, resouceId: 'testID' })
+      .then(res => {
+        expect(res).toEqual(expectedResult)
       })
   })
 })

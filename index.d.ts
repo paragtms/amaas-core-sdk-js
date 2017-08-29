@@ -316,6 +316,26 @@ declare module '@amaas/amaas-core-sdk-js' {
     version?: number
   }
 
+  export interface IMonitorEvent {
+    assetManagerId: number
+    eventId?: string
+    linkId?: string
+    linkSource?: string
+    eventType?: 'Internal' | 'External'
+    eventStart?: string
+    eventEnd?: string
+    eventStatus?: 'Open' | 'Closed'
+    title?: string
+    description?: string
+    internalId?: number
+    clientId?: number
+    createdBy?: string
+    createdTime?: string
+    updatedBy?: string
+    updatedTime?: string
+    version?: number
+  }
+
   // Transactions
   export interface ITransaction {
     assetManagerId: number
@@ -411,9 +431,12 @@ declare module '@amaas/amaas-core-sdk-js' {
       function resubmitItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
       function searchItems({ AMId, query }: { AMId?: number, query?: { assetManagerIds?: number | number[], itemIds?: string | string[], assetBookIds?: string | string[], itemStatuses?: string | string[], itemClasses?: string | string[], itemTypes?: string | string[], itemLevels?: string | string[], itemSources?: string | string[], transactionIds?: string | string[], assetIds?: string | string[] } }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
       function closeItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
+      function retrieveEvent({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<monitor.Event | monitor.Event[]> | void
+      function insertEvent({ AMId, event }: { AMId: number, event: monitor.Event | IMonitorEvent }, callback?: Function): Promise<monitor.Event> | void
+      function closeEvent({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Event> | void
     }
     namespace Parties {
-      function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<parties.PartiesClassType[]> | void
+      function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<parties.PartiesClassType | parties.PartiesClassType[]> | void
       function insert({ AMId, party }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType }, callback?: Function): Promise<parties.PartiesClassType> | void
       function amend({ AMId, party, resourceId }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType, resourceId: string }): Promise<parties.PartiesClassType> | void
       function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
@@ -915,6 +938,27 @@ declare module '@amaas/amaas-core-sdk-js' {
       updatedTime?: string
       version?: number
       constructor(props: IMonitorItem)
+    }
+
+    class Event {
+      assetManagerId: number
+      eventId?: string
+      linkId?: string
+      linkSource?: string
+      eventType?: 'Internal' | 'External'
+      eventStart?: string
+      eventEnd?: string
+      eventStatus?: 'Open' | 'Closed'
+      title?: string
+      description?: string
+      internalId?: number
+      clientId?: number
+      createdBy?: string
+      createdTime?: string
+      updatedBy?: string
+      updatedTime?: string
+      version?: number
+      constructor(props: IMonitorEvent)
     }
   }
 
