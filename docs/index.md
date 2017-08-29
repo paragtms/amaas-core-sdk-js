@@ -179,6 +179,9 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
         * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.approveRel(params, [callback])](#module_api.Relationships.approveRel) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> \| <code>null</code>
         * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Transactions](#module_api.Transactions) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Transactions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
@@ -1188,6 +1191,9 @@ Search for Transaction with specified fields
     * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
     * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.approveRel(params, [callback])](#module_api.Relationships.approveRel) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> \| <code>null</code>
     * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Relationships.retrieve"></a>
@@ -1263,6 +1269,54 @@ Amend an existing Relationship
 | params.AMId | <code>number</code> | Asset Manager ID who owns the Relationship to amend |
 | params.relationship | <code>Relationship</code> | Amended Relationship instance |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the amended Relationship instance. Omit to return Promise |
+
+<a name="module_api.Relationships.approveRel"></a>
+
+#### Relationships.approveRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Approve a Relationship
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the approved Relationship instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Relationship to approve |
+| params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
+| params.relationshipType | <code>string</code> | Relationship type being approved |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the approved Relationship. Omit to return Promise |
+
+<a name="module_api.Relationships.rejectRel"></a>
+
+#### Relationships.rejectRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Reject a Relationship
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the rejected Relationship instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Relationship to reject |
+| params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
+| params.relationshipType | <code>string</code> | Relationship type being rejected |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the rejected Relationship. Omit to return Promise |
+
+<a name="module_api.Relationships.revokeRel"></a>
+
+#### Relationships.revokeRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Revoke a Relationship
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the revoked Relationship instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Relationship to revoke |
+| params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
+| params.relationshipType | <code>string</code> | Relationship type being revoked |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the revoked Relationship. Omit to return Promise |
 
 <a name="module_api.Relationships.sendInvitation"></a>
 

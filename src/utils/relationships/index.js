@@ -3,6 +3,6 @@
  * @memberof module:api
  */
 
-import { retrieve, requestRelationship, getRelatedAMID, insert, amend, sendInvitation } from './relationships'
+import { retrieve, requestRelationship, getRelatedAMID, insert, amend, sendInvitation, approveRel, rejectRel, revokeRel } from './relationships'
 
-export { retrieve, requestRelationship, getRelatedAMID, insert, amend, sendInvitation }
+export { retrieve, requestRelationship, getRelatedAMID, insert, amend, sendInvitation, approveRel, rejectRel, revokeRel }

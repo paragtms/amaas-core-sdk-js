@@ -1,4 +1,4 @@
-import { retrieveData, putData, insertData } from '../network'
+import { retrieveData, patchData, putData, insertData } from '../network'
 import { Relationship } from '../../relationships'
 
 /**
@@ -156,6 +156,102 @@ export function amend({ AMId, relationship }, callback) {
     data
   }
   let promise = putData(params).then(result => {
+    result = _parseRelationship(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Approve a Relationship
+ * @function approveRel
+ * @memberof module:api.Relationships
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the Relationship to approve
+ * @param {string} params.relatedId - ID of the Asset Manager ID related to `params.AMId`
+ * @param {string} params.relationshipType - Relationship type being approved
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the approved Relationship. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the approved Relationship instance
+ */
+export function approveRel({ AMId, relatedId, relationshipType }, callback) {
+  const data = { relatedId, relationshipType, relationshipStatus: 'Active' }
+  const params = {
+    AMaaSClass: 'relationships',
+    AMId,
+    data
+  }
+  let promise = patchData(params).then(result => {
+    result = _parseRelationship(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Reject a Relationship
+ * @function rejectRel
+ * @memberof module:api.Relationships
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the Relationship to reject
+ * @param {string} params.relatedId - ID of the Asset Manager ID related to `params.AMId`
+ * @param {string} params.relationshipType - Relationship type being rejected
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the rejected Relationship. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the rejected Relationship instance
+ */
+export function rejectRel({ AMId, relatedId, relationshipType }, callback) {
+  const data = { relatedId, relationshipType, relationshipStatus: 'Inactive' }
+  const params = {
+    AMaaSClass: 'relationships',
+    AMId,
+    data
+  }
+  let promise = patchData(params).then(result => {
+    result = _parseRelationship(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Revoke a Relationship
+ * @function revokeRel
+ * @memberof module:api.Relationships
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the Relationship to revoke
+ * @param {string} params.relatedId - ID of the Asset Manager ID related to `params.AMId`
+ * @param {string} params.relationshipType - Relationship type being revoked
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the revoked Relationship. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the revoked Relationship instance
+ */
+export function revokeRel({ AMId, relatedId, relationshipType }, callback) {
+  const data = { relatedId, relationshipType, relationshipStatus: 'Inactive' }
+  const params = {
+    AMaaSClass: 'relationships',
+    AMId,
+    data
+  }
+  let promise = patchData(params).then(result => {
     result = _parseRelationship(result)
     if (typeof callback === 'function') {
       callback(null, result)
