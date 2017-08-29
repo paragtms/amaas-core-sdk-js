@@ -154,6 +154,9 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> \| <code>null</code>
         * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> \| <code>null</code>
         * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Netting](#module_api.Netting) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Netting.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.send(params, [callback])](#module_api.Netting.send) ⇒ <code>Promise</code> \| <code>null</code>
@@ -827,6 +830,9 @@ Make request and search data
     * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> \| <code>null</code>
     * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> \| <code>null</code>
     * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Monitor.retrieveItem"></a>
 
@@ -899,9 +905,48 @@ Close a monitor item
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.assetManagerId | <code>number</code> | Asset Manager ID of the Item to close |
+| params.AMId | <code>number</code> | Asset Manager ID of the Item to close |
 | params.resourceId | <code>string</code> | itemId of the Item to close |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the closed Monitor Item instance. Omit to return promise |
+
+<a name="module_api.Monitor.retrieveEvent"></a>
+
+#### Monitor.retrieveEvent(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an Event or array of Events  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID of the Event to retrieve __(required)__ |
+| [params.resourceId] | <code>string</code> | Event ID. Omit to return all Events for the Asset Manager ID |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an Event or array of Events. Omit to return promise |
+
+<a name="module_api.Monitor.insertEvent"></a>
+
+#### Monitor.insertEvent(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the newly inserted Event  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID to insert to |
+| params.event | <code>Event</code> | Event instance or object to insert |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the inserted Event. Omit to return promise |
+
+<a name="module_api.Monitor.closeEvent"></a>
+
+#### Monitor.closeEvent(params, callback) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the closed Event  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID of the Event to close |
+| params.resourceId | <code>string</code> | Event ID to close |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the closed Event. Omit to return promise |
 
 <a name="module_api.Netting"></a>
 
