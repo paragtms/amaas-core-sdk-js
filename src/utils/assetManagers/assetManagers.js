@@ -233,7 +233,11 @@ export function checkDomains({ domain }, callback) {
   }
   let promise = retrieveData(params).then(result => {
     if (result) {
-      result = _parseDomain(result)
+      if (Array.isArray(result)) {
+        result = result.map(dom => _parseDomain(result))
+      } else {
+        result = _parseDomain(result)
+      }
     }
     if (typeof callback === 'function') {
       callback(null, result)

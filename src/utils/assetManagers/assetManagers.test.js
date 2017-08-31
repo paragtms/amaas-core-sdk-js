@@ -1,6 +1,7 @@
 import { _parseAM, getAssetManager } from './assetManagers.js'
 import { retrieve, insert, amend, deactivate, reactivate, searchDomains, checkDomains, insertDomain, retrieveEODBooks, getCredentialsForPubSub } from './assetManagers.js'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
+import Domain from '../../assetManagers/Domain/domain'
 import * as api from '../../exports/api'
 import * as network from '../network'
 
@@ -258,14 +259,15 @@ describe('utils/assetManagers', () => {
         domain: 'testDomain.com',
         isPrimary: true
       }
-      network.retrieveData.mockImplementation(() => Promise.resolve(data))
     })
     test('with promise', () => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(data))
       let promise = checkDomains({ domain: 'testDomain.com' })
       expect(promise).toBeInstanceOf(Promise)
     })
     it('calls retrieveData with correct params', done => {
-      checkDomains({ domains: 'testDomain.com' }, (error, result) => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(data))
+      checkDomains({ domain: 'testDomain.com' }, (error, result) => {
         expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', query: { domains: ['testDomain.com'], isPrimary: true } })
         done()
       })
