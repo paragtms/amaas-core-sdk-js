@@ -216,17 +216,17 @@ export function makeRequest({ method, url, data, query, stage, credPath }) {
     .then(res => {
       switch (method) {
         case 'GET':
-          return request.get(url).set(setAuthorization(stage), res).query(query)
+          return request.get(url).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         case 'SEARCH':
-          return request.get(url).set(setAuthorization(stage), res).query(data)
+          return request.get(url).set(setAuthorization(stage), res).query({ ...data, camelcase: true })
         case 'POST':
-          return request.post(url).send(data).set(setAuthorization(stage), res).query(query)
+          return request.post(url).send(data).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         case 'PUT':
-          return request.put(url).send(data).set(setAuthorization(stage), res).query({ camelcase: true })
+          return request.put(url).send(data).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         case 'PATCH':
-          return request.patch(url).send(data).set(setAuthorization(stage), res).query({ camelcase: true })
+          return request.patch(url).send(data).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         case 'DELETE':
-          return request.delete(url).set(setAuthorization(stage), res).query({ camelcase: true })
+          return request.delete(url).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         default:
       }
     })
