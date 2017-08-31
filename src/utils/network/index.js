@@ -49,15 +49,11 @@ export function retrieveData({ AMaaSClass, AMId, resourceId, query }, callback) 
     callback(e)
     return
   }
+  let queryParams = {}
   if (typeof query === 'object' && Object.keys(query).length > 0) {
-    for (let q in query) {
-      if (query.hasOwnProperty(q)) {
-        data[q] = query[q].join()
-      }
-    }
+    queryParams = parseQueryParams(query)
   }
-  let promise = utils.makeRequest({ method: 'GET', url, query: { ...data, camelcase: true }, stage })
-  // let promise = request.get(url).set('x-api-key', token).query({ camelcase: true })
+  let promise = utils.makeRequest({ method: 'GET', url, query: queryParams, stage })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
@@ -120,7 +116,6 @@ export function insertData({ AMaaSClass, AMId, resourceId, data, queryParams }, 
     }
   }
   let promise = utils.makeRequest({ method: 'POST', url, data, query, stage })
-  // let promise = request.post(url).send(data).set('x-api-key', token).query({ camelcase: true })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
@@ -158,7 +153,6 @@ export function putData({ AMaaSClass, AMId, resourceId, data }, callback) {
     json: data
   }
   let promise = utils.makeRequest({ method: 'PUT', url, data, stage })
-  // let promise = request.put(url).send(data).set('x-api-key', token).query({ camelcase: true })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
@@ -196,7 +190,6 @@ export function patchData({ AMaaSClass, AMId, resourceId, data }, callback) {
     json: data
   }
   let promise = utils.makeRequest({ method: 'PATCH', url, data, stage })
-  // let promise = request.patch(url).send(data).set('x-api-key', token).query({ camelcase: true })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
@@ -230,7 +223,6 @@ export function deleteData({ AMaaSClass, AMId, resourceId }, callback) {
     return
   }
   let promise = utils.makeRequest({ method: 'DELETE', url, stage })
-  // let promise = request.delete(url).set('x-api-key', token).query({ camelcase: true })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
@@ -268,17 +260,7 @@ export function searchData({ AMaaSClass, AMId, query }, callback) {
     callback(e)
     return
   }
-  let data = { camelcase: true }
-  for (let q in query) {
-    if (query.hasOwnProperty(q)) {
-      let param = query[q]
-      if (Array.isArray(param)) {
-        data[q] = query[q].join()
-      } else {
-        data[q] = `${query[q]}`
-      }
-    }
-  }
+  let data = parseQueryParams(query)
   let promise = utils.makeRequest({ method: 'SEARCH', url, data, stage })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
@@ -293,6 +275,21 @@ export function searchData({ AMaaSClass, AMId, query }, callback) {
       return callback(err)
     }
   })
+}
+
+function parseQueryParams(query) {
+  let data = { camelcase: true }
+  for (let q in query) {
+    if (query.hasOwnProperty(q)) {
+      let param = query[q]
+      if (Array.isArray(param)) {
+        data[q] = query[q].join()
+      } else {
+        data[q] = `${query[q]}`
+      }
+    }
+  }
+  return data
 }
 
 function _networkCallback(error, response, body, callback) {

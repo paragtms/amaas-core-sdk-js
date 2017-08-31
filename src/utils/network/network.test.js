@@ -19,7 +19,8 @@ describe('retrieveData', () => {
   })
   const testParams = {
     AMaaSClass: 'book',
-    AMId: 1234
+    AMId: 1234,
+    query: { domain: 'domain', domains: ['domain1', 'domain2'] }
   }
   it('calls buildURL with correct params', callback => {
     api.config({ stage: 'prod', apiVersion: 'v2.0' })
@@ -30,7 +31,7 @@ describe('retrieveData', () => {
   })
   it('calls makeRequest with correct params', callback => {
     network.retrieveData(testParams, (error, result) => {
-      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'GET', url: 'testURL', query: { camelcase: true }, stage: 'prod' })
+      expect(utils.makeRequest).toHaveBeenCalledWith({ method: 'GET', url: 'testURL', query: { camelcase: true, domain: 'domain', domains: 'domain1,domain2' }, stage: 'prod' })
       callback()
     })
   })
