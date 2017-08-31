@@ -272,6 +272,13 @@ describe('utils/assetManagers', () => {
         done()
       })
     })
+    it('returns an array', done => {
+      network.retrieveData.mockImplementation(() => Promise.resolve([data]))
+      checkDomains({ domain: 'testDomain.com' }, (error, result) => {
+        expect(result).toEqual([new Domain(data)])
+        done()
+      })
+    })
   })
 
   describe('insertDomain', () => {
