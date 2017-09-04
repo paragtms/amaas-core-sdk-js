@@ -9,7 +9,7 @@ api.config({
   stage: 'staging'
 })
 
-describe.only('retrieveData', () => {
+describe('retrieveData', () => {
   beforeAll(() => {
     utils.buildURL.mockImplementation(() => 'testURL')
     utils.makeRequest.mockImplementation(() => Promise.resolve({ body: 'testBody' }))
