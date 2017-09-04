@@ -45,6 +45,15 @@ describe('utils/fundamentals', () => {
         done()
       })
     })
+    it('calls searchData with the correct parameters', done => {
+      fundamentals.countries({}, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({
+          AMaaSClass: 'fundamentalCountries',
+          query: {}
+        })
+        done()
+      })
+    })
   })
 
   describe('calcBusinessDate', () => {

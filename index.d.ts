@@ -443,7 +443,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
     }
     namespace Fundamentals {
-      function countries({ code }: { code: string }, callback?: Function): Promise<{ [key: string]: string | number }> | void
+      function countries({ code }: { code?: string }, callback?: Function): Promise<{ [key: string]: string | number }> | void
       function calcBusinessDate({ date, codes, offset, invalidDates }: { date: string, codes: string | string[], offset: number, invalidDates: any }, callback?: Function): Promise<{ businessDate: string }> | void
       function processDateInfo({ date, codes }: { date: string, codes: string | string[] }, callback?: Function): Promise<{ [countryCode: string]: any }> | void
       function holidays({ codes, years }: { codes: string | string[], years: string | string[] }, callback?: Function): Promise<{ [countryCode: string]: { calendar: string, holidays: any[], weekends: number[] } }> | void
