@@ -126,6 +126,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
         * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
@@ -421,6 +422,7 @@ Retrieve temporary credentials for pub/sub connection
     * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
@@ -501,6 +503,19 @@ Search for Assets
 | [params.AMId] | <code>number</code> | Asset Manager ID of the Assets to search over. If omitted, you must send assetManagerIds in the search query with at least one value |
 | params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>assetStatuses</li> <li>assetIds</li> <li>referenceTypes</li> <li>referenceValues</li> <li>assetIssuerIds</li> <li>assetClasses</li> <li>assetTypes</li> e.g. `{ assetManagerIds: 1, assetClasses: ['ForeignExchange', 'Equity'] }` |
 | callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance |
+
+<a name="module_api.Assets.fuzzySearch"></a>
+
+#### Assets.fuzzySearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Fuzzy Search on assets
+
+**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the above object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>object</code> | Query object of the form . |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> ``` { _index: <string>, _type: <string>, _id: <string>, _score: <number>, _source: {  assetType: <string>,  assetId: <string>,  description: <string>,  assetClass: <string>,  displayName: <string>,  assetManagerId: <string>,  ticker: <string> } } ``` |
 
 <a name="module_api.Assets.fieldsSearch"></a>
 
