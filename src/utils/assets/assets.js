@@ -245,7 +245,7 @@ export function fuzzySearch({ AMId, query = { fuzzy: true } }, callback) {
  */
 export function fieldsSearch(query , callback) { 
   if (!query.assetManagerIds) {
-    throw new Error('You must specificy at least one Asset Manager ID')
+    throw new Error('You must specify at least one Asset Manager ID')
   }
   const params = {
     AMaaSClass: 'assets',
