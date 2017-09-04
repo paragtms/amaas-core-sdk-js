@@ -1,19 +1,32 @@
 import request from 'superagent'
-import { endpoint, userPoolId, clientAppId } from '../../config.js'
+import { endpoint, userPoolConfig } from '../../config.js'
 import fs from 'fs'
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js'
 import expandTilde from 'expand-tilde'
 
-const userPool = new CognitoUserPool({
-  UserPoolId: userPoolId,
-  ClientId: clientAppId
+export function poolConfig({ stage }) {
+  switch (stage) {
+    case 'dev':
+      return userPoolConfig.dev
+    case 'staging':
+      return userPoolConfig.staging
+    case 'prod':
+    default:
+      throw new Error('unavailable config')
+  }
+}
+
+const userPool = (stage) => new CognitoUserPool({
+  UserPoolId: poolConfig(stage).userPoolId,
+  ClientId: poolConfig(stage).clientAppId
 })
 
 export function getEndpoint({ stage, apiVersion }) {
   switch (stage) {
     case 'dev':
-    case 'staging':
       return `${endpoint.dev}/${apiVersion || 'v1.0'}`
+    case 'staging':
+      return `${endpoint.staging}/${apiVersion || 'v1.0'}`
     case 'prod':
       return `${endpoint.prod}/${apiVersion || 'sg1.0'}`
     default:
@@ -30,7 +43,7 @@ function isNode() {
   }
 }
 
-export function authenticate(credPath) {
+export function authenticate(stage, credPath) {
   let injectedResolve
   let injectedReject
   return new Promise((resolve, reject) => {
@@ -55,7 +68,7 @@ export function authenticate(credPath) {
       })
       const cognitoUser = new CognitoUser({
         Username,
-        Pool: userPool
+        Pool: userPool(stage)
       })
       console.log('Starting authentication...')
       cognitoUser.authenticateUser(authenticationDetails, {
@@ -80,11 +93,11 @@ export function getToken(stage, credPath) {
       case 'dev':
       case 'staging':
       case 'prod':
-        const cognitoUser = userPool.getCurrentUser()
+        const cognitoUser = userPool(stage).getCurrentUser()
         if (!cognitoUser) {
           if (isNode()) {
             console.warn('No user in storage, attempting to authenticate...')
-            authenticate(credPath)
+            authenticate(stage, credPath)
               .then(res => injectedResolve(res))
               .catch(err => injectedReject(err))
           } else {
@@ -98,7 +111,7 @@ export function getToken(stage, credPath) {
             } else {
               if (isNode()) {
                 console.warn('getSession failure, attempting to authenticate')
-                  authenticate(credPath)
+                  authenticate(stage, credPath)
                   .then(res => injectedResolve(res))
                   .catch(err => injectedReject(err))
               } else {

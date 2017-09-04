@@ -233,6 +233,28 @@ declare module '@amaas/amaas-core-sdk-js' {
     legs?: any[]
   }
 
+  export interface IFuzzySearchResult {
+    total: number
+    max_score: number
+    hits: IFuzzyHit[]
+  }
+
+  export interface IFuzzyHit {
+    _index: string
+    _type: string
+    _id: string
+    _score: number
+    _source: {
+      assetType?: string,
+      assetId?: string
+      description?: string
+      assetClass?: string
+      displayName?: string
+      assetManagerId?: string
+      ticker?: string
+    }
+  }
+
   // Parties
   export interface IParty {
     assetManagerId: number
@@ -407,6 +429,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function amend({ AMId, asset, resourceId }: { AMId: number, asset: assets.AssetClassTypes | assets.IAssetTypes, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: { [keyName: string]: any }, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function search({ AMId, query }: { AMId: number, query?: { clientIds?: string | number | any[], assetStatuses?: string | string[], assetIds?: string | string[], referenceTypes?: string | string[], referenceValues?: string | string[], assetIssuerIds?: string | number | any[], assetClasses?: string | string[], assetTypes?: string | string[] } }, callback?: Function): Promise<assets.AssetClassTypes[]> | void
+      function fuzzySearch({ AMId, query }: { AMId: number, query: any }, callback?: Function): Promise<IFuzzySearchResult> | void
       function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function fieldSearch(query: { assetManagerIds: number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
@@ -420,7 +443,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
     }
     namespace Fundamentals {
-      function countries({ code }: { code: string }, callback?: Function): Promise<{ [key: string]: string | number }> | void
+      function countries({ code }: { code?: string }, callback?: Function): Promise<{ [key: string]: string | number }> | void
       function calcBusinessDate({ date, codes, offset, invalidDates }: { date: string, codes: string | string[], offset: number, invalidDates: any }, callback?: Function): Promise<{ businessDate: string }> | void
       function processDateInfo({ date, codes }: { date: string, codes: string | string[] }, callback?: Function): Promise<{ [countryCode: string]: any }> | void
       function holidays({ codes, years }: { codes: string | string[], years: string | string[] }, callback?: Function): Promise<{ [countryCode: string]: { calendar: string, holidays: any[], weekends: number[] } }> | void
