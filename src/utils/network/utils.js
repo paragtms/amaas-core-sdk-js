@@ -4,7 +4,7 @@ import fs from 'fs'
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js'
 import expandTilde from 'expand-tilde'
 
-export function poolConfig({ stage }) {
+export function poolConfig(stage) {
   switch (stage) {
     case 'dev':
       return userPoolConfig.dev
