@@ -245,13 +245,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     _id: string
     _score: number
     _source: {
-      assetType?: string,
-      assetId?: string
-      description?: string
-      assetClass?: string
-      displayName?: string
-      assetManagerId?: string
-      ticker?: string
+      [field: string]: any
     }
   }
 

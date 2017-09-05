@@ -515,7 +515,7 @@ Fuzzy Search on assets
 | Param | Type | Description |
 | --- | --- | --- |
 | query | <code>object</code> | Query object of the form . |
-| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> ``` { _index: <string>, _type: <string>, _id: <string>, _score: <number>, _source: {  assetType: <string>,  assetId: <string>,  description: <string>,  assetClass: <string>,  displayName: <string>,  assetManagerId: <string>,  ticker: <string> } } ``` |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> <pre><code>  {  _index: string,  _type: string,  _id: string,  _score: number,  _sourc:{   assetType: string,   assetId: string,   description: string,   assetClass: string,   displayName: string,   assetManagerId: string,   ticker: strin>  }  } </code></pre> |
 
 <a name="module_api.Assets.fieldsSearch"></a>
 
