@@ -6,7 +6,7 @@ const endpoint = {
 
 const userPoolConfig = {
   dev: { userPoolId: 'us-west-2_wKa82vECF', clientAppId: '5mrqm1sjmfp80k8foasq83rb9k' },
-  staging: { userPoolId: 'ap-southeast-1_k67J4gGnb', clientAppId: '2jvrtlmj6sfdb1o7j65dgkqmgt' },
+  staging: { userPoolId: 'ap-southeast-1_zzL5MjFxg', clientAppId: 'irjfbh2d4g5dfs1ni9blncnso' },
   prod: {}
 }
 
