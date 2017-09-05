@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, _parseParty, insert, partialAmend, amend, search, deactivate, reactivate } from './parties.js'
+import { retrieve, _parseParty, insert, partialAmend, amend, search, fuzzySearch, deactivate, reactivate } from './parties.js'
 import Party from '../../parties/Party/party.js'
 import Individual from '../../parties/Individual/individual'
 import Broker from '../../parties/Broker/broker.js'
@@ -23,6 +23,45 @@ api.config({
 const mockParty = {
   assetManagerId: 1,
   partyType: 'Individual'
+}
+
+let mockFuzzyResult = {
+  total: 25650,
+  max_score: 1,
+  hits: [
+    {
+      _index: "parties",
+      _type: "10",
+      _id: "001114727",
+      _score: 1,
+      _source: {
+        partyType: "Broker",
+        legalName: "Saxo Capital Markets Pte. Ltd.",
+        description: "Saxo Capital Markets Singapore",
+        assetManagerId: 0,
+        displayName: "Saxo Singapore",
+        partyId: "52990041GUUCABWVC636",
+        partyClass: "Company",
+        AMaaS: "52990041GUUCABWVC636"
+      }
+    },
+    {
+      _index: "parties",
+      _type: "10",
+      _id: "001114999",
+      _score: 1,
+      _source: {
+        partyType: "Exchange",
+        legalName: "",
+        description: "SINGAPORE COMMODITY EXCHANGE",
+        assetManagerId: 0,
+        displayName: "",
+        partyId: "XSCE",
+        partyClass: "Company",
+        AMaaS: "XSCE"
+      }
+    }
+  ]
 }
 
 describe('retrieve', () => {
@@ -100,6 +139,26 @@ describe('search', () => {
   it('calls searchData with the correct params', done => {
     search({ AMId: 1, query: { queryKey: ['queryValues'] } }, (error, result) => {
       expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 1, query: { queryKey: ['queryValues'] } })
+      done()
+    })
+  })
+})
+
+describe('fuzzySearch', () => {
+  beforeAll(() => {
+    network.retrieveData.mockImplementation(() => Promise.resolve(mockFuzzyResult))
+  })
+  test('with promise', () => {
+    let promise = fuzzySearch({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls retrieveData with the correct params', done => {
+    const params = {
+      AMId: 1,
+      query: { q: 'AGMI', fields: ['ticker', 'asset'], includeAdditional: [1, 10] }
+    }
+    fuzzySearch(params, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'parties', AMId: 'search', resourceId: 1, query: { q: 'AGMI', fields: ['ticker', 'asset'], includeAdditional: [1, 10], fuzzy: true } })
       done()
     })
   })

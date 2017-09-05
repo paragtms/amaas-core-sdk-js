@@ -167,6 +167,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.amend(params, [callback])](#module_api.Parties.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.partialAmend(params, [callback])](#module_api.Parties.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, [callback])](#module_api.Parties.search) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fuzzySearch(query, callback)](#module_api.Parties.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.Parties.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.Parties.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Positions](#module_api.Positions) : <code>object</code>
@@ -1019,6 +1020,7 @@ Send Transactions to Net
     * [.amend(params, [callback])](#module_api.Parties.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.partialAmend(params, [callback])](#module_api.Parties.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, [callback])](#module_api.Parties.search) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fuzzySearch(query, callback)](#module_api.Parties.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.Parties.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.Parties.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
 
@@ -1098,6 +1100,19 @@ Search for Parties
 | [params.AMId] | <code>number</code> | Asset Manager of the Parties to search over. If omitted you must pass assetManagerIds in the query |
 | params.query | <code>object</code> | Search parameters of the form: { `key`: `value` | `[values]` }<br /> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>clientIds</li> <li>partyStatuses</li> <li>partyIds</li> <li>partyClasses</li> <li>partyTypes</li> e.g. `{ assetManagerIds: 1, partyTypes: ['Individual', 'Fund'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Parties or a single Party instance. Omit to return promise |
+
+<a name="module_api.Parties.fuzzySearch"></a>
+
+#### Parties.fuzzySearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Fuzzy Search on parties
+
+**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the above object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>object</code> | Query object of the form . |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> <pre><code> { _index: string, _type: string, _id: string, _score: number, _source:{  partyType: string  legalName: string  description: string  assetManagerId: number  displayName: string  partyId: string  partyClass: string  AMaaS: string } } </code></pre> |
 
 <a name="module_api.Parties.deactivate"></a>
 
