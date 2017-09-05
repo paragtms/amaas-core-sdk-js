@@ -196,21 +196,24 @@ export function search({ AMId, query }, callback) {
  * @static
  * @param {object} query - Query object of the form .
  * @param {function} callback - Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br />
- * ```
- * { _index: <string>,
- * _type: <string>,
- * _id: <string>,
- * _score: <number>,
- * _source: {
- *  assetType: <string>,
- *  assetId: <string>,
- *  description: <string>,
- *  assetClass: <string>,
- *  displayName: <string>,
- *  assetManagerId: <string>,
- *  ticker: <string>
- * } }
- * ```
+ * 
+ * <pre><code>
+ * {
+ * _index: string,
+ * _type: string,
+ * _id: string,
+ * _score: number,
+ * _source:{
+ *  assetType: string,
+ *  assetId: string,
+ *  description: string,
+ *  assetClass: string,
+ *  displayName: string,
+ *  assetManagerId: string,
+ *  ticker: string
+ * }
+ * }
+ * </code></pre>
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the above object.
  */
 export function fuzzySearch({ AMId, query = { fuzzy: true } }, callback) {
