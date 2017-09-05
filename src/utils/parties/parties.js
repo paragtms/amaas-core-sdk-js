@@ -189,6 +189,54 @@ export function search({ AMId, query }, callback) {
 }
 
 /**
+ * Fuzzy Search on parties
+ * @function fuzzySearch
+ * @memberof module:api.Parties
+ * @static
+ * @param {object} query - Query object of the form .
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br />
+ * 
+ * <pre><code>
+ * {
+ * _index: string,
+ * _type: string,
+ * _id: string,
+ * _score: number,
+ * _source:{
+ *  partyType: string
+ *  legalName: string
+ *  description: string
+ *  assetManagerId: number
+ *  displayName: string
+ *  partyId: string
+ *  partyClass: string
+ *  AMaaS: string
+ * }
+ * }
+ * </code></pre>
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the above object.
+ */
+export function fuzzySearch({ AMId, query = { fuzzy: true } }, callback) {
+  query = { ...query, fuzzy: true }
+  const params = {
+    AMaaSClass: 'parties',
+    AMId: 'search',
+    resourceId: AMId,
+    query
+  }
+  let promise = retrieveData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
  * Deactivate an exising Party. This will set the Party status to 'Inactive'
  * @function deactivate
  * @memberof module:api.Parties
