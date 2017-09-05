@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - Add a `sendInviation()` function to Relationships.
 - Add fields to Individual class *(department, role, contactNumber, title)*.
 - Add fields to Company class *(licenseNumber, licenseType, registrationNumber, assetsUnderManagement, contactNumber, yearOfIncorporation)*.
+- Add fuzzySearch function to Assets.
 
 ### Changed
 - Changed the handling of the retrieve and search functions in api.Monitor to accept an object with shape `{ data: [], totalPages: 1 }`.
