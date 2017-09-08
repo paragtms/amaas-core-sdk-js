@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## (v0.1.3) Unreleased
+## v0.1.3 - 2017-09-08
 ### Added
 - Added CommodityFuture and ForeignExchangeFuture classes.
 - Added getCredentialsForPubSub function to api.AssetManagers.
@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - Add fields to Individual class *(department, role, contactNumber, title)*.
 - Add fields to Company class *(licenseNumber, licenseType, registrationNumber, assetsUnderManagement, contactNumber, yearOfIncorporation)*.
 - Add fuzzySearch function to Assets.
+- Add fuzzySearch function to Parties.
 
 ### Changed
 - Changed the handling of the retrieve and search functions in api.Monitor to accept an object with shape `{ data: [], totalPages: 1 }`.
