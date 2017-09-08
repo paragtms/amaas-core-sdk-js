@@ -13,6 +13,23 @@ AMaaS Core features a secure, encrypted database, which serves as the foundation
 ## Documentation
 [Get the full documentation here.](docs/index.md)
 
+## Versioning
+
+```javascript
+import { api } from '@amaas/amaas-core-sdk-js'
+
+const options = {
+  stage: 'dev' | 'staging' | 'prod',
+  apiVersion: 'v1.0'
+}
+api.config(options)
+```
+Available versions:
+1. Dev and staging
+  * `v1.0`
+2. Prod
+  * `sg1.0`
+
 ## Numbers in the AMaaS Core SDK for JavaScript
 Numbers are handled by the [decimal.js](https://github.com/MikeMcl/decimal.js/) package. All numbers in the classes are stored as Decimal instances. For a full list of functions available on these numbers please refer to the decimal.js documentation.
 

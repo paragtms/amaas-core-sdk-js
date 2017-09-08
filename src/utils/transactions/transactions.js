@@ -148,7 +148,7 @@ export function partialAmend({ changes, AMId, resourceId }, callback) {
  * @static
  * @param {object} params - object of parameters
  * @param {number} [params.AMId] - Asset Manager ID of the Transactions to search over. If omitted you must pass assetManagerIds in the query
- * @param {object} params.query - Search parameters of the form: { `key`: `[values]` }<br />
+ * @param {object} params.query - Search parameters of the form: { `key`: `value` | `[values]` }<br />
  * Available keys are:
  * <li>clientIds</li>
  * <li>transactionStatuses</li>
@@ -166,7 +166,7 @@ export function partialAmend({ changes, AMId, resourceId }, callback) {
  * <li>partyIds</li>
  * <li>referenceTypes</li>
  * <li>referenceValues</li>
- * e.g. `{ assetManagerIds: [1], bookIds: [1, 2, 3] }`
+ * e.g. `{ assetManagerIds: 1, bookIds: [1, 2, 3] }`
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is an array of Transactions or a single Transaction instance. Omit to return Promise
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Transactions or a single Transaction instance
  */
@@ -182,6 +182,37 @@ export function search({ AMId, query }, callback) {
     } else {
       result = _parseTransaction(result)
     }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Search for Transaction with specified fields
+ * @function fieldsSearch
+ * @memberof module:api.Positions
+ * @static
+ * @param {object} query - query object of the form `{ assetManagerIds: number, fields: string[] }`. Any Transaction properties can be passed to `fields`.
+ * Note that you may include additional properties in this object corresponding to the available search keys as defined in the `search` function.
+ * e.g.`{ assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']}`
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is a plain object or array of plain objects. Omit to return Promise
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with a plain object or array of plain objects.
+ */
+export function fieldsSearch(query, callback) {
+  if (!query.assetManagerIds) {
+    throw new Error('You must specify at least one Asset Manager ID')
+  }    
+  const params = {
+    AMaaSClass: 'transactions',
+    query
+  }
+  let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
     }

@@ -1,7 +1,30 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased (v0.1.2)
+## v0.1.3 - 2017-09-08
+### Added
+- Added CommodityFuture and ForeignExchangeFuture classes.
+- Added getCredentialsForPubSub function to api.AssetManagers.
+- Added retrieveItem function for api.Monitor.
+- Added getRelatedAMID function for api.Relationships.
+- Added fieldSearch functions to api.Assets, api.Positions and api.Transactions.
+- Added ForeignExchangeForward class.
+- Added the searchDomains function for generic search on Domains.
+- Add a `sendInviation()` function to Relationships.
+- Add fields to Individual class *(department, role, contactNumber, title)*.
+- Add fields to Company class *(licenseNumber, licenseType, registrationNumber, assetsUnderManagement, contactNumber, yearOfIncorporation)*.
+- Add fuzzySearch function to Assets.
+- Add fuzzySearch function to Parties.
+
+### Changed
+- Changed the handling of the retrieve and search functions in api.Monitor to accept an object with shape `{ data: [], totalPages: 1 }`.
+- Deleted the NonDeliverableForward class (replaced by ForeignExchangeForward).
+- Amend the `api.config` to reflect the changes in the endpoint naming.
+- Amended the searchData function to accept either arrays or non-array types. Non-array types will be cast to strings. Allowing non-array types for convenience and because more single value query params are appearing.
+- Updated the checkDomains function to reflect changes in the API (`domain` is changed to `domains`).
+- Updated the insertDomains function to reflect changes in the API (include `AMId` in the params and eveything else should be in the request body).
+
+## v0.1.2 - 2017-07-31
 ### Added
 - Added accountType field to the AssetManager class.
 - Added a csv parser to convert csv strings into Assets, Books, Parties, Transactions. @JYL123

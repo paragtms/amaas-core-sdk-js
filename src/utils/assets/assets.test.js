@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, insert, amend, partialAmend, search, deactivate, reactivate } from './assets.js'
+import { retrieve, insert, amend, partialAmend, search, fuzzySearch, fieldsSearch, deactivate, reactivate } from './assets.js'
 import Asset from '../../assets/Asset/asset.js'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -20,6 +20,43 @@ let mockAsset = {
   assetType: 'Equity',
   assetManagerId: 1,
   assetId: 'testAssetID'
+}
+
+let mockFuzzyResult = {
+  total: 25650,
+  max_score: 1,
+  hits: [
+    {
+      _index: "assets",
+      _type: "10",
+      _id: "001114727",
+      _score: 1,
+      _source: {
+        assetType: "Equity",
+        assetId: "001114727",
+        description: "ORD NPV",
+        assetClass: "Equity",
+        displayName: "SAP SE",
+        assetManagerId: "10",
+        ticker: "SAP"
+      }
+    },
+    {
+      _index: "assets",
+      _type: "10",
+      _id: "001114999",
+      _score: 1,
+      _source: {
+        assetType: "Equity",
+        assetId: "001114999",
+        description: "NPV",
+        assetClass: "Equity",
+        displayName: "ARCANDOR AG",
+        assetManagerId: "10",
+        ticker: "ARO"
+      }
+    }
+  ]
 }
 
 describe('utils/assets', () => {
@@ -98,6 +135,48 @@ describe('utils/assets', () => {
     it('calls searchData with the correct params', done => {
       search({ AMId: 1, query: { queryKey: ['queryValue'] } }, (error, result) => {
         expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'assets', AMId: 1, query: { queryKey: ['queryValue'] } })
+        done()
+      })
+    })
+  })
+
+  describe('fuzzySearch', () => {
+    beforeAll(() => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(mockFuzzyResult))
+    })
+    test('with promise', () => {
+      let promise = fuzzySearch({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls retrieveData with the correct params', done => {
+      const params = {
+        AMId: 1,
+        query: { q: 'AGMI', fields: ['ticker', 'asset'], includeAdditional: [1, 10] }
+      }
+      fuzzySearch(params, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assets', AMId: 'search', resourceId: 1, query: { q: 'AGMI', fields: ['ticker', 'asset'], includeAdditional: [1, 10], fuzzy: true } })
+        done()
+      })
+    })
+  })
+
+  describe ('fieldsSearch', () => {
+    beforeAll(() => {
+      network.searchData.mockImplementation(() => Promise.resolve(mockAsset))
+    })
+    test('with promise', () => {
+      let promise = search({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('throws if assetManagerIds is not supplied', () => {
+      const willThrow = () => {
+        fieldsSearch({ fields: ['description'] })
+      }
+      expect(willThrow).toThrowError(new Error('You must specify at least one Asset Manager ID'))
+    })
+    it('calls searchData with the correct params', done => {
+      fieldsSearch({ assetManagerIds: [1, 2], assetIds: [1, 2], fields: [ "description", "assetType", "assetManagerId", "assetId" ] }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: "assets", query: { assetManagerIds: [1, 2], assetIds: [1, 2], fields: [ "description", "assetType", "assetManagerId", "assetId" ] } })
         done()
       })
     })

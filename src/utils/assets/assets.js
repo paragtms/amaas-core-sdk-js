@@ -162,7 +162,7 @@ export function partialAmend({ AMId, changes, resourceId }, callback) {
  * <li>assetIssuerIds</li>
  * <li>assetClasses</li>
  * <li>assetTypes</li>
- * e.g. `{ assetManagerIds: [1], assetClasses: ['ForeignExchange', 'Equity'] }`
+ * e.g. `{ assetManagerIds: 1, assetClasses: ['ForeignExchange', 'Equity'] }`
  * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance
  */
@@ -178,6 +178,83 @@ export function search({ AMId, query }, callback) {
     } else {
       result = _parseAsset(result)
     }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Fuzzy Search on assets
+ * @function fuzzySearch
+ * @memberof module:api.Assets
+ * @static
+ * @param {object} query - Query object of the form .
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br />
+ * 
+ * <pre><code>
+ * {
+ * _index: string,
+ * _type: string,
+ * _id: string,
+ * _score: number,
+ * _source:{
+ *  assetType: string,
+ *  assetId: string,
+ *  description: string,
+ *  assetClass: string,
+ *  displayName: string,
+ *  assetManagerId: string,
+ *  ticker: string
+ * }
+ * }
+ * </code></pre>
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the above object.
+ */
+export function fuzzySearch({ AMId, query = { fuzzy: true } }, callback) {
+  query = { ...query, fuzzy: true }
+  const params = {
+    AMaaSClass: 'assets',
+    AMId: 'search',
+    resourceId: AMId,
+    query
+  }
+  let promise = retrieveData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Search for Assets and return specified fields
+ * @function fieldsSearch
+ * @memberof module:api.Assets
+ * @static
+ * @param {object} query - Query object of the form `{ assetManagerIds: number, fields: string[] }`. Any asset property may be specified as a field parameter.
+ * e.g. `{ query: { assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']} }`
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of plain objects or a single plain object
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of plain objects or a single plain object
+ */
+export function fieldsSearch(query , callback) { 
+  if (!query.assetManagerIds) {
+    throw new Error('You must specify at least one Asset Manager ID')
+  }
+  const params = {
+    AMaaSClass: 'assets',
+    query
+  }
+  let promise = searchData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
     }

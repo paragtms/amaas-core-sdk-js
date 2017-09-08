@@ -14,7 +14,7 @@ import { searchData } from '../network'
 export function countries({ code }, callback) {
   const params = {
     AMaaSClass: 'fundamentalCountries',
-    query: {countryCode: [code]}
+    query: code ? { countryCode: [code] }: {}
   }
   //if code is not specified, retun all countries 
   let promise = searchData(params).then(result => {

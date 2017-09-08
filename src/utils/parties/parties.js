@@ -153,7 +153,7 @@ export function partialAmend({ AMId, changes, resourceId }, callback) {
  * @static
  * @param {object} params - object of parameters:
  * @param {number} [params.AMId] - Asset Manager of the Parties to search over. If omitted you must pass assetManagerIds in the query
- * @param {object} params.query - Search parameters of the form: { `key`: `[values]` }<br />
+ * @param {object} params.query - Search parameters of the form: { `key`: `value` | `[values]` }<br />
  * Available keys are:
  * <li>assetManagerIds (required if AMId param is omitted)</li>
  * <li>clientIds</li>
@@ -161,7 +161,7 @@ export function partialAmend({ AMId, changes, resourceId }, callback) {
  * <li>partyIds</li>
  * <li>partyClasses</li>
  * <li>partyTypes</li>
- * e.g. `{ assetManagerIds: [1], partyTypes: ['Individual', 'Fund'] }`
+ * e.g. `{ assetManagerIds: 1, partyTypes: ['Individual', 'Fund'] }`
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is an array of Parties or a single Party instance. Omit to return promise
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Parties or a single Party instance
  */
@@ -177,6 +177,54 @@ export function search({ AMId, query }, callback) {
     } else {
       result = _parseParty(result)
     }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Fuzzy Search on parties
+ * @function fuzzySearch
+ * @memberof module:api.Parties
+ * @static
+ * @param {object} query - Query object of the form .
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br />
+ * 
+ * <pre><code>
+ * {
+ * _index: string,
+ * _type: string,
+ * _id: string,
+ * _score: number,
+ * _source:{
+ *  partyType: string
+ *  legalName: string
+ *  description: string
+ *  assetManagerId: number
+ *  displayName: string
+ *  partyId: string
+ *  partyClass: string
+ *  AMaaS: string
+ * }
+ * }
+ * </code></pre>
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the above object.
+ */
+export function fuzzySearch({ AMId, query = { fuzzy: true } }, callback) {
+  query = { ...query, fuzzy: true }
+  const params = {
+    AMaaSClass: 'parties',
+    AMId: 'search',
+    resourceId: AMId,
+    query
+  }
+  let promise = retrieveData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null, result)
     }

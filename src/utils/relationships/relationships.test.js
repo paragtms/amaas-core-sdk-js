@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, requestRelationship, insert, amend } from './relationships'
+import { retrieve, requestRelationship, getRelatedAMID, insert, amend, sendInvitation, approveRel, rejectRel, revokeRel } from './relationships'
 import Relationship from '../../relationships'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -56,6 +56,22 @@ describe('requestRelationship', () => {
   })
 })
 
+describe('getRelatedAMID', () => {
+  beforeAll(() => {
+    network.insertData.mockImplementation(() => Promise.resolve(mockRel))
+  })
+  test('with promise', () => {
+    let promise = getRelatedAMID({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls retrieveData with correct params', done => {
+    getRelatedAMID({ AMId: 1, options: { includeInactive: true, relationshipType: 'Employee' } }, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'relatedAssetManagerID', AMId: 1, query: { includeInactive: true, relationshipType: 'Employee' } })
+      done()
+    })
+  })
+})
+
 describe('insert', () => {
   beforeAll(() => {
     network.insertData.mockImplementation(() => Promise.resolve(mockRel))
@@ -83,6 +99,70 @@ describe('amend', () => {
   it('calls putData with correct params', done => {
     amend({ AMId: 1, relationship: mockRel }, (error, result) => {
       expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, data: JSON.parse(JSON.stringify(mockRel)) })
+      done()
+    })
+  })
+})
+
+describe('sendInvitation', () => {
+  beforeAll(() => {
+    network.putData.mockImplementation(() => Promise.resolve(true))
+  })
+  test('with promise', () => {
+    let promise = sendInvitation({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls putData with correct params', done => {
+    sendInvitation({ AMId: 1, toEmail: 'offboard@argomi.com', fromEmail: 'onboard@argomi.com', companyName: 'Argomi' }, (error, result) => {
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, resourceId: 'invitations', data: { userEmail: 'offboard@argomi.com', adminEmail: 'onboard@argomi.com', companyName: 'Argomi' } })
+      done()
+    })
+  })
+})
+
+describe('approveRel', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockRel))
+  })
+  test('with promise', () => {
+    let promise = approveRel({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with correct params', done => {
+    approveRel({ AMId: 1, relationshipType: 'Employee', relatedId: 5 }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, data: { relationshipType: 'Employee', relatedId: 5, relationshipStatus: 'Active' } })
+      done()
+    })
+  })
+})
+
+describe('rejectRel', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockRel))
+  })
+  test('with promise', () => {
+    let promise = rejectRel({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with correct params', done => {
+    rejectRel({ AMId: 1, relationshipType: 'Employee', relatedId: 5 }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, data: { relationshipType: 'Employee', relatedId: 5, relationshipStatus: 'Inactive' } })
+      done()
+    })
+  })
+})
+
+describe('revokeRel', () => {
+  beforeAll(() => {
+    network.patchData.mockImplementation(() => Promise.resolve(mockRel))
+  })
+  test('with promise', () => {
+    let promise = revokeRel({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls patchData with correct params', done => {
+    revokeRel({ AMId: 1, relationshipType: 'Employee', relatedId: 5 }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, data: { relationshipType: 'Employee', relatedId: 5, relationshipStatus: 'Inactive' } })
       done()
     })
   })

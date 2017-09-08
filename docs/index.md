@@ -115,15 +115,19 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.amend(params, [callback])](#module_api.AssetManagers.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.AssetManagers.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.AssetManagers.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.searchDomains(params, [callback])](#module_api.AssetManagers.searchDomains) ⇒ <code>Promise</code> \| <code>null</code>
         * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> \| <code>null</code>
         * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.getCredentialsForPubSub(params, [callback])](#module_api.AssetManagers.getCredentialsForPubSub) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Assets](#module_api.Assets) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Assets.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Assets.insert) ⇒ <code>Promise</code> \| <code>null</code>
         * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Books](#module_api.Books) : <code>object</code>
@@ -151,6 +155,9 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> \| <code>null</code>
         * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> \| <code>null</code>
         * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Netting](#module_api.Netting) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Netting.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.send(params, [callback])](#module_api.Netting.send) ⇒ <code>Promise</code> \| <code>null</code>
@@ -160,16 +167,24 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.amend(params, [callback])](#module_api.Parties.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.partialAmend(params, [callback])](#module_api.Parties.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, [callback])](#module_api.Parties.search) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fuzzySearch(query, callback)](#module_api.Parties.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.Parties.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.Parties.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Positions](#module_api.Positions) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Positions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, [callback])](#module_api.Positions.search) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Relationships](#module_api.Relationships) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Relationships.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.requestRelationship(params, [callback])](#module_api.Relationships.requestRelationship) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
         * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.approveRel(params, [callback])](#module_api.Relationships.approveRel) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Transactions](#module_api.Transactions) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Transactions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Transactions.insert) ⇒ <code>Promise</code> \| <code>null</code>
@@ -248,9 +263,11 @@ Send Allocations for a specific Transaction
     * [.amend(params, [callback])](#module_api.AssetManagers.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.AssetManagers.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.AssetManagers.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.searchDomains(params, [callback])](#module_api.AssetManagers.searchDomains) ⇒ <code>Promise</code> \| <code>null</code>
     * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> \| <code>null</code>
     * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.getCredentialsForPubSub(params, [callback])](#module_api.AssetManagers.getCredentialsForPubSub) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.AssetManagers.retrieve"></a>
 
@@ -323,6 +340,20 @@ Reactivate an Asset Manager
 | params.AMId | <code>number</code> | AMID of the Asset Manager to deactivate |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the reactivated AssetManager instance. Omit to return Promise |
 
+<a name="module_api.AssetManagers.searchDomains"></a>
+
+#### AssetManagers.searchDomains(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Search domains
+
+**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with the matching Domain instances.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.query | <code>string</code> | search parameters for the domain search. Available keys are: <li>assetManagerIds</li> <li>isPrimary</li> <li>domains</li> <li>domainStatuses</li> <li>fields</li> e.g. `query = { isPrimary: true, domains: ['amaas.com', 'argomi.com'], domainStatuses: 'Active' }` |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` are the matching Domain instances. Omit to return promise. |
+
 <a name="module_api.AssetManagers.checkDomains"></a>
 
 #### AssetManagers.checkDomains(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
@@ -348,6 +379,7 @@ Insert a new Domain for a given AMID
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the new Domain's owner. |
 | params.domain | <code>Domain</code> | Domain instance or object to insert. |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the inserted Domain instance. Omit to return promise. |
 
@@ -366,6 +398,20 @@ Retrieve EOD Books
 | params.bookID | <code>string</code> | Book ID to retrieve. |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of EODBooks or a single EODBook instance. Omit to return promise. |
 
+<a name="module_api.AssetManagers.getCredentialsForPubSub"></a>
+
+#### AssetManagers.getCredentialsForPubSub(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Retrieve temporary credentials for pub/sub connection
+
+**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with the credentials object as well as an array of available subscriptions.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | AMId of user for whom you want to retrieve credentials |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the credentials object containing `AccessKeyId`, `SecretAccessKey` and `SessionToken`, along with an array of available subscription topics. |
+
 <a name="module_api.Assets"></a>
 
 ### api.Assets : <code>object</code>
@@ -377,6 +423,8 @@ Retrieve EOD Books
     * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
 
@@ -454,8 +502,34 @@ Search for Assets
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.AMId] | <code>number</code> | Asset Manager ID of the Assets to search over. If omitted, you must send assetManagerIds in the search query with at least one value |
-| params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>assetStatuses</li> <li>assetIds</li> <li>referenceTypes</li> <li>referenceValues</li> <li>assetIssuerIds</li> <li>assetClasses</li> <li>assetTypes</li> e.g. `{ assetManagerIds: [1], assetClasses: ['ForeignExchange', 'Equity'] }` |
+| params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>assetStatuses</li> <li>assetIds</li> <li>referenceTypes</li> <li>referenceValues</li> <li>assetIssuerIds</li> <li>assetClasses</li> <li>assetTypes</li> e.g. `{ assetManagerIds: 1, assetClasses: ['ForeignExchange', 'Equity'] }` |
 | callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Assets or a single Asset instance |
+
+<a name="module_api.Assets.fuzzySearch"></a>
+
+#### Assets.fuzzySearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Fuzzy Search on assets
+
+**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the above object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>object</code> | Query object of the form . |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> <pre><code> { _index: string, _type: string, _id: string, _score: number, _source:{  assetType: string,  assetId: string,  description: string,  assetClass: string,  displayName: string,  assetManagerId: string,  ticker: string } } </code></pre> |
+
+<a name="module_api.Assets.fieldsSearch"></a>
+
+#### Assets.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Search for Assets and return specified fields
+
+**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of plain objects or a single plain object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>object</code> | Query object of the form `{ assetManagerIds: number, fields: string[] }`. Any asset property may be specified as a field parameter. e.g. `{ query: { assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']} }` |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of plain objects or a single plain object |
 
 <a name="module_api.Assets.deactivate"></a>
 
@@ -527,7 +601,7 @@ Search Books for specified AMId and bookId
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.AMId] | <code>number</code> | Asset Manager ID of the user calling the API. If omitted, you must pass assetManagerIds in the query |
-| params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>bookStatuses</li> <li>bookIds</li> <li>ownerIds</li> e.g. `{ assetManagerIds: [1], bookIds: [1, 2, 3] }` |
+| params.query | <code>object</code> | Search parameters of the form: { `key`: `value` | `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>bookStatuses</li> <li>bookIds</li> <li>ownerIds</li> e.g. `{ assetManagerIds: 1, bookIds: [1, 2, 3] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Books or a single Book instance. Omit to return Promise |
 
 <a name="module_api.Books.insert"></a>
@@ -662,7 +736,7 @@ Search for Corporate Actions
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.AMId] | <code>number</code> | AMId of the Asset Manager that owns the Corporate Action. If omitted you must pass assetManagerIds in the query |
-| params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>corporateActionIds</li> <li>corporateActionStatuses</li> <li>corporateActionTypes</li> <li>assetIds</li> <li>partyIds</li> <li>recordDateStart</li> <li>recordDateEnd</li> <li>declaredDateStart</li> <li>declaredDateEnd</li> <li>referenceTypes</li> <li>referenceValues</li> e.g. `{ assetManagerIds: [1], assetIds: ['ASKJ18', 'LKHB98'] }` |
+| params.query | <code>object</code> | Search parameters of the form { `key`: `value` | `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>clientIds</li> <li>corporateActionIds</li> <li>corporateActionStatuses</li> <li>corporateActionTypes</li> <li>assetIds</li> <li>partyIds</li> <li>recordDateStart</li> <li>recordDateEnd</li> <li>declaredDateStart</li> <li>declaredDateEnd</li> <li>referenceTypes</li> <li>referenceValues</li> e.g. `{ assetManagerIds: 1, assetIds: ['ASKJ18', 'LKHB98'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Corporate Actions or a single CorporateAction instance. Omit to return Promise |
 
 <a name="module_api.CorporateActions.cancel"></a>
@@ -775,6 +849,9 @@ Make request and search data
     * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> \| <code>null</code>
     * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> \| <code>null</code>
     * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Monitor.retrieveItem"></a>
 
@@ -833,7 +910,7 @@ Search Monitor Items
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.assetManagerId] | <code>number</code> | Asset Manager ID of the Items over which to search. If omitted, you must include `assetManagerIds` in the query |
-| params.query | <code>object</code> | Search parameters of the form { `key`: `[values]` }<br/> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>itemIds</li> <li>assetBookIds</li> <li>itemStatuses</li> <li>itemClasses</li> <li>itemTypes</li> <li>itemLevels</li> <li>itemSources</li> <li>transactionIds</li> <li>assetIds</li> |
+| params.query | <code>object</code> | Search parameters of the form { `key`: `value` | `[values]` }<br/> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>itemIds</li> <li>assetBookIds</li> <li>itemStatuses</li> <li>itemClasses</li> <li>itemTypes</li> <li>itemLevels</li> <li>itemSources</li> <li>transactionIds</li> <li>assetIds</li> |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Items or a single Item instance. |
 
 <a name="module_api.Monitor.closeItem"></a>
@@ -847,9 +924,48 @@ Close a monitor item
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.assetManagerId | <code>number</code> | Asset Manager ID of the Item to close |
+| params.AMId | <code>number</code> | Asset Manager ID of the Item to close |
 | params.resourceId | <code>string</code> | itemId of the Item to close |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the closed Monitor Item instance. Omit to return promise |
+
+<a name="module_api.Monitor.retrieveEvent"></a>
+
+#### Monitor.retrieveEvent(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an Event or array of Events  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID of the Event to retrieve __(required)__ |
+| [params.resourceId] | <code>string</code> | Event ID. Omit to return all Events for the Asset Manager ID |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an Event or array of Events. Omit to return promise |
+
+<a name="module_api.Monitor.insertEvent"></a>
+
+#### Monitor.insertEvent(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the newly inserted Event  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID to insert to |
+| params.event | <code>Event</code> | Event instance or object to insert |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the inserted Event. Omit to return promise |
+
+<a name="module_api.Monitor.closeEvent"></a>
+
+#### Monitor.closeEvent(params, callback) ⇒ <code>Promise</code> \| <code>null</code>
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the closed Event  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters |
+| params.AMId | <code>number</code> | Asset Manager ID of the Event to close |
+| params.resourceId | <code>string</code> | Event ID to close |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the closed Event. Omit to return promise |
 
 <a name="module_api.Netting"></a>
 
@@ -904,6 +1020,7 @@ Send Transactions to Net
     * [.amend(params, [callback])](#module_api.Parties.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.partialAmend(params, [callback])](#module_api.Parties.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, [callback])](#module_api.Parties.search) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fuzzySearch(query, callback)](#module_api.Parties.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.Parties.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.Parties.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
 
@@ -981,8 +1098,21 @@ Search for Parties
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | [params.AMId] | <code>number</code> | Asset Manager of the Parties to search over. If omitted you must pass assetManagerIds in the query |
-| params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>clientIds</li> <li>partyStatuses</li> <li>partyIds</li> <li>partyClasses</li> <li>partyTypes</li> e.g. `{ assetManagerIds: [1], partyTypes: ['Individual', 'Fund'] }` |
+| params.query | <code>object</code> | Search parameters of the form: { `key`: `value` | `[values]` }<br /> Available keys are: <li>assetManagerIds (required if AMId param is omitted)</li> <li>clientIds</li> <li>partyStatuses</li> <li>partyIds</li> <li>partyClasses</li> <li>partyTypes</li> e.g. `{ assetManagerIds: 1, partyTypes: ['Individual', 'Fund'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Parties or a single Party instance. Omit to return promise |
+
+<a name="module_api.Parties.fuzzySearch"></a>
+
+#### Parties.fuzzySearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Fuzzy Search on parties
+
+**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the above object.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>object</code> | Query object of the form . |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> <pre><code> { _index: string, _type: string, _id: string, _score: number, _source:{  partyType: string  legalName: string  description: string  assetManagerId: number  displayName: string  partyId: string  partyClass: string  AMaaS: string } } </code></pre> |
 
 <a name="module_api.Parties.deactivate"></a>
 
@@ -1022,6 +1152,8 @@ Reactivate a Party. This will set the Party status to 'Active'
 * [.Positions](#module_api.Positions) : <code>object</code>
     * [.retrieve(params, [callback])](#module_api.Positions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, [callback])](#module_api.Positions.search) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Positions.retrieve"></a>
 
@@ -1049,8 +1181,34 @@ Search for Positions in the database
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters |
 | params.AMId | <code>number</code> | Asset Manager ID of the Asset Manager owning the Postions |
-| params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>bookIds</li> <li>assetIds</li> <li>clientIds</li> <li>accountIds</li> <li>accountingTypes</li> <li>positionDate</li> e.g. `{ assetManagerIds: [1], bookIds: ['LAXJ98', 'OXYW09', 'COSY45'] }` |
+| params.query | <code>object</code> | Search parameters of the form: { `key`: `values` | `[values]` }<br /> Available keys are: <li>assetManagerIds (Required if AMId param is omitted)</li> <li>bookIds</li> <li>assetIds</li> <li>clientIds</li> <li>accountIds</li> <li>accountingTypes</li> <li>positionDate</li> e.g. `{ assetManagerIds: 1, bookIds: ['LAXJ98', 'OXYW09', 'COSY45'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. Omit to return Promise |
+
+<a name="module_api.Positions.fieldsSearch"></a>
+
+#### Positions.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Search for Positions and return only specified fields
+
+**Kind**: static method of [<code>Positions</code>](#module_api.Positions)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback is supplied, returns promise that resolves with a plain object or array of plain objects.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>number</code> | query object of the form `{ assetManagerIds: number, fields: string[] }`. Any Position properties can be passed to `fields`. Note that you may include additional properties in this object corresponding to the available search keys as defined in the `search` function. e.g. `{ assetManagerIds: [1], assetIds: [1, 2], fields: ['displayName', 'assetId'] }` |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is a plain object or array of plain objects. Omit to return Promise |
+
+<a name="module_api.Positions.fieldsSearch"></a>
+
+#### Positions.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Search for Transaction with specified fields
+
+**Kind**: static method of [<code>Positions</code>](#module_api.Positions)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with a plain object or array of plain objects.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>object</code> | query object of the form `{ assetManagerIds: number, fields: string[] }`. Any Transaction properties can be passed to `fields`. Note that you may include additional properties in this object corresponding to the available search keys as defined in the `search` function. e.g.`{ assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']}` |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is a plain object or array of plain objects. Omit to return Promise |
 
 <a name="module_api.Relationships"></a>
 
@@ -1060,8 +1218,13 @@ Search for Positions in the database
 * [.Relationships](#module_api.Relationships) : <code>object</code>
     * [.retrieve(params, [callback])](#module_api.Relationships.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
     * [.requestRelationship(params, [callback])](#module_api.Relationships.requestRelationship) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
     * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.approveRel(params, [callback])](#module_api.Relationships.approveRel) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Relationships.retrieve"></a>
 
@@ -1092,6 +1255,21 @@ Request a new Relationship
 | params.params | <code>object</code> | Object of relationshipType and relationshipId. |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the inserted Relationship instance. Omit to return Promise |
 
+<a name="module_api.Relationships.getRelatedAMID"></a>
+
+#### Relationships.getRelatedAMID(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Get a list of relationships where the passed AMID is the relatedId
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the Relationship instance or list of Relationships.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the AM that you want to see the parent Relationships for |
+| params.options | <code>object</code> | `{ includeInactive: [true], relationshipType: ['Employee', 'External] }` |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the Relationship instance or list of Relationships. Omit to return Promise |
+
 <a name="module_api.Relationships.insert"></a>
 
 #### Relationships.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
@@ -1121,6 +1299,71 @@ Amend an existing Relationship
 | params.AMId | <code>number</code> | Asset Manager ID who owns the Relationship to amend |
 | params.relationship | <code>Relationship</code> | Amended Relationship instance |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the amended Relationship instance. Omit to return Promise |
+
+<a name="module_api.Relationships.approveRel"></a>
+
+#### Relationships.approveRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Approve a Relationship
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the approved Relationship instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Relationship to approve |
+| params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
+| params.relationshipType | <code>string</code> | Relationship type being approved |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the approved Relationship. Omit to return Promise |
+
+<a name="module_api.Relationships.rejectRel"></a>
+
+#### Relationships.rejectRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Reject a Relationship
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the rejected Relationship instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Relationship to reject |
+| params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
+| params.relationshipType | <code>string</code> | Relationship type being rejected |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the rejected Relationship. Omit to return Promise |
+
+<a name="module_api.Relationships.revokeRel"></a>
+
+#### Relationships.revokeRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Revoke a Relationship
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the revoked Relationship instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Relationship to revoke |
+| params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
+| params.relationshipType | <code>string</code> | Relationship type being revoked |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the revoked Relationship. Omit to return Promise |
+
+<a name="module_api.Relationships.sendInvitation"></a>
+
+#### Relationships.sendInvitation(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Send invitation to join
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with `true`.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | AMID of company to join |
+| params.toEmail | <code>string</code> | Email address to send to |
+| params.fromEmail | <code>string</code> | Email address sent from |
+| params.companyName | <code>string</code> | Company to Join |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is `true`. |
 
 <a name="module_api.Transactions"></a>
 
@@ -1209,7 +1452,7 @@ Search Transactions
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters |
 | [params.AMId] | <code>number</code> | Asset Manager ID of the Transactions to search over. If omitted you must pass assetManagerIds in the query |
-| params.query | <code>object</code> | Search parameters of the form: { `key`: `[values]` }<br /> Available keys are: <li>clientIds</li> <li>transactionStatuses</li> <li>transactionIds</li> <li>assetBookIds</li> <li>counterpartyBookIds</li> <li>assetIds</li> <li>transactionDateStart</li> <li>transactionDateEnd</li> <li>codeTypes</li> <li>codeValues</li> <li>linkTypes</li> <li>linkedTransactionIds</li> <li>partyTypes</li> <li>partyIds</li> <li>referenceTypes</li> <li>referenceValues</li> e.g. `{ assetManagerIds: [1], bookIds: [1, 2, 3] }` |
+| params.query | <code>object</code> | Search parameters of the form: { `key`: `value` | `[values]` }<br /> Available keys are: <li>clientIds</li> <li>transactionStatuses</li> <li>transactionIds</li> <li>assetBookIds</li> <li>counterpartyBookIds</li> <li>assetIds</li> <li>transactionDateStart</li> <li>transactionDateEnd</li> <li>codeTypes</li> <li>codeValues</li> <li>linkTypes</li> <li>linkedTransactionIds</li> <li>partyTypes</li> <li>partyIds</li> <li>referenceTypes</li> <li>referenceValues</li> e.g. `{ assetManagerIds: 1, bookIds: [1, 2, 3] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Transactions or a single Transaction instance. Omit to return Promise |
 
 <a name="module_api.Transactions.cancel"></a>
@@ -1355,20 +1598,24 @@ Classes for the Assets service
         * [new Fund(params)](#new_module_assets.Fund_new)
     * [.ForeignExchange](#module_assets.ForeignExchange) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
         * [new ForeignExchange(params)](#new_module_assets.ForeignExchange_new)
+    * [.ForeignExchangeForward](#module_assets.ForeignExchangeForward) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+        * [new ForeignExchangeForward(params)](#new_module_assets.ForeignExchangeForward_new)
     * [.ForeignExchangeBase](#module_assets.ForeignExchangeBase) ⇐ [<code>Asset</code>](#module_assets.Asset)
         * [new ForeignExchangeBase(params)](#new_module_assets.ForeignExchangeBase_new)
-    * [.NonDeliverableForward](#module_assets.NonDeliverableForward) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
-        * [new NonDeliverableForward(params)](#new_module_assets.NonDeliverableForward_new)
     * [.Index](#module_assets.Index) ⇐ [<code>Asset</code>](#module_assets.Asset)
         * [new Index(params)](#new_module_assets.Index_new)
     * [.BondFuture](#module_assets.BondFuture) ⇐ [<code>Future</code>](#module_assets.Future)
         * [new BondFuture(params)](#new_module_assets.BondFuture_new)
     * [.BondFutureOption](#module_assets.BondFutureOption) ⇐ [<code>Future</code>](#module_assets.Future)
         * [new BondFutureOption(params)](#new_module_assets.BondFutureOption_new)
+    * [.CommodityFuture](#module_assets.CommodityFuture) ⇐ <code>module:ListDerivatives.Future</code>
+        * [new CommodityFuture(params)](#new_module_assets.CommodityFuture_new)
     * [.EnergyFuture](#module_assets.EnergyFuture) ⇐ [<code>Future</code>](#module_assets.Future)
         * [new EnergyFuture(params)](#new_module_assets.EnergyFuture_new)
     * [.EquityFuture](#module_assets.EquityFuture) ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
         * [new EquityFuture(params)](#new_module_assets.EquityFuture_new)
+    * [.ForeignExchangeFuture](#module_assets.ForeignExchangeFuture) ⇐ <code>module:ListDerivatives.Future</code>
+        * [new ForeignExchangeFuture(params)](#new_module_assets.ForeignExchangeFuture_new)
     * [.Future](#module_assets.Future) ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
         * [new Future(params)](#new_module_assets.Future_new)
     * [.FutureOption](#module_assets.FutureOption) ⇐ [<code>Future</code>](#module_assets.Future)
@@ -2035,6 +2282,8 @@ Construct a new Foreign Exchange instance
 | [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Foreign Exchange |
 | [params.description] | <code>string</code> |  | Description of the Foreign Exchange |
 | [params.displayName] | <code>string</code> |  | Display name of the ForeignExchange |
+| params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
+| params.major | <code>boolean</code> |  | Whether this FX is major __(required)__ |
 | [params.clientId] | <code>string</code> |  | ID of the associated client |
 | [params.comments] | <code>object</code> |  | Object of Comments attached to the Foreign Exchange |
 | [params.links] | <code>object</code> |  | Object of array of Links attached to the Foreign Exchange |
@@ -2043,6 +2292,43 @@ Construct a new Foreign Exchange instance
 | [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Foreign Exchange |
 | [params.createdTime] | <code>date</code> |  | Time that the Foreign Exchange was created |
 | [params.updatedTime] | <code>date</code> |  | Time that the Foreign Exchange was updated |
+| [params.version] | <code>number</code> |  | Version number |
+
+<a name="module_assets.ForeignExchangeForward"></a>
+
+### assets.ForeignExchangeForward ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+Class representing FXForward
+
+**Kind**: static class of [<code>assets</code>](#module_assets)  
+**Extends**: [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)  
+<a name="new_module_assets.ForeignExchangeForward_new"></a>
+
+#### new ForeignExchangeForward(params)
+Construct a new FXForward instance
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| params | <code>object</code> |  | FXForward creation options: |
+| params.assetId | <code>string</code> |  | ID of the FXForward __(required)__ |
+| params.assetIssuerId | <code>string</code> |  | ID of the Issuer |
+| params.assetManagerId | <code>number</code> |  | Asset Manager ID |
+| [params.assetClass] | <code>string</code> | <code>&quot;ForeignExchange&quot;</code> | Auto-set to `ForeignExchange` __(read-only)__ |
+| [params.assetStatus] | <code>string</code> |  | Status of the asset |
+| [params.description] | <code>string</code> |  | Description of the ForeignExchangeForward |
+| [params.clientId] | <code>string</code> |  | ID of the client |
+| params.major | <code>boolean</code> |  | Whether it is a major currency or not |
+| params.countryCodes | <code>object</code> |  | An array of country codes |
+| params.settlementDate | <code>string</code> |  | The date of exchange of ownership |
+| [params.fixingDate] | <code>string</code> |  | The date of fixing exchange rate between two currencies |
+| params.forwardRate | <code>string</code> |  | Currency exchange rate |
+| [params.comments] | <code>object</code> |  | Object of Comments attached to the Non Deliverable Forward |
+| [params.links] | <code>object</code> |  | Object of array of Links attached to the Non Deliverable Forward |
+| [params.references] | <code>object</code> | <code>{ AMaaS: Reference() }</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
+| [params.createdBy] | <code>string</code> |  | ID of the user that created the Non Deliverable Forward |
+| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Non Deliverable Forward |
+| [params.createdTime] | <code>date</code> |  | Time that the Non Deliverable Forward was created |
+| [params.updatedTime] | <code>date</code> |  | Time that the Non Deliverable Forward was updated |
 | [params.version] | <code>number</code> |  | Version number |
 
 <a name="module_assets.ForeignExchangeBase"></a>
@@ -2062,7 +2348,7 @@ Construct a new ForeignExchangeBase instance
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | params | <code>object</code> |  | ForeignExchangeBase creation options: |
-| [params.assetManagerId] | <code>number</code> | <code>0</code> | Auto-set to `0`. All FX classes and subclasses are treated as public Assets |
+| [params.assetManagerId] | <code>number</code> | <code>0</code> | Auto-set to `0` except for ForeignExchangeForward. All FX classes and subclasses are treated as public Assets |
 | params.assetId | <code>number</code> |  | ID of the ForeignExchangeBase __(required)__ |
 | [params.assetClass] | <code>string</code> | <code>&quot;ForeignExchange&quot;</code> | Auto-set to `ForeignExchange` __(read-only)__ |
 | [params.assetType] | <code>string</code> |  | Type of the ForeignExchangeBase. Auto-set based on the class or subclass constructor |
@@ -2072,6 +2358,8 @@ Construct a new ForeignExchangeBase instance
 | [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the ForeignExchangeBase |
 | [params.description] | <code>string</code> |  | Description of the ForeignExchangeBase |
 | [params.displayName] | <code>string</code> |  | Display name of the ForeignExchangeBase |
+| params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
+| params.major | <code>boolean</code> |  | Whether this FX is major __(required)__ |
 | [params.rollPrice] | <code>boolean</code> | <code>false</code> | Auto-set to `false` __(read-only)__ |
 | [params.clientId] | <code>string</code> |  | ID of the associated client |
 | [params.comments] | <code>object</code> |  | Object of Comments attached to the ForeignExchangeBase |
@@ -2082,41 +2370,6 @@ Construct a new ForeignExchangeBase instance
 | [params.createdTime] | <code>date</code> |  | Time that the ForeignExchangeBase was created |
 | [params.updatedTime] | <code>date</code> |  | Time that the ForeignExchangeBase was updated |
 | params.version | <code>number</code> |  | Version number |
-
-<a name="module_assets.NonDeliverableForward"></a>
-
-### assets.NonDeliverableForward ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
-Class representing FX
-
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)  
-<a name="new_module_assets.NonDeliverableForward_new"></a>
-
-#### new NonDeliverableForward(params)
-Construct a new Non Deliverable Forward instance
-
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| params | <code>object</code> |  | NonDeliverableForward creation options: |
-| params.assetId | <code>number</code> |  | ID of the Non Deliverable Forward __(required)__ |
-| [params.assetClass] | <code>string</code> | <code>&quot;ForeignExchange&quot;</code> | Auto-set to `ForeignExchange` __(read-only)__ |
-| [params.assetType] | <code>string</code> |  | Type of the Non Deliverable Forward. Auto-set based on the class or subclass constructor |
-| [params.assetTypeDisplay] | <code>string</code> |  | Auto-set to the spaced class name (e.g. `Listed Derivative` for `ListedDerivative()`) |
-| [params.fungible] | <code>boolean</code> | <code>true</code> | Auto-set to `true` __(read-only)__ |
-| [params.assetIssuerId] | <code>string</code> |  | ID of the Non Deliverable Forward's issuer |
-| [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Asset |
-| [params.description] | <code>string</code> |  | Description of the Non Deliverable Forward |
-| [params.displayName] | <code>string</code> |  | Display name of the Non Deliverable Forward |
-| [params.clientId] | <code>string</code> |  | ID of the associated client |
-| [params.comments] | <code>object</code> |  | Object of Comments attached to the Non Deliverable Forward |
-| [params.links] | <code>object</code> |  | Object of array of Links attached to the Non Deliverable Forward |
-| [params.references] | <code>object</code> | <code>{ AMaaS: Reference() }</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
-| [params.createdBy] | <code>string</code> |  | ID of the user that created the Non Deliverable Forward |
-| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Non Deliverable Forward |
-| [params.createdTime] | <code>date</code> |  | Time that the Non Deliverable Forward was created |
-| [params.updatedTime] | <code>date</code> |  | Time that the Non Deliverable Forward was updated |
-| [params.version] | <code>number</code> |  | Version number |
 
 <a name="module_assets.Index"></a>
 
@@ -2258,6 +2511,46 @@ Construct a new Bond Future Option instance
 | [params.updatedTime] | <code>date</code> |  | Time that the Bond Future Option was updated |
 | [params.version] | <code>number</code> |  | Version number |
 
+<a name="module_assets.CommodityFuture"></a>
+
+### assets.CommodityFuture ⇐ <code>module:ListDerivatives.Future</code>
+Class representing an CommodityFuture
+
+**Kind**: static class of [<code>assets</code>](#module_assets)  
+**Extends**: <code>module:ListDerivatives.Future</code>  
+<a name="new_module_assets.CommodityFuture_new"></a>
+
+#### new CommodityFuture(params)
+Construct a new CommodityFuture instance
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| params | <code>object</code> |  | CommodityFuture creation options: |
+| params.assetManagerId | <code>number</code> |  | ID of Asset's Asset Manager __(required)__ |
+| params.assetId | <code>number</code> |  | ID of the Asset __(required)__ |
+| params.settlementType | <code>string</code> |  | A type of settlement |
+| params.contractSize | <code>number</code> |  | An integer, e.g. 10 barrels per contract |
+| params.pointValue | <code>string</code> |  | Value of 1 point |
+| params.tickSize | <code>number</code> |  | The minimum unit of price change |
+| params.quoteUnit | <code>number</code> |  | Contract unit, e.g. barrel |
+| [params.assetIssuerId] | <code>string</code> |  | ID of the Asset issuer |
+| [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Asset |
+| [params.countryId] | <code>string</code> |  | ID of Asset's country |
+| [params.venueId] | <code>string</code> |  | ID of Asset's venue if applicable |
+| [params.currency] | <code>string</code> |  | Asset currency (e.g. USD, SGD) |
+| [params.issueDate] | <code>string</code> | <code>&quot;0001-01-01&quot;</code> | Issue date if applicable (YYYY-MM-DD) |
+| [params.expiryDate] | <code>string</code> |  | Expiry date |
+| [params.description] | <code>string</code> |  | Description of the Asset |
+| [params.displayName] | <code>string</code> |  | Display name of the Asset |
+| [params.links] | <code>object</code> |  | Object of array of Links attached to the Asset |
+| [params.references] | <code>object</code> | <code>{}</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
+| [params.createdBy] | <code>string</code> |  | ID of the user that created the Asset |
+| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Asset |
+| [params.createdTime] | <code>date</code> |  | Time that the Asset was created |
+| [params.updatedTime] | <code>date</code> |  | Time that the Asset was updated |
+| [params.version] | <code>number</code> |  | Version number |
+
 <a name="module_assets.EnergyFuture"></a>
 
 ### assets.EnergyFuture ⇐ [<code>Future</code>](#module_assets.Future)
@@ -2350,6 +2643,46 @@ Construct a new Equity Future instance
 | [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Equity Future |
 | [params.createdTime] | <code>date</code> |  | Time that the Equity Future was created |
 | [params.updatedTime] | <code>date</code> |  | Time that the Equity Future was updated |
+| [params.version] | <code>number</code> |  | Version number |
+
+<a name="module_assets.ForeignExchangeFuture"></a>
+
+### assets.ForeignExchangeFuture ⇐ <code>module:ListDerivatives.Future</code>
+Class representing an ForeignExchangeFuture
+
+**Kind**: static class of [<code>assets</code>](#module_assets)  
+**Extends**: <code>module:ListDerivatives.Future</code>  
+<a name="new_module_assets.ForeignExchangeFuture_new"></a>
+
+#### new ForeignExchangeFuture(params)
+Construct a new ForeignExchangeFuture instance
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| params | <code>object</code> |  | ForeignExchangeFuture creation options: |
+| params.assetManagerId | <code>number</code> |  | ID of Asset's Asset Manager __(required)__ |
+| params.assetId | <code>number</code> |  | ID of the Asset __(required)__ |
+| params.settlementType | <code>string</code> |  | A type of settlement |
+| params.contractSize | <code>number</code> |  | An integer, e.g. 10 barrels per contract |
+| params.pointValue | <code>string</code> |  | Value of 1 point |
+| params.tickSize | <code>number</code> |  | The minimum unit of price change |
+| params.quoteUnit | <code>number</code> |  | Contract unit, e.g. barrel |
+| [params.assetIssuerId] | <code>string</code> |  | ID of the Asset issuer |
+| [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Asset |
+| [params.countryId] | <code>string</code> |  | ID of Asset's country |
+| [params.venueId] | <code>string</code> |  | ID of Asset's venue if applicable |
+| [params.currency] | <code>string</code> |  | Asset currency (e.g. USD, SGD) |
+| [params.issueDate] | <code>string</code> | <code>&quot;0001-01-01&quot;</code> | Issue date if applicable (YYYY-MM-DD) |
+| [params.expiryDate] | <code>string</code> |  | Expiry date |
+| [params.description] | <code>string</code> |  | Description of the Asset |
+| [params.displayName] | <code>string</code> |  | Display name of the Asset |
+| [params.links] | <code>object</code> |  | Object of array of Links attached to the Asset |
+| [params.references] | <code>object</code> | <code>{}</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
+| [params.createdBy] | <code>string</code> |  | ID of the user that created the Asset |
+| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Asset |
+| [params.createdTime] | <code>date</code> |  | Time that the Asset was created |
+| [params.updatedTime] | <code>date</code> |  | Time that the Asset was updated |
 | [params.version] | <code>number</code> |  | Version number |
 
 <a name="module_assets.Future"></a>
@@ -3114,8 +3447,44 @@ Classes for the Monitor Service
 
 
 * [monitor](#module_monitor)
+    * [.Event](#module_monitor.Event) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+        * [new Event(params)](#new_module_monitor.Event_new)
     * [.Item](#module_monitor.Item) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
         * [new Item(params)](#new_module_monitor.Item_new)
+
+<a name="module_monitor.Event"></a>
+
+### monitor.Event ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+Class representing a Monitor Event
+
+**Kind**: static class of [<code>monitor</code>](#module_monitor)  
+**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+<a name="new_module_monitor.Event_new"></a>
+
+#### new Event(params)
+Construct a new Monitor Event instance
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | Event creation options: |
+| params.assetManagerId | <code>number</code> | Asset Manager ID of the owner of the Event |
+| params.eventId | <code>string</code> | ID of the Event |
+| params.linkId | <code>string</code> | ID of the relevant resouce based on the `linkSource` (e.g. transactionId, assetId, partyId) |
+| params.linkSource | <code>string</code> | Service that the Event is from.<br /> Available Options: <li>Transactions</li> <li>Assets</li> <li>Parties</li> |
+| params.eventType | <code>string</code> | The Event type.<br /> Available Options: <li>Internal</li> <li>External</li> |
+| params.eventStart | <code>string</code> | Start date and time of the event |
+| params.eventEnd | <code>string</code> | End date and time of the event |
+| params.eventStatus | <code>string</code> | Status of the event.<br /> Available Options: <li>Open</li> <li>Closed</li> |
+| params.title | <code>string</code> | Title of the Event |
+| params.description | <code>string</code> | Description of the Event |
+| params.internalId | <code>number</code> | Internal ID of the Event *(set server side)* |
+| params.clientId | <code>number</code> | Client ID *(set server side)* |
+| [params.createdBy] | <code>string</code> | Who the Event was created by *(set server side)* |
+| [params.createdTime] | <code>string</code> | When the Event was created *(set server side)* |
+| [params.updatedBy] | <code>string</code> | Who the Event was last updated by *(set server side)* |
+| [params.updatedTime] | <code>string</code> | When the Event was last updated *(set server side)* |
+| [params.version] | <code>number</code> | version *(set server side)* |
 
 <a name="module_monitor.Item"></a>
 
@@ -3225,6 +3594,12 @@ Construct a new Asset Manager instance
 | params.partyStatus | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Asset Manager (e.g. 'Active') |
 | params.baseCurrency | <code>string</code> |  | Base Currency of the Asset Manager (e.g. SGD, USD) |
 | params.description | <code>string</code> |  | Description of the Asset Manager |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | params.addresses | <code>object</code> |  | Object of Addresses associated with this Asset Manager |
 | params.emails | <code>object</code> |  | Object of Emails associated with this Asset Manager |
 | params.references | <code>object</code> |  | Object of References associated with this Asset Manager |
@@ -3290,6 +3665,12 @@ Construct a new Broker instance
 | [params.partyStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Broker |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Broker (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Broker |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Broker |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Broker |
 | [params.references] | <code>object</code> |  | Object of References associated with the Broker |
@@ -3411,6 +3792,12 @@ Construct a new Company instance
 | [params.partyClass] | <code>string</code> | <code>&quot;Company&quot;</code> | Class of the Company (a subclass of Company may define its own partyClass) |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Company (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Company |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Company |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Company |
 | [params.references] | <code>object</code> |  | Object of References associated with the Company |
@@ -3476,6 +3863,12 @@ Construct a new Exchange instance
 | [params.partyStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Exchange |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Exchange (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Exchange |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Exchange |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Exchange |
 | [params.references] | <code>object</code> |  | Object of References associated with the Exchange |
@@ -3541,6 +3934,12 @@ Construct a new Fund instance
 | [params.partyStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Fund |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Fund (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Fund |
+| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
+| [params.licenseType] | <code>string</code> |  | Company license type |
+| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
+| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
+| [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
+| [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Fund |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Fund |
 | [params.references] | <code>object</code> |  | Object of References associated with the Fund |
@@ -3676,6 +4075,10 @@ Construct a new Individual instance
 | params.givenNames | <code>string</code> |  | Individual's given names |
 | params.surname | <code>string</code> |  | Individual's surname |
 | params.dateOfBirth | <code>string</code> |  | Individual's date of birth (YYYY-MM-DD) |
+| [params.title] | <code>string</code> |  | Individual's title (e.g. Mr, Mrs, Ms, etc.) |
+| [params.department] | <code>string</code> |  | Individual's department |
+| [params.role] | <code>string</code> |  | Individual's role |
+| [params.contactNumber] | <code>string</code> |  | Individual's contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Individual |
 | [params.emails] | <code>object</code> |  | Object of Emails associated with the Individual |
 | [params.references] | <code>object</code> |  | Object of References associated with the Individual |

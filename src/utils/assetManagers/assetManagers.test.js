@@ -1,6 +1,7 @@
 import { _parseAM, getAssetManager } from './assetManagers.js'
-import { retrieve, insert, amend, deactivate, reactivate, checkDomains, insertDomain, retrieveEODBooks } from './assetManagers.js'
+import { retrieve, insert, amend, deactivate, reactivate, searchDomains, checkDomains, insertDomain, retrieveEODBooks, getCredentialsForPubSub } from './assetManagers.js'
 import AssetManager from '../../assetManagers/AssetManager/assetManager.js'
+import Domain from '../../assetManagers/Domain/domain'
 import * as api from '../../exports/api'
 import * as network from '../network'
 
@@ -228,6 +229,28 @@ describe('utils/assetManagers', () => {
     })
   })
 
+  describe('searchDomains', () => {
+    let data
+    beforeAll(() => {
+      data = {
+        assetManagerId: 1,
+        domain: 'testDomain.com',
+        isPrimary: true
+      }
+      network.searchData.mockImplementation(() => Promise.resolve(data))
+    })
+    test('with promise', () => {
+      let promise = searchDomains({ query: { isPrimary: true } })
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls searchData with the correct params', done => {
+      searchDomains({ query: { isPrimary: true } }, (error, result) => {
+        expect(network.searchData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', query: { isPrimary: true } })
+        done()
+      })
+    })
+  })
+
   describe('checkDomains', () => {
     let data
     beforeAll(() => {
@@ -236,15 +259,23 @@ describe('utils/assetManagers', () => {
         domain: 'testDomain.com',
         isPrimary: true
       }
-      network.retrieveData.mockImplementation(() => Promise.resolve(data))
     })
     test('with promise', () => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(data))
       let promise = checkDomains({ domain: 'testDomain.com' })
       expect(promise).toBeInstanceOf(Promise)
     })
     it('calls retrieveData with correct params', done => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(data))
       checkDomains({ domain: 'testDomain.com' }, (error, result) => {
-        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', query: { domain: ['testDomain.com'] } })
+        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', query: { domains: ['testDomain.com'], isPrimary: true } })
+        done()
+      })
+    })
+    it('returns an array', done => {
+      network.retrieveData.mockImplementation(() => Promise.resolve([data]))
+      checkDomains({ domain: 'testDomain.com' }, (error, result) => {
+        expect(result).toEqual([new Domain(data)])
         done()
       })
     })
@@ -261,12 +292,12 @@ describe('utils/assetManagers', () => {
       network.insertData.mockImplementation(() => Promise.resolve(data))
     })
     test('with promise', () => {
-      let promise = insertDomain({ domain: data })
+      let promise = insertDomain({ AMId: 1, domain: data })
       expect(promise).toBeInstanceOf(Promise)
     })
     it('calls insertData with correct params', done => {
       insertDomain({ domain: data }, (error, result) => {
-        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', data, queryParams: { assetManagerId: [1] } })
+        expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerDomains', AMId: 1, data })
         done()
       })
     })
@@ -290,13 +321,37 @@ describe('utils/assetManagers', () => {
       retrieveEODBooks({AMId: 1, bookID: 'ABC'}, (error, result) => {
         expect(network.retrieveData).toHaveBeenCalledWith({AMaaSClass: 'assetManagerEODBooks', AMId: 1, bookID: 'ABC'})
         done()  
-    })
+      })
     })
     it('calls retrieveEODBooks with the correct params', done => {
       retrieveEODBooks({AMId: 1}, (error, result) => {
         expect(network.retrieveData).toHaveBeenCalledWith({AMaaSClass: 'assetManagerEODBooks', AMId: 1})
         done()  
-    }) 
+      }) 
+    })
+  })
+
+  describe('getCredentialsForPubSub', () => {
+    const mockedCredentials = {
+      credentials: {
+        AccessKeyId: 'testAcccessKey',
+        SecretAccessKey: 'testSecretKey',
+        SessionToken: 'testSessionToken'
+      },
+      topics: ['topic1', 'topic2']
+    }
+    beforeAll(() => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(mockedCredentials))
+    })
+    it('returns promise', () => {
+      let promise = getCredentialsForPubSub({ AMId: 1 })
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls retrieveData with the correct params', done => {
+      getCredentialsForPubSub({ AMId: 1 }, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'assetManagerPubSubCredentials', AMId: 1 })
+        done()
+      })
     })
   })
 })

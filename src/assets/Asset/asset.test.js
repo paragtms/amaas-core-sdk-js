@@ -6,7 +6,7 @@ import AssetLink from '../../children/Link/AssetLink'
 describe('Asset', () => {
   describe('constructor', () => {
 
-    it('should default issueDate correctly', () => {
+    it('should set default issueDate correctly', () => {
       const testAsset = new Asset({})
       const issueDate = testAsset.issueDate
       expect(issueDate).toEqual('0001-01-01')

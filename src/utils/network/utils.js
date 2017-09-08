@@ -1,23 +1,37 @@
 import request from 'superagent'
-import { endpoint, userPoolId, clientAppId } from '../../config.js'
+import { endpoint, userPoolConfig } from '../../config.js'
 import fs from 'fs'
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js'
 import expandTilde from 'expand-tilde'
 
-const userPool = new CognitoUserPool({
-  UserPoolId: userPoolId,
-  ClientId: clientAppId
+export function poolConfig(stage) {
+  switch (stage) {
+    case 'dev':
+      return userPoolConfig.dev
+    case 'staging':
+      return userPoolConfig.staging
+    case 'prod':
+    default:
+      throw new Error('unavailable config')
+  }
+}
+
+const userPool = (stage) => new CognitoUserPool({
+  UserPoolId: poolConfig(stage).userPoolId,
+  ClientId: poolConfig(stage).clientAppId
 })
 
 export function getEndpoint({ stage, apiVersion }) {
   switch (stage) {
+    case 'dev':
+      return `${endpoint.dev}/${apiVersion || 'v1.0'}`
     case 'staging':
-      return `${endpoint.staging}/staging`
+      return `${endpoint.staging}/${apiVersion || 'v1.0'}`
     case 'prod':
-      return `${endpoint.prod}/${apiVersion}`
+      return `${endpoint.prod}/${apiVersion || 'sg1.0'}`
     default:
-      console.warn(`Unknown stage variable: ${stage}. Defaulting to /prod`)
-      return `${endpoint.prod}/${apiVersion}`
+      console.warn(`Unknown stage variable: ${stage}. Defaulting to dev`)
+      return `${endpoint.dev}/${apiVersion || 'v1.0'}`
   }
 }
 
@@ -29,7 +43,7 @@ function isNode() {
   }
 }
 
-export function authenticate(credPath) {
+export function authenticate(stage, credPath) {
   let injectedResolve
   let injectedReject
   return new Promise((resolve, reject) => {
@@ -54,7 +68,7 @@ export function authenticate(credPath) {
       })
       const cognitoUser = new CognitoUser({
         Username,
-        Pool: userPool
+        Pool: userPool(stage)
       })
       console.log('Starting authentication...')
       cognitoUser.authenticateUser(authenticationDetails, {
@@ -76,13 +90,14 @@ export function getToken(stage, credPath) {
     injectedResolve = resolve
     injectedReject = reject
     switch (stage) {
+      case 'dev':
       case 'staging':
       case 'prod':
-        const cognitoUser = userPool.getCurrentUser()
+        const cognitoUser = userPool(stage).getCurrentUser()
         if (!cognitoUser) {
           if (isNode()) {
             console.warn('No user in storage, attempting to authenticate...')
-            authenticate(credPath)
+            authenticate(stage, credPath)
               .then(res => injectedResolve(res))
               .catch(err => injectedReject(err))
           } else {
@@ -96,7 +111,7 @@ export function getToken(stage, credPath) {
             } else {
               if (isNode()) {
                 console.warn('getSession failure, attempting to authenticate')
-                  authenticate(credPath)
+                  authenticate(stage, credPath)
                   .then(res => injectedResolve(res))
                   .catch(err => injectedReject(err))
               } else {
@@ -160,8 +175,14 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
     case 'relationships':
       baseURL = `${getEndpoint({ stage, apiVersion })}/assetmanager/asset-manager-relationships`
       break
+    case 'relatedAssetManagerID':
+      baseURL = `${getEndpoint({ stage, apiVersion })}/assetmanager/asset-manager-related-amid`
+      break
     case 'relationshipRequest':
       baseURL = `${getEndpoint({ stage, apiVersion })}/assetmanager/relationship-request`
+      break
+    case 'assetManagerPubSubCredentials':
+      baseURL = `${getEndpoint({ stage, apiVersion })}/assetmanager/credential`
       break
     case 'transactions':
       baseURL = `${getEndpoint({ stage, apiVersion })}/transaction/transactions`
@@ -195,6 +216,7 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
 
 export function setAuthorization(stage) {
   switch (stage) {
+    case 'dev':
     case 'staging':
     case 'prod':
     default:
@@ -207,17 +229,17 @@ export function makeRequest({ method, url, data, query, stage, credPath }) {
     .then(res => {
       switch (method) {
         case 'GET':
-          return request.get(url).set(setAuthorization(stage), res).query(query)
+          return request.get(url).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         case 'SEARCH':
-          return request.get(url).set(setAuthorization(stage), res).query(data)
+          return request.get(url).set(setAuthorization(stage), res).query({ ...data, camelcase: true })
         case 'POST':
-          return request.post(url).send(data).set(setAuthorization(stage), res).query(query)
+          return request.post(url).send(data).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         case 'PUT':
-          return request.put(url).send(data).set(setAuthorization(stage), res).query({ camelcase: true })
+          return request.put(url).send(data).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         case 'PATCH':
-          return request.patch(url).send(data).set(setAuthorization(stage), res).query({ camelcase: true })
+          return request.patch(url).send(data).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         case 'DELETE':
-          return request.delete(url).set(setAuthorization(stage), res).query({ camelcase: true })
+          return request.delete(url).set(setAuthorization(stage), res).query({ ...query, camelcase: true })
         default:
       }
     })

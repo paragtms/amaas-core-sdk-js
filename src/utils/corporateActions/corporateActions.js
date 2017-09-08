@@ -115,7 +115,7 @@ export function amend({ AMId, resourceId, corporateAction }, callback) {
  * @static
  * @param {object} params - object of parameters:
  * @param {number} [params.AMId] - AMId of the Asset Manager that owns the Corporate Action. If omitted you must pass assetManagerIds in the query
- * @param {object} params.query - Search parameters of the form { `key`: `[values]` }<br />
+ * @param {object} params.query - Search parameters of the form { `key`: `value` | `[values]` }<br />
  * Available keys are:
  * <li>assetManagerIds (Required if AMId param is omitted)</li>
  * <li>clientIds</li>
@@ -130,7 +130,7 @@ export function amend({ AMId, resourceId, corporateAction }, callback) {
  * <li>declaredDateEnd</li>
  * <li>referenceTypes</li>
  * <li>referenceValues</li>
- * e.g. `{ assetManagerIds: [1], assetIds: ['ASKJ18', 'LKHB98'] }`
+ * e.g. `{ assetManagerIds: 1, assetIds: ['ASKJ18', 'LKHB98'] }`
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is an array of Corporate Actions or a single CorporateAction instance. Omit to return Promise
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of Corporate Actions or a single CorporateAction instance
  */
