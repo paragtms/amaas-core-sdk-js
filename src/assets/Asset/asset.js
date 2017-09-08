@@ -122,7 +122,8 @@ class Asset extends AMaaSModel {
           } else {
             this._links = {}
           }
-        }
+        },
+        enumerable: true
       },
       _references: { writable: true, enumerable: false },
       references: {
