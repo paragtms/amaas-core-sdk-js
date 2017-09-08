@@ -18,7 +18,7 @@ class AssetLink extends Link {
       updatedTime,
       version
     })
-    this.linkedAssetId
+    this.linkedAssetId = linkedAssetId
   }
 }
 
