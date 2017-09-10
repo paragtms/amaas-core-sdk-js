@@ -46,7 +46,7 @@ class Company extends Organisation {
     licenseType,
     assetsUnderManagement,
     registrationNumber,
-    yearOfIncoporation,
+    yearOfIncorporation,
     contactNumber,
     addresses={},
     emails={},
@@ -87,7 +87,7 @@ class Company extends Organisation {
     this.licenseType = licenseType
     this.assetsUnderManagement = assetsUnderManagement
     this.registrationNumber = registrationNumber
-    this.yearOfIncoporation = yearOfIncoporation
+    this.yearOfIncorporation = yearOfIncorporation
     this.contactNumber = contactNumber
   }
 }
