@@ -210,7 +210,7 @@ export function search({ AMId, query }, callback) {
  *  assetClass: string,
  *  displayName: string,
  *  assetManagerId: string,
- *  ticker: string
+ *  search: string
  * }
  * }
  * </code></pre>
