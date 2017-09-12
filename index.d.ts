@@ -301,7 +301,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     assetManagerId: number
     relationshipId?: string
     relatedId: number
-    relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee'
+    relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee' | 'Data Provider'
     clientId?: number
     relationshipStatus: 'Active' | 'Pending' | 'Superseded' | 'Inactive'
     createdBy?: string
@@ -926,7 +926,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       assetManagerId: number
       relationshipId?: string
       relatedId: number
-      relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee'
+      relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee' | 'Data Provider'
       clientId?: number
       relationshipStatus: 'Active' | 'Pending' | 'Superseded' | 'Inactive'
       createdBy?: string
