@@ -205,7 +205,7 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
     default:
       throw new Error(`Invalid class type: ${AMaaSClass}`)
   }
-  if (!AMId) {
+  if (AMId === null || AMId === undefined) {
     return `${baseURL}`
   } else if (!resourceId) {
     return `${baseURL}/${AMId}`
