@@ -426,7 +426,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function fuzzySearch({ AMId, query }: { AMId: number, query: any }, callback?: Function): Promise<IFuzzySearchResult> | void
       function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
-      function fieldSearch(query: { assetManagerIds: number | number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
+      function fieldsSearch(query: { assetManagerIds: number | number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
     }
     namespace Books {
       function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<books.Book[]> | void
@@ -476,7 +476,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     namespace Positions {
       function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<transactions.Position> | void
       function search({ AMId, query }: { AMId: number, query?: { assetManagerIds?: number | number[], bookIds?: string | string[], assetIds?: string | string[], clientIds?: number | number[], accountIds?: string | string[], accountingTypes?: string | string[], positionDate?: string | string[] } }, callback?: Function): Promise<transactions.Position> | void
-      function fieldSearch(query: { assetManagerIds: number | number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
+      function fieldsSearch(query: { assetManagerIds: number | number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
     }
     namespace Transactions {
       function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<transactions.Transaction[]> | void
@@ -484,7 +484,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function amend({ AMId, transaction, resourceId }: { AMId: number, transaction: transactions.Transaction | ITransaction, resourceId?: string }, callback?: Function): Promise<transactions.Transaction> | void
       function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId?: string }, callback?: Function): Promise<transactions.Transaction> | void
       function search({ AMId, query }: { AMId: number, query?: { clientIds?: string | number | any[], transactionStatuses?: string | string[], transactionIds?: string | string[], assetBookIds?: string | string[], counterpartyBookIds?: string | string[], assetIds?: string | string[], transactionDateStart?: any, transactionDateEnd?: any, codeTypes?: string | string[], codeValues?: string | string[], linkTypes?: string | string[], linkedTransactionIds?: string | string[], partyTypes?: string | string[], partyIds?: string | string[], referenceTypes?: string | string[], referenceValues?: string | string[] } }, callback?: Function): Promise<transactions.Transaction> | void
-      function fieldSearch(query: { assetManagerIds: number | number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
+      function fieldsSearch(query: { assetManagerIds: number | number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
       function cancel({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<transactions.Transaction> | void
     }
     function config({ stage, credentialsPath, apiVersion, token }: { stage?: string, credentialsPath?: string, apiVersion?: string, token?: string }): void
