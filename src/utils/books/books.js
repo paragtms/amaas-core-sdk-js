@@ -216,6 +216,46 @@ export function reactivate({ AMId, resourceId }, callback) {
 }
 
 /**
+ * Retrieve Book Permissions for an AMID.
+ * @function getPermissions
+ * @memberof module:api.Books
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the Company owning the Book Permission
+ * @param {string} [params.bookId] - Specific Book ID to retrieve permissions for. Omit to return all Permissions for the given AMId
+ * @param {boolean} params.includeInactive - Whether to show inactive Book Permissions
+ * @param {function} [callback] - Called with two values (error, result) on completion. `result` is the inserted Book Permission instance.
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the inserted Book Permission
+ */
+export function getPermissions({ AMId, bookId, includeInactive }, callback) {
+  const query = { includeInactive: includeInactive || 'false' }
+  const params = {
+    AMaaSClass: 'bookPermissions',
+    AMId,
+    resourceId: bookId,
+    query
+  }
+  let promise = retrieveData(params).then(result => {
+    if (!Array.isArray(result)) {
+      result = _parseBookPermission(result)
+    } else {
+      result = result.map(bookPerm => {
+        return _parseBookPermission(bookPerm)
+      })
+    }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    // return promise if callback is not provided
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
  * Add a Book Permission.
  * @function addPermission
  * @memberof module:api.Books

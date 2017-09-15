@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, search, insert, amend, retire, reactivate, addPermission, readPermission, writePermission, deactivatePermission } from './books'
+import { retrieve, search, insert, amend, retire, reactivate, getPermissions, addPermission, readPermission, writePermission, deactivatePermission } from './books'
 import Book from '../../books/Book/book'
 import BookPermission from '../../books/BookPermission'
 import * as api from '../../exports/api'
@@ -138,6 +138,20 @@ describe('utils/books', () => {
       reactivate({ AMId: 1, resourceId: 'testId' })
       expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1, resourceId: 'testId', data: { bookStatus: 'Active' } })
       done()
+    })
+  })
+
+  describe('getPermissions', () => {
+    beforeAll(() => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(mockBookPermission))
+    })
+    test('with promise', () => {
+      let promise = getPermissions({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls retrieveData with the correct params', () => {
+      getPermissions({ AMId: 88, bookId: 'TEST' })
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'bookPermissions', AMId: 88, resourceId: 'TEST', query: { includeInactive: 'false' } })
     })
   })
 
