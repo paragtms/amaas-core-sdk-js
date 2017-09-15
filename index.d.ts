@@ -62,6 +62,19 @@ declare module '@amaas/amaas-core-sdk-js' {
     version?: number
   }
 
+  export interface IBookPermission {
+    assetManagerId: number
+    bookId: string
+    userAssetManagerId: number
+    permissionStatus: 'Active' | 'Inactive' | 'Superseded'
+    permission: 'read' | 'write'
+    createdBy?: string
+    updatedBy?: string
+    createdTime?: string
+    updatedTime?: string
+    version?: number
+  }
+
   // Assets
   export interface IAsset {
     assetManagerId: number
@@ -435,6 +448,11 @@ declare module '@amaas/amaas-core-sdk-js' {
       function amend({ AMId, book, resourceId }: { AMId: number, book: books.Book | IBook, resourceId: string }, callback?: Function): Promise<books.Book> | void
       function retire({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
+      function getPermissions({ AMId, bookId, includeInactive }: { AMId: number, bookId?: string, includeInactive?: boolean }, callback?: Function): Promise<books.BookPermission | books.BookPermission[]> | void
+      function addPermission({ AMId, bookPermission }: { AMId: number, bookPermission: IBookPermission | books.BookPermission }, callback?: Function): Promise<books.BookPermission> | void
+      function readPermission({ AMId, userAssetManagerId, bookId }: { AMId: number, userAssetManagerId: number, bookId: string }, callback?: Function): Promise<books.BookPermission> | void
+      function writePermission({ AMId, userAssetManagerId, bookId }: { AMId: number, userAssetManagerId: number, bookId: string }, callback?: Function): Promise<books.BookPermission> | void
+      function deactivatePermission({ AMId, userAssetManagerId, bookId }: { AMId: number, userAssetManagerId: number, bookId: string }, callback?: Function): Promise<books.BookPermission> | void
     }
     namespace Fundamentals {
       function countries({ code }: { code?: string }, callback?: Function): Promise<{ [key: string]: string | number }> | void
@@ -560,6 +578,20 @@ declare module '@amaas/amaas-core-sdk-js' {
       updatedTime?: string
       version?: number
       constructor(props: IBook)
+    }
+
+    class BookPermission {
+      assetManagerId: number
+      bookId: string
+      userAssetManagerId: number
+      permissionStatus: 'Active' | 'Inactive' | 'Superseded'
+      permission: 'read' | 'write'
+      createdBy?: string
+      updatedBy?: string
+      createdTime?: string
+      updatedTime?: string
+      version?: number
+      constructor(props: IBookPermission)
     }
   }
 

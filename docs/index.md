@@ -137,6 +137,11 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.amend(params, [callback])](#module_api.Books.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.retire(params, [callback])](#module_api.Books.retire) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.Books.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.getPermissions(params, [callback])](#module_api.Books.getPermissions) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.addPermission(params, [callback])](#module_api.Books.addPermission) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.readPermission(params, [callback])](#module_api.Books.readPermission) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.writePermission(params, [callback])](#module_api.Books.writePermission) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.deactivatePermission(params, [callback])](#module_api.Books.deactivatePermission) ⇒ <code>Promise</code> \| <code>null</code>
     * [.CorporateActions](#module_api.CorporateActions) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.CorporateActions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.CorporateActions.insert) ⇒ <code>Promise</code> \| <code>null</code>
@@ -573,6 +578,11 @@ Reactivate a deactivated Asset. This will set the Asset status to 'Active'.
     * [.amend(params, [callback])](#module_api.Books.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.retire(params, [callback])](#module_api.Books.retire) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.Books.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.getPermissions(params, [callback])](#module_api.Books.getPermissions) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.addPermission(params, [callback])](#module_api.Books.addPermission) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.readPermission(params, [callback])](#module_api.Books.readPermission) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.writePermission(params, [callback])](#module_api.Books.writePermission) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.deactivatePermission(params, [callback])](#module_api.Books.deactivatePermission) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Books.retrieve"></a>
 
@@ -664,6 +674,85 @@ Reactivate a Book. This will set the Book status to 'Active'.
 | params.AMId | <code>string</code> | AMId of the Books to be reactivated |
 | params.resourceId | <code>string</code> | Book ID of the Book to be reactivated |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the reactivated Book instance. Omit to return Promise |
+
+<a name="module_api.Books.getPermissions"></a>
+
+#### Books.getPermissions(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Retrieve Book Permissions for an AMID.
+
+**Kind**: static method of [<code>Books</code>](#module_api.Books)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Book Permission  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Company owning the Book Permission |
+| [params.bookId] | <code>string</code> | Specific Book ID to retrieve permissions for. Omit to return all Permissions for the given AMId |
+| params.includeInactive | <code>boolean</code> | Whether to show inactive Book Permissions |
+| [callback] | <code>function</code> | Called with two values (error, result) on completion. `result` is the inserted Book Permission instance. |
+
+<a name="module_api.Books.addPermission"></a>
+
+#### Books.addPermission(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Add a Book Permission.
+
+**Kind**: static method of [<code>Books</code>](#module_api.Books)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Book Permission  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Company owning the Book |
+| params.bookPermission | <code>BookPermission</code> \| <code>object</code> | Book permission instance or object |
+| [callback] | <code>function</code> | Called with two values (error, result) on completion. `result` is the inserted Book Permission instance. |
+
+<a name="module_api.Books.readPermission"></a>
+
+#### Books.readPermission(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Modify a Book Permission to read (this will downgrade an existing write permission)
+
+**Kind**: static method of [<code>Books</code>](#module_api.Books)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Company owning the Book |
+| params.userAssetManagerId | <code>number</code> | Asset Manager ID of the user to grant read permission to |
+| params.bookId | <code>string</code> | Book ID |
+| [callback] | <code>function</code> | Called with two values (error, result) on completion. `result` is the modifed Book Permission instance. |
+
+<a name="module_api.Books.writePermission"></a>
+
+#### Books.writePermission(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Modify a Book Permission to write (this will upgrade an existing write permission)
+
+**Kind**: static method of [<code>Books</code>](#module_api.Books)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Company owning the Book |
+| params.userAssetManagerId | <code>number</code> | Asset Manager ID of the user to grant read permission to |
+| params.bookId | <code>string</code> | Book ID |
+| [callback] | <code>function</code> | Called with two values (error, result) on completion. `result` is the modifed Book Permission instance. |
+
+<a name="module_api.Books.deactivatePermission"></a>
+
+#### Books.deactivatePermission(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Deactivate a Book Permission (reactivation requires adding new permission)
+
+**Kind**: static method of [<code>Books</code>](#module_api.Books)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Company owning the Book |
+| params.userAssetManagerId | <code>number</code> | Asset Manager ID of the user to grant read permission to |
+| params.bookId | <code>string</code> | Book ID |
+| [callback] | <code>function</code> | Called with two values (error, result) on completion. `result` is the modifed Book Permission instance. |
 
 <a name="module_api.CorporateActions"></a>
 
@@ -3332,6 +3421,8 @@ Classes for the Books Service
 * [books](#module_books)
     * [.Book](#module_books.Book) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
         * [new Book(params)](#new_module_books.Book_new)
+    * [.BookPermission](#module_books.BookPermission) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+        * [new BookPermission(params)](#new_module_books.BookPermission_new)
 
 <a name="module_books.Book"></a>
 
@@ -3366,6 +3457,32 @@ Construct a new Book object
 | [params.createdTime] | <code>date</code> |  | Time that the Book was created (required if creating new Book) |
 | [params.updatedTime] | <code>date</code> |  | Time that the Book was updated (required if amending existing Book) |
 | [params.version] | <code>number</code> |  | Version number of the Book |
+
+<a name="module_books.BookPermission"></a>
+
+### books.BookPermission ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+Class representing a Book Permission
+
+**Kind**: static class of [<code>books</code>](#module_books)  
+**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+<a name="new_module_books.BookPermission_new"></a>
+
+#### new BookPermission(params)
+Construct a new Book Permission instance
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | Book Permission creation options: |
+| params.assetManagerId | <code>number</code> | Asset Manager ID of the Book Permission |
+| params.bookId | <code>string</code> | Book ID |
+| params.userAssetManagerId | <code>number</code> | Asset Manager ID of the User to grant the permission to |
+| params.permissionStatus | <code>string</code> | Permission status (Active or Inactive) |
+| params.permission | <code>string</code> | Permission value ('read' or 'write') |
+| [params.createdBy] | <code>string</code> | Username of the user that created this permission |
+| [params.updatedBy] | <code>string</code> | Username of the user that updated this permission |
+| [params.createdTime] | <code>date</code> | Time that the permission was created |
+| [params.updatedTime] | <code>date</code> | Time that the permission was updated |
 
 <a name="module_children"></a>
 
