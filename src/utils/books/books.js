@@ -215,12 +215,6 @@ export function reactivate({ AMId, resourceId }, callback) {
   promise.catch(error => callback(error))
 }
 
-// POST add permission for a user
-// body: {
-  // assetManagerId (company amid)
-  // bookId
-  // userAssetManagerId (person getting the permission)
-// }
 /**
  * Add a Book Permission.
  * @function addPermission
@@ -241,6 +235,123 @@ export function addPermission({ AMId, bookPermission }, callback) {
     data
   }
   let promise = insertData(params).then(result => {
+    result = _parseBookPermission(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Modify a Book Permission to read (this will downgrade an existing write permission)
+ * @function readPermission
+ * @memberof module:api.Books
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the Company owning the Book
+ * @param {number} params.userAssetManagerId - Asset Manager ID of the user to grant read permission to
+ * @param {string} params.bookId - Book ID
+ * @param {function} [callback] - Called with two values (error, result) on completion. `result` is the modifed Book Permission instance.
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the modified Book Permission
+ */
+export function readPermission({ AMId, userAssetManagerId, bookId }, callback) {
+  const data = new BookPermission({
+    assetManagerId: AMId,
+    userAssetManagerId,
+    bookId,
+    permissionStatus: 'Active',
+    permission: 'read'
+  })
+  const params = {
+    AMaaSClass: 'bookPermissions',
+    AMId,
+    resourceId: `${data.bookId}/modify`,
+    data: { ...data }
+  }
+  let promise = putData(params).then(result => {
+    result = _parseBookPermission(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Modify a Book Permission to write (this will upgrade an existing write permission)
+ * @function writePermission
+ * @memberof module:api.Books
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the Company owning the Book
+ * @param {number} params.userAssetManagerId - Asset Manager ID of the user to grant read permission to
+ * @param {string} params.bookId - Book ID
+ * @param {function} [callback] - Called with two values (error, result) on completion. `result` is the modifed Book Permission instance.
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the modified Book Permission
+ */
+export function writePermission({ AMId, userAssetManagerId, bookId }, callback) {
+  const data = new BookPermission({
+    assetManagerId: AMId,
+    userAssetManagerId,
+    bookId,
+    permissionStatus: 'Active',
+    permission: 'write'
+  })
+  const params = {
+    AMaaSClass: 'bookPermissions',
+    AMId,
+    resourceId: `${data.bookId}/modify`,
+    data: { ...data }
+  }
+  let promise = putData(params).then(result => {
+    result = _parseBookPermission(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Deactivate a Book Permission (reactivation requires adding new permission)
+ * @function deactivatePermission
+ * @memberof module:api.Books
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the Company owning the Book
+ * @param {number} params.userAssetManagerId - Asset Manager ID of the user to grant read permission to
+ * @param {string} params.bookId - Book ID
+ * @param {function} [callback] - Called with two values (error, result) on completion. `result` is the modifed Book Permission instance.
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the modified Book Permission
+ */
+export function deactivatePermission({ AMId, userAssetManagerId, bookId }, callback) {
+  const data = new BookPermission({
+    assetManagerId: AMId,
+    userAssetManagerId,
+    bookId,
+    permissionStatus: 'Inactive',
+    permission: 'write'
+  })
+  const params = {
+    AMaaSClass: 'bookPermissions',
+    AMId,
+    resourceId: `${data.bookId}/deactivate`,
+    data: { ...data }
+  }
+  let promise = putData(params).then(result => {
     result = _parseBookPermission(result)
     if (typeof callback === 'function') {
       callback(null, result)

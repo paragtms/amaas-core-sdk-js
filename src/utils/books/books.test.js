@@ -1,6 +1,7 @@
 import uuid from 'uuid'
-import { retrieve, search, insert, amend, retire, reactivate, addPermission } from './books'
+import { retrieve, search, insert, amend, retire, reactivate, addPermission, readPermission, writePermission, deactivatePermission } from './books'
 import Book from '../../books/Book/book'
+import BookPermission from '../../books/BookPermission'
 import * as api from '../../exports/api'
 import * as network from '../network'
 
@@ -148,9 +149,54 @@ describe('utils/books', () => {
       let promise = addPermission({})
       expect(promise).toBeInstanceOf(Promise)
     })
-    it('calls isnertData with the correct params', () => {
+    it('calls insertData with the correct params', () => {
       addPermission({ AMId: 88, bookPermission: mockBookPermission })
       expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'bookPermissions', AMId: 88, resourceId: 'TEST', data: mockBookPermission })
+    })
+  })
+
+  describe('readPermission', () => {
+    beforeAll(() => {
+      network.putData.mockImplementation(() => Promise.resolve(mockBookPermission))
+    })
+    test('with promise', () => {
+      let promise = readPermission({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls putData with the correct params', () => {
+      const data = new BookPermission({ ...mockBookPermission, permission: 'read' })
+      readPermission({ AMId: 88, userAssetManagerId: 99, bookId: 'TEST' })
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'bookPermissions', AMId: 88, resourceId: 'TEST/modify', data: { ...data } })
+    })
+  })
+
+  describe('writePermission', () => {
+    beforeAll(() => {
+      network.putData.mockImplementation(() => Promise.resolve(mockBookPermission))
+    })
+    test('with promise', () => {
+      let promise = writePermission({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls putData with the correct params', () => {
+      const data = new BookPermission(mockBookPermission)
+      writePermission({ AMId: 88, userAssetManagerId: 99, bookId: 'TEST' })
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'bookPermissions', AMId: 88, resourceId: 'TEST/modify', data: { ...data } })
+    })
+  })
+
+  describe('deactivatePermission', () => {
+    beforeAll(() => {
+      network.putData.mockImplementation(() => Promise.resolve({ ...mockBookPermission, permissionStatus: 'Inactive' }))
+    })
+    test('with promise', () => {
+      let promise = deactivatePermission({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls putData with the correct params', () => {
+      const data = new BookPermission({ ...mockBookPermission, permissionStatus: 'Inactive' })
+      deactivatePermission({ AMId: 88, userAssetManagerId: 99, bookId: 'TEST' })
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'bookPermissions', AMId: 88, resourceId: 'TEST/deactivate', data: { ...data } })
     })
   })
 })
