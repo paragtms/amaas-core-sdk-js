@@ -1,5 +1,6 @@
 import { retrieveData, searchData, putData, patchData, insertData } from '../network'
 import Book from './../../books/Book/book'
+import BookPermission from './../../books/BookPermission'
 
 /**
  * Retrieve Book data for specified AMId and bookId
@@ -212,6 +213,48 @@ export function reactivate({ AMId, resourceId }, callback) {
     return promise
   }
   promise.catch(error => callback(error))
+}
+
+// POST add permission for a user
+// body: {
+  // assetManagerId (company amid)
+  // bookId
+  // userAssetManagerId (person getting the permission)
+// }
+/**
+ * Add a Book Permission.
+ * @function addPermission
+ * @memberof module:api.Books
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - Asset Manager ID of the Company owning the Book
+ * @param {BookPermission|object} params.bookPermission - Book permission instance or object
+ * @param {function} [callback] - Called with two values (error, result) on completion. `result` is the inserted Book Permission instance.
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the inserted Book Permission
+ */
+export function addPermission({ AMId, bookPermission }, callback) {
+  const data = { ...bookPermission }
+  const params = {
+    AMaaSClass: 'bookPermissions',
+    AMId,
+    resourceId: data.bookId,
+    data
+  }
+  let promise = insertData(params).then(result => {
+    result = _parseBookPermission(result)
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+export function _parseBookPermission(object) {
+  return new BookPermission(object)
 }
 
 export function _parseBook(object) {

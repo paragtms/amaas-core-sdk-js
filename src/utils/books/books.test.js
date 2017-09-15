@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, search, insert, amend, retire, reactivate } from './books'
+import { retrieve, search, insert, amend, retire, reactivate, addPermission } from './books'
 import Book from '../../books/Book/book'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -28,6 +28,14 @@ const mockBook = {
   assetManagerId: 1,
   ownerId: "50SJMSPK7A",
   baseCurrency: "USD",
+}
+
+const mockBookPermission = {
+  assetManagerId: 88,
+  userAssetManagerId: 99,
+  bookId: 'TEST',
+  permissionStatus: 'Active',
+  permission: 'write'
 }
 
 describe('utils/books', () => {
@@ -129,6 +137,20 @@ describe('utils/books', () => {
       reactivate({ AMId: 1, resourceId: 'testId' })
       expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'book', AMId: 1, resourceId: 'testId', data: { bookStatus: 'Active' } })
       done()
+    })
+  })
+
+  describe('addPermission', () => {
+    beforeAll(() => {
+      network.insertData.mockImplementation(() => Promise.resolve(mockBookPermission))
+    })
+    test('with promise', () => {
+      let promise = addPermission({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls isnertData with the correct params', () => {
+      addPermission({ AMId: 88, bookPermission: mockBookPermission })
+      expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'bookPermissions', AMId: 88, resourceId: 'TEST', data: mockBookPermission })
     })
   })
 })
