@@ -42,10 +42,6 @@ class Company extends Organisation {
     partyClass='Company',
     baseCurrency,
     description='',
-    licenseNumber,
-    licenseType,
-    assetsUnderManagement,
-    registrationNumber,
     yearOfIncorporation,
     contactNumber,
     addresses={},
@@ -83,10 +79,6 @@ class Company extends Organisation {
       updatedTime,
       version
     })
-    this.licenseNumber = licenseNumber
-    this.licenseType = licenseType
-    this.assetsUnderManagement = assetsUnderManagement
-    this.registrationNumber = registrationNumber
     this.yearOfIncorporation = yearOfIncorporation
     this.contactNumber = contactNumber
   }
