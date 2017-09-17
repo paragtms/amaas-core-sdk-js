@@ -47,18 +47,18 @@ These classes cannot be instantiated from the SDK, they are included for referen
 
 
 * [core](#module_core)
-    * [.Reference](#module_core.Reference) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Reference](#module_core.Reference) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Reference(params)](#new_module_core.Reference_new)
     * [.AMaaSModel](#module_core.AMaaSModel)
         * [new AMaaSModel(params)](#new_module_core.AMaaSModel_new)
 
 <a name="module_core.Reference"></a>
 
-### core.Reference ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### core.Reference ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Reference
 
-**Kind**: static class of [<code>core</code>](#module_core)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[core](#module_core)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_core.Reference_new"></a>
 
 #### new Reference(params)
@@ -81,7 +81,7 @@ Construct a new Reference instance
 Class representing a AMaaSModel.
 This is the base class for almost every other class.
 
-**Kind**: static class of [<code>core</code>](#module_core)  
+**Kind**: static class of <code>[core](#module_core)</code>  
 <a name="new_module_core.AMaaSModel_new"></a>
 
 #### new AMaaSModel(params)
@@ -107,107 +107,107 @@ API Methods. These methods enable communication with the AMaaS Database. All met
     * [.csv](#module_api.csv) : <code>object</code>
         * [.parseString(params)](#module_api.csv.parseString) ⇒ <code>Array</code>
     * [.Allocations](#module_api.Allocations) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.Allocations.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.send(params, [callback])](#module_api.Allocations.send) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.Allocations.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.send(params, [callback])](#module_api.Allocations.send) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.AssetManagers](#module_api.AssetManagers) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.AssetManagers.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insert(params, [callback])](#module_api.AssetManagers.insert) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.amend(params, [callback])](#module_api.AssetManagers.amend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.deactivate(params, [callback])](#module_api.AssetManagers.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.reactivate(params, [callback])](#module_api.AssetManagers.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.searchDomains(params, [callback])](#module_api.AssetManagers.searchDomains) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.getCredentialsForPubSub(params, [callback])](#module_api.AssetManagers.getCredentialsForPubSub) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.AssetManagers.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insert(params, [callback])](#module_api.AssetManagers.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.amend(params, [callback])](#module_api.AssetManagers.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.deactivate(params, [callback])](#module_api.AssetManagers.deactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.reactivate(params, [callback])](#module_api.AssetManagers.reactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.searchDomains(params, [callback])](#module_api.AssetManagers.searchDomains) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.getCredentialsForPubSub(params, [callback])](#module_api.AssetManagers.getCredentialsForPubSub) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Assets](#module_api.Assets) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.Assets.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insert(params, [callback])](#module_api.Assets.insert) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.Assets.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insert(params, [callback])](#module_api.Assets.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Books](#module_api.Books) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.Books.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.search(params, [callback])](#module_api.Books.search) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insert(params, [callback])](#module_api.Books.insert) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.amend(params, [callback])](#module_api.Books.amend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.retire(params, [callback])](#module_api.Books.retire) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.reactivate(params, [callback])](#module_api.Books.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.getPermissions(params, [callback])](#module_api.Books.getPermissions) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.addPermission(params, [callback])](#module_api.Books.addPermission) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.readPermission(params, [callback])](#module_api.Books.readPermission) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.writePermission(params, [callback])](#module_api.Books.writePermission) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.deactivatePermission(params, [callback])](#module_api.Books.deactivatePermission) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.Books.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.search(params, [callback])](#module_api.Books.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insert(params, [callback])](#module_api.Books.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.amend(params, [callback])](#module_api.Books.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.retire(params, [callback])](#module_api.Books.retire) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.reactivate(params, [callback])](#module_api.Books.reactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.getPermissions(params, [callback])](#module_api.Books.getPermissions) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.addPermission(params, [callback])](#module_api.Books.addPermission) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.readPermission(params, [callback])](#module_api.Books.readPermission) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.writePermission(params, [callback])](#module_api.Books.writePermission) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.deactivatePermission(params, [callback])](#module_api.Books.deactivatePermission) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.CorporateActions](#module_api.CorporateActions) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.CorporateActions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insert(params, [callback])](#module_api.CorporateActions.insert) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.amend(params, [callback])](#module_api.CorporateActions.amend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.search(params, [callback])](#module_api.CorporateActions.search) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.cancel(params, [callback])](#module_api.CorporateActions.cancel) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.reopen(params, [callback])](#module_api.CorporateActions.reopen) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.CorporateActions.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insert(params, [callback])](#module_api.CorporateActions.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.amend(params, [callback])](#module_api.CorporateActions.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.search(params, [callback])](#module_api.CorporateActions.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.cancel(params, [callback])](#module_api.CorporateActions.cancel) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.reopen(params, [callback])](#module_api.CorporateActions.reopen) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Fundamentals](#module_api.Fundamentals) : <code>object</code>
-        * [.countries(params, [callback])](#module_api.Fundamentals.countries) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.calcBusinessDate(params, [callback])](#module_api.Fundamentals.calcBusinessDate) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.processDateInfo(params, [callback])](#module_api.Fundamentals.processDateInfo) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.holidays(params, [callback])](#module_api.Fundamentals.holidays) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.countries(params, [callback])](#module_api.Fundamentals.countries) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.calcBusinessDate(params, [callback])](#module_api.Fundamentals.calcBusinessDate) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.processDateInfo(params, [callback])](#module_api.Fundamentals.processDateInfo) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.holidays(params, [callback])](#module_api.Fundamentals.holidays) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Monitor](#module_api.Monitor) : <code>object</code>
-        * [.retrieveItem(params, callback)](#module_api.Monitor.retrieveItem) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insertNewItem(params, [callback])](#module_api.Monitor.insertNewItem) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieveItem(params, callback)](#module_api.Monitor.retrieveItem) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insertNewItem(params, [callback])](#module_api.Monitor.insertNewItem) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Netting](#module_api.Netting) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.Netting.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.send(params, [callback])](#module_api.Netting.send) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.Netting.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.send(params, [callback])](#module_api.Netting.send) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Parties](#module_api.Parties) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.Parties.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insert(params, [callback])](#module_api.Parties.insert) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.amend(params, [callback])](#module_api.Parties.amend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.partialAmend(params, [callback])](#module_api.Parties.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.search(params, [callback])](#module_api.Parties.search) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.fuzzySearch(query, callback)](#module_api.Parties.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.deactivate(params, [callback])](#module_api.Parties.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.reactivate(params, [callback])](#module_api.Parties.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.Parties.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insert(params, [callback])](#module_api.Parties.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.amend(params, [callback])](#module_api.Parties.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.partialAmend(params, [callback])](#module_api.Parties.partialAmend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.search(params, [callback])](#module_api.Parties.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.fuzzySearch(query, callback)](#module_api.Parties.fuzzySearch) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.deactivate(params, [callback])](#module_api.Parties.deactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.reactivate(params, [callback])](#module_api.Parties.reactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Positions](#module_api.Positions) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.Positions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.search(params, [callback])](#module_api.Positions.search) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.Positions.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.search(params, [callback])](#module_api.Positions.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Relationships](#module_api.Relationships) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.Relationships.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.requestRelationship(params, [callback])](#module_api.Relationships.requestRelationship) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.approveRel(params, [callback])](#module_api.Relationships.approveRel) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.Relationships.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.requestRelationship(params, [callback])](#module_api.Relationships.requestRelationship) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.approveRel(params, [callback])](#module_api.Relationships.approveRel) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> &#124; <code>null</code>
     * [.Transactions](#module_api.Transactions) : <code>object</code>
-        * [.retrieve(params, [callback])](#module_api.Transactions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.insert(params, [callback])](#module_api.Transactions.insert) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.amend(params, [callback])](#module_api.Transactions.amend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.partialAmend(params, [callback])](#module_api.Transactions.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.search(params, [callback])](#module_api.Transactions.search) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.cancel(params, [callback])](#module_api.Transactions.cancel) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieve(params, [callback])](#module_api.Transactions.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.insert(params, [callback])](#module_api.Transactions.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.amend(params, [callback])](#module_api.Transactions.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.partialAmend(params, [callback])](#module_api.Transactions.partialAmend) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.search(params, [callback])](#module_api.Transactions.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+        * [.cancel(params, [callback])](#module_api.Transactions.cancel) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.csv"></a>
 
 ### api.csv : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 <a name="module_api.csv.parseString"></a>
 
 #### csv.parseString(params) ⇒ <code>Array</code>
 Convert csv object string into class instance
 
-**Kind**: static method of [<code>csv</code>](#module_api.csv)  
+**Kind**: static method of <code>[csv](#module_api.csv)</code>  
 **Returns**: <code>Array</code> - An array of Transaction instances  
 
 | Param | Type | Description |
@@ -219,20 +219,20 @@ Convert csv object string into class instance
 <a name="module_api.Allocations"></a>
 
 ### api.Allocations : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 **Note**: This service is in beta (untested)  
 
 * [.Allocations](#module_api.Allocations) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.Allocations.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.send(params, [callback])](#module_api.Allocations.send) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.Allocations.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.send(params, [callback])](#module_api.Allocations.send) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Allocations.retrieve"></a>
 
-#### Allocations.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Allocations.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve Allocations for a specific Transaction
 
-**Kind**: static method of [<code>Allocations</code>](#module_api.Allocations)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an Array of Link instances or a single Link instance (an Allocation is an instance of the Link class)  
+**Kind**: static method of <code>[Allocations](#module_api.Allocations)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an Array of Link instances or a single Link instance (an Allocation is an instance of the Link class)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -243,11 +243,11 @@ Retrieve Allocations for a specific Transaction
 
 <a name="module_api.Allocations.send"></a>
 
-#### Allocations.send(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Allocations.send(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Send Allocations for a specific Transaction
 
-**Kind**: static method of [<code>Allocations</code>](#module_api.Allocations)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Allocations  
+**Kind**: static method of <code>[Allocations](#module_api.Allocations)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Allocations  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -260,27 +260,27 @@ Send Allocations for a specific Transaction
 <a name="module_api.AssetManagers"></a>
 
 ### api.AssetManagers : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.AssetManagers](#module_api.AssetManagers) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.AssetManagers.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insert(params, [callback])](#module_api.AssetManagers.insert) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.amend(params, [callback])](#module_api.AssetManagers.amend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.deactivate(params, [callback])](#module_api.AssetManagers.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.reactivate(params, [callback])](#module_api.AssetManagers.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.searchDomains(params, [callback])](#module_api.AssetManagers.searchDomains) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.getCredentialsForPubSub(params, [callback])](#module_api.AssetManagers.getCredentialsForPubSub) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.AssetManagers.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insert(params, [callback])](#module_api.AssetManagers.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.amend(params, [callback])](#module_api.AssetManagers.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.deactivate(params, [callback])](#module_api.AssetManagers.deactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.reactivate(params, [callback])](#module_api.AssetManagers.reactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.searchDomains(params, [callback])](#module_api.AssetManagers.searchDomains) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.checkDomains(params, [callback])](#module_api.AssetManagers.checkDomains) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insertDomain(params, [callback])](#module_api.AssetManagers.insertDomain) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.retrieveEODBooks(params, [callback])](#module_api.AssetManagers.retrieveEODBooks) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.getCredentialsForPubSub(params, [callback])](#module_api.AssetManagers.getCredentialsForPubSub) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.AssetManagers.retrieve"></a>
 
-#### AssetManagers.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve Asset Manager data for specified Asset Manager ID
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an AssetManager instance  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an AssetManager instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -290,11 +290,11 @@ Retrieve Asset Manager data for specified Asset Manager ID
 
 <a name="module_api.AssetManagers.insert"></a>
 
-#### AssetManagers.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.insert(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a new Asset Manager into the database
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted AssetManager instance  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted AssetManager instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -304,11 +304,11 @@ Insert a new Asset Manager into the database
 
 <a name="module_api.AssetManagers.amend"></a>
 
-#### AssetManagers.amend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.amend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Amend an Asset Manager (Replaces current Asset Manager with what is passed in)
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended AssetManager instance  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended AssetManager instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -319,11 +319,11 @@ Amend an Asset Manager (Replaces current Asset Manager with what is passed in)
 
 <a name="module_api.AssetManagers.deactivate"></a>
 
-#### AssetManagers.deactivate(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.deactivate(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Deactivate an Asset Manager
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the deactivated AssetManager instance  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the deactivated AssetManager instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -333,11 +333,11 @@ Deactivate an Asset Manager
 
 <a name="module_api.AssetManagers.reactivate"></a>
 
-#### AssetManagers.reactivate(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.reactivate(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Reactivate an Asset Manager
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the reactivated AssetManager instance  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the reactivated AssetManager instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -347,11 +347,11 @@ Reactivate an Asset Manager
 
 <a name="module_api.AssetManagers.searchDomains"></a>
 
-#### AssetManagers.searchDomains(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.searchDomains(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search domains
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with the matching Domain instances.  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a promise that resolves with the matching Domain instances.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -361,11 +361,11 @@ Search domains
 
 <a name="module_api.AssetManagers.checkDomains"></a>
 
-#### AssetManagers.checkDomains(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.checkDomains(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Check whether a domain has any AMIDs associated with it
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with the Domain instance containing an AMID which is primary for this domain, or null.  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a promise that resolves with the Domain instance containing an AMID which is primary for this domain, or null.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -375,11 +375,11 @@ Check whether a domain has any AMIDs associated with it
 
 <a name="module_api.AssetManagers.insertDomain"></a>
 
-#### AssetManagers.insertDomain(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.insertDomain(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a new Domain for a given AMID
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with the inserted Domain instance.  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a promise that resolves with the inserted Domain instance.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -390,11 +390,11 @@ Insert a new Domain for a given AMID
 
 <a name="module_api.AssetManagers.retrieveEODBooks"></a>
 
-#### AssetManagers.retrieveEODBooks(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.retrieveEODBooks(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve EOD Books
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with an array of EODBooks or a single EODBook instance.  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a promise that resolves with an array of EODBooks or a single EODBook instance.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -405,11 +405,11 @@ Retrieve EOD Books
 
 <a name="module_api.AssetManagers.getCredentialsForPubSub"></a>
 
-#### AssetManagers.getCredentialsForPubSub(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### AssetManagers.getCredentialsForPubSub(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve temporary credentials for pub/sub connection
 
-**Kind**: static method of [<code>AssetManagers</code>](#module_api.AssetManagers)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with the credentials object as well as an array of available subscriptions.  
+**Kind**: static method of <code>[AssetManagers](#module_api.AssetManagers)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a promise that resolves with the credentials object as well as an array of available subscriptions.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -420,26 +420,26 @@ Retrieve temporary credentials for pub/sub connection
 <a name="module_api.Assets"></a>
 
 ### api.Assets : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.Assets](#module_api.Assets) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.Assets.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insert(params, [callback])](#module_api.Assets.insert) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.Assets.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insert(params, [callback])](#module_api.Assets.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Assets.retrieve"></a>
 
-#### Assets.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve Asset data for specified AMId and assetId
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -450,11 +450,11 @@ Retrieve Asset data for specified AMId and assetId
 
 <a name="module_api.Assets.insert"></a>
 
-#### Assets.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.insert(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a new Asset into the database
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Asset instance  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Asset instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -465,11 +465,11 @@ Insert a new Asset into the database
 
 <a name="module_api.Assets.amend"></a>
 
-#### Assets.amend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.amend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Amend an existing Asset. WARNING: This makes a HTTP PUT request and will replace the existing Asset with the one passed in
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Asset instance  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Asset instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -481,11 +481,11 @@ Amend an existing Asset. WARNING: This makes a HTTP PUT request and will replace
 
 <a name="module_api.Assets.partialAmend"></a>
 
-#### Assets.partialAmend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.partialAmend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Partially amend an existing Asset.
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Asset instance  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Asset instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -497,11 +497,11 @@ Partially amend an existing Asset.
 
 <a name="module_api.Assets.search"></a>
 
-#### Assets.search(params, callback) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.search(params, callback) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search for Assets
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Assets or a single Asset instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -512,11 +512,11 @@ Search for Assets
 
 <a name="module_api.Assets.fuzzySearch"></a>
 
-#### Assets.fuzzySearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.fuzzySearch(query, callback) ⇒ <code>Promise</code> &#124; <code>null</code>
 Fuzzy Search on assets
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the above object.  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the above object.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -525,11 +525,11 @@ Fuzzy Search on assets
 
 <a name="module_api.Assets.fieldsSearch"></a>
 
-#### Assets.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.fieldsSearch(query, callback) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search for Assets and return specified fields
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of plain objects or a single plain object  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of plain objects or a single plain object  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -538,11 +538,11 @@ Search for Assets and return specified fields
 
 <a name="module_api.Assets.deactivate"></a>
 
-#### Assets.deactivate(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.deactivate(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Delete an exising Asset. This will set the Asset status to 'Inactive'.
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the deactivated Asset instance  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the deactivated Asset instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -553,11 +553,11 @@ Delete an exising Asset. This will set the Asset status to 'Inactive'.
 
 <a name="module_api.Assets.reactivate"></a>
 
-#### Assets.reactivate(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.reactivate(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Reactivate a deactivated Asset. This will set the Asset status to 'Active'.
 
-**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the reactivated Asset instance  
+**Kind**: static method of <code>[Assets](#module_api.Assets)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the reactivated Asset instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -569,28 +569,28 @@ Reactivate a deactivated Asset. This will set the Asset status to 'Active'.
 <a name="module_api.Books"></a>
 
 ### api.Books : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.Books](#module_api.Books) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.Books.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.search(params, [callback])](#module_api.Books.search) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insert(params, [callback])](#module_api.Books.insert) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.amend(params, [callback])](#module_api.Books.amend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.retire(params, [callback])](#module_api.Books.retire) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.reactivate(params, [callback])](#module_api.Books.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.getPermissions(params, [callback])](#module_api.Books.getPermissions) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.addPermission(params, [callback])](#module_api.Books.addPermission) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.readPermission(params, [callback])](#module_api.Books.readPermission) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.writePermission(params, [callback])](#module_api.Books.writePermission) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.deactivatePermission(params, [callback])](#module_api.Books.deactivatePermission) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.Books.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.search(params, [callback])](#module_api.Books.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insert(params, [callback])](#module_api.Books.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.amend(params, [callback])](#module_api.Books.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.retire(params, [callback])](#module_api.Books.retire) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.reactivate(params, [callback])](#module_api.Books.reactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.getPermissions(params, [callback])](#module_api.Books.getPermissions) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.addPermission(params, [callback])](#module_api.Books.addPermission) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.readPermission(params, [callback])](#module_api.Books.readPermission) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.writePermission(params, [callback])](#module_api.Books.writePermission) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.deactivatePermission(params, [callback])](#module_api.Books.deactivatePermission) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Books.retrieve"></a>
 
-#### Books.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve Book data for specified AMId and bookId
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Books or a single Book instance  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Books or a single Book instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -601,11 +601,11 @@ Retrieve Book data for specified AMId and bookId
 
 <a name="module_api.Books.search"></a>
 
-#### Books.search(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.search(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search Books for specified AMId and bookId
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Books or a single Book instance  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Books or a single Book instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -616,11 +616,11 @@ Search Books for specified AMId and bookId
 
 <a name="module_api.Books.insert"></a>
 
-#### Books.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.insert(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a new Book into the database
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Book instance  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Book instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -631,11 +631,11 @@ Insert a new Book into the database
 
 <a name="module_api.Books.amend"></a>
 
-#### Books.amend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.amend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Amend an existing Book. WARNING: This makes a HTTP PUT request and will replace the existing Book with the one passed in
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Book instance  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Book instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -647,11 +647,11 @@ Amend an existing Book. WARNING: This makes a HTTP PUT request and will replace 
 
 <a name="module_api.Books.retire"></a>
 
-#### Books.retire(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.retire(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retire a Book. This will set the Book status to 'Retired'.
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the retired Book instance  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the retired Book instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -662,11 +662,11 @@ Retire a Book. This will set the Book status to 'Retired'.
 
 <a name="module_api.Books.reactivate"></a>
 
-#### Books.reactivate(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.reactivate(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Reactivate a Book. This will set the Book status to 'Active'.
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the reactivated Book instance  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the reactivated Book instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -677,11 +677,11 @@ Reactivate a Book. This will set the Book status to 'Active'.
 
 <a name="module_api.Books.getPermissions"></a>
 
-#### Books.getPermissions(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.getPermissions(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve Book Permissions for an AMID.
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Book Permission  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Book Permission  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -693,26 +693,26 @@ Retrieve Book Permissions for an AMID.
 
 <a name="module_api.Books.addPermission"></a>
 
-#### Books.addPermission(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.addPermission(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Add a Book Permission.
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Book Permission  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Book Permission  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | params.AMId | <code>number</code> | Asset Manager ID of the Company owning the Book |
-| params.bookPermission | <code>BookPermission</code> \| <code>object</code> | Book permission instance or object |
+| params.bookPermission | <code>BookPermission</code> &#124; <code>object</code> | Book permission instance or object |
 | [callback] | <code>function</code> | Called with two values (error, result) on completion. `result` is the inserted Book Permission instance. |
 
 <a name="module_api.Books.readPermission"></a>
 
-#### Books.readPermission(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.readPermission(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Modify a Book Permission to read (this will downgrade an existing write permission)
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -724,11 +724,11 @@ Modify a Book Permission to read (this will downgrade an existing write permissi
 
 <a name="module_api.Books.writePermission"></a>
 
-#### Books.writePermission(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.writePermission(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Modify a Book Permission to write (this will upgrade an existing write permission)
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -740,11 +740,11 @@ Modify a Book Permission to write (this will upgrade an existing write permissio
 
 <a name="module_api.Books.deactivatePermission"></a>
 
-#### Books.deactivatePermission(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Books.deactivatePermission(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Deactivate a Book Permission (reactivation requires adding new permission)
 
-**Kind**: static method of [<code>Books</code>](#module_api.Books)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
+**Kind**: static method of <code>[Books](#module_api.Books)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the modified Book Permission  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -757,23 +757,23 @@ Deactivate a Book Permission (reactivation requires adding new permission)
 <a name="module_api.CorporateActions"></a>
 
 ### api.CorporateActions : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.CorporateActions](#module_api.CorporateActions) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.CorporateActions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insert(params, [callback])](#module_api.CorporateActions.insert) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.amend(params, [callback])](#module_api.CorporateActions.amend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.search(params, [callback])](#module_api.CorporateActions.search) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.cancel(params, [callback])](#module_api.CorporateActions.cancel) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.reopen(params, [callback])](#module_api.CorporateActions.reopen) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.CorporateActions.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insert(params, [callback])](#module_api.CorporateActions.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.amend(params, [callback])](#module_api.CorporateActions.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.search(params, [callback])](#module_api.CorporateActions.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.cancel(params, [callback])](#module_api.CorporateActions.cancel) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.reopen(params, [callback])](#module_api.CorporateActions.reopen) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.CorporateActions.retrieve"></a>
 
-#### CorporateActions.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### CorporateActions.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve a Corporate Action
 
-**Kind**: static method of [<code>CorporateActions</code>](#module_api.CorporateActions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Corporate Actions or a single CorporateAction instance  
+**Kind**: static method of <code>[CorporateActions](#module_api.CorporateActions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Corporate Actions or a single CorporateAction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -784,11 +784,11 @@ Retrieve a Corporate Action
 
 <a name="module_api.CorporateActions.insert"></a>
 
-#### CorporateActions.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### CorporateActions.insert(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a Corporate Action
 
-**Kind**: static method of [<code>CorporateActions</code>](#module_api.CorporateActions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted CorporateAction instance  
+**Kind**: static method of <code>[CorporateActions](#module_api.CorporateActions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted CorporateAction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -799,11 +799,11 @@ Insert a Corporate Action
 
 <a name="module_api.CorporateActions.amend"></a>
 
-#### CorporateActions.amend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### CorporateActions.amend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a Corporate Action
 
-**Kind**: static method of [<code>CorporateActions</code>](#module_api.CorporateActions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended CorporateAction instance  
+**Kind**: static method of <code>[CorporateActions](#module_api.CorporateActions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended CorporateAction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -815,11 +815,11 @@ Insert a Corporate Action
 
 <a name="module_api.CorporateActions.search"></a>
 
-#### CorporateActions.search(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### CorporateActions.search(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search for Corporate Actions
 
-**Kind**: static method of [<code>CorporateActions</code>](#module_api.CorporateActions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Corporate Actions or a single CorporateAction instance  
+**Kind**: static method of <code>[CorporateActions](#module_api.CorporateActions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Corporate Actions or a single CorporateAction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -830,11 +830,11 @@ Search for Corporate Actions
 
 <a name="module_api.CorporateActions.cancel"></a>
 
-#### CorporateActions.cancel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### CorporateActions.cancel(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Cancel a Corporate Action
 
-**Kind**: static method of [<code>CorporateActions</code>](#module_api.CorporateActions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the cancelled CorporateAction instance  
+**Kind**: static method of <code>[CorporateActions](#module_api.CorporateActions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the cancelled CorporateAction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -845,11 +845,11 @@ Cancel a Corporate Action
 
 <a name="module_api.CorporateActions.reopen"></a>
 
-#### CorporateActions.reopen(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### CorporateActions.reopen(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Reopen a cancelled Corporate Action
 
-**Kind**: static method of [<code>CorporateActions</code>](#module_api.CorporateActions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the reopened CorporateAction instance  
+**Kind**: static method of <code>[CorporateActions](#module_api.CorporateActions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the reopened CorporateAction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -861,21 +861,21 @@ Reopen a cancelled Corporate Action
 <a name="module_api.Fundamentals"></a>
 
 ### api.Fundamentals : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.Fundamentals](#module_api.Fundamentals) : <code>object</code>
-    * [.countries(params, [callback])](#module_api.Fundamentals.countries) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.calcBusinessDate(params, [callback])](#module_api.Fundamentals.calcBusinessDate) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.processDateInfo(params, [callback])](#module_api.Fundamentals.processDateInfo) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.holidays(params, [callback])](#module_api.Fundamentals.holidays) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.countries(params, [callback])](#module_api.Fundamentals.countries) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.calcBusinessDate(params, [callback])](#module_api.Fundamentals.calcBusinessDate) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.processDateInfo(params, [callback])](#module_api.Fundamentals.processDateInfo) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.holidays(params, [callback])](#module_api.Fundamentals.holidays) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Fundamentals.countries"></a>
 
-#### Fundamentals.countries(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Fundamentals.countries(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve country info for a specific code.
 
-**Kind**: static method of [<code>Fundamentals</code>](#module_api.Fundamentals)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, resolves with a country object.  
+**Kind**: static method of <code>[Fundamentals](#module_api.Fundamentals)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, resolves with a country object.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -885,70 +885,70 @@ Retrieve country info for a specific code.
 
 <a name="module_api.Fundamentals.calcBusinessDate"></a>
 
-#### Fundamentals.calcBusinessDate(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Fundamentals.calcBusinessDate(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Make request and search data
 
-**Kind**: static method of [<code>Fundamentals</code>](#module_api.Fundamentals)  
+**Kind**: static method of <code>[Fundamentals](#module_api.Fundamentals)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.codes | <code>string</code> \| <code>array</code> | A country code string or an array of country code strings |
+| params.codes | <code>string</code> &#124; <code>array</code> | A country code string or an array of country code strings |
 | params.date | <code>string</code> | start date |
 | params.offset | <code>string</code> | Number of offset days. |
-| params.invalidDates | <code>string</code> \| <code>array</code> | an invalid date string or an array of invalid dates strings |
+| params.invalidDates | <code>string</code> &#124; <code>array</code> | an invalid date string or an array of invalid dates strings |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is a country name returned or country names. Omit to return Promise |
 
 <a name="module_api.Fundamentals.processDateInfo"></a>
 
-#### Fundamentals.processDateInfo(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Fundamentals.processDateInfo(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Make request and search data
 
-**Kind**: static method of [<code>Fundamentals</code>](#module_api.Fundamentals)  
+**Kind**: static method of <code>[Fundamentals](#module_api.Fundamentals)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.codes | <code>string</code> \| <code>array</code> | A country code string or an array of country codes strings |
+| params.codes | <code>string</code> &#124; <code>array</code> | A country code string or an array of country codes strings |
 | params.date | <code>string</code> | start date |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is a country name returned or country names. Omit to return Promise |
 
 <a name="module_api.Fundamentals.holidays"></a>
 
-#### Fundamentals.holidays(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Fundamentals.holidays(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Make request and search data
 
-**Kind**: static method of [<code>Fundamentals</code>](#module_api.Fundamentals)  
+**Kind**: static method of <code>[Fundamentals](#module_api.Fundamentals)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.codes | <code>string</code> \| <code>array</code> | A country code string or an array of country codes strings |
-| params.years | <code>string</code> \| <code>array</code> | A year string or an array of |
+| params.codes | <code>string</code> &#124; <code>array</code> | A country code string or an array of country codes strings |
+| params.years | <code>string</code> &#124; <code>array</code> | A year string or an array of |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is a country name returned or country names. Omit to return Promise |
 
 <a name="module_api.Monitor"></a>
 
 ### api.Monitor : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.Monitor](#module_api.Monitor) : <code>object</code>
-    * [.retrieveItem(params, callback)](#module_api.Monitor.retrieveItem) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insertNewItem(params, [callback])](#module_api.Monitor.insertNewItem) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieveItem(params, callback)](#module_api.Monitor.retrieveItem) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insertNewItem(params, [callback])](#module_api.Monitor.insertNewItem) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.resubmitItem(params, [callback])](#module_api.Monitor.resubmitItem) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.searchItems(params, [callback])](#module_api.Monitor.searchItems) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.closeItem(params, [callback])](#module_api.Monitor.closeItem) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Monitor.retrieveItem"></a>
 
-#### Monitor.retrieveItem(params, callback) ⇒ <code>Promise</code> \| <code>null</code>
+#### Monitor.retrieveItem(params, callback) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve a Monitor Item
 
-**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
-**Returns**: <code>Promise</code> \| <code>null</code> - - If no callback supplied, returns a Promise that resolves with an array of Items or a single Item instance  
+**Kind**: static method of <code>[Monitor](#module_api.Monitor)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - - If no callback supplied, returns a Promise that resolves with an array of Items or a single Item instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -959,26 +959,26 @@ Retrieve a Monitor Item
 
 <a name="module_api.Monitor.insertNewItem"></a>
 
-#### Monitor.insertNewItem(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Monitor.insertNewItem(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a new Monitor Item
 
-**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
-**Returns**: <code>Promise</code> \| <code>null</code> - - If no callback supplied, returns a Promise that resolves with the inserted Item instance  
+**Kind**: static method of <code>[Monitor](#module_api.Monitor)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - - If no callback supplied, returns a Promise that resolves with the inserted Item instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | params.assetManagerId | <code>number</code> | Asset Manager ID of the Item |
-| params.item | <code>Item</code> \| <code>object</code> | Monitor Item |
+| params.item | <code>Item</code> &#124; <code>object</code> | Monitor Item |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result ` is the inserted Item instance. Omit to return Promise |
 
 <a name="module_api.Monitor.resubmitItem"></a>
 
-#### Monitor.resubmitItem(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Monitor.resubmitItem(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Resubmit a monitor item
 
-**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the resubmitted Item instance.  
+**Kind**: static method of <code>[Monitor](#module_api.Monitor)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the resubmitted Item instance.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -989,11 +989,11 @@ Resubmit a monitor item
 
 <a name="module_api.Monitor.searchItems"></a>
 
-#### Monitor.searchItems(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Monitor.searchItems(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search Monitor Items
 
-**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Items or a single Item instance.  
+**Kind**: static method of <code>[Monitor](#module_api.Monitor)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Items or a single Item instance.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1004,11 +1004,11 @@ Search Monitor Items
 
 <a name="module_api.Monitor.closeItem"></a>
 
-#### Monitor.closeItem(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Monitor.closeItem(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Close a monitor item
 
-**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the closed Monitor Item instance.  
+**Kind**: static method of <code>[Monitor](#module_api.Monitor)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the closed Monitor Item instance.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1019,9 +1019,9 @@ Close a monitor item
 
 <a name="module_api.Monitor.retrieveEvent"></a>
 
-#### Monitor.retrieveEvent(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
-**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an Event or array of Events  
+#### Monitor.retrieveEvent(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
+**Kind**: static method of <code>[Monitor](#module_api.Monitor)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an Event or array of Events  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1032,9 +1032,9 @@ Close a monitor item
 
 <a name="module_api.Monitor.insertEvent"></a>
 
-#### Monitor.insertEvent(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
-**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the newly inserted Event  
+#### Monitor.insertEvent(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
+**Kind**: static method of <code>[Monitor](#module_api.Monitor)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the newly inserted Event  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1045,9 +1045,9 @@ Close a monitor item
 
 <a name="module_api.Monitor.closeEvent"></a>
 
-#### Monitor.closeEvent(params, callback) ⇒ <code>Promise</code> \| <code>null</code>
-**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the closed Event  
+#### Monitor.closeEvent(params, callback) ⇒ <code>Promise</code> &#124; <code>null</code>
+**Kind**: static method of <code>[Monitor](#module_api.Monitor)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the closed Event  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1059,20 +1059,20 @@ Close a monitor item
 <a name="module_api.Netting"></a>
 
 ### api.Netting : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 **Note**: This service is in beta (untested)  
 
 * [.Netting](#module_api.Netting) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.Netting.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.send(params, [callback])](#module_api.Netting.send) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.Netting.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.send(params, [callback])](#module_api.Netting.send) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Netting.retrieve"></a>
 
-#### Netting.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Netting.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve Netting for a specific Transaction
 
-**Kind**: static method of [<code>Netting</code>](#module_api.Netting)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If callback is supplied, it is called with ???. Otherwise a promise that resolves with ??? is returned  
+**Kind**: static method of <code>[Netting](#module_api.Netting)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If callback is supplied, it is called with ???. Otherwise a promise that resolves with ??? is returned  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1084,11 +1084,11 @@ Retrieve Netting for a specific Transaction
 
 <a name="module_api.Netting.send"></a>
 
-#### Netting.send(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Netting.send(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Send Transactions to Net
 
-**Kind**: static method of [<code>Netting</code>](#module_api.Netting)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with ???  
+**Kind**: static method of <code>[Netting](#module_api.Netting)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with ???  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -1101,25 +1101,25 @@ Send Transactions to Net
 <a name="module_api.Parties"></a>
 
 ### api.Parties : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.Parties](#module_api.Parties) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.Parties.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insert(params, [callback])](#module_api.Parties.insert) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.amend(params, [callback])](#module_api.Parties.amend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.partialAmend(params, [callback])](#module_api.Parties.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.search(params, [callback])](#module_api.Parties.search) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.fuzzySearch(query, callback)](#module_api.Parties.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.deactivate(params, [callback])](#module_api.Parties.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.reactivate(params, [callback])](#module_api.Parties.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.Parties.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insert(params, [callback])](#module_api.Parties.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.amend(params, [callback])](#module_api.Parties.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.partialAmend(params, [callback])](#module_api.Parties.partialAmend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.search(params, [callback])](#module_api.Parties.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.fuzzySearch(query, callback)](#module_api.Parties.fuzzySearch) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.deactivate(params, [callback])](#module_api.Parties.deactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.reactivate(params, [callback])](#module_api.Parties.reactivate) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Parties.retrieve"></a>
 
-#### Parties.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Parties.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve Party data for specified AMId and partyId
 
-**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
-**Returns**: <code>Promise</code> \| <code>null</code> - - If no callback supplied, returns a Promise that resolves with an array of Parties or a single Party instance  
+**Kind**: static method of <code>[Parties](#module_api.Parties)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - - If no callback supplied, returns a Promise that resolves with an array of Parties or a single Party instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1130,11 +1130,11 @@ Retrieve Party data for specified AMId and partyId
 
 <a name="module_api.Parties.insert"></a>
 
-#### Parties.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Parties.insert(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a new Party into the database
 
-**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Party instance  
+**Kind**: static method of <code>[Parties](#module_api.Parties)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Party instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1145,11 +1145,11 @@ Insert a new Party into the database
 
 <a name="module_api.Parties.amend"></a>
 
-#### Parties.amend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Parties.amend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Amend an existing Party. WARNING: This makes a HTTP PUT request and will replace the existing Party with the one passed in
 
-**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Party instance  
+**Kind**: static method of <code>[Parties](#module_api.Parties)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Party instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1161,11 +1161,11 @@ Amend an existing Party. WARNING: This makes a HTTP PUT request and will replace
 
 <a name="module_api.Parties.partialAmend"></a>
 
-#### Parties.partialAmend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Parties.partialAmend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Partially amend an existing Party.
 
-**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Party instance  
+**Kind**: static method of <code>[Parties](#module_api.Parties)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Party instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1177,11 +1177,11 @@ Partially amend an existing Party.
 
 <a name="module_api.Parties.search"></a>
 
-#### Parties.search(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Parties.search(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search for Parties
 
-**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Parties or a single Party instance  
+**Kind**: static method of <code>[Parties](#module_api.Parties)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Parties or a single Party instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1192,11 +1192,11 @@ Search for Parties
 
 <a name="module_api.Parties.fuzzySearch"></a>
 
-#### Parties.fuzzySearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+#### Parties.fuzzySearch(query, callback) ⇒ <code>Promise</code> &#124; <code>null</code>
 Fuzzy Search on parties
 
-**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the above object.  
+**Kind**: static method of <code>[Parties](#module_api.Parties)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the above object.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1205,11 +1205,11 @@ Fuzzy Search on parties
 
 <a name="module_api.Parties.deactivate"></a>
 
-#### Parties.deactivate(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Parties.deactivate(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Deactivate an exising Party. This will set the Party status to 'Inactive'
 
-**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the deactivated Party instance  
+**Kind**: static method of <code>[Parties](#module_api.Parties)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the deactivated Party instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1220,11 +1220,11 @@ Deactivate an exising Party. This will set the Party status to 'Inactive'
 
 <a name="module_api.Parties.reactivate"></a>
 
-#### Parties.reactivate(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Parties.reactivate(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Reactivate a Party. This will set the Party status to 'Active'
 
-**Kind**: static method of [<code>Parties</code>](#module_api.Parties)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the reactivated Party instance  
+**Kind**: static method of <code>[Parties](#module_api.Parties)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the reactivated Party instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1236,21 +1236,21 @@ Reactivate a Party. This will set the Party status to 'Active'
 <a name="module_api.Positions"></a>
 
 ### api.Positions : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.Positions](#module_api.Positions) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.Positions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.search(params, [callback])](#module_api.Positions.search) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.Positions.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.search(params, [callback])](#module_api.Positions.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.fieldsSearch(query, callback)](#module_api.Positions.fieldsSearch) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Positions.retrieve"></a>
 
-#### Positions.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Positions.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve a Position from the database
 
-**Kind**: static method of [<code>Positions</code>](#module_api.Positions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback is supplied, returns promise that resolves with an array of Positions  
+**Kind**: static method of <code>[Positions](#module_api.Positions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback is supplied, returns promise that resolves with an array of Positions  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1260,11 +1260,11 @@ Retrieve a Position from the database
 
 <a name="module_api.Positions.search"></a>
 
-#### Positions.search(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Positions.search(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search for Positions in the database
 
-**Kind**: static method of [<code>Positions</code>](#module_api.Positions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback is supplied, returns promise that resolves with array of Positions  
+**Kind**: static method of <code>[Positions](#module_api.Positions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback is supplied, returns promise that resolves with array of Positions  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1275,11 +1275,11 @@ Search for Positions in the database
 
 <a name="module_api.Positions.fieldsSearch"></a>
 
-#### Positions.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+#### Positions.fieldsSearch(query, callback) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search for Positions and return only specified fields
 
-**Kind**: static method of [<code>Positions</code>](#module_api.Positions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback is supplied, returns promise that resolves with a plain object or array of plain objects.  
+**Kind**: static method of <code>[Positions](#module_api.Positions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback is supplied, returns promise that resolves with a plain object or array of plain objects.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1288,11 +1288,11 @@ Search for Positions and return only specified fields
 
 <a name="module_api.Positions.fieldsSearch"></a>
 
-#### Positions.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+#### Positions.fieldsSearch(query, callback) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search for Transaction with specified fields
 
-**Kind**: static method of [<code>Positions</code>](#module_api.Positions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with a plain object or array of plain objects.  
+**Kind**: static method of <code>[Positions](#module_api.Positions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with a plain object or array of plain objects.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1302,26 +1302,26 @@ Search for Transaction with specified fields
 <a name="module_api.Relationships"></a>
 
 ### api.Relationships : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.Relationships](#module_api.Relationships) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.Relationships.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.requestRelationship(params, [callback])](#module_api.Relationships.requestRelationship) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.approveRel(params, [callback])](#module_api.Relationships.approveRel) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.Relationships.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.requestRelationship(params, [callback])](#module_api.Relationships.requestRelationship) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.getRelatedAMID(params, [callback])](#module_api.Relationships.getRelatedAMID) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insert(params, [callback])](#module_api.Relationships.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.amend(params, [callback])](#module_api.Relationships.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.approveRel(params, [callback])](#module_api.Relationships.approveRel) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Relationships.retrieve"></a>
 
-#### Relationships.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve Relationships for specified Asset Manager
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with an array of Relationships or a Relationship instance  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a promise that resolves with an array of Relationships or a Relationship instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1331,11 +1331,11 @@ Retrieve Relationships for specified Asset Manager
 
 <a name="module_api.Relationships.requestRelationship"></a>
 
-#### Relationships.requestRelationship(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.requestRelationship(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Request a new Relationship
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Relationship instance.  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Relationship instance.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1346,11 +1346,11 @@ Request a new Relationship
 
 <a name="module_api.Relationships.getRelatedAMID"></a>
 
-#### Relationships.getRelatedAMID(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.getRelatedAMID(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Get a list of relationships where the passed AMID is the relatedId
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the Relationship instance or list of Relationships.  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the Relationship instance or list of Relationships.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1361,11 +1361,11 @@ Get a list of relationships where the passed AMID is the relatedId
 
 <a name="module_api.Relationships.insert"></a>
 
-#### Relationships.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.insert(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a new Relationship
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Relationship instance  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Relationship instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1376,11 +1376,11 @@ Insert a new Relationship
 
 <a name="module_api.Relationships.amend"></a>
 
-#### Relationships.amend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.amend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Amend an existing Relationship
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Relationship instance  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the amended Relationship instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1391,11 +1391,11 @@ Amend an existing Relationship
 
 <a name="module_api.Relationships.approveRel"></a>
 
-#### Relationships.approveRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.approveRel(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Approve a Relationship
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the approved Relationship instance  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the approved Relationship instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1407,11 +1407,11 @@ Approve a Relationship
 
 <a name="module_api.Relationships.rejectRel"></a>
 
-#### Relationships.rejectRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.rejectRel(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Reject a Relationship
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the rejected Relationship instance  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the rejected Relationship instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1423,11 +1423,11 @@ Reject a Relationship
 
 <a name="module_api.Relationships.revokeRel"></a>
 
-#### Relationships.revokeRel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.revokeRel(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Revoke a Relationship
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the revoked Relationship instance  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with the revoked Relationship instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1439,11 +1439,11 @@ Revoke a Relationship
 
 <a name="module_api.Relationships.sendInvitation"></a>
 
-#### Relationships.sendInvitation(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Relationships.sendInvitation(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Send invitation to join
 
-**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with `true`.  
+**Kind**: static method of <code>[Relationships](#module_api.Relationships)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a promise that resolves with `true`.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1457,23 +1457,23 @@ Send invitation to join
 <a name="module_api.Transactions"></a>
 
 ### api.Transactions : <code>object</code>
-**Kind**: static namespace of [<code>api</code>](#module_api)  
+**Kind**: static namespace of <code>[api](#module_api)</code>  
 
 * [.Transactions](#module_api.Transactions) : <code>object</code>
-    * [.retrieve(params, [callback])](#module_api.Transactions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.insert(params, [callback])](#module_api.Transactions.insert) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.amend(params, [callback])](#module_api.Transactions.amend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.partialAmend(params, [callback])](#module_api.Transactions.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.search(params, [callback])](#module_api.Transactions.search) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.cancel(params, [callback])](#module_api.Transactions.cancel) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieve(params, [callback])](#module_api.Transactions.retrieve) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.insert(params, [callback])](#module_api.Transactions.insert) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.amend(params, [callback])](#module_api.Transactions.amend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.partialAmend(params, [callback])](#module_api.Transactions.partialAmend) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.search(params, [callback])](#module_api.Transactions.search) ⇒ <code>Promise</code> &#124; <code>null</code>
+    * [.cancel(params, [callback])](#module_api.Transactions.cancel) ⇒ <code>Promise</code> &#124; <code>null</code>
 
 <a name="module_api.Transactions.retrieve"></a>
 
-#### Transactions.retrieve(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Transactions.retrieve(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Retrieve a Transaction from the database
 
-**Kind**: static method of [<code>Transactions</code>](#module_api.Transactions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns Promise that resolves with an Array of Transactions or a single Transaction instance  
+**Kind**: static method of <code>[Transactions](#module_api.Transactions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns Promise that resolves with an Array of Transactions or a single Transaction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1484,11 +1484,11 @@ Retrieve a Transaction from the database
 
 <a name="module_api.Transactions.insert"></a>
 
-#### Transactions.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Transactions.insert(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Insert a new Transaction into the database
 
-**Kind**: static method of [<code>Transactions</code>](#module_api.Transactions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns Promise that resolves with the inserted Transaction instance  
+**Kind**: static method of <code>[Transactions](#module_api.Transactions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns Promise that resolves with the inserted Transaction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1499,11 +1499,11 @@ Insert a new Transaction into the database
 
 <a name="module_api.Transactions.amend"></a>
 
-#### Transactions.amend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Transactions.amend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Amend a Transaction
 
-**Kind**: static method of [<code>Transactions</code>](#module_api.Transactions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns Promise that resolves with the amended Transaction instance  
+**Kind**: static method of <code>[Transactions](#module_api.Transactions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns Promise that resolves with the amended Transaction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1515,11 +1515,11 @@ Amend a Transaction
 
 <a name="module_api.Transactions.partialAmend"></a>
 
-#### Transactions.partialAmend(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Transactions.partialAmend(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Partially amend a Transaction
 
-**Kind**: static method of [<code>Transactions</code>](#module_api.Transactions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns Promise that resolves with the amended Transaction instance  
+**Kind**: static method of <code>[Transactions](#module_api.Transactions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns Promise that resolves with the amended Transaction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1531,11 +1531,11 @@ Partially amend a Transaction
 
 <a name="module_api.Transactions.search"></a>
 
-#### Transactions.search(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Transactions.search(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Search Transactions
 
-**Kind**: static method of [<code>Transactions</code>](#module_api.Transactions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Transactions or a single Transaction instance  
+**Kind**: static method of <code>[Transactions](#module_api.Transactions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of Transactions or a single Transaction instance  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1546,11 +1546,11 @@ Search Transactions
 
 <a name="module_api.Transactions.cancel"></a>
 
-#### Transactions.cancel(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+#### Transactions.cancel(params, [callback]) ⇒ <code>Promise</code> &#124; <code>null</code>
 Cancel a Transaction
 
-**Kind**: static method of [<code>Transactions</code>](#module_api.Transactions)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns Promise that resolves with the cancelled Transaction instance. Note that this is the only time the API returns a Transaction instance where transactionStatus === 'Cancelled'  
+**Kind**: static method of <code>[Transactions](#module_api.Transactions)</code>  
+**Returns**: <code>Promise</code> &#124; <code>null</code> - If no callback supplied, returns Promise that resolves with the cancelled Transaction instance. Note that this is the only time the API returns a Transaction instance where transactionStatus === 'Cancelled'  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1566,20 +1566,20 @@ Classes for the AssetManagers service
 
 
 * [assetManagers](#module_assetManagers)
-    * [.AssetManager](#module_assetManagers.AssetManager) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.AssetManager](#module_assetManagers.AssetManager) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new AssetManager(params)](#new_module_assetManagers.AssetManager_new)
-    * [.Domain](#module_assetManagers.Domain) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Domain](#module_assetManagers.Domain) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Domain(params)](#new_module_assetManagers.Domain_new)
-    * [.EODBook](#module_assetManagers.EODBook) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.EODBook](#module_assetManagers.EODBook) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new EODBook(params)](#new_module_assetManagers.EODBook_new)
 
 <a name="module_assetManagers.AssetManager"></a>
 
-### assetManagers.AssetManager ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### assetManagers.AssetManager ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing an Asset Manager
 
-**Kind**: static class of [<code>assetManagers</code>](#module_assetManagers)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[assetManagers](#module_assetManagers)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_assetManagers.AssetManager_new"></a>
 
 #### new AssetManager(params)
@@ -1606,11 +1606,11 @@ Construct a new Asset Manager Model
 
 <a name="module_assetManagers.Domain"></a>
 
-### assetManagers.Domain ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### assetManagers.Domain ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Domain
 
-**Kind**: static class of [<code>assetManagers</code>](#module_assetManagers)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[assetManagers](#module_assetManagers)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_assetManagers.Domain_new"></a>
 
 #### new Domain(params)
@@ -1626,11 +1626,11 @@ Construct a new Domain instance
 
 <a name="module_assetManagers.EODBook"></a>
 
-### assetManagers.EODBook ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### assetManagers.EODBook ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing an EOD Book
 
-**Kind**: static class of [<code>assetManagers</code>](#module_assetManagers)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[assetManagers](#module_assetManagers)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_assetManagers.EODBook_new"></a>
 
 #### new EODBook(params)
@@ -1657,90 +1657,90 @@ Classes for the Assets service
 
 
 * [assets](#module_assets)
-    * [.Asset](#module_assets.Asset) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Asset](#module_assets.Asset) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Asset(params)](#new_module_assets.Asset_new)
-    * [.BondBase](#module_assets.BondBase) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.BondBase](#module_assets.BondBase) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new BondBase(params)](#new_module_assets.BondBase_new)
-    * [.BondCorporate](#module_assets.BondCorporate) ⇐ [<code>BondBase</code>](#module_assets.BondBase)
+    * [.BondCorporate](#module_assets.BondCorporate) ⇐ <code>[BondBase](#module_assets.BondBase)</code>
         * [new BondCorporate(params)](#new_module_assets.BondCorporate_new)
-    * [.BondGovernment](#module_assets.BondGovernment) ⇐ [<code>BondBase</code>](#module_assets.BondBase)
+    * [.BondGovernment](#module_assets.BondGovernment) ⇐ <code>[BondBase](#module_assets.BondBase)</code>
         * [new BondGovernment(params)](#new_module_assets.BondGovernment_new)
-    * [.BondMortgage](#module_assets.BondMortgage) ⇐ [<code>BondBase</code>](#module_assets.BondBase)
+    * [.BondMortgage](#module_assets.BondMortgage) ⇐ <code>[BondBase](#module_assets.BondBase)</code>
         * [new BondMortgage(params)](#new_module_assets.BondMortgage_new)
-    * [.Currency](#module_assets.Currency) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.Currency](#module_assets.Currency) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new Currency(params)](#new_module_assets.Currency_new)
-    * [.CustomAsset](#module_assets.CustomAsset) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.CustomAsset](#module_assets.CustomAsset) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new CustomAsset(params)](#new_module_assets.CustomAsset_new)
-    * [.BondOption](#module_assets.BondOption) ⇐ [<code>Derivative</code>](#module_assets.Derivative)
+    * [.BondOption](#module_assets.BondOption) ⇐ <code>[Derivative](#module_assets.Derivative)</code>
         * [new BondOption(params)](#new_module_assets.BondOption_new)
-    * [.ContractForDifference](#module_assets.ContractForDifference) ⇐ [<code>Derivative</code>](#module_assets.Derivative)
+    * [.ContractForDifference](#module_assets.ContractForDifference) ⇐ <code>[Derivative](#module_assets.Derivative)</code>
         * [new ContractForDifference(params)](#new_module_assets.ContractForDifference_new)
-    * [.Derivative](#module_assets.Derivative) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.Derivative](#module_assets.Derivative) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new Derivative(params)](#new_module_assets.Derivative_new)
-    * [.ForeignExchangeOption](#module_assets.ForeignExchangeOption) ⇐ [<code>Derivative</code>](#module_assets.Derivative)
+    * [.ForeignExchangeOption](#module_assets.ForeignExchangeOption) ⇐ <code>[Derivative](#module_assets.Derivative)</code>
         * [new ForeignExchangeOption(params)](#new_module_assets.ForeignExchangeOption_new)
-    * [.Equity](#module_assets.Equity) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.Equity](#module_assets.Equity) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new Equity(params)](#new_module_assets.Equity_new)
-    * [.ExchangeTradedFund](#module_assets.ExchangeTradedFund) ⇐ [<code>Fund</code>](#module_assets.Fund)
+    * [.ExchangeTradedFund](#module_assets.ExchangeTradedFund) ⇐ <code>[Fund](#module_assets.Fund)</code>
         * [new ExchangeTradedFund(params)](#new_module_assets.ExchangeTradedFund_new)
-    * [.Fund](#module_assets.Fund) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.Fund](#module_assets.Fund) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new Fund(params)](#new_module_assets.Fund_new)
-    * [.ForeignExchange](#module_assets.ForeignExchange) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+    * [.ForeignExchange](#module_assets.ForeignExchange) ⇐ <code>[ForeignExchangeBase](#module_assets.ForeignExchangeBase)</code>
         * [new ForeignExchange(params)](#new_module_assets.ForeignExchange_new)
-    * [.ForeignExchangeForward](#module_assets.ForeignExchangeForward) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+    * [.ForeignExchangeForward](#module_assets.ForeignExchangeForward) ⇐ <code>[ForeignExchangeBase](#module_assets.ForeignExchangeBase)</code>
         * [new ForeignExchangeForward(params)](#new_module_assets.ForeignExchangeForward_new)
-    * [.ForeignExchangeBase](#module_assets.ForeignExchangeBase) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.ForeignExchangeBase](#module_assets.ForeignExchangeBase) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new ForeignExchangeBase(params)](#new_module_assets.ForeignExchangeBase_new)
-    * [.Index](#module_assets.Index) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.Index](#module_assets.Index) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new Index(params)](#new_module_assets.Index_new)
-    * [.BondFuture](#module_assets.BondFuture) ⇐ [<code>Future</code>](#module_assets.Future)
+    * [.BondFuture](#module_assets.BondFuture) ⇐ <code>[Future](#module_assets.Future)</code>
         * [new BondFuture(params)](#new_module_assets.BondFuture_new)
-    * [.BondFutureOption](#module_assets.BondFutureOption) ⇐ [<code>Future</code>](#module_assets.Future)
+    * [.BondFutureOption](#module_assets.BondFutureOption) ⇐ <code>[Future](#module_assets.Future)</code>
         * [new BondFutureOption(params)](#new_module_assets.BondFutureOption_new)
     * [.CommodityFuture](#module_assets.CommodityFuture) ⇐ <code>module:ListDerivatives.Future</code>
         * [new CommodityFuture(params)](#new_module_assets.CommodityFuture_new)
-    * [.EnergyFuture](#module_assets.EnergyFuture) ⇐ [<code>Future</code>](#module_assets.Future)
+    * [.EnergyFuture](#module_assets.EnergyFuture) ⇐ <code>[Future](#module_assets.Future)</code>
         * [new EnergyFuture(params)](#new_module_assets.EnergyFuture_new)
-    * [.EquityFuture](#module_assets.EquityFuture) ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
+    * [.EquityFuture](#module_assets.EquityFuture) ⇐ <code>[ListedDerivative](#module_assets.ListedDerivative)</code>
         * [new EquityFuture(params)](#new_module_assets.EquityFuture_new)
     * [.ForeignExchangeFuture](#module_assets.ForeignExchangeFuture) ⇐ <code>module:ListDerivatives.Future</code>
         * [new ForeignExchangeFuture(params)](#new_module_assets.ForeignExchangeFuture_new)
-    * [.Future](#module_assets.Future) ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
+    * [.Future](#module_assets.Future) ⇐ <code>[ListedDerivative](#module_assets.ListedDerivative)</code>
         * [new Future(params)](#new_module_assets.Future_new)
-    * [.FutureOption](#module_assets.FutureOption) ⇐ [<code>Future</code>](#module_assets.Future)
+    * [.FutureOption](#module_assets.FutureOption) ⇐ <code>[Future](#module_assets.Future)</code>
         * [new FutureOption(params)](#new_module_assets.FutureOption_new)
-    * [.IndexFuture](#module_assets.IndexFuture) ⇐ [<code>Future</code>](#module_assets.Future)
+    * [.IndexFuture](#module_assets.IndexFuture) ⇐ <code>[Future](#module_assets.Future)</code>
         * [new IndexFuture(params)](#new_module_assets.IndexFuture_new)
-    * [.InterestRateFuture](#module_assets.InterestRateFuture) ⇐ [<code>Future</code>](#module_assets.Future)
+    * [.InterestRateFuture](#module_assets.InterestRateFuture) ⇐ <code>[Future](#module_assets.Future)</code>
         * [new InterestRateFuture(params)](#new_module_assets.InterestRateFuture_new)
-    * [.ListedContractForDifference](#module_assets.ListedContractForDifference) ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
+    * [.ListedContractForDifference](#module_assets.ListedContractForDifference) ⇐ <code>[ListedDerivative](#module_assets.ListedDerivative)</code>
         * [new ListedContractForDifference(params)](#new_module_assets.ListedContractForDifference_new)
-    * [.ListedDerivative](#module_assets.ListedDerivative) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.ListedDerivative](#module_assets.ListedDerivative) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new ListedDerivative(params)](#new_module_assets.ListedDerivative_new)
-    * [.PrivateInvestment](#module_assets.PrivateInvestment) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.PrivateInvestment](#module_assets.PrivateInvestment) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new PrivateInvestment(params)](#new_module_assets.PrivateInvestment_new)
-    * [.RealAsset](#module_assets.RealAsset) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.RealAsset](#module_assets.RealAsset) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new RealAsset(params)](#new_module_assets.RealAsset_new)
-    * [.RealEstate](#module_assets.RealEstate) ⇐ [<code>RealAsset</code>](#module_assets.RealAsset)
+    * [.RealEstate](#module_assets.RealEstate) ⇐ <code>[RealAsset](#module_assets.RealAsset)</code>
         * [new RealEstate(params)](#new_module_assets.RealEstate_new)
-    * [.Wine](#module_assets.Wine) ⇐ [<code>RealAsset</code>](#module_assets.RealAsset)
+    * [.Wine](#module_assets.Wine) ⇐ <code>[RealAsset](#module_assets.RealAsset)</code>
         * [new Wine(params)](#new_module_assets.Wine_new)
-    * [.Sukuk](#module_assets.Sukuk) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.Sukuk](#module_assets.Sukuk) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new Sukuk(params)](#new_module_assets.Sukuk_new)
-    * [.Synthetic](#module_assets.Synthetic) ⇐ [<code>Asset</code>](#module_assets.Asset)
+    * [.Synthetic](#module_assets.Synthetic) ⇐ <code>[Asset](#module_assets.Asset)</code>
         * [new Synthetic(params)](#new_module_assets.Synthetic_new)
-    * [.SyntheticFromBook](#module_assets.SyntheticFromBook) ⇐ [<code>Synthetic</code>](#module_assets.Synthetic)
+    * [.SyntheticFromBook](#module_assets.SyntheticFromBook) ⇐ <code>[Synthetic](#module_assets.Synthetic)</code>
         * [new SyntheticFromBook(params)](#new_module_assets.SyntheticFromBook_new)
-    * [.SyntheticMultiLeg](#module_assets.SyntheticMultiLeg) ⇐ [<code>Synthetic</code>](#module_assets.Synthetic)
+    * [.SyntheticMultiLeg](#module_assets.SyntheticMultiLeg) ⇐ <code>[Synthetic](#module_assets.Synthetic)</code>
         * [new SyntheticMultiLeg(params)](#new_module_assets.SyntheticMultiLeg_new)
 
 <a name="module_assets.Asset"></a>
 
-### assets.Asset ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### assets.Asset ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing an Asset
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_assets.Asset_new"></a>
 
 #### new Asset(params)
@@ -1777,11 +1777,11 @@ Construct a new Asset instance
 
 <a name="module_assets.BondBase"></a>
 
-### assets.BondBase ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.BondBase ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing a Base Bond
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.BondBase_new"></a>
 
 #### new BondBase(params)
@@ -1823,11 +1823,11 @@ Construct new Bond instance
 
 <a name="module_assets.BondCorporate"></a>
 
-### assets.BondCorporate ⇐ [<code>BondBase</code>](#module_assets.BondBase)
+### assets.BondCorporate ⇐ <code>[BondBase](#module_assets.BondBase)</code>
 Class representing a Corporate Bond
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>BondBase</code>](#module_assets.BondBase)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[BondBase](#module_assets.BondBase)</code>  
 <a name="new_module_assets.BondCorporate_new"></a>
 
 #### new BondCorporate(params)
@@ -1869,11 +1869,11 @@ Construct new Corporate Bond instance
 
 <a name="module_assets.BondGovernment"></a>
 
-### assets.BondGovernment ⇐ [<code>BondBase</code>](#module_assets.BondBase)
+### assets.BondGovernment ⇐ <code>[BondBase](#module_assets.BondBase)</code>
 Class representing a Government Bond
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>BondBase</code>](#module_assets.BondBase)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[BondBase](#module_assets.BondBase)</code>  
 <a name="new_module_assets.BondGovernment_new"></a>
 
 #### new BondGovernment(params)
@@ -1915,11 +1915,11 @@ Construct new Government Bond instance
 
 <a name="module_assets.BondMortgage"></a>
 
-### assets.BondMortgage ⇐ [<code>BondBase</code>](#module_assets.BondBase)
+### assets.BondMortgage ⇐ <code>[BondBase](#module_assets.BondBase)</code>
 Class representing a Mortgage Bond
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>BondBase</code>](#module_assets.BondBase)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[BondBase](#module_assets.BondBase)</code>  
 <a name="new_module_assets.BondMortgage_new"></a>
 
 #### new BondMortgage(params)
@@ -1961,11 +1961,11 @@ Construct new Mortgage Bond instance
 
 <a name="module_assets.Currency"></a>
 
-### assets.Currency ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.Currency ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing an Currency
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.Currency_new"></a>
 
 #### new Currency(params)
@@ -2002,11 +2002,11 @@ Construct a new Currency instance
 
 <a name="module_assets.CustomAsset"></a>
 
-### assets.CustomAsset ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.CustomAsset ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing an Custom Asset
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.CustomAsset_new"></a>
 
 #### new CustomAsset(params)
@@ -2045,11 +2045,11 @@ Construct a new Custom Asset instance
 
 <a name="module_assets.BondOption"></a>
 
-### assets.BondOption ⇐ [<code>Derivative</code>](#module_assets.Derivative)
+### assets.BondOption ⇐ <code>[Derivative](#module_assets.Derivative)</code>
 Class representing an Bond Option
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Derivative</code>](#module_assets.Derivative)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Derivative](#module_assets.Derivative)</code>  
 <a name="new_module_assets.BondOption_new"></a>
 
 #### new BondOption(params)
@@ -2090,11 +2090,11 @@ Construct a new Bond Option instance
 
 <a name="module_assets.ContractForDifference"></a>
 
-### assets.ContractForDifference ⇐ [<code>Derivative</code>](#module_assets.Derivative)
+### assets.ContractForDifference ⇐ <code>[Derivative](#module_assets.Derivative)</code>
 Class representing a CFD
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Derivative</code>](#module_assets.Derivative)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Derivative](#module_assets.Derivative)</code>  
 <a name="new_module_assets.ContractForDifference_new"></a>
 
 #### new ContractForDifference(params)
@@ -2130,11 +2130,11 @@ Construct a new CFD instance
 
 <a name="module_assets.Derivative"></a>
 
-### assets.Derivative ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.Derivative ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing an Derivative
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.Derivative_new"></a>
 
 #### new Derivative(params)
@@ -2171,11 +2171,11 @@ Construct a new Derivative instance
 
 <a name="module_assets.ForeignExchangeOption"></a>
 
-### assets.ForeignExchangeOption ⇐ [<code>Derivative</code>](#module_assets.Derivative)
+### assets.ForeignExchangeOption ⇐ <code>[Derivative](#module_assets.Derivative)</code>
 Class representing an FX Option
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Derivative</code>](#module_assets.Derivative)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Derivative](#module_assets.Derivative)</code>  
 <a name="new_module_assets.ForeignExchangeOption_new"></a>
 
 #### new ForeignExchangeOption(params)
@@ -2216,11 +2216,11 @@ Construct a new FX Option instance
 
 <a name="module_assets.Equity"></a>
 
-### assets.Equity ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.Equity ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing an Equity
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.Equity_new"></a>
 
 #### new Equity(params)
@@ -2258,11 +2258,11 @@ Construct a new Equity instance
 
 <a name="module_assets.ExchangeTradedFund"></a>
 
-### assets.ExchangeTradedFund ⇐ [<code>Fund</code>](#module_assets.Fund)
+### assets.ExchangeTradedFund ⇐ <code>[Fund](#module_assets.Fund)</code>
 Class representing an ETF
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Fund</code>](#module_assets.Fund)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Fund](#module_assets.Fund)</code>  
 <a name="new_module_assets.ExchangeTradedFund_new"></a>
 
 #### new ExchangeTradedFund(params)
@@ -2303,11 +2303,11 @@ Construct a new ETF instance
 
 <a name="module_assets.Fund"></a>
 
-### assets.Fund ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.Fund ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing a Fund
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.Fund_new"></a>
 
 #### new Fund(params)
@@ -2348,11 +2348,11 @@ Construct a new Fund instance
 
 <a name="module_assets.ForeignExchange"></a>
 
-### assets.ForeignExchange ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+### assets.ForeignExchange ⇐ <code>[ForeignExchangeBase](#module_assets.ForeignExchangeBase)</code>
 Class representing FX
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[ForeignExchangeBase](#module_assets.ForeignExchangeBase)</code>  
 <a name="new_module_assets.ForeignExchange_new"></a>
 
 #### new ForeignExchange(params)
@@ -2385,11 +2385,11 @@ Construct a new Foreign Exchange instance
 
 <a name="module_assets.ForeignExchangeForward"></a>
 
-### assets.ForeignExchangeForward ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+### assets.ForeignExchangeForward ⇐ <code>[ForeignExchangeBase](#module_assets.ForeignExchangeBase)</code>
 Class representing FXForward
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[ForeignExchangeBase](#module_assets.ForeignExchangeBase)</code>  
 <a name="new_module_assets.ForeignExchangeForward_new"></a>
 
 #### new ForeignExchangeForward(params)
@@ -2422,12 +2422,12 @@ Construct a new FXForward instance
 
 <a name="module_assets.ForeignExchangeBase"></a>
 
-### assets.ForeignExchangeBase ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.ForeignExchangeBase ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing FX (this should never be instantiated directly, use the appropriate subclass instead).
 Note that creating and editing FXBase subclasses and other public subclasses is a restricted action.
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.ForeignExchangeBase_new"></a>
 
 #### new ForeignExchangeBase(params)
@@ -2462,11 +2462,11 @@ Construct a new ForeignExchangeBase instance
 
 <a name="module_assets.Index"></a>
 
-### assets.Index ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.Index ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing an Index
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.Index_new"></a>
 
 #### new Index(params)
@@ -2502,11 +2502,11 @@ Construct a new Index instance
 
 <a name="module_assets.BondFuture"></a>
 
-### assets.BondFuture ⇐ [<code>Future</code>](#module_assets.Future)
+### assets.BondFuture ⇐ <code>[Future](#module_assets.Future)</code>
 Class representing a Bond Future
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Future</code>](#module_assets.Future)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Future](#module_assets.Future)</code>  
 <a name="new_module_assets.BondFuture_new"></a>
 
 #### new BondFuture(params)
@@ -2552,11 +2552,11 @@ Construct a new Bond Future instance
 
 <a name="module_assets.BondFutureOption"></a>
 
-### assets.BondFutureOption ⇐ [<code>Future</code>](#module_assets.Future)
+### assets.BondFutureOption ⇐ <code>[Future](#module_assets.Future)</code>
 Class representing a Bond Future Option
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Future</code>](#module_assets.Future)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Future](#module_assets.Future)</code>  
 <a name="new_module_assets.BondFutureOption_new"></a>
 
 #### new BondFutureOption(params)
@@ -2605,8 +2605,8 @@ Construct a new Bond Future Option instance
 ### assets.CommodityFuture ⇐ <code>module:ListDerivatives.Future</code>
 Class representing an CommodityFuture
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: <code>module:ListDerivatives.Future</code>  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>module:ListDerivatives.Future</code>  
 <a name="new_module_assets.CommodityFuture_new"></a>
 
 #### new CommodityFuture(params)
@@ -2642,11 +2642,11 @@ Construct a new CommodityFuture instance
 
 <a name="module_assets.EnergyFuture"></a>
 
-### assets.EnergyFuture ⇐ [<code>Future</code>](#module_assets.Future)
+### assets.EnergyFuture ⇐ <code>[Future](#module_assets.Future)</code>
 Class representing an Energy Future
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Future</code>](#module_assets.Future)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Future](#module_assets.Future)</code>  
 <a name="new_module_assets.EnergyFuture_new"></a>
 
 #### new EnergyFuture(params)
@@ -2689,11 +2689,11 @@ Construct a new Energy Future instance
 
 <a name="module_assets.EquityFuture"></a>
 
-### assets.EquityFuture ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
+### assets.EquityFuture ⇐ <code>[ListedDerivative](#module_assets.ListedDerivative)</code>
 Class representing a Future
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>ListedDerivative</code>](#module_assets.ListedDerivative)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[ListedDerivative](#module_assets.ListedDerivative)</code>  
 <a name="new_module_assets.EquityFuture_new"></a>
 
 #### new EquityFuture(params)
@@ -2739,8 +2739,8 @@ Construct a new Equity Future instance
 ### assets.ForeignExchangeFuture ⇐ <code>module:ListDerivatives.Future</code>
 Class representing an ForeignExchangeFuture
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: <code>module:ListDerivatives.Future</code>  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>module:ListDerivatives.Future</code>  
 <a name="new_module_assets.ForeignExchangeFuture_new"></a>
 
 #### new ForeignExchangeFuture(params)
@@ -2776,11 +2776,11 @@ Construct a new ForeignExchangeFuture instance
 
 <a name="module_assets.Future"></a>
 
-### assets.Future ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
+### assets.Future ⇐ <code>[ListedDerivative](#module_assets.ListedDerivative)</code>
 Class representing a Future
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>ListedDerivative</code>](#module_assets.ListedDerivative)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[ListedDerivative](#module_assets.ListedDerivative)</code>  
 <a name="new_module_assets.Future_new"></a>
 
 #### new Future(params)
@@ -2823,11 +2823,11 @@ Construct a new Future instance
 
 <a name="module_assets.FutureOption"></a>
 
-### assets.FutureOption ⇐ [<code>Future</code>](#module_assets.Future)
+### assets.FutureOption ⇐ <code>[Future](#module_assets.Future)</code>
 Class representing a Future Option
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Future</code>](#module_assets.Future)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Future](#module_assets.Future)</code>  
 <a name="new_module_assets.FutureOption_new"></a>
 
 #### new FutureOption(params)
@@ -2873,11 +2873,11 @@ Construct a new Future Option instance
 
 <a name="module_assets.IndexFuture"></a>
 
-### assets.IndexFuture ⇐ [<code>Future</code>](#module_assets.Future)
+### assets.IndexFuture ⇐ <code>[Future](#module_assets.Future)</code>
 Class representing an Index Future
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Future</code>](#module_assets.Future)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Future](#module_assets.Future)</code>  
 <a name="new_module_assets.IndexFuture_new"></a>
 
 #### new IndexFuture(params)
@@ -2920,11 +2920,11 @@ Construct a new Index Future instance
 
 <a name="module_assets.InterestRateFuture"></a>
 
-### assets.InterestRateFuture ⇐ [<code>Future</code>](#module_assets.Future)
+### assets.InterestRateFuture ⇐ <code>[Future](#module_assets.Future)</code>
 Class representing an Interest Rate Future
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Future</code>](#module_assets.Future)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Future](#module_assets.Future)</code>  
 <a name="new_module_assets.InterestRateFuture_new"></a>
 
 #### new InterestRateFuture(params)
@@ -2967,11 +2967,11 @@ Construct a new Interest Rate Future instance
 
 <a name="module_assets.ListedContractForDifference"></a>
 
-### assets.ListedContractForDifference ⇐ [<code>ListedDerivative</code>](#module_assets.ListedDerivative)
+### assets.ListedContractForDifference ⇐ <code>[ListedDerivative](#module_assets.ListedDerivative)</code>
 Class representing a Listed CFD
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>ListedDerivative</code>](#module_assets.ListedDerivative)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[ListedDerivative](#module_assets.ListedDerivative)</code>  
 <a name="new_module_assets.ListedContractForDifference_new"></a>
 
 #### new ListedContractForDifference(params)
@@ -3007,11 +3007,11 @@ Construct a new Listed CFD instance
 
 <a name="module_assets.ListedDerivative"></a>
 
-### assets.ListedDerivative ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.ListedDerivative ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing a Listed Derivative
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.ListedDerivative_new"></a>
 
 #### new ListedDerivative(params)
@@ -3048,11 +3048,11 @@ Construct a new Listed Derivative instance
 
 <a name="module_assets.PrivateInvestment"></a>
 
-### assets.PrivateInvestment ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.PrivateInvestment ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing a Private Investment
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.PrivateInvestment_new"></a>
 
 #### new PrivateInvestment(params)
@@ -3109,11 +3109,11 @@ Construct a new Private Investment instance
 
 <a name="module_assets.RealAsset"></a>
 
-### assets.RealAsset ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.RealAsset ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing a Real Asset
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.RealAsset_new"></a>
 
 #### new RealAsset(params)
@@ -3150,11 +3150,11 @@ Construct a new Real Asset instance
 
 <a name="module_assets.RealEstate"></a>
 
-### assets.RealEstate ⇐ [<code>RealAsset</code>](#module_assets.RealAsset)
+### assets.RealEstate ⇐ <code>[RealAsset](#module_assets.RealAsset)</code>
 Class representing Real Estate
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>RealAsset</code>](#module_assets.RealAsset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[RealAsset](#module_assets.RealAsset)</code>  
 <a name="new_module_assets.RealEstate_new"></a>
 
 #### new RealEstate(params)
@@ -3190,11 +3190,11 @@ Construct a new Real Estate instance
 
 <a name="module_assets.Wine"></a>
 
-### assets.Wine ⇐ [<code>RealAsset</code>](#module_assets.RealAsset)
+### assets.Wine ⇐ <code>[RealAsset](#module_assets.RealAsset)</code>
 Class representing Wine
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>RealAsset</code>](#module_assets.RealAsset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[RealAsset](#module_assets.RealAsset)</code>  
 <a name="new_module_assets.Wine_new"></a>
 
 #### new Wine(params)
@@ -3244,11 +3244,11 @@ Construct a new Wine instance
 
 <a name="module_assets.Sukuk"></a>
 
-### assets.Sukuk ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.Sukuk ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing a Sukuk
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.Sukuk_new"></a>
 
 #### new Sukuk(params)
@@ -3286,11 +3286,11 @@ Construct a new Sukuk instance
 
 <a name="module_assets.Synthetic"></a>
 
-### assets.Synthetic ⇐ [<code>Asset</code>](#module_assets.Asset)
+### assets.Synthetic ⇐ <code>[Asset](#module_assets.Asset)</code>
 Class representing a Synthetic
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Asset</code>](#module_assets.Asset)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Asset](#module_assets.Asset)</code>  
 <a name="new_module_assets.Synthetic_new"></a>
 
 #### new Synthetic(params)
@@ -3328,11 +3328,11 @@ Construct a new Synthetic instance
 
 <a name="module_assets.SyntheticFromBook"></a>
 
-### assets.SyntheticFromBook ⇐ [<code>Synthetic</code>](#module_assets.Synthetic)
+### assets.SyntheticFromBook ⇐ <code>[Synthetic](#module_assets.Synthetic)</code>
 Class representing a Synthetic From Book. This is an Asset whose value is based on the value of the assets in a referenced Book
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Synthetic</code>](#module_assets.Synthetic)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Synthetic](#module_assets.Synthetic)</code>  
 <a name="new_module_assets.SyntheticFromBook_new"></a>
 
 #### new SyntheticFromBook(params)
@@ -3371,11 +3371,11 @@ Construct a new Synthetic From Book instance
 
 <a name="module_assets.SyntheticMultiLeg"></a>
 
-### assets.SyntheticMultiLeg ⇐ [<code>Synthetic</code>](#module_assets.Synthetic)
+### assets.SyntheticMultiLeg ⇐ <code>[Synthetic](#module_assets.Synthetic)</code>
 Class representing a Multi-Leg Synthetic. This is an Asset which takes multiple assets as 'legs'. The value of the entire structure is equal to the sum of the legs
 
-**Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>Synthetic</code>](#module_assets.Synthetic)  
+**Kind**: static class of <code>[assets](#module_assets)</code>  
+**Extends:** <code>[Synthetic](#module_assets.Synthetic)</code>  
 <a name="new_module_assets.SyntheticMultiLeg_new"></a>
 
 #### new SyntheticMultiLeg(params)
@@ -3419,18 +3419,18 @@ Classes for the Books Service
 
 
 * [books](#module_books)
-    * [.Book](#module_books.Book) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Book](#module_books.Book) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Book(params)](#new_module_books.Book_new)
-    * [.BookPermission](#module_books.BookPermission) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.BookPermission](#module_books.BookPermission) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new BookPermission(params)](#new_module_books.BookPermission_new)
 
 <a name="module_books.Book"></a>
 
-### books.Book ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### books.Book ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Book
 
-**Kind**: static class of [<code>books</code>](#module_books)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[books](#module_books)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_books.Book_new"></a>
 
 #### new Book(params)
@@ -3460,11 +3460,11 @@ Construct a new Book object
 
 <a name="module_books.BookPermission"></a>
 
-### books.BookPermission ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### books.BookPermission ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Book Permission
 
-**Kind**: static class of [<code>books</code>](#module_books)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[books](#module_books)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_books.BookPermission_new"></a>
 
 #### new BookPermission(params)
@@ -3491,16 +3491,16 @@ These are general children classes used in a variety of places
 
 
 * [children](#module_children)
-    * [.PartyChild](#module_children.PartyChild) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.PartyChild](#module_children.PartyChild) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new PartyChild(params)](#new_module_children.PartyChild_new)
 
 <a name="module_children.PartyChild"></a>
 
-### children.PartyChild ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### children.PartyChild ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Party (a Transaction children type)
 
-**Kind**: static class of [<code>children</code>](#module_children)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[children](#module_children)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_children.PartyChild_new"></a>
 
 #### new PartyChild(params)
@@ -3524,39 +3524,39 @@ Classes for the CorporateActions Service
 
 
 * [corporateActions](#module_corporateActions)
-    * [.CorporateAction](#module_corporateActions.CorporateAction) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.CorporateAction](#module_corporateActions.CorporateAction) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
     * [.Dividend](#module_corporateActions.Dividend) ⇐ <code>module:coporateActions.CorporateAction</code>
-    * [.Notification](#module_corporateActions.Notification) ⇐ [<code>CorporateAction</code>](#module_corporateActions.CorporateAction)
-    * [.Split](#module_corporateActions.Split) ⇐ [<code>CorporateAction</code>](#module_corporateActions.CorporateAction)
+    * [.Notification](#module_corporateActions.Notification) ⇐ <code>[CorporateAction](#module_corporateActions.CorporateAction)</code>
+    * [.Split](#module_corporateActions.Split) ⇐ <code>[CorporateAction](#module_corporateActions.CorporateAction)</code>
 
 <a name="module_corporateActions.CorporateAction"></a>
 
-### corporateActions.CorporateAction ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### corporateActions.CorporateAction ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Corporate Actions
 
-**Kind**: static class of [<code>corporateActions</code>](#module_corporateActions)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[corporateActions](#module_corporateActions)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="module_corporateActions.Dividend"></a>
 
 ### corporateActions.Dividend ⇐ <code>module:coporateActions.CorporateAction</code>
 Class representing a Dividend
 
-**Kind**: static class of [<code>corporateActions</code>](#module_corporateActions)  
-**Extends**: <code>module:coporateActions.CorporateAction</code>  
+**Kind**: static class of <code>[corporateActions](#module_corporateActions)</code>  
+**Extends:** <code>module:coporateActions.CorporateAction</code>  
 <a name="module_corporateActions.Notification"></a>
 
-### corporateActions.Notification ⇐ [<code>CorporateAction</code>](#module_corporateActions.CorporateAction)
+### corporateActions.Notification ⇐ <code>[CorporateAction](#module_corporateActions.CorporateAction)</code>
 Class representing a Notification
 
-**Kind**: static class of [<code>corporateActions</code>](#module_corporateActions)  
-**Extends**: [<code>CorporateAction</code>](#module_corporateActions.CorporateAction)  
+**Kind**: static class of <code>[corporateActions](#module_corporateActions)</code>  
+**Extends:** <code>[CorporateAction](#module_corporateActions.CorporateAction)</code>  
 <a name="module_corporateActions.Split"></a>
 
-### corporateActions.Split ⇐ [<code>CorporateAction</code>](#module_corporateActions.CorporateAction)
+### corporateActions.Split ⇐ <code>[CorporateAction](#module_corporateActions.CorporateAction)</code>
 Class representing a Split
 
-**Kind**: static class of [<code>corporateActions</code>](#module_corporateActions)  
-**Extends**: [<code>CorporateAction</code>](#module_corporateActions.CorporateAction)  
+**Kind**: static class of <code>[corporateActions](#module_corporateActions)</code>  
+**Extends:** <code>[CorporateAction](#module_corporateActions.CorporateAction)</code>  
 <a name="module_monitor"></a>
 
 ## monitor
@@ -3564,18 +3564,18 @@ Classes for the Monitor Service
 
 
 * [monitor](#module_monitor)
-    * [.Event](#module_monitor.Event) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Event](#module_monitor.Event) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Event(params)](#new_module_monitor.Event_new)
-    * [.Item](#module_monitor.Item) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Item](#module_monitor.Item) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Item(params)](#new_module_monitor.Item_new)
 
 <a name="module_monitor.Event"></a>
 
-### monitor.Event ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### monitor.Event ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Monitor Event
 
-**Kind**: static class of [<code>monitor</code>](#module_monitor)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[monitor](#module_monitor)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_monitor.Event_new"></a>
 
 #### new Event(params)
@@ -3605,11 +3605,11 @@ Construct a new Monitor Event instance
 
 <a name="module_monitor.Item"></a>
 
-### monitor.Item ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### monitor.Item ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Monitor Item
 
-**Kind**: static class of [<code>monitor</code>](#module_monitor)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[monitor](#module_monitor)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_monitor.Item_new"></a>
 
 #### new Item(params)
@@ -3639,60 +3639,60 @@ Classes for the Parties service
 
 
 * [parties](#module_parties)
-    * [.AssetManager](#module_parties.AssetManager) ⇐ [<code>Company</code>](#module_parties.Company)
+    * [.AssetManager](#module_parties.AssetManager) ⇐ <code>[Company](#module_parties.Company)</code>
         * [new AssetManager(params)](#new_module_parties.AssetManager_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.Broker](#module_parties.Broker) ⇐ [<code>Company</code>](#module_parties.Company)
+    * [.Broker](#module_parties.Broker) ⇐ <code>[Company](#module_parties.Company)</code>
         * [new Broker(params)](#new_module_parties.Broker_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.Address](#module_parties.Address) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Address](#module_parties.Address) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Address(params)](#new_module_parties.Address_new)
-    * [.Email](#module_parties.Email) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Email](#module_parties.Email) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Email(params)](#new_module_parties.Email_new)
-    * [.Company](#module_parties.Company) ⇐ [<code>Organisation</code>](#module_parties.Organisation)
+    * [.Company](#module_parties.Company) ⇐ <code>[Organisation](#module_parties.Organisation)</code>
         * [new Company(params)](#new_module_parties.Company_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.Exchange](#module_parties.Exchange) ⇐ [<code>Company</code>](#module_parties.Company)
+    * [.Exchange](#module_parties.Exchange) ⇐ <code>[Company](#module_parties.Company)</code>
         * [new Exchange(params)](#new_module_parties.Exchange_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.Fund](#module_parties.Fund) ⇐ [<code>Company</code>](#module_parties.Company)
+    * [.Fund](#module_parties.Fund) ⇐ <code>[Company](#module_parties.Company)</code>
         * [new Fund(params)](#new_module_parties.Fund_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.GovernmentAgency](#module_parties.GovernmentAgency) ⇐ [<code>Organisation</code>](#module_parties.Organisation)
+    * [.GovernmentAgency](#module_parties.GovernmentAgency) ⇐ <code>[Organisation](#module_parties.Organisation)</code>
         * [new GovernmentAgency(params)](#new_module_parties.GovernmentAgency_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.Individual](#module_parties.Individual) ⇐ [<code>Party</code>](#module_parties.Party)
+    * [.Individual](#module_parties.Individual) ⇐ <code>[Party](#module_parties.Party)</code>
         * [new Individual(params)](#new_module_parties.Individual_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.Organisation](#module_parties.Organisation) ⇐ [<code>Party</code>](#module_parties.Party)
+    * [.Organisation](#module_parties.Organisation) ⇐ <code>[Party](#module_parties.Party)</code>
         * [new Organisation(params)](#new_module_parties.Organisation_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.Party](#module_parties.Party) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Party](#module_parties.Party) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Party(params)](#new_module_parties.Party_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
-    * [.SubFund](#module_parties.SubFund) ⇐ [<code>Party</code>](#module_parties.Party)
+    * [.SubFund](#module_parties.SubFund) ⇐ <code>[Party](#module_parties.Party)</code>
         * [new SubFund(params)](#new_module_parties.SubFund_new)
         * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
         * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
 
 <a name="module_parties.AssetManager"></a>
 
-### parties.AssetManager ⇐ [<code>Company</code>](#module_parties.Company)
+### parties.AssetManager ⇐ <code>[Company](#module_parties.Company)</code>
 Class representing an Asset Manager
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Company</code>](#module_parties.Company)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Company](#module_parties.Company)</code>  
 
-* [.AssetManager](#module_parties.AssetManager) ⇐ [<code>Company</code>](#module_parties.Company)
+* [.AssetManager](#module_parties.AssetManager) ⇐ <code>[Company](#module_parties.Company)</code>
     * [new AssetManager(params)](#new_module_parties.AssetManager_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -3736,7 +3736,7 @@ Construct a new Asset Manager instance
 #### assetManager.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>AssetManager</code>](#module_parties.AssetManager)  
+**Kind**: instance method of <code>[AssetManager](#module_parties.AssetManager)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3748,7 +3748,7 @@ Upsert an Address
 #### assetManager.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>AssetManager</code>](#module_parties.AssetManager)  
+**Kind**: instance method of <code>[AssetManager](#module_parties.AssetManager)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3757,13 +3757,13 @@ Upsert an Email
 
 <a name="module_parties.Broker"></a>
 
-### parties.Broker ⇐ [<code>Company</code>](#module_parties.Company)
+### parties.Broker ⇐ <code>[Company](#module_parties.Company)</code>
 Class representing a Broker
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Company</code>](#module_parties.Company)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Company](#module_parties.Company)</code>  
 
-* [.Broker](#module_parties.Broker) ⇐ [<code>Company</code>](#module_parties.Company)
+* [.Broker](#module_parties.Broker) ⇐ <code>[Company](#module_parties.Company)</code>
     * [new Broker(params)](#new_module_parties.Broker_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -3807,7 +3807,7 @@ Construct a new Broker instance
 #### broker.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>Broker</code>](#module_parties.Broker)  
+**Kind**: instance method of <code>[Broker](#module_parties.Broker)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3819,7 +3819,7 @@ Upsert an Address
 #### broker.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>Broker</code>](#module_parties.Broker)  
+**Kind**: instance method of <code>[Broker](#module_parties.Broker)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3828,11 +3828,11 @@ Upsert an Email
 
 <a name="module_parties.Address"></a>
 
-### parties.Address ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### parties.Address ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing an Address
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_parties.Address_new"></a>
 
 #### new Address(params)
@@ -3858,11 +3858,11 @@ Construct a new Address instance
 
 <a name="module_parties.Email"></a>
 
-### parties.Email ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### parties.Email ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing an Email
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_parties.Email_new"></a>
 
 #### new Email(params)
@@ -3883,13 +3883,13 @@ Construct a new Email object
 
 <a name="module_parties.Company"></a>
 
-### parties.Company ⇐ [<code>Organisation</code>](#module_parties.Organisation)
+### parties.Company ⇐ <code>[Organisation](#module_parties.Organisation)</code>
 Class representing a Company
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Organisation</code>](#module_parties.Organisation)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Organisation](#module_parties.Organisation)</code>  
 
-* [.Company](#module_parties.Company) ⇐ [<code>Organisation</code>](#module_parties.Organisation)
+* [.Company](#module_parties.Company) ⇐ <code>[Organisation](#module_parties.Organisation)</code>
     * [new Company(params)](#new_module_parties.Company_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -3909,10 +3909,6 @@ Construct a new Company instance
 | [params.partyClass] | <code>string</code> | <code>&quot;Company&quot;</code> | Class of the Company (a subclass of Company may define its own partyClass) |
 | [params.baseCurrency] | <code>string</code> |  | Base Currency of the Company (e.g. SGD, USD) |
 | [params.description] | <code>string</code> |  | Description of the Company |
-| [params.licenseNumber] | <code>string</code> |  | Company license number (if applicable) |
-| [params.licenseType] | <code>string</code> |  | Company license type |
-| [params.assetsUnderManagement] | <code>string</code> |  | Value of assets under management |
-| [params.registrationNumber] | <code>string</code> |  | Business registration number (if applicable) |
 | [params.yearOfIncorporation] | <code>string</code> |  | Year of incorporation |
 | [params.contactNumber] | <code>string</code> |  | Contact number |
 | [params.addresses] | <code>object</code> |  | Object of Addresses associated with the Company |
@@ -3934,7 +3930,7 @@ Construct a new Company instance
 #### company.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>Company</code>](#module_parties.Company)  
+**Kind**: instance method of <code>[Company](#module_parties.Company)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3946,7 +3942,7 @@ Upsert an Address
 #### company.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>Company</code>](#module_parties.Company)  
+**Kind**: instance method of <code>[Company](#module_parties.Company)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -3955,13 +3951,13 @@ Upsert an Email
 
 <a name="module_parties.Exchange"></a>
 
-### parties.Exchange ⇐ [<code>Company</code>](#module_parties.Company)
+### parties.Exchange ⇐ <code>[Company](#module_parties.Company)</code>
 Class representing an Exchange
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Company</code>](#module_parties.Company)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Company](#module_parties.Company)</code>  
 
-* [.Exchange](#module_parties.Exchange) ⇐ [<code>Company</code>](#module_parties.Company)
+* [.Exchange](#module_parties.Exchange) ⇐ <code>[Company](#module_parties.Company)</code>
     * [new Exchange(params)](#new_module_parties.Exchange_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -4005,7 +4001,7 @@ Construct a new Exchange instance
 #### exchange.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>Exchange</code>](#module_parties.Exchange)  
+**Kind**: instance method of <code>[Exchange](#module_parties.Exchange)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4017,7 +4013,7 @@ Upsert an Address
 #### exchange.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>Exchange</code>](#module_parties.Exchange)  
+**Kind**: instance method of <code>[Exchange](#module_parties.Exchange)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4026,13 +4022,13 @@ Upsert an Email
 
 <a name="module_parties.Fund"></a>
 
-### parties.Fund ⇐ [<code>Company</code>](#module_parties.Company)
+### parties.Fund ⇐ <code>[Company](#module_parties.Company)</code>
 Class representing a Fund
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Company</code>](#module_parties.Company)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Company](#module_parties.Company)</code>  
 
-* [.Fund](#module_parties.Fund) ⇐ [<code>Company</code>](#module_parties.Company)
+* [.Fund](#module_parties.Fund) ⇐ <code>[Company](#module_parties.Company)</code>
     * [new Fund(params)](#new_module_parties.Fund_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -4076,7 +4072,7 @@ Construct a new Fund instance
 #### fund.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>Fund</code>](#module_parties.Fund)  
+**Kind**: instance method of <code>[Fund](#module_parties.Fund)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4088,7 +4084,7 @@ Upsert an Address
 #### fund.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>Fund</code>](#module_parties.Fund)  
+**Kind**: instance method of <code>[Fund](#module_parties.Fund)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4097,13 +4093,13 @@ Upsert an Email
 
 <a name="module_parties.GovernmentAgency"></a>
 
-### parties.GovernmentAgency ⇐ [<code>Organisation</code>](#module_parties.Organisation)
+### parties.GovernmentAgency ⇐ <code>[Organisation](#module_parties.Organisation)</code>
 Class representing a Government Agency
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Organisation</code>](#module_parties.Organisation)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Organisation](#module_parties.Organisation)</code>  
 
-* [.GovernmentAgency](#module_parties.GovernmentAgency) ⇐ [<code>Organisation</code>](#module_parties.Organisation)
+* [.GovernmentAgency](#module_parties.GovernmentAgency) ⇐ <code>[Organisation](#module_parties.Organisation)</code>
     * [new GovernmentAgency(params)](#new_module_parties.GovernmentAgency_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -4142,7 +4138,7 @@ Construct a new Government Agency instance
 #### governmentAgency.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>GovernmentAgency</code>](#module_parties.GovernmentAgency)  
+**Kind**: instance method of <code>[GovernmentAgency](#module_parties.GovernmentAgency)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4154,7 +4150,7 @@ Upsert an Address
 #### governmentAgency.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>GovernmentAgency</code>](#module_parties.GovernmentAgency)  
+**Kind**: instance method of <code>[GovernmentAgency](#module_parties.GovernmentAgency)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4163,13 +4159,13 @@ Upsert an Email
 
 <a name="module_parties.Individual"></a>
 
-### parties.Individual ⇐ [<code>Party</code>](#module_parties.Party)
+### parties.Individual ⇐ <code>[Party](#module_parties.Party)</code>
 Class representing an Individual
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Party</code>](#module_parties.Party)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Party](#module_parties.Party)</code>  
 
-* [.Individual](#module_parties.Individual) ⇐ [<code>Party</code>](#module_parties.Party)
+* [.Individual](#module_parties.Individual) ⇐ <code>[Party](#module_parties.Party)</code>
     * [new Individual(params)](#new_module_parties.Individual_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -4215,7 +4211,7 @@ Construct a new Individual instance
 #### individual.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>Individual</code>](#module_parties.Individual)  
+**Kind**: instance method of <code>[Individual](#module_parties.Individual)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4227,7 +4223,7 @@ Upsert an Address
 #### individual.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>Individual</code>](#module_parties.Individual)  
+**Kind**: instance method of <code>[Individual](#module_parties.Individual)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4236,13 +4232,13 @@ Upsert an Email
 
 <a name="module_parties.Organisation"></a>
 
-### parties.Organisation ⇐ [<code>Party</code>](#module_parties.Party)
+### parties.Organisation ⇐ <code>[Party](#module_parties.Party)</code>
 Class representing an Organisation
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Party</code>](#module_parties.Party)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Party](#module_parties.Party)</code>  
 
-* [.Organisation](#module_parties.Organisation) ⇐ [<code>Party</code>](#module_parties.Party)
+* [.Organisation](#module_parties.Organisation) ⇐ <code>[Party](#module_parties.Party)</code>
     * [new Organisation(params)](#new_module_parties.Organisation_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -4281,7 +4277,7 @@ Construct a new Organisation instance
 #### organisation.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>Organisation</code>](#module_parties.Organisation)  
+**Kind**: instance method of <code>[Organisation](#module_parties.Organisation)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4293,7 +4289,7 @@ Upsert an Address
 #### organisation.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>Organisation</code>](#module_parties.Organisation)  
+**Kind**: instance method of <code>[Organisation](#module_parties.Organisation)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4302,13 +4298,13 @@ Upsert an Email
 
 <a name="module_parties.Party"></a>
 
-### parties.Party ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### parties.Party ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Party
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 
-* [.Party](#module_parties.Party) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+* [.Party](#module_parties.Party) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
     * [new Party(params)](#new_module_parties.Party_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -4347,7 +4343,7 @@ Construct a new Party instance
 #### party.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>Party</code>](#module_parties.Party)  
+**Kind**: instance method of <code>[Party](#module_parties.Party)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4359,7 +4355,7 @@ Upsert an Address
 #### party.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>Party</code>](#module_parties.Party)  
+**Kind**: instance method of <code>[Party](#module_parties.Party)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4368,13 +4364,13 @@ Upsert an Email
 
 <a name="module_parties.SubFund"></a>
 
-### parties.SubFund ⇐ [<code>Party</code>](#module_parties.Party)
+### parties.SubFund ⇐ <code>[Party](#module_parties.Party)</code>
 Class representing a Celled Fund Structure (SubFund)
 
-**Kind**: static class of [<code>parties</code>](#module_parties)  
-**Extends**: [<code>Party</code>](#module_parties.Party)  
+**Kind**: static class of <code>[parties](#module_parties)</code>  
+**Extends:** <code>[Party](#module_parties.Party)</code>  
 
-* [.SubFund](#module_parties.SubFund) ⇐ [<code>Party</code>](#module_parties.Party)
+* [.SubFund](#module_parties.SubFund) ⇐ <code>[Party](#module_parties.Party)</code>
     * [new SubFund(params)](#new_module_parties.SubFund_new)
     * [.upsertAddress(type, address)](#module_parties.Party+upsertAddress)
     * [.upsertEmail(type, email)](#module_parties.Party+upsertEmail)
@@ -4412,7 +4408,7 @@ Construct a new SubFund instance
 #### subFund.upsertAddress(type, address)
 Upsert an Address
 
-**Kind**: instance method of [<code>SubFund</code>](#module_parties.SubFund)  
+**Kind**: instance method of <code>[SubFund](#module_parties.SubFund)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4424,7 +4420,7 @@ Upsert an Address
 #### subFund.upsertEmail(type, email)
 Upsert an Email
 
-**Kind**: instance method of [<code>SubFund</code>](#module_parties.SubFund)  
+**Kind**: instance method of <code>[SubFund](#module_parties.SubFund)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -4446,8 +4442,8 @@ Classes and API methods for the Relationships service (not ready yet)
 ### relationships.Relationship ⇐ <code>module:Core.AMaaSModel</code>
 Class representing a Relationship
 
-**Kind**: static class of [<code>relationships</code>](#module_relationships)  
-**Extends**: <code>module:Core.AMaaSModel</code>  
+**Kind**: static class of <code>[relationships](#module_relationships)</code>  
+**Extends:** <code>module:Core.AMaaSModel</code>  
 <a name="new_module_relationships.Relationship_new"></a>
 
 #### new Relationship(params)
@@ -4476,16 +4472,16 @@ Classes for the Transactions service.
 
 
 * [transactions](#module_transactions)
-    * [.Transaction](#module_transactions.Transaction) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+    * [.Transaction](#module_transactions.Transaction) ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
         * [new Transaction(params)](#new_module_transactions.Transaction_new)
 
 <a name="module_transactions.Transaction"></a>
 
-### transactions.Transaction ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+### transactions.Transaction ⇐ <code>[AMaaSModel](#module_core.AMaaSModel)</code>
 Class representing a Transaction
 
-**Kind**: static class of [<code>transactions</code>](#module_transactions)  
-**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+**Kind**: static class of <code>[transactions](#module_transactions)</code>  
+**Extends:** <code>[AMaaSModel](#module_core.AMaaSModel)</code>  
 <a name="new_module_transactions.Transaction_new"></a>
 
 #### new Transaction(params)

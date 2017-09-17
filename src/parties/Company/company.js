@@ -15,10 +15,6 @@ class Company extends Organisation {
    * @param {string} [params.partyClass=Company] - Class of the Company (a subclass of Company may define its own partyClass)
    * @param {string} [params.baseCurrency] - Base Currency of the Company (e.g. SGD, USD)
    * @param {string} [params.description] - Description of the Company
-   * @param {string} [params.licenseNumber] - Company license number (if applicable)
-   * @param {string} [params.licenseType] - Company license type
-   * @param {string} [params.assetsUnderManagement] - Value of assets under management
-   * @param {string} [params.registrationNumber] - Business registration number (if applicable)
    * @param {string} [params.yearOfIncorporation] - Year of incorporation
    * @param {string} [params.contactNumber] - Contact number
    * @param {object} [params.addresses] - Object of Addresses associated with the Company
