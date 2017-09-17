@@ -11,5 +11,19 @@ describe('Party AssetManager class', () => {
       const am = new AssetManager({})
       expect(am.partyType).toEqual('AssetManager')
     })
+
+    it('sets fields', () => {
+      const params = {
+        licenseType: 'testType',
+        licenseNumber: 'testNo',
+        assetsUnderManagement: '<20m',
+        registrationNumber: 'testReg'
+      }
+      const am = new AssetManager(params)
+      expect(am.licenseNumber).toEqual('testNo')
+      expect(am.licenseType).toEqual('testType')
+      expect(am.assetsUnderManagement).toEqual('<20m')
+      expect(am.registrationNumber).toEqual('testReg')
+    })
   })
 })

@@ -297,17 +297,18 @@ declare module '@amaas/amaas-core-sdk-js' {
   export interface ISubFund extends IParty {}
   export interface IGovernmentAgency extends IOrganisation {}
   export interface ICompany extends IOrganisation {
-    licenseNumber?: string
-    licenseType?: string
-    assetsUnderManagement?: string
-    registrationNumber?: string
     yearOfIncoporation?: string
     contactNumber?: string
   }
   export interface IFund extends ICompany {}
   export interface IExchange extends ICompany {}
   export interface IBroker extends ICompany {}
-  export interface IAssetManagerParty extends ICompany {}
+  export interface IAssetManagerParty extends ICompany {
+    licenseNumber?: string
+    licenseType?: string
+    assetsUnderManagement?: string
+    registrationNumber?: string
+  }
 
   // Relationships
   export interface IRelationship {
@@ -924,10 +925,6 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     class Company extends Organisation {
-      licenseNumber?: string
-      licenseType?: string
-      assetsUnderManagement?: string
-      registrationNumber?: string
       yearOfIncoporation?: string
       contactNumber?: string
       constructor(props: ICompany)
@@ -946,6 +943,10 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     class AssetManager extends Company {
+      licenseNumber?: string
+      licenseType?: string
+      assetsUnderManagement?: string
+      registrationNumber?: string
       constructor(props: AssetManager)
     }
 
