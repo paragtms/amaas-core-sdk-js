@@ -478,6 +478,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
       function search({ AMId, query }: { AMId: number, query?: { assetManagerIds?: number | number[], clientIds?: number | number[], partyStatuses?: string | string[], partyIds?: string | string[], partyClasses?: string | string[], partyTypes?: string | string[] } }, callback?: Function): Promise<parties.PartiesClassType[]> | void
       function fuzzySearch({ AMId, query }: { AMId: number, query: any }, callback?: Function): Promise<IFuzzySearchResult> | void
+      function fieldsSearch(query: { assetManagerIds: number | number[], [fieldName: string]: any }, callback?: Function): Promise<any> | void
       function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
       function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
     }
