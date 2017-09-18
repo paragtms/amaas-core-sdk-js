@@ -297,7 +297,7 @@ declare module '@amaas/amaas-core-sdk-js' {
   export interface ISubFund extends IParty {}
   export interface IGovernmentAgency extends IOrganisation {}
   export interface ICompany extends IOrganisation {
-    yearOfIncoporation?: string
+    yearOfIncorporation?: string
     contactNumber?: string
   }
   export interface IFund extends ICompany {}
@@ -926,7 +926,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     class Company extends Organisation {
-      yearOfIncoporation?: string
+      yearOfIncorporation?: string
       contactNumber?: string
       constructor(props: ICompany)
     }
