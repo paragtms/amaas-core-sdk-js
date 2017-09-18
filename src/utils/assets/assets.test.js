@@ -165,7 +165,7 @@ describe('utils/assets', () => {
       network.searchData.mockImplementation(() => Promise.resolve(mockAsset))
     })
     test('with promise', () => {
-      let promise = fieldsSearch({})
+      let promise = fieldsSearch({ assetManagerIds: 88 })
       expect(promise).toBeInstanceOf(Promise)
     })
     it('throws if assetManagerIds is not supplied', () => {
