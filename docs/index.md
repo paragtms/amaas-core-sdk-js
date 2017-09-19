@@ -191,6 +191,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> \| <code>null</code>
         * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> \| <code>null</code>
         * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.register(params, [callback])](#module_api.Relationships.register) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Transactions](#module_api.Transactions) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Transactions.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Transactions.insert) ⇒ <code>Promise</code> \| <code>null</code>
@@ -1329,6 +1330,7 @@ Search for Transaction with specified fields
     * [.rejectRel(params, [callback])](#module_api.Relationships.rejectRel) ⇒ <code>Promise</code> \| <code>null</code>
     * [.revokeRel(params, [callback])](#module_api.Relationships.revokeRel) ⇒ <code>Promise</code> \| <code>null</code>
     * [.sendInvitation(params, [callback])](#module_api.Relationships.sendInvitation) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.register(params, [callback])](#module_api.Relationships.register) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Relationships.retrieve"></a>
 
@@ -1410,15 +1412,14 @@ Amend an existing Relationship
 Approve a Relationship
 
 **Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the approved Relationship instance  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves on success  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.AMId | <code>number</code> | Asset Manager ID of the Relationship to approve |
-| params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
-| params.relationshipType | <code>string</code> | Relationship type being approved |
-| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the approved Relationship. Omit to return Promise |
+| params.AMId | <code>number</code> | Asset Manager ID of the company with whom to approve the relationship |
+| params.relatedId | <code>string</code> | ID of the Asset Manager ID to approve |
+| [callback] | <code>function</code> | Called with one argument (error) on completion. If successful, error is null |
 
 <a name="module_api.Relationships.rejectRel"></a>
 
@@ -1426,15 +1427,14 @@ Approve a Relationship
 Reject a Relationship
 
 **Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the rejected Relationship instance  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves on success  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | params.AMId | <code>number</code> | Asset Manager ID of the Relationship to reject |
 | params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
-| params.relationshipType | <code>string</code> | Relationship type being rejected |
-| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the rejected Relationship. Omit to return Promise |
+| [callback] | <code>function</code> | Called with one argument (error) on completion. If successful, error is null |
 
 <a name="module_api.Relationships.revokeRel"></a>
 
@@ -1442,15 +1442,14 @@ Reject a Relationship
 Revoke a Relationship
 
 **Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the revoked Relationship instance  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves on success  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
-| params.AMId | <code>number</code> | Asset Manager ID of the Relationship to revoke |
-| params.relatedId | <code>string</code> | ID of the Asset Manager ID related to `params.AMId` |
-| params.relationshipType | <code>string</code> | Relationship type being revoked |
-| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the revoked Relationship. Omit to return Promise |
+| params.AMId | <code>number</code> | Asset Manager ID of the company with whom to revoke the relationship |
+| params.relatedId | <code>string</code> | ID of the Asset Manager ID to revoke the relationship from |
+| [callback] | <code>function</code> | Called with one argument (error) on completion. If successful, error is null |
 
 <a name="module_api.Relationships.sendInvitation"></a>
 
@@ -1458,16 +1457,29 @@ Revoke a Relationship
 Send invitation to join
 
 **Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves with `true`.  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves on success  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | params.AMId | <code>number</code> | AMID of company to join |
-| params.toEmail | <code>string</code> | Email address to send to |
-| params.fromEmail | <code>string</code> | Email address sent from |
-| params.companyName | <code>string</code> | Company to Join |
-| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is `true`. |
+| params.email | <code>string</code> | Email address to send the invitation to |
+| params.companyName | <code>string</code> | Name of company to join |
+| [callback] | <code>function</code> | Called with one argument (error) on completion. If successful, error is null |
+
+<a name="module_api.Relationships.register"></a>
+
+#### Relationships.register(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Register a new user in the database
+
+**Kind**: static method of [<code>Relationships</code>](#module_api.Relationships)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a promise that resolves on success.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | AMID of Company (either the new company or the company to join) |
+| [callback] | <code>function</code> | Called with one argument (error) on completion. If successful, error is null. |
 
 <a name="module_api.Transactions"></a>
 

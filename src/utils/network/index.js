@@ -131,7 +131,7 @@ export function insertData({ AMaaSClass, AMId, resourceId, data, queryParams }, 
   })
 }
 
-export function putData({ AMaaSClass, AMId, resourceId, data }, callback) {
+export function putData({ AMaaSClass, AMId, resourceId, data, query }, callback) {
   let url
   try {
     url = utils.buildURL({
@@ -139,7 +139,7 @@ export function putData({ AMaaSClass, AMId, resourceId, data }, callback) {
       AMId,
       resourceId,
       stage,
-      apiVersion
+      apiVersion,
     })
   } catch (e) {
     if (typeof callback !== 'function') {
@@ -148,11 +148,7 @@ export function putData({ AMaaSClass, AMId, resourceId, data }, callback) {
     callback(e)
     return
   }
-  const params = {
-    url,
-    json: data
-  }
-  let promise = utils.makeRequest({ method: 'PUT', url, data, stage })
+  let promise = utils.makeRequest({ method: 'PUT', url, data, stage, query })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
@@ -168,7 +164,7 @@ export function putData({ AMaaSClass, AMId, resourceId, data }, callback) {
   })
 }
 
-export function patchData({ AMaaSClass, AMId, resourceId, data }, callback) {
+export function patchData({ AMaaSClass, AMId, resourceId, data, query }, callback) {
   let url
   try {
     url = utils.buildURL({
@@ -189,7 +185,7 @@ export function patchData({ AMaaSClass, AMId, resourceId, data }, callback) {
     url,
     json: data
   }
-  let promise = utils.makeRequest({ method: 'PATCH', url, data, stage })
+  let promise = utils.makeRequest({ method: 'PATCH', url, data, stage, query })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
