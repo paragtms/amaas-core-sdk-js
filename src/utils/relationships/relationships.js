@@ -1,4 +1,4 @@
-import { retrieveData, patchData, putData, insertData } from '../network'
+import { retrieveData, putData, insertData } from '../network'
 import { Relationship } from '../../relationships'
 
 /**
@@ -188,7 +188,7 @@ export function approveRel({ AMId, relatedId }, callback) {
     data,
     query: { actionType: 'Approve' }
   }
-  let promise = patchData(params).then(result => {
+  let promise = putData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null)
     }
@@ -220,7 +220,7 @@ export function rejectRel({ AMId, relatedId }, callback) {
     data,
     query: { actionType: 'Reject' }
   }
-  let promise = patchData(params).then(result => {
+  let promise = putData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null)
     }
@@ -252,7 +252,7 @@ export function revokeRel({ AMId, relatedId }, callback) {
     data,
     query: { actionType: 'Revoke' }
   }
-  let promise = patchData(params).then(result => {
+  let promise = putData(params).then(result => {
     if (typeof callback === 'function') {
       callback(null)
     }
