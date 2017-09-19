@@ -1,7 +1,8 @@
 export const RELATIONSHIP_TYPES = [
   'Administrator',
-  'External',
-  'Front Office',
+  'Data Provider',
+  'Demo',
   'Employee',
-  'Data Provider'
+  'External',
+  'Front Office'
 ]

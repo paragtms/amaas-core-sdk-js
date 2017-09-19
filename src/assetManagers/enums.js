@@ -11,4 +11,4 @@ export const ASSET_MANAGER_TYPES = [
   'Individual',
   'Venture Capital'
 ]
-export const ACCOUNT_TYPES = [ 'Test', 'Basic', 'Professional' ]
+export const ACCOUNT_TYPES = [ 'Test', 'Basic', 'Professional', 'Demo' ]
