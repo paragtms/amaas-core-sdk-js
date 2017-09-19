@@ -5,7 +5,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     assetManagerId?: number
     assetManagerType: 'Accredited Investor' | 'Bank' | 'Broker' | 'Corporate Treasury' | 'Family Office' | 'Fund Administrator' | 'Fund Manager' | 'Hedge Fund' | 'Private Equity' | 'Individual' | 'Venture Capital'
     assetManagerStatus?: string
-    accountType?: 'Test' | 'Basic' | 'Professional'
+    accountType?: 'Test' | 'Basic' | 'Professional' | 'Demo'
     clientId?: number
     partyId?: string
     defaultBookOwnerId?: number
@@ -961,7 +961,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       assetManagerId: number
       relationshipId?: string
       relatedId: number
-      relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee' | 'Data Provider'
+      relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee' | 'Data Provider' | 'Demo'
       clientId?: number
       relationshipStatus: 'Active' | 'Pending' | 'Superseded' | 'Inactive'
       createdBy?: string
