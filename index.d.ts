@@ -488,10 +488,11 @@ declare module '@amaas/amaas-core-sdk-js' {
       function insert({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
       function amend({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
       function getRelatedAMID({ AMId, options }: { AMId: number, options: { includeInactive : boolean[], relationshipType: string[] } }, callback?: Function): Promise<relationships.Relationship | relationships.Relationship[]> | void
-      function sendInvitation({ AMId, toEmail, fromEmail, companyName }: { AMId: number, toEmail: string, fromEmail: string, companyName: string }, callback?: Function): Promise<boolean> | void
-      function approveRel({ AMId, relatedId, relationshipType }: { AMId: number, relatedId: string, relationshipType: string }, callback?: Function): Promise<relationships.Relationship> | void
-      function rejectRel({ AMId, relatedId, relationshipType }: { AMId: number, relatedId: string, relationshipType: string }, callback?: Function): Promise<relationships.Relationship> | void
-      function revokeRel({ AMId, relatedId, relationshipType }: { AMId: number, relatedId: string, relationshipType: string }, callback?: Function): Promise<relationships.Relationship> | void
+      function sendInvitation({ AMId, email, companyName }: { AMId: number, email: string, companyName: string }, callback?: Function): Promise<null> | void
+      function approveRel({ AMId, relatedId }: { AMId: number, relatedId: string }, callback?: Function): Promise<null> | void
+      function rejectRel({ AMId, relatedId }: { AMId: number, relatedId: string }, callback?: Function): Promise<null> | void
+      function revokeRel({ AMId, relatedId }: { AMId: number, relatedId: string }, callback?: Function): Promise<null> | void
+      function register({ AMId }: { AMId: number }, callback?: Function): Promise<null> | void
     }
     namespace Positions {
       function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<transactions.Position> | void

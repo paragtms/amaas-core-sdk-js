@@ -174,25 +174,25 @@ export function amend({ AMId, relationship }, callback) {
  * @memberof module:api.Relationships
  * @static
  * @param {object} params - object of parameters:
- * @param {number} params.AMId - Asset Manager ID of the Relationship to approve
- * @param {string} params.relatedId - ID of the Asset Manager ID related to `params.AMId`
- * @param {string} params.relationshipType - Relationship type being approved
- * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the approved Relationship. Omit to return Promise
- * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the approved Relationship instance
+ * @param {number} params.AMId - Asset Manager ID of the company with whom to approve the relationship
+ * @param {string} params.relatedId - ID of the Asset Manager ID to approve
+ * @param {function} [callback] - Called with one argument (error) on completion. If successful, error is null
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves on success
  */
-export function approveRel({ AMId, relatedId, relationshipType }, callback) {
-  const data = { relatedId, relationshipType, relationshipStatus: 'Active' }
+export function approveRel({ AMId, relatedId }, callback) {
+  const data = { relatedId }
   const params = {
     AMaaSClass: 'relationships',
     AMId,
-    data
+    resourceId: 'employees',
+    data,
+    query: { actionType: 'Approve' }
   }
   let promise = patchData(params).then(result => {
-    result = _parseRelationship(result)
     if (typeof callback === 'function') {
-      callback(null, result)
+      callback(null)
     }
-    return result
+    return
   })
   if (typeof callback !== 'function') {
     return promise
@@ -208,23 +208,23 @@ export function approveRel({ AMId, relatedId, relationshipType }, callback) {
  * @param {object} params - object of parameters:
  * @param {number} params.AMId - Asset Manager ID of the Relationship to reject
  * @param {string} params.relatedId - ID of the Asset Manager ID related to `params.AMId`
- * @param {string} params.relationshipType - Relationship type being rejected
- * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the rejected Relationship. Omit to return Promise
- * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the rejected Relationship instance
+ * @param {function} [callback] - Called with one argument (error) on completion. If successful, error is null
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves on success
  */
-export function rejectRel({ AMId, relatedId, relationshipType }, callback) {
-  const data = { relatedId, relationshipType, relationshipStatus: 'Inactive' }
+export function rejectRel({ AMId, relatedId }, callback) {
+  const data = { relatedId }
   const params = {
     AMaaSClass: 'relationships',
     AMId,
-    data
+    resourceId: 'employees',
+    data,
+    query: { actionType: 'Reject' }
   }
   let promise = patchData(params).then(result => {
-    result = _parseRelationship(result)
     if (typeof callback === 'function') {
-      callback(null, result)
+      callback(null)
     }
-    return result
+    return
   })
   if (typeof callback !== 'function') {
     return promise
@@ -238,25 +238,25 @@ export function rejectRel({ AMId, relatedId, relationshipType }, callback) {
  * @memberof module:api.Relationships
  * @static
  * @param {object} params - object of parameters:
- * @param {number} params.AMId - Asset Manager ID of the Relationship to revoke
- * @param {string} params.relatedId - ID of the Asset Manager ID related to `params.AMId`
- * @param {string} params.relationshipType - Relationship type being revoked
- * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the revoked Relationship. Omit to return Promise
- * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the revoked Relationship instance
+ * @param {number} params.AMId - Asset Manager ID of the company with whom to revoke the relationship
+ * @param {string} params.relatedId - ID of the Asset Manager ID to revoke the relationship from
+ * @param {function} [callback] - Called with one argument (error) on completion. If successful, error is null
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves on success
  */
-export function revokeRel({ AMId, relatedId, relationshipType }, callback) {
-  const data = { relatedId, relationshipType, relationshipStatus: 'Inactive' }
+export function revokeRel({ AMId, relatedId }, callback) {
+  const data = { relatedId }
   const params = {
     AMaaSClass: 'relationships',
     AMId,
-    data
+    resourceId: 'employees',
+    data,
+    query: { actionType: 'Revoke' }
   }
   let promise = patchData(params).then(result => {
-    result = _parseRelationship(result)
     if (typeof callback === 'function') {
-      callback(null, result)
+      callback(null)
     }
-    return result
+    return
   })
   if (typeof callback !== 'function') {
     return promise
@@ -271,28 +271,55 @@ export function revokeRel({ AMId, relatedId, relationshipType }, callback) {
  * @static
  * @param {object} params - object of parameters:
  * @param {number} params.AMId - AMID of company to join
- * @param {string} params.toEmail - Email address to send to
- * @param {string} params.fromEmail - Email address sent from
- * @param {string} params.companyName - Company to Join
- * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is `true`.
- * @returns {Promise|null} If no callback supplied, returns a promise that resolves with `true`.
+ * @param {string} params.email - Email address to send the invitation to
+ * @param {string} params.companyName - Name of company to join
+ * @param {function} [callback] - Called with one argument (error) on completion. If successful, error is null
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves on success
  */
-export function sendInvitation({ AMId, toEmail, fromEmail, companyName }, callback) {
+export function sendInvitation({ AMId, email, companyName }, callback) {
   const params = {
     AMaaSClass: 'relationships',
     AMId,
-    resourceId: 'invitations',
+    resourceId: 'employees',
     data: {
-      userEmail: toEmail,
-      adminEmail: fromEmail,
+      userEmail: email,
       companyName
-    }
+    },
+    query: { actionType: 'Invite' }
   }
   let promise = putData(params).then(result => {
     if (typeof callback === 'function') {
-      callback(null, result)
+      callback(null)
     }
-    return result
+    return
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
+/**
+ * Register a new user in the database
+ * @function register
+ * @memberof module:api.Relationships
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.AMId - AMID of Company (either the new company or the company to join)
+ * @param {function} [callback] - Called with one argument (error) on completion. If successful, error is null.
+ * @returns {Promise|null} If no callback supplied, returns a promise that resolves on success.
+ */
+export function register({ AMId }, callback) {
+  const params = {
+    AMaaSClass: 'relationships',
+    AMId,
+    resourceId: 'employees'
+  }
+  let promise = insertData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null)
+    }
+    return
   })
   if (typeof callback !== 'function') {
     return promise

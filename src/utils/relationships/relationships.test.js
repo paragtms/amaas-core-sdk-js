@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { retrieve, requestRelationship, getRelatedAMID, insert, amend, sendInvitation, approveRel, rejectRel, revokeRel } from './relationships'
+import { retrieve, requestRelationship, getRelatedAMID, insert, amend, sendInvitation, approveRel, rejectRel, revokeRel, register } from './relationships'
 import Relationship from '../../relationships'
 import * as api from '../../exports/api'
 import * as network from '../network'
@@ -106,15 +106,15 @@ describe('amend', () => {
 
 describe('sendInvitation', () => {
   beforeAll(() => {
-    network.putData.mockImplementation(() => Promise.resolve(true))
+    network.putData.mockImplementation(() => Promise.resolve())
   })
   test('with promise', () => {
     let promise = sendInvitation({})
     expect(promise).toBeInstanceOf(Promise)
   })
   it('calls putData with correct params', done => {
-    sendInvitation({ AMId: 1, toEmail: 'offboard@argomi.com', fromEmail: 'onboard@argomi.com', companyName: 'Argomi' }, (error, result) => {
-      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, resourceId: 'invitations', data: { userEmail: 'offboard@argomi.com', adminEmail: 'onboard@argomi.com', companyName: 'Argomi' } })
+    sendInvitation({ AMId: 1, email: 'offboard@argomi.com', companyName: 'Argomi' }, (error) => {
+      expect(network.putData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, resourceId: 'employees', data: { userEmail: 'offboard@argomi.com', companyName: 'Argomi' }, query: { actionType: 'Invite' } })
       done()
     })
   })
@@ -122,15 +122,15 @@ describe('sendInvitation', () => {
 
 describe('approveRel', () => {
   beforeAll(() => {
-    network.patchData.mockImplementation(() => Promise.resolve(mockRel))
+    network.patchData.mockImplementation(() => Promise.resolve())
   })
   test('with promise', () => {
     let promise = approveRel({})
     expect(promise).toBeInstanceOf(Promise)
   })
   it('calls patchData with correct params', done => {
-    approveRel({ AMId: 1, relationshipType: 'Employee', relatedId: 5 }, (error, result) => {
-      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, data: { relationshipType: 'Employee', relatedId: 5, relationshipStatus: 'Active' } })
+    approveRel({ AMId: 1, relatedId: 5 }, (error) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, resourceId: 'employees', data: { relatedId: 5 }, query: { actionType: 'Approve' } })
       done()
     })
   })
@@ -138,15 +138,15 @@ describe('approveRel', () => {
 
 describe('rejectRel', () => {
   beforeAll(() => {
-    network.patchData.mockImplementation(() => Promise.resolve(mockRel))
+    network.patchData.mockImplementation(() => Promise.resolve())
   })
   test('with promise', () => {
     let promise = rejectRel({})
     expect(promise).toBeInstanceOf(Promise)
   })
   it('calls patchData with correct params', done => {
-    rejectRel({ AMId: 1, relationshipType: 'Employee', relatedId: 5 }, (error, result) => {
-      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, data: { relationshipType: 'Employee', relatedId: 5, relationshipStatus: 'Inactive' } })
+    rejectRel({ AMId: 1, relatedId: 5 }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, resourceId: 'employees', data: { relatedId: 5 }, query: { actionType: 'Reject' } })
       done()
     })
   })
@@ -154,15 +154,31 @@ describe('rejectRel', () => {
 
 describe('revokeRel', () => {
   beforeAll(() => {
-    network.patchData.mockImplementation(() => Promise.resolve(mockRel))
+    network.patchData.mockImplementation(() => Promise.resolve())
   })
   test('with promise', () => {
     let promise = revokeRel({})
     expect(promise).toBeInstanceOf(Promise)
   })
   it('calls patchData with correct params', done => {
-    revokeRel({ AMId: 1, relationshipType: 'Employee', relatedId: 5 }, (error, result) => {
-      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, data: { relationshipType: 'Employee', relatedId: 5, relationshipStatus: 'Inactive' } })
+    revokeRel({ AMId: 1, relatedId: 5 }, (error, result) => {
+      expect(network.patchData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 1, resourceId: 'employees', data: { relatedId: 5 }, query: { actionType: 'Revoke' } })
+      done()
+    })
+  })
+})
+
+describe('register', () => {
+  beforeAll(() => {
+    network.insertData.mockImplementation(() => Promise.resolve())
+  })
+  test('with promise', () => {
+    let promise = register({})
+    expect(promise).toBeInstanceOf(Promise)
+  })
+  it('calls insertData with the correct params', done => {
+    register({ AMId: 88 }, (error, result) => {
+      expect(network.insertData).toHaveBeenCalledWith({ AMaaSClass: 'relationships', AMId: 88, resourceId: 'employees' })
       done()
     })
   })
