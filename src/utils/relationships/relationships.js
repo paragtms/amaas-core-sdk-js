@@ -73,7 +73,7 @@ export function requestRelationship({ AMId, options }, callback) {
  * @static
  * @param {object} params - object of parameters:
  * @param {number} params.AMId - Asset Manager ID of the AM that you want to see the parent Relationships for
- * @param {object} params.options - `{ includeInactive: [true], relationshipType: ['Employee', 'External] }`
+ * @param {object} params.options - e.g. `{ includeInactive: true, relationshipType: ['Employee', 'External'] }`
  * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the Relationship instance or list of Relationships. Omit to return Promise
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the Relationship instance or list of Relationships.
  */

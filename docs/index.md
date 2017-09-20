@@ -1373,7 +1373,7 @@ Get a list of relationships where the passed AMID is the relatedId
 | --- | --- | --- |
 | params | <code>object</code> | object of parameters: |
 | params.AMId | <code>number</code> | Asset Manager ID of the AM that you want to see the parent Relationships for |
-| params.options | <code>object</code> | `{ includeInactive: [true], relationshipType: ['Employee', 'External] }` |
+| params.options | <code>object</code> | e.g. `{ includeInactive: true, relationshipType: ['Employee', 'External'] }` |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the Relationship instance or list of Relationships. Omit to return Promise |
 
 <a name="module_api.Relationships.insert"></a>
