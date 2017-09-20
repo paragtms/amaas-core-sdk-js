@@ -1,6 +1,6 @@
 export const TRANSACTION_TYPES = [ 'Allocation', 'Block', 'Cashflow', 'Coupon', 'Dividend', 'Exercise', 'Expiry', 'Payment', 'Journal', 'Maturity', 'Net', 'Novation', 'Split', 'Trade', 'Transfer' ]
 export const TRANSACTION_INVESTOR_ACTIONS = [ 'Subscription', 'Redemption' ]
 export const TRANSACTION_LIFECYCLE_ACTIONS = [ 'Acquire', 'Remove' ]
-export const TRANSACTION_ACTIONS = [ 'Buy', 'Sell', 'Short Sell', 'Deliver', 'Receive', ...TRANSACTION_INVESTOR_ACTIONS, ...TRANSACTION_LIFECYCLE_ACTIONS ]
+export const TRANSACTION_ACTIONS = [ 'Buy', 'Sell', 'Short Sell', 'Short Cover', 'Deliver', 'Receive', ...TRANSACTION_INVESTOR_ACTIONS, ...TRANSACTION_LIFECYCLE_ACTIONS ]
 export const TRANSACTION_CANCEL_STATUSES = [ 'Cancelled', 'Netted', 'Novated' ]
 export const TRANSACTION_STATUSES = [ 'New', 'Amended', 'Superseded', ...TRANSACTION_CANCEL_STATUSES ]

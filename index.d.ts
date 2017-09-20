@@ -371,7 +371,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     assetManagerId: number
     assetBookId?: string
     counterpartyBookId?: string
-    transactionAction?: 'Buy' | 'Sell' | 'Short Sell' | 'Deliver' | 'Receive' | 'Subscription' | 'Redemption' | 'Acquire' | 'Remove'
+    transactionAction?: 'Buy' | 'Sell' | 'Short Sell' | 'Short Cover' | 'Deliver' | 'Receive' | 'Subscription' | 'Redemption' | 'Acquire' | 'Remove'
     assetId?: string
     quantity?: any
     transactionDate?: string
@@ -1024,7 +1024,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       assetManagerId: number
       assetBookId?: string
       counterpartyBookId?: string
-      transactionAction?: 'Buy' | 'Sell' | 'Short Sell' | 'Deliver' | 'Receive' | 'Subscription' | 'Redemption' | 'Acquire' | 'Remove'
+      transactionAction?: 'Buy' | 'Sell' | 'Short Sell' | 'Short Cover' | 'Deliver' | 'Receive' | 'Subscription' | 'Redemption' | 'Acquire' | 'Remove'
       assetId?: string
       quantity?: any
       transactionDate?: string
