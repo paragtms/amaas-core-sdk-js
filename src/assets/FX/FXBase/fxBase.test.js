@@ -1,6 +1,10 @@
 import ForeignExchangeBase from './fxBase.js'
 
 describe('FXBase', () => {
+  describe('constructor', () => {
+    const fxBase = new ForeignExchangeBase({ currency: 'USD' })
+    expect(fxBase.currency).toEqual('USD')
+  })
   describe('serialization', () => {
     it('should serialize properly', () => {
       const test = new ForeignExchangeBase({ assetStatus: 'Active' })

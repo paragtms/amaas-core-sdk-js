@@ -16,6 +16,7 @@ class ForeignExchange extends ForeignExchangeBase {
    * @param {boolean} [params.fungible=true] - Auto-set to `true` __(read-only)__
    * @param {string} [params.assetIssuerId] - ID of the Foreign Exchange's issuer
    * @param {string} [params.assetStatus=Active] - Status of the Foreign Exchange
+   * @param {string} [params.currency] - Transacted Currency for the FX pair (counterc currency)
    * @param {string} [params.description] - Description of the Foreign Exchange
    * @param {string} [params.displayName] - Display name of the ForeignExchange
    * @param {array} params.countryCodes - Array of country codes __(required)__
@@ -36,6 +37,7 @@ class ForeignExchange extends ForeignExchangeBase {
     assetStatus='Active',
     description='',
     displayName,
+    currency,
     countryCodes,
     major,
     clientId,
@@ -52,6 +54,7 @@ class ForeignExchange extends ForeignExchangeBase {
       assetId,
       assetIssuerId,
       assetStatus,
+      currency,
       description,
       displayName,
       countryCodes,

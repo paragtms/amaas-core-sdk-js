@@ -14,6 +14,7 @@ class ForeignExchangeForward extends ForeignExchangeBase {
    * @param {number} params.assetManagerId - Asset Manager ID
    * @param {string} [params.assetClass=ForeignExchange] - Auto-set to `ForeignExchange` __(read-only)__
    * @param {string} [params.assetStatus] - Status of the asset 
+   * @param {string} [params.currency] - Transacted currency
    * @param {string} [params.description] - Description of the ForeignExchangeForward
    * @param {string} [params.clientId] - ID of the client
    * @param {boolean} params.major - Whether it is a major currency or not 
@@ -35,6 +36,7 @@ class ForeignExchangeForward extends ForeignExchangeBase {
     assetIssuerId,
     assetManagerId,
     assetStatus='Active',
+    currency,
     description='',
     displayName,    
     clientId,
@@ -57,6 +59,7 @@ class ForeignExchangeForward extends ForeignExchangeBase {
       assetIssuerId,
       assetManagerId,
       assetStatus,
+      currency,
       description,
       displayName,
       countryCodes,
