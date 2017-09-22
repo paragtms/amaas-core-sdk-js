@@ -6,6 +6,10 @@ describe('ForeignExchangeForward', () => {
       const testFXForward = new ForeignExchangeForward({ fixingDate: '2017-12-31' })
       expect(testFXForward.fixingDate).toEqual('2017-12-31')
     })
+    it('should set currency', () => {
+      const fxf = new ForeignExchangeForward({ currency: 'USD' })
+      expect(fxf.currency).toEqual('USD')
+    })
   })
   describe('serialization', () => {
     it('should serialize properly', () => {

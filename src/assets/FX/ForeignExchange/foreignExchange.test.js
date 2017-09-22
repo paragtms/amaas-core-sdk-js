@@ -1,6 +1,12 @@
 import ForeignExchange from './foreignExchange.js'
 
 describe('ForeignExchange', () => {
+  describe('constructor', () => {
+    it('should set currency', () => {
+      const fx = new ForeignExchange({ currency: 'USD' })
+      expect(fx.currency).toEqual('USD')
+    })
+  })
   describe('serialization', () => {
     it('should serialize properly', () => {
       const test = new ForeignExchange({ assetId: 'USDSGD' })
