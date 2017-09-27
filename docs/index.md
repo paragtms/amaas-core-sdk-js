@@ -127,7 +127,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
         * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
-        * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.fieldsSearch(params, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Books](#module_api.Books) : <code>object</code>
@@ -431,7 +431,7 @@ Retrieve temporary credentials for pub/sub connection
     * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
     * [.fuzzySearch(query, callback)](#module_api.Assets.fuzzySearch) ⇒ <code>Promise</code> \| <code>null</code>
-    * [.fieldsSearch(query, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.fieldsSearch(params, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
 
@@ -527,16 +527,18 @@ Fuzzy Search on assets
 
 <a name="module_api.Assets.fieldsSearch"></a>
 
-#### Assets.fieldsSearch(query, callback) ⇒ <code>Promise</code> \| <code>null</code>
+#### Assets.fieldsSearch(params, callback) ⇒ <code>Promise</code> \| <code>null</code>
 Search for Assets and return specified fields
 
 **Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
-**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of plain objects or a single plain object  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with an array of objects or a single object  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| query | <code>object</code> | Query object of the form `{ assetManagerIds: number, fields: string[] }`. Any asset property may be specified as a field parameter. e.g. `{ query: { assetManagerIds: [1, 2], fields: ['assetId', 'references', 'comments']} }` |
-| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of plain objects or a single plain object |
+| params | <code>object</code> | Search parameters |
+| params.AMId | <code>number</code> | Asset Manager ID to search over. |
+| params.query | <code>object</code> | Query object containing a `fields` property. e.g. `{ query: { fields: ['assetId', 'references', 'comments']} }` |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of objects or a single object |
 
 <a name="module_api.Assets.deactivate"></a>
 
