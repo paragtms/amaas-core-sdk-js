@@ -246,12 +246,10 @@ export function fuzzySearch({ AMId, query = { fuzzy: true } }, callback) {
  * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of plain objects or a single plain object
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of plain objects or a single plain object
  */
-export function fieldsSearch(query , callback) {
-  if (!query.assetManagerIds) {
-    throw new Error('You must specify at least one Asset Manager ID')
-  }
+export function fieldsSearch({ AMId, query } , callback) {
   const params = {
     AMaaSClass: 'parties',
+    AMId,
     query
   }
   let promise = searchData(params).then(result => {
