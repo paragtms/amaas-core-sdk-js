@@ -9,14 +9,16 @@ import { Transaction } from '../../transactions'
 * @param {object} params - object of parameters:
 * @param {number} params.AMId - Asset Manager ID of the Transaction's owner
 * @param {string} [params.resourceId] - Transaction ID. Omit to return all Transactions for the supplied AMId
+* @param {string} [params.query] - Optional query to allow version to be specified (`query: { version: 3 }`)
 * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is an Array of Transactions or a single Transaction instance. Omit to return Promise
 * @returns {Promise|null} If no callback supplied, returns Promise that resolves with an Array of Transactions or a single Transaction instance
 */
-export function retrieve({ AMId, resourceId }, callback) {
+export function retrieve({ AMId, resourceId, query }, callback) {
   const params = {
     AMaaSClass: 'transactions',
     AMId,
-    resourceId
+    resourceId,
+    query
   }
   let promise = retrieveData(params).then(result => {
     if (Array.isArray(result)) {
