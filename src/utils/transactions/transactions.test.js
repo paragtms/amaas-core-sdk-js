@@ -43,8 +43,8 @@ describe('retrieve', () => {
     expect(promise).toBeInstanceOf(Promise)
   })
   it('calls retrieveData with correct params', done => {
-    retrieve({ AMId: 1, resourceId: 'testID' }, (error, result) => {
-      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMId: 1, resourceId: 'testID' })
+    retrieve({ AMId: 1, resourceId: 'testID', query: { version: 8 } }, (error, result) => {
+      expect(network.retrieveData).toHaveBeenCalledWith({ AMaaSClass: 'transactions', AMId: 1, resourceId: 'testID', query: { version: 8 } })
       done()
     })
   })
