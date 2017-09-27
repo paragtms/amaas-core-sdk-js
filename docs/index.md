@@ -1507,7 +1507,6 @@ Retrieve a Transaction from the database
 | params | <code>object</code> | object of parameters: |
 | params.AMId | <code>number</code> | Asset Manager ID of the Transaction's owner |
 | [params.resourceId] | <code>string</code> | Transaction ID. Omit to return all Transactions for the supplied AMId |
-| [params.query] | <code>number</code> | Optional query to select the version of the Transaction |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an Array of Transactions or a single Transaction instance. Omit to return Promise |
 
 <a name="module_api.Transactions.insert"></a>
@@ -2397,7 +2396,6 @@ Construct a new Foreign Exchange instance
 | [params.fungible] | <code>boolean</code> | <code>true</code> | Auto-set to `true` __(read-only)__ |
 | [params.assetIssuerId] | <code>string</code> |  | ID of the Foreign Exchange's issuer |
 | [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Foreign Exchange |
-| [params.currency] | <code>string</code> |  | Transacted Currency for the FX pair (counterc currency) |
 | [params.description] | <code>string</code> |  | Description of the Foreign Exchange |
 | [params.displayName] | <code>string</code> |  | Display name of the ForeignExchange |
 | params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
@@ -2433,7 +2431,6 @@ Construct a new FXForward instance
 | params.assetManagerId | <code>number</code> |  | Asset Manager ID |
 | [params.assetClass] | <code>string</code> | <code>&quot;ForeignExchange&quot;</code> | Auto-set to `ForeignExchange` __(read-only)__ |
 | [params.assetStatus] | <code>string</code> |  | Status of the asset |
-| [params.currency] | <code>string</code> |  | Transacted currency |
 | [params.description] | <code>string</code> |  | Description of the ForeignExchangeForward |
 | [params.clientId] | <code>string</code> |  | ID of the client |
 | params.major | <code>boolean</code> |  | Whether it is a major currency or not |
