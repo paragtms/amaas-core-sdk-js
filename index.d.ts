@@ -3,7 +3,18 @@ declare module '@amaas/amaas-core-sdk-js' {
   // AssetManagers
   export interface IAssetManager {
     assetManagerId?: number
-    assetManagerType: 'Accredited Investor' | 'Bank' | 'Broker' | 'Corporate Treasury' | 'Family Office' | 'Fund Administrator' | 'Fund Manager' | 'Hedge Fund' | 'Private Equity' | 'Individual' | 'Venture Capital'
+    assetManagerType:
+      | 'Accredited Investor'
+      | 'Bank'
+      | 'Broker'
+      | 'Corporate Treasury'
+      | 'Family Office'
+      | 'Fund Administrator'
+      | 'Fund Manager'
+      | 'Hedge Fund'
+      | 'Private Equity'
+      | 'Individual'
+      | 'Venture Capital'
     assetManagerStatus?: string
     accountType?: 'Test' | 'Basic' | 'Professional' | 'Demo'
     clientId?: number
@@ -168,12 +179,38 @@ declare module '@amaas/amaas-core-sdk-js' {
   }
   export interface IBondFuture extends IFuture {
     cheapestToDeliverId?: string | number
-    underlyingBondTenor?: '1M' | '3M' | '6M' | '9M' | '1Y' | '2Y' | '5Y' | '10Y' | '15Y' | '20Y' | '30Y' | '40Y' | '50Y'
+    underlyingBondTenor?:
+      | '1M'
+      | '3M'
+      | '6M'
+      | '9M'
+      | '1Y'
+      | '2Y'
+      | '5Y'
+      | '10Y'
+      | '15Y'
+      | '20Y'
+      | '30Y'
+      | '40Y'
+      | '50Y'
     underlyingBondCoupon?: any
   }
   export interface IBondFuture extends IFuture {
     cheapestToDeliverId?: string | number
-    underlyingBondTenor?: '1M' | '3M' | '6M' | '9M' | '1Y' | '2Y' | '5Y' | '10Y' | '15Y' | '20Y' | '30Y' | '40Y' | '50Y'
+    underlyingBondTenor?:
+      | '1M'
+      | '3M'
+      | '6M'
+      | '9M'
+      | '1Y'
+      | '2Y'
+      | '5Y'
+      | '10Y'
+      | '15Y'
+      | '20Y'
+      | '30Y'
+      | '40Y'
+      | '50Y'
     underlyingBondCoupon?: any
   }
   export interface IFutureOption extends IFuture {
@@ -190,8 +227,44 @@ declare module '@amaas/amaas-core-sdk-js' {
   export interface IInterestRateFuture extends IFuture {}
   export interface IListedContractForDifference extends IListedDerivative {}
   export interface IPrivateInvestment extends IAsset {
-    category?: 'Private Equity' | 'Mutual Funds' | 'Hedge Funds' | 'Fund of Funds' | 'StartUp' | 'Private Company' | 'Others'
-    subCategory?: 'Money Market Funds' | 'Bond Funds' | 'Balanced Funds' | 'Equity Funds' | 'Speciality Funds' | 'Leverage Buyout Funds' | 'Growth Equity Funds' | 'Venture Capital Funds' | 'Real Estate Investment Funds' | 'Mezzanine Funds' | 'Distresses Debt Funds' | 'Special Situation Funds'| 'Market Neutral Funds' | 'Equity Long Funds' | 'Equity Short Funds' | 'Event-Driven Funds' | 'Macro Funds' | 'Currency Funds' | 'Equity Funds' | 'Commodity' | 'Credit' | 'Index Arbitrage' | 'Quant Funds' | 'Lifestyle Startup' | 'Small Business' | 'Silicon Valley Type Startup' | 'Startup to be Quickly Sold' | 'Large Company Startup' | 'Social Startups'
+    category?:
+      | 'Private Equity'
+      | 'Mutual Funds'
+      | 'Hedge Funds'
+      | 'Fund of Funds'
+      | 'StartUp'
+      | 'Private Company'
+      | 'Others'
+    subCategory?:
+      | 'Money Market Funds'
+      | 'Bond Funds'
+      | 'Balanced Funds'
+      | 'Equity Funds'
+      | 'Speciality Funds'
+      | 'Leverage Buyout Funds'
+      | 'Growth Equity Funds'
+      | 'Venture Capital Funds'
+      | 'Real Estate Investment Funds'
+      | 'Mezzanine Funds'
+      | 'Distresses Debt Funds'
+      | 'Special Situation Funds'
+      | 'Market Neutral Funds'
+      | 'Equity Long Funds'
+      | 'Equity Short Funds'
+      | 'Event-Driven Funds'
+      | 'Macro Funds'
+      | 'Currency Funds'
+      | 'Equity Funds'
+      | 'Commodity'
+      | 'Credit'
+      | 'Index Arbitrage'
+      | 'Quant Funds'
+      | 'Lifestyle Startup'
+      | 'Small Business'
+      | 'Silicon Valley Type Startup'
+      | 'Startup to be Quickly Sold'
+      | 'Large Company Startup'
+      | 'Social Startups'
     investmentDate?: string
     numShares?: any
     priceShare?: any
@@ -253,13 +326,7 @@ declare module '@amaas/amaas-core-sdk-js' {
   }
 
   export interface IFuzzyHit {
-    _index: string
-    _type: string
-    _id: string
-    _score: number
-    _source: {
-      [field: string]: any
-    }
+    [field: string]: any
   }
 
   // Parties
@@ -315,7 +382,13 @@ declare module '@amaas/amaas-core-sdk-js' {
     assetManagerId: number
     relationshipId?: string
     relatedId: number
-    relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee' | 'Data Provider' | 'Demo'
+    relationshipType:
+      | 'Administrator'
+      | 'External'
+      | 'Front Office'
+      | 'Employee'
+      | 'Data Provider'
+      | 'Demo'
     clientId?: number
     relationshipStatus: 'Active' | 'Pending' | 'Superseded' | 'Inactive'
     createdBy?: string
@@ -371,7 +444,17 @@ declare module '@amaas/amaas-core-sdk-js' {
     assetManagerId: number
     assetBookId?: string
     counterpartyBookId?: string
-    transactionAction?: 'Buy' | 'Sell' | 'Short Sell' | 'Short Cover' | 'Deliver' | 'Receive' | 'Subscription' | 'Redemption' | 'Acquire' | 'Remove'
+    transactionAction?:
+      | 'Buy'
+      | 'Sell'
+      | 'Short Sell'
+      | 'Short Cover'
+      | 'Deliver'
+      | 'Receive'
+      | 'Subscription'
+      | 'Redemption'
+      | 'Acquire'
+      | 'Remove'
     assetId?: string
     quantity?: any
     transactionDate?: string
@@ -381,9 +464,30 @@ declare module '@amaas/amaas-core-sdk-js' {
     settlementCurrency?: string
     asset?: any
     executionTime?: string
-    transactionType?: 'Allocation' | 'Block' | 'Cashflow' | 'Coupon' | 'Dividend' | 'Exercise' | 'Expiry' | 'Payment' | 'Journal' | 'Maturity' | 'Net' | 'Novation' | 'Split' | 'Trade' | 'Transfer'
+    transactionType?:
+      | 'Allocation'
+      | 'Block'
+      | 'Cashflow'
+      | 'Coupon'
+      | 'Dividend'
+      | 'Exercise'
+      | 'Expiry'
+      | 'Payment'
+      | 'Journal'
+      | 'Maturity'
+      | 'Net'
+      | 'Novation'
+      | 'Split'
+      | 'Trade'
+      | 'Transfer'
     transactionId?: string
-    transactionStatus?: 'New' | 'Amended' | 'Superseded' | 'Cancelled' | 'Netted' | 'Novated'
+    transactionStatus?:
+      | 'New'
+      | 'Amended'
+      | 'Superseded'
+      | 'Cancelled'
+      | 'Netted'
+      | 'Novated'
     charges?: any
     codes?: any
     comments?: any
@@ -416,108 +520,599 @@ declare module '@amaas/amaas-core-sdk-js' {
     version?: number
   }
 
-  
   // API
   namespace api {
     namespace AssetManagers {
-      function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<any> | void
-      function insert({ assetManager }: { assetManager: assetManagers.AssetManager | IAssetManager }, callback?: Function): Promise<assetManagers.AssetManager> | void
-      function amend({ AMId, assetManager }: { AMId: number, assetManager: assetManagers.AssetManager | IAssetManager }, callback?: Function): Promise<assetManagers.AssetManager> | void
-      function deactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
-      function reactivate({ AMId }: { AMId: number }, callback?: Function): Promise<assetManagers.AssetManager> | void
-      function searchDomains({ query }: { query?: { assetManagerIds?: number | number[], isPrimary?: boolean, domains?: string | string[], domainStatuses?: string | string[], fields?: string | string[] } }, callback?: Function): Promise<assetManagers.Domain | assetManagers.Domain[]> | void
-      function checkDomains({ domain }: { domain: string }, callback?: Function): Promise<assetManagers.Domain[]> | void
-      function insertDomain({ AMId, domain }: { AMId: number, domain: assetManagers.Domain | IDomain }, callback?: Function): Promise<assetManagers.Domain> | void
-      function retrieveEODBooks({ AMId, bookID }: { AMId: number, bookID: string }, callback?: Function): Promise<assetManagers.EODBook | assetManagers.EODBook[]> | void
-      function getCredentialsForPubSub({ AMId }: { AMId: number }, callback?: Function): Promise<{ credentials: { AccessKeyId: string, SecretAccessKey: string, SessionToken: string }, topics: string[] }> | void
+      function retrieve(
+        { AMId }: { AMId: number },
+        callback?: Function
+      ): Promise<any> | void
+      function insert(
+        {
+          assetManager
+        }: { assetManager: assetManagers.AssetManager | IAssetManager },
+        callback?: Function
+      ): Promise<assetManagers.AssetManager> | void
+      function amend(
+        {
+          AMId,
+          assetManager
+        }: {
+          AMId: number
+          assetManager: assetManagers.AssetManager | IAssetManager
+        },
+        callback?: Function
+      ): Promise<assetManagers.AssetManager> | void
+      function deactivate(
+        { AMId }: { AMId: number },
+        callback?: Function
+      ): Promise<assetManagers.AssetManager> | void
+      function reactivate(
+        { AMId }: { AMId: number },
+        callback?: Function
+      ): Promise<assetManagers.AssetManager> | void
+      function searchDomains(
+        {
+          query
+        }: {
+          query?: {
+            assetManagerIds?: number | number[]
+            isPrimary?: boolean
+            domains?: string | string[]
+            domainStatuses?: string | string[]
+            fields?: string | string[]
+          }
+        },
+        callback?: Function
+      ): Promise<assetManagers.Domain | assetManagers.Domain[]> | void
+      function checkDomains(
+        { domain }: { domain: string },
+        callback?: Function
+      ): Promise<assetManagers.Domain[]> | void
+      function insertDomain(
+        {
+          AMId,
+          domain
+        }: { AMId: number; domain: assetManagers.Domain | IDomain },
+        callback?: Function
+      ): Promise<assetManagers.Domain> | void
+      function retrieveEODBooks(
+        { AMId, bookID }: { AMId: number; bookID: string },
+        callback?: Function
+      ): Promise<assetManagers.EODBook | assetManagers.EODBook[]> | void
+      function getCredentialsForPubSub(
+        { AMId }: { AMId: number },
+        callback?: Function
+      ): Promise<{
+        credentials: {
+          AccessKeyId: string
+          SecretAccessKey: string
+          SessionToken: string
+        }
+        topics: string[]
+      }> | void
     }
     namespace Assets {
-      function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<assets.AssetClassTypes[]> | void
-      function insert({ AMId, asset }: { AMId: number, asset: assets.AssetClassTypes | assets.IAssetTypes }, callback?: Function): Promise<assets.AssetClassTypes> | void
-      function amend({ AMId, asset, resourceId }: { AMId: number, asset: assets.AssetClassTypes | assets.IAssetTypes, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
-      function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: { [keyName: string]: any }, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
-      function search({ AMId, query }: { AMId: number, query?: { clientIds?: string | number | any[], assetStatuses?: string | string[], assetIds?: string | string[], referenceTypes?: string | string[], referenceValues?: string | string[], assetIssuerIds?: string | number | any[], assetClasses?: string | string[], assetTypes?: string | string[] } }, callback?: Function): Promise<assets.AssetClassTypes[]> | void
-      function fuzzySearch({ AMId, query }: { AMId: number, query: any }, callback?: Function): Promise<IFuzzySearchResult> | void
-      function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
-      function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<assets.AssetClassTypes> | void
-      function fieldsSearch({ AMId, query }: { AMId: number, query: { [queryKey: string]: any } }, callback?: Function): Promise<any> | void
+      function retrieve(
+        { AMId, resourceId }: { AMId: number; resourceId?: string },
+        callback?: Function
+      ): Promise<assets.AssetClassTypes[]> | void
+      function insert(
+        {
+          AMId,
+          asset
+        }: { AMId: number; asset: assets.AssetClassTypes | assets.IAssetTypes },
+        callback?: Function
+      ): Promise<assets.AssetClassTypes> | void
+      function amend(
+        {
+          AMId,
+          asset,
+          resourceId
+        }: {
+          AMId: number
+          asset: assets.AssetClassTypes | assets.IAssetTypes
+          resourceId: string
+        },
+        callback?: Function
+      ): Promise<assets.AssetClassTypes> | void
+      function partialAmend(
+        {
+          AMId,
+          changes,
+          resourceId
+        }: {
+          AMId: number
+          changes: { [keyName: string]: any }
+          resourceId: string
+        },
+        callback?: Function
+      ): Promise<assets.AssetClassTypes> | void
+      function search(
+        {
+          AMId,
+          query
+        }: {
+          AMId: number
+          query?: {
+            clientIds?: string | number | any[]
+            assetStatuses?: string | string[]
+            assetIds?: string | string[]
+            referenceTypes?: string | string[]
+            referenceValues?: string | string[]
+            assetIssuerIds?: string | number | any[]
+            assetClasses?: string | string[]
+            assetTypes?: string | string[]
+          }
+        },
+        callback?: Function
+      ): Promise<assets.AssetClassTypes[]> | void
+      function fuzzySearch(
+        { AMId, query }: { AMId: number; query: any },
+        callback?: Function
+      ): Promise<IFuzzySearchResult> | void
+      function deactivate(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<assets.AssetClassTypes> | void
+      function reactivate(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<assets.AssetClassTypes> | void
+      function fieldsSearch(
+        { AMId, query }: { AMId: number; query: { [queryKey: string]: any } },
+        callback?: Function
+      ): Promise<any> | void
     }
     namespace Books {
-      function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<books.Book[]> | void
-      function search({ AMId, query }: { AMId: number, query?: { assetManagerIds?: number | number[], clientIds?: string | number | any[], bookStatuses?: string | string[], bookIds?: string | string[], ownerIds?: string | string[] } }, callback?: Function): Promise<books.Book[]> | void
-      function insert({ AMId, book }: { AMId: number, book: books.Book | IBook }, callback?: Function): Promise<books.Book> | void
-      function amend({ AMId, book, resourceId }: { AMId: number, book: books.Book | IBook, resourceId: string }, callback?: Function): Promise<books.Book> | void
-      function retire({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
-      function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<books.Book> | void
-      function getPermissions({ AMId, bookId, includeInactive }: { AMId: number, bookId?: string, includeInactive?: boolean }, callback?: Function): Promise<books.BookPermission | books.BookPermission[]> | void
-      function addPermission({ AMId, bookPermission }: { AMId: number, bookPermission: IBookPermission | books.BookPermission }, callback?: Function): Promise<books.BookPermission> | void
-      function readPermission({ AMId, userAssetManagerId, bookId }: { AMId: number, userAssetManagerId: number, bookId: string }, callback?: Function): Promise<books.BookPermission> | void
-      function writePermission({ AMId, userAssetManagerId, bookId }: { AMId: number, userAssetManagerId: number, bookId: string }, callback?: Function): Promise<books.BookPermission> | void
-      function deactivatePermission({ AMId, userAssetManagerId, bookId }: { AMId: number, userAssetManagerId: number, bookId: string }, callback?: Function): Promise<books.BookPermission> | void
+      function retrieve(
+        { AMId, resourceId }: { AMId: number; resourceId?: string },
+        callback?: Function
+      ): Promise<books.Book[]> | void
+      function search(
+        {
+          AMId,
+          query
+        }: {
+          AMId: number
+          query?: {
+            assetManagerIds?: number | number[]
+            clientIds?: string | number | any[]
+            bookStatuses?: string | string[]
+            bookIds?: string | string[]
+            ownerIds?: string | string[]
+          }
+        },
+        callback?: Function
+      ): Promise<books.Book[]> | void
+      function insert(
+        { AMId, book }: { AMId: number; book: books.Book | IBook },
+        callback?: Function
+      ): Promise<books.Book> | void
+      function amend(
+        {
+          AMId,
+          book,
+          resourceId
+        }: { AMId: number; book: books.Book | IBook; resourceId: string },
+        callback?: Function
+      ): Promise<books.Book> | void
+      function retire(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<books.Book> | void
+      function reactivate(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<books.Book> | void
+      function getPermissions(
+        {
+          AMId,
+          bookId,
+          includeInactive
+        }: { AMId: number; bookId?: string; includeInactive?: boolean },
+        callback?: Function
+      ): Promise<books.BookPermission | books.BookPermission[]> | void
+      function addPermission(
+        {
+          AMId,
+          bookPermission
+        }: {
+          AMId: number
+          bookPermission: IBookPermission | books.BookPermission
+        },
+        callback?: Function
+      ): Promise<books.BookPermission> | void
+      function readPermission(
+        {
+          AMId,
+          userAssetManagerId,
+          bookId
+        }: { AMId: number; userAssetManagerId: number; bookId: string },
+        callback?: Function
+      ): Promise<books.BookPermission> | void
+      function writePermission(
+        {
+          AMId,
+          userAssetManagerId,
+          bookId
+        }: { AMId: number; userAssetManagerId: number; bookId: string },
+        callback?: Function
+      ): Promise<books.BookPermission> | void
+      function deactivatePermission(
+        {
+          AMId,
+          userAssetManagerId,
+          bookId
+        }: { AMId: number; userAssetManagerId: number; bookId: string },
+        callback?: Function
+      ): Promise<books.BookPermission> | void
     }
     namespace Fundamentals {
-      function countries({ code }: { code?: string }, callback?: Function): Promise<{ [key: string]: string | number }> | void
-      function calcBusinessDate({ date, codes, offset, invalidDates }: { date: string, codes: string | string[], offset: number, invalidDates: any }, callback?: Function): Promise<{ businessDate: string }> | void
-      function processDateInfo({ date, codes }: { date: string, codes: string | string[] }, callback?: Function): Promise<{ [countryCode: string]: any }> | void
-      function holidays({ codes, years }: { codes: string | string[], years: string | string[] }, callback?: Function): Promise<{ [countryCode: string]: { calendar: string, holidays: any[], weekends: number[] } }> | void
+      function countries(
+        { code }: { code?: string },
+        callback?: Function
+      ): Promise<{ [key: string]: string | number }> | void
+      function calcBusinessDate(
+        {
+          date,
+          codes,
+          offset,
+          invalidDates
+        }: {
+          date: string
+          codes: string | string[]
+          offset: number
+          invalidDates: any
+        },
+        callback?: Function
+      ): Promise<{ businessDate: string }> | void
+      function processDateInfo(
+        { date, codes }: { date: string; codes: string | string[] },
+        callback?: Function
+      ): Promise<{ [countryCode: string]: any }> | void
+      function holidays(
+        {
+          codes,
+          years
+        }: { codes: string | string[]; years: string | string[] },
+        callback?: Function
+      ): Promise<{
+        [countryCode: string]: {
+          calendar: string
+          holidays: any[]
+          weekends: number[]
+        }
+      }> | void
     }
     namespace Monitor {
-      function retrieveItems({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
-      function insertNewItem({ AMId, item }: { AMId: number, item: IMonitorItem | monitor.Item }, callback?: Function): Promise<monitor.Item> | void
-      function resubmitItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
-      function searchItems({ AMId, query }: { AMId?: number, query?: { assetManagerIds?: number | number[], itemIds?: string | string[], assetBookIds?: string | string[], itemStatuses?: string | string[], itemClasses?: string | string[], itemTypes?: string | string[], itemLevels?: string | string[], itemSources?: string | string[], transactionIds?: string | string[], assetIds?: string | string[] } }, callback?: Function): Promise<monitor.Item | monitor.Item[]> | void
-      function closeItem({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Item> | void
-      function retrieveEvent({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<monitor.Event | monitor.Event[]> | void
-      function insertEvent({ AMId, event }: { AMId: number, event: monitor.Event | IMonitorEvent }, callback?: Function): Promise<monitor.Event> | void
-      function closeEvent({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<monitor.Event> | void
+      function retrieveItems(
+        { AMId, resourceId }: { AMId: number; resourceId?: string },
+        callback?: Function
+      ): Promise<monitor.Item | monitor.Item[]> | void
+      function insertNewItem(
+        { AMId, item }: { AMId: number; item: IMonitorItem | monitor.Item },
+        callback?: Function
+      ): Promise<monitor.Item> | void
+      function resubmitItem(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<monitor.Item> | void
+      function searchItems(
+        {
+          AMId,
+          query
+        }: {
+          AMId?: number
+          query?: {
+            assetManagerIds?: number | number[]
+            itemIds?: string | string[]
+            assetBookIds?: string | string[]
+            itemStatuses?: string | string[]
+            itemClasses?: string | string[]
+            itemTypes?: string | string[]
+            itemLevels?: string | string[]
+            itemSources?: string | string[]
+            transactionIds?: string | string[]
+            assetIds?: string | string[]
+          }
+        },
+        callback?: Function
+      ): Promise<monitor.Item | monitor.Item[]> | void
+      function closeItem(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<monitor.Item> | void
+      function retrieveEvent(
+        { AMId, resourceId }: { AMId: number; resourceId?: string },
+        callback?: Function
+      ): Promise<monitor.Event | monitor.Event[]> | void
+      function insertEvent(
+        { AMId, event }: { AMId: number; event: monitor.Event | IMonitorEvent },
+        callback?: Function
+      ): Promise<monitor.Event> | void
+      function closeEvent(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<monitor.Event> | void
     }
     namespace Parties {
-      function retrieve({ AMId, resourceId }: { AMId: number, resourceId?: string }, callback?: Function): Promise<parties.PartiesClassType | parties.PartiesClassType[]> | void
-      function insert({ AMId, party }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType }, callback?: Function): Promise<parties.PartiesClassType> | void
-      function amend({ AMId, party, resourceId }: { AMId: number, party: parties.PartiesClassType | parties.PartiesInterfaceType, resourceId: string }): Promise<parties.PartiesClassType> | void
-      function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
-      function search({ AMId, query }: { AMId: number, query?: { assetManagerIds?: number | number[], clientIds?: number | number[], partyStatuses?: string | string[], partyIds?: string | string[], partyClasses?: string | string[], partyTypes?: string | string[] } }, callback?: Function): Promise<parties.PartiesClassType[]> | void
-      function fuzzySearch({ AMId, query }: { AMId: number, query: any }, callback?: Function): Promise<IFuzzySearchResult> | void
-      function fieldsSearch({ AMId, query }: { AMId: number, query: { [queryKey: string]: any } }, callback?: Function): Promise<any> | void
-      function deactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
-      function reactivate({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<parties.PartiesClassType> | void
+      function retrieve(
+        { AMId, resourceId }: { AMId: number; resourceId?: string },
+        callback?: Function
+      ): Promise<parties.PartiesClassType | parties.PartiesClassType[]> | void
+      function insert(
+        {
+          AMId,
+          party
+        }: {
+          AMId: number
+          party: parties.PartiesClassType | parties.PartiesInterfaceType
+        },
+        callback?: Function
+      ): Promise<parties.PartiesClassType> | void
+      function amend({
+        AMId,
+        party,
+        resourceId
+      }: {
+        AMId: number
+        party: parties.PartiesClassType | parties.PartiesInterfaceType
+        resourceId: string
+      }): Promise<parties.PartiesClassType> | void
+      function partialAmend(
+        {
+          AMId,
+          changes,
+          resourceId
+        }: { AMId: number; changes: any; resourceId: string },
+        callback?: Function
+      ): Promise<parties.PartiesClassType> | void
+      function search(
+        {
+          AMId,
+          query
+        }: {
+          AMId: number
+          query?: {
+            assetManagerIds?: number | number[]
+            clientIds?: number | number[]
+            partyStatuses?: string | string[]
+            partyIds?: string | string[]
+            partyClasses?: string | string[]
+            partyTypes?: string | string[]
+          }
+        },
+        callback?: Function
+      ): Promise<parties.PartiesClassType[]> | void
+      function fuzzySearch(
+        { AMId, query }: { AMId: number; query: any },
+        callback?: Function
+      ): Promise<IFuzzySearchResult> | void
+      function fieldsSearch(
+        { AMId, query }: { AMId: number; query: { [queryKey: string]: any } },
+        callback?: Function
+      ): Promise<any> | void
+      function deactivate(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<parties.PartiesClassType> | void
+      function reactivate(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<parties.PartiesClassType> | void
     }
     namespace Relationships {
-      function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<relationships.Relationship[]> | void
-      function requestRelationship({ AMId, options }: { AMId: number, options: { relationshipId: string, relationshipType: string } }, callback?: Function): Promise<relationships.Relationship> | void
-      function insert({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
-      function amend({ AMId, relationship }: { AMId: number, relationship: relationships.Relationship | IRelationship }, callback?: Function): Promise<relationships.Relationship> | void
-      function getRelatedAMID({ AMId, options }: { AMId: number, options: { includeInactive : boolean[], relationshipType: string[] } }, callback?: Function): Promise<relationships.Relationship | relationships.Relationship[]> | void
-      function sendInvitation({ AMId, email, companyName }: { AMId: number, email: string, companyName: string }, callback?: Function): Promise<null> | void
-      function approveRel({ AMId, relatedId }: { AMId: number, relatedId: string }, callback?: Function): Promise<null> | void
-      function rejectRel({ AMId, relatedId }: { AMId: number, relatedId: string }, callback?: Function): Promise<null> | void
-      function revokeRel({ AMId, relatedId }: { AMId: number, relatedId: string }, callback?: Function): Promise<null> | void
-      function register({ AMId }: { AMId: number }, callback?: Function): Promise<null> | void
+      function retrieve(
+        { AMId }: { AMId: number },
+        callback?: Function
+      ): Promise<relationships.Relationship[]> | void
+      function requestRelationship(
+        {
+          AMId,
+          options
+        }: {
+          AMId: number
+          options: { relationshipId: string; relationshipType: string }
+        },
+        callback?: Function
+      ): Promise<relationships.Relationship> | void
+      function insert(
+        {
+          AMId,
+          relationship
+        }: {
+          AMId: number
+          relationship: relationships.Relationship | IRelationship
+        },
+        callback?: Function
+      ): Promise<relationships.Relationship> | void
+      function amend(
+        {
+          AMId,
+          relationship
+        }: {
+          AMId: number
+          relationship: relationships.Relationship | IRelationship
+        },
+        callback?: Function
+      ): Promise<relationships.Relationship> | void
+      function getRelatedAMID(
+        {
+          AMId,
+          options
+        }: {
+          AMId: number
+          options: { includeInactive: boolean[]; relationshipType: string[] }
+        },
+        callback?: Function
+      ): Promise<
+        relationships.Relationship | relationships.Relationship[]
+      > | void
+      function sendInvitation(
+        {
+          AMId,
+          email,
+          companyName
+        }: { AMId: number; email: string; companyName: string },
+        callback?: Function
+      ): Promise<null> | void
+      function approveRel(
+        { AMId, relatedId }: { AMId: number; relatedId: string },
+        callback?: Function
+      ): Promise<null> | void
+      function rejectRel(
+        { AMId, relatedId }: { AMId: number; relatedId: string },
+        callback?: Function
+      ): Promise<null> | void
+      function revokeRel(
+        { AMId, relatedId }: { AMId: number; relatedId: string },
+        callback?: Function
+      ): Promise<null> | void
+      function register(
+        { AMId }: { AMId: number },
+        callback?: Function
+      ): Promise<null> | void
     }
     namespace Positions {
-      function retrieve({ AMId }: { AMId: number }, callback?: Function): Promise<transactions.Position> | void
-      function search({ AMId, query }: { AMId: number, query?: { assetManagerIds?: number | number[], bookIds?: string | string[], assetIds?: string | string[], clientIds?: number | number[], accountIds?: string | string[], accountingTypes?: string | string[], positionDate?: string | string[] } }, callback?: Function): Promise<transactions.Position> | void
-      function fieldsSearch(query: { assetManagerIds: number | number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
+      function retrieve(
+        { AMId }: { AMId: number },
+        callback?: Function
+      ): Promise<transactions.Position> | void
+      function search(
+        {
+          AMId,
+          query
+        }: {
+          AMId: number
+          query?: {
+            assetManagerIds?: number | number[]
+            bookIds?: string | string[]
+            assetIds?: string | string[]
+            clientIds?: number | number[]
+            accountIds?: string | string[]
+            accountingTypes?: string | string[]
+            positionDate?: string | string[]
+          }
+        },
+        callback?: Function
+      ): Promise<transactions.Position> | void
+      function fieldsSearch(
+        query: {
+          assetManagerIds: number | number[]
+          [searchQuery: string]: any
+        },
+        callback?: Function
+      ): Promise<any> | void
     }
     namespace Transactions {
-      function retrieve({ AMId, resourceId, query }: { AMId: number, resourceId?: string, query?: any }, callback?: Function): Promise<transactions.Transaction | transactions.Transaction[]> | void
-      function insert({ AMId, transaction }: { AMId: number, transaction: transactions.Transaction | ITransaction }, callback?: Function): Promise<transactions.Transaction> | void
-      function amend({ AMId, transaction, resourceId }: { AMId: number, transaction: transactions.Transaction | ITransaction, resourceId?: string }, callback?: Function): Promise<transactions.Transaction> | void
-      function partialAmend({ AMId, changes, resourceId }: { AMId: number, changes: any, resourceId?: string }, callback?: Function): Promise<transactions.Transaction> | void
-      function search({ AMId, query }: { AMId: number, query?: { clientIds?: string | number | any[], transactionStatuses?: string | string[], transactionIds?: string | string[], assetBookIds?: string | string[], counterpartyBookIds?: string | string[], assetIds?: string | string[], transactionDateStart?: any, transactionDateEnd?: any, codeTypes?: string | string[], codeValues?: string | string[], linkTypes?: string | string[], linkedTransactionIds?: string | string[], partyTypes?: string | string[], partyIds?: string | string[], referenceTypes?: string | string[], referenceValues?: string | string[] } }, callback?: Function): Promise<transactions.Transaction | transactions.Transaction[]> | void
-      function fieldsSearch(query: { assetManagerIds: number | number[], [searchQuery: string]: any }, callback?: Function): Promise<any> | void
-      function cancel({ AMId, resourceId }: { AMId: number, resourceId: string }, callback?: Function): Promise<transactions.Transaction> | void
+      function retrieve(
+        {
+          AMId,
+          resourceId,
+          query
+        }: { AMId: number; resourceId?: string; query?: any },
+        callback?: Function
+      ): Promise<transactions.Transaction | transactions.Transaction[]> | void
+      function insert(
+        {
+          AMId,
+          transaction
+        }: {
+          AMId: number
+          transaction: transactions.Transaction | ITransaction
+        },
+        callback?: Function
+      ): Promise<transactions.Transaction> | void
+      function amend(
+        {
+          AMId,
+          transaction,
+          resourceId
+        }: {
+          AMId: number
+          transaction: transactions.Transaction | ITransaction
+          resourceId?: string
+        },
+        callback?: Function
+      ): Promise<transactions.Transaction> | void
+      function partialAmend(
+        {
+          AMId,
+          changes,
+          resourceId
+        }: { AMId: number; changes: any; resourceId?: string },
+        callback?: Function
+      ): Promise<transactions.Transaction> | void
+      function search(
+        {
+          AMId,
+          query
+        }: {
+          AMId: number
+          query?: {
+            clientIds?: string | number | any[]
+            transactionStatuses?: string | string[]
+            transactionIds?: string | string[]
+            assetBookIds?: string | string[]
+            counterpartyBookIds?: string | string[]
+            assetIds?: string | string[]
+            transactionDateStart?: any
+            transactionDateEnd?: any
+            codeTypes?: string | string[]
+            codeValues?: string | string[]
+            linkTypes?: string | string[]
+            linkedTransactionIds?: string | string[]
+            partyTypes?: string | string[]
+            partyIds?: string | string[]
+            referenceTypes?: string | string[]
+            referenceValues?: string | string[]
+          }
+        },
+        callback?: Function
+      ): Promise<transactions.Transaction | transactions.Transaction[]> | void
+      function fieldsSearch(
+        query: {
+          assetManagerIds: number | number[]
+          [searchQuery: string]: any
+        },
+        callback?: Function
+      ): Promise<any> | void
+      function cancel(
+        { AMId, resourceId }: { AMId: number; resourceId: string },
+        callback?: Function
+      ): Promise<transactions.Transaction> | void
     }
-    function config({ stage, credentialsPath, apiVersion, token }: { stage?: string, credentialsPath?: string, apiVersion?: string, token?: string }): void
+    function config({
+      stage,
+      credentialsPath,
+      apiVersion,
+      token
+    }: {
+      stage?: string
+      credentialsPath?: string
+      apiVersion?: string
+      token?: string
+    }): void
   }
   // CLASSES
-  
+
   // assetManagers
   namespace assetManagers {
-
     class AssetManager {
       assetManagerId?: number
-      assetManagerType: 'Accredited Investor' | 'Bank' | 'Broker' | 'Corporate Treasury' | 'Family Office' | 'Fund Administrator' | 'Fund Manager' | 'Hedge Fund' | 'Private Equity' | 'Individual' | 'Venture Capital'
+      assetManagerType:
+        | 'Accredited Investor'
+        | 'Bank'
+        | 'Broker'
+        | 'Corporate Treasury'
+        | 'Family Office'
+        | 'Fund Administrator'
+        | 'Fund Manager'
+        | 'Hedge Fund'
+        | 'Private Equity'
+        | 'Individual'
+        | 'Venture Capital'
       assetManagerStatus?: string
       accountType?: 'Test' | 'Basic' | 'Professional' | 'Demo'
       clientId?: number
@@ -561,7 +1156,6 @@ declare module '@amaas/amaas-core-sdk-js' {
 
   // books
   namespace books {
-
     class Book {
       assetManagerId: number
       bookId: string
@@ -600,9 +1194,36 @@ declare module '@amaas/amaas-core-sdk-js' {
 
   //assets
   namespace assets {
-
-    type IAssetTypes = IAsset | IBondTypes | ICurrencyTypes | ICustomAssetTypes | IDerivativesType | IEquityTypes | IFundTypes | IForeignExchangeTypes | IIndexTypes | IListedDerivativeTypes | IPrivateInvestmentTypes | IRealAssetTypes | ISukukTypes | ISyntheticTypes
-    type AssetClassTypes = Asset | BondClassTypes | CurrencyClassTypes | CustomAssetClassTypes | DerivativesClassType | EquityClassTypes | FundClassTypes | ForeignExchangeClassTypes | IndexClassTypes | ListedDerivativeClassTypes | PrivateInvestmentClassTypes | RealAssetClassTypes | SukukClassTypes | SyntheticClassTypes
+    type IAssetTypes =
+      | IAsset
+      | IBondTypes
+      | ICurrencyTypes
+      | ICustomAssetTypes
+      | IDerivativesType
+      | IEquityTypes
+      | IFundTypes
+      | IForeignExchangeTypes
+      | IIndexTypes
+      | IListedDerivativeTypes
+      | IPrivateInvestmentTypes
+      | IRealAssetTypes
+      | ISukukTypes
+      | ISyntheticTypes
+    type AssetClassTypes =
+      | Asset
+      | BondClassTypes
+      | CurrencyClassTypes
+      | CustomAssetClassTypes
+      | DerivativesClassType
+      | EquityClassTypes
+      | FundClassTypes
+      | ForeignExchangeClassTypes
+      | IndexClassTypes
+      | ListedDerivativeClassTypes
+      | PrivateInvestmentClassTypes
+      | RealAssetClassTypes
+      | SukukClassTypes
+      | SyntheticClassTypes
 
     // base class
     class Asset {
@@ -632,8 +1253,16 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     // bonds
-    type IBondTypes = IBondBase | IBondCorporate | IBondGovernment | IBondMortgage
-    type BondClassTypes = BondBase | BondCorporate | BondGovernment | BondMortgage
+    type IBondTypes =
+      | IBondBase
+      | IBondCorporate
+      | IBondGovernment
+      | IBondMortgage
+    type BondClassTypes =
+      | BondBase
+      | BondCorporate
+      | BondGovernment
+      | BondMortgage
 
     class BondBase extends Asset {
       maturityDate?: string
@@ -672,8 +1301,16 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     // derivatives
-    type IDerivativesType = IDerivative | IBondOption | IContractForDifference | IForeignExchangeOption
-    type DerivativesClassType = Derivative | BondOption | ContractForDifference | ForeignExchangeOption
+    type IDerivativesType =
+      | IDerivative
+      | IBondOption
+      | IContractForDifference
+      | IForeignExchangeOption
+    type DerivativesClassType =
+      | Derivative
+      | BondOption
+      | ContractForDifference
+      | ForeignExchangeOption
     class Derivative extends Asset {
       constructor(props: IDerivative)
     }
@@ -720,8 +1357,14 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     // foreign exchange
-    type IForeignExchangeTypes = IForeignExchangeBase | IForeignExchange | IForeignExchangeForward
-    type ForeignExchangeClassTypes = ForeignExchangeBase | ForeignExchange | ForeignExchangeForward
+    type IForeignExchangeTypes =
+      | IForeignExchangeBase
+      | IForeignExchange
+      | IForeignExchangeForward
+    type ForeignExchangeClassTypes =
+      | ForeignExchangeBase
+      | ForeignExchange
+      | ForeignExchangeForward
     class ForeignExchangeBase extends Asset {
       constructor(props: IForeignExchangeBase)
     }
@@ -740,8 +1383,28 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
 
     // listed derivative
-    type IListedDerivativeTypes = IListedDerivative | IFuture | IBondFuture | IFutureOption | IBondFutureOption | IEnergyFuture | IEquityFuture | IIndexFuture | IInterestRateFuture | IListedContractForDifference
-    type ListedDerivativeClassTypes = ListedDerivative | Future | BondFuture | FutureOption | BondFutureOption | EnergyFuture | EquityFuture | IndexFuture | InterestRateFuture | ListedContractForDifference
+    type IListedDerivativeTypes =
+      | IListedDerivative
+      | IFuture
+      | IBondFuture
+      | IFutureOption
+      | IBondFutureOption
+      | IEnergyFuture
+      | IEquityFuture
+      | IIndexFuture
+      | IInterestRateFuture
+      | IListedContractForDifference
+    type ListedDerivativeClassTypes =
+      | ListedDerivative
+      | Future
+      | BondFuture
+      | FutureOption
+      | BondFutureOption
+      | EnergyFuture
+      | EquityFuture
+      | IndexFuture
+      | InterestRateFuture
+      | ListedContractForDifference
     class ListedDerivative extends Asset {
       constructor(props: IListedDerivative)
     }
@@ -757,7 +1420,20 @@ declare module '@amaas/amaas-core-sdk-js' {
     }
     class BondFuture extends Future {
       cheapestToDeliverId?: string | number
-      underlyingBondTenor?: '1M' | '3M' | '6M' | '9M' | '1Y' | '2Y' | '5Y' | '10Y' | '15Y' | '20Y' | '30Y' | '40Y' | '50Y'
+      underlyingBondTenor?:
+        | '1M'
+        | '3M'
+        | '6M'
+        | '9M'
+        | '1Y'
+        | '2Y'
+        | '5Y'
+        | '10Y'
+        | '15Y'
+        | '20Y'
+        | '30Y'
+        | '40Y'
+        | '50Y'
       underlyingBondCoupon?: any
     }
     class CommodityFuture extends Future {
@@ -795,8 +1471,44 @@ declare module '@amaas/amaas-core-sdk-js' {
     type IPrivateInvestmentTypes = IPrivateInvestment
     type PrivateInvestmentClassTypes = PrivateInvestment
     class PrivateInvestment extends Asset {
-      category?: 'Private Equity' | 'Mutual Funds' | 'Hedge Funds' | 'Fund of Funds' | 'StartUp' | 'Private Company' | 'Others'
-      subCategory?: 'Money Market Funds' | 'Bond Funds' | 'Balanced Funds' | 'Equity Funds' | 'Speciality Funds' | 'Leverage Buyout Funds' | 'Growth Equity Funds' | 'Venture Capital Funds' | 'Real Estate Investment Funds' | 'Mezzanine Funds' | 'Distresses Debt Funds' | 'Special Situation Funds'| 'Market Neutral Funds' | 'Equity Long Funds' | 'Equity Short Funds' | 'Event-Driven Funds' | 'Macro Funds' | 'Currency Funds' | 'Equity Funds' | 'Commodity' | 'Credit' | 'Index Arbitrage' | 'Quant Funds' | 'Lifestyle Startup' | 'Small Business' | 'Silicon Valley Type Startup' | 'Startup to be Quickly Sold' | 'Large Company Startup' | 'Social Startups'
+      category?:
+        | 'Private Equity'
+        | 'Mutual Funds'
+        | 'Hedge Funds'
+        | 'Fund of Funds'
+        | 'StartUp'
+        | 'Private Company'
+        | 'Others'
+      subCategory?:
+        | 'Money Market Funds'
+        | 'Bond Funds'
+        | 'Balanced Funds'
+        | 'Equity Funds'
+        | 'Speciality Funds'
+        | 'Leverage Buyout Funds'
+        | 'Growth Equity Funds'
+        | 'Venture Capital Funds'
+        | 'Real Estate Investment Funds'
+        | 'Mezzanine Funds'
+        | 'Distresses Debt Funds'
+        | 'Special Situation Funds'
+        | 'Market Neutral Funds'
+        | 'Equity Long Funds'
+        | 'Equity Short Funds'
+        | 'Event-Driven Funds'
+        | 'Macro Funds'
+        | 'Currency Funds'
+        | 'Equity Funds'
+        | 'Commodity'
+        | 'Credit'
+        | 'Index Arbitrage'
+        | 'Quant Funds'
+        | 'Lifestyle Startup'
+        | 'Small Business'
+        | 'Silicon Valley Type Startup'
+        | 'Startup to be Quickly Sold'
+        | 'Large Company Startup'
+        | 'Social Startups'
       investmentDate?: string
       numShares?: any
       priceShare?: any
@@ -871,14 +1583,32 @@ declare module '@amaas/amaas-core-sdk-js' {
       legs?: any[]
       constructor(props: ISyntheticMultiLeg)
     }
-
   }
 
   // parties
   namespace parties {
-
-    type PartiesClassType = parties.AssetManager | parties.Broker | parties.Company | parties.Exchange | parties.Fund | parties.GovernmentAgency | parties.Individual | parties.Organisation | parties.Party | parties.SubFund
-    type PartiesInterfaceType = IAssetManagerParty | IBroker | ICompany | IExchange | IFund | IGovernmentAgency | IIndividual | IOrganisation | IParty | ISubFund
+    type PartiesClassType =
+      | parties.AssetManager
+      | parties.Broker
+      | parties.Company
+      | parties.Exchange
+      | parties.Fund
+      | parties.GovernmentAgency
+      | parties.Individual
+      | parties.Organisation
+      | parties.Party
+      | parties.SubFund
+    type PartiesInterfaceType =
+      | IAssetManagerParty
+      | IBroker
+      | ICompany
+      | IExchange
+      | IFund
+      | IGovernmentAgency
+      | IIndividual
+      | IOrganisation
+      | IParty
+      | ISubFund
 
     class Party {
       assetManagerId: number
@@ -951,17 +1681,21 @@ declare module '@amaas/amaas-core-sdk-js' {
       registrationNumber?: string
       constructor(props: AssetManager)
     }
-
   }
 
   // relationships
   namespace relationships {
-
     class Relationship {
       assetManagerId: number
       relationshipId?: string
       relatedId: number
-      relationshipType: 'Administrator' | 'External' | 'Front Office' | 'Employee' | 'Data Provider' | 'Demo'
+      relationshipType:
+        | 'Administrator'
+        | 'External'
+        | 'Front Office'
+        | 'Employee'
+        | 'Data Provider'
+        | 'Demo'
       clientId?: number
       relationshipStatus: 'Active' | 'Pending' | 'Superseded' | 'Inactive'
       createdBy?: string
@@ -1024,7 +1758,17 @@ declare module '@amaas/amaas-core-sdk-js' {
       assetManagerId: number
       assetBookId?: string
       counterpartyBookId?: string
-      transactionAction?: 'Buy' | 'Sell' | 'Short Sell' | 'Short Cover' | 'Deliver' | 'Receive' | 'Subscription' | 'Redemption' | 'Acquire' | 'Remove'
+      transactionAction?:
+        | 'Buy'
+        | 'Sell'
+        | 'Short Sell'
+        | 'Short Cover'
+        | 'Deliver'
+        | 'Receive'
+        | 'Subscription'
+        | 'Redemption'
+        | 'Acquire'
+        | 'Remove'
       assetId?: string
       quantity?: any
       transactionDate?: string
@@ -1034,9 +1778,30 @@ declare module '@amaas/amaas-core-sdk-js' {
       settlementCurrency?: string
       asset?: any
       executionTime?: string
-      transactionType?: 'Allocation' | 'Block' | 'Cashflow' | 'Coupon' | 'Dividend' | 'Exercise' | 'Expiry' | 'Payment' | 'Journal' | 'Maturity' | 'Net' | 'Novation' | 'Split' | 'Trade' | 'Transfer'
+      transactionType?:
+        | 'Allocation'
+        | 'Block'
+        | 'Cashflow'
+        | 'Coupon'
+        | 'Dividend'
+        | 'Exercise'
+        | 'Expiry'
+        | 'Payment'
+        | 'Journal'
+        | 'Maturity'
+        | 'Net'
+        | 'Novation'
+        | 'Split'
+        | 'Trade'
+        | 'Transfer'
       transactionId?: string
-      transactionStatus?: 'New' | 'Amended' | 'Superseded' | 'Cancelled' | 'Netted' | 'Novated'
+      transactionStatus?:
+        | 'New'
+        | 'Amended'
+        | 'Superseded'
+        | 'Cancelled'
+        | 'Netted'
+        | 'Novated'
       charges?: any
       codes?: any
       comments?: any
