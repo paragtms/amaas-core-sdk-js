@@ -1,4 +1,11 @@
-import { retrieveData, insertData, patchData, putData, deleteData, searchData } from '../network'
+import {
+  retrieveData,
+  insertData,
+  patchData,
+  putData,
+  deleteData,
+  searchData
+} from '../network'
 
 import * as AssetClasses from '../../assets'
 
@@ -199,11 +206,6 @@ export function search({ AMId, query }, callback) {
  * 
  * <pre><code>
  * {
- * _index: string,
- * _type: string,
- * _id: string,
- * _score: number,
- * _source:{
  *  assetType: string,
  *  assetId: string,
  *  description: string,
@@ -211,7 +213,6 @@ export function search({ AMId, query }, callback) {
  *  displayName: string,
  *  assetManagerId: string,
  *  search: string
- * }
  * }
  * </code></pre>
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the above object.
@@ -248,7 +249,7 @@ export function fuzzySearch({ AMId, query = { fuzzy: true } }, callback) {
  * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of objects or a single object
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with an array of objects or a single object
  */
-export function fieldsSearch({ AMId, query } , callback) {
+export function fieldsSearch({ AMId, query }, callback) {
   const params = {
     AMaaSClass: 'assets',
     AMId,

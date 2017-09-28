@@ -523,7 +523,7 @@ Fuzzy Search on assets
 | Param | Type | Description |
 | --- | --- | --- |
 | query | <code>object</code> | Query object of the form . |
-| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> <pre><code> { _index: string, _type: string, _id: string, _score: number, _source:{  assetType: string,  assetId: string,  description: string,  assetClass: string,  displayName: string,  assetManagerId: string,  search: string } } </code></pre> |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> <pre><code> {  assetType: string,  assetId: string,  description: string,  assetClass: string,  displayName: string,  assetManagerId: string,  search: string } </code></pre> |
 
 <a name="module_api.Assets.fieldsSearch"></a>
 
@@ -1206,7 +1206,7 @@ Fuzzy Search on parties
 | Param | Type | Description |
 | --- | --- | --- |
 | query | <code>object</code> | Query object of the form . |
-| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> <pre><code> { _index: string, _type: string, _id: string, _score: number, _source:{  partyType: string  legalName: string  description: string  assetManagerId: number  displayName: string  partyId: string  partyClass: string  AMaaS: string } } </code></pre> |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is object of shape `{ total: <number>, max_score: <number>, hits: <Array> }`. `hits` is an array of objects:<br /> <pre><code> {  partyType: string  legalName: string  description: string  assetManagerId: number  displayName: string  partyId: string  partyClass: string  AMaaS: string } </code></pre> |
 
 <a name="module_api.Parties.fieldsSearch"></a>
 
