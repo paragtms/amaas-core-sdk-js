@@ -1,26 +1,26 @@
-import ForeignExchangeBase from '../FXBase/fxBase.js'
+import ForeignExchange from '../ForeignExchange/foreignExchange.js'
 
 /**
- * Class representing ForeignExchange (the underlying pair used in a spo/forward asset)
+ * Class representing Spot ForeignExchange (Settles as soon as possible)
  * @memberof module:assets
- * @extends module:assets.ForeignExchangeBase
+ * @extends module:assets.ForeignExchange
  */
-class ForeignExchange extends ForeignExchangeBase {
+class ForeignExchangeSpot extends ForeignExchange {
   /**
    * Construct a new Foreign Exchange instance
    * @param {object} params - ForeignExchange creation options:
    * @param {number} params.assetId - ID of the Asset __(required)__
    * @param {string} params.assetClass - Auto-set to `ForeignExchange` __(read-only)__
-   * @param {string} [params.assetType] - Type of the ForeignExchange. Auto-set based on the class or subclass constructor
+   * @param {string} [params.assetType] - Auto-set to `ForeignExchangeSpot` __(read-only)__
    * @param {string} [params.assetTypeDisplay] - Auto-set to the spaced class name (e.g. `Listed Derivative` for `ListedDerivative()`)
    * @param {boolean} [params.fungible=true] - Auto-set to `true` __(read-only)__
-   * @param {string} [params.assetIssuerId] - ID of the Foreign Exchange's issuer
-   * @param {string} [params.assetStatus=Active] - Status of the Foreign Exchange
+   * @param {string} [params.assetStatus=Active] - Status of the Foreign Exchange Spot
    * @param {string} [params.currency] - Transacted Currency for the FX pair (counterc currency)
    * @param {string} [params.description] - Description of the Foreign Exchange
    * @param {string} [params.displayName] - Display name of the ForeignExchange
+   * @param {string} params.underlying - Underlying assetID of the ForeignExchangeBase
+   * @param {string} params.settlementDate - Settlement date for the spot pair
    * @param {array} params.countryCodes - Array of country codes __(required)__
-   * @param {boolean} [params.major=false] - Whether this FX is major
    * @param {string} [params.clientId] - ID of the associated client
    * @param {object} [params.comments] - Object of Comments attached to the Foreign Exchange
    * @param {object} [params.links] - Object of array of Links attached to the Foreign Exchange
@@ -38,9 +38,10 @@ class ForeignExchange extends ForeignExchangeBase {
     assetStatus = 'Active',
     description = '',
     displayName,
+    underlying,
+    settlementDate,
     currency,
     countryCodes,
-    major,
     clientId,
     comments,
     links,
@@ -70,8 +71,9 @@ class ForeignExchange extends ForeignExchangeBase {
       updatedTime,
       version
     })
-    this.major = major || false
+    this.underlying = underlying
+    this.settlementDate = settlementDate
   }
 }
 
-export default ForeignExchange
+export default ForeignExchangeSpot

@@ -159,11 +159,15 @@ declare module '@amaas/amaas-core-sdk-js' {
   export interface IExchangeTradedFund extends IFund {}
   export interface IForeignExchangeBase extends IAsset {
     countryCodes: any[]
-    major: boolean
   }
-  export interface IForeignExchange extends IForeignExchangeBase {}
-  export interface IForeignExchangeForward extends IForeignExchangeBase {
+  export interface IForeignExchange extends IForeignExchangeBase {
+    major?: boolean
+  }
+  export interface IForeignExchangeSpot extends IForeignExchange {
+    underlying: string
     settlementDate: string
+  }
+  export interface IForeignExchangeForward extends IForeignExchangeSpot {
     fixingDate?: string
     forwardRate: string | number
   }
@@ -1362,18 +1366,29 @@ declare module '@amaas/amaas-core-sdk-js' {
     type IForeignExchangeTypes =
       | IForeignExchangeBase
       | IForeignExchange
+      | IForeignExchangeSpot
       | IForeignExchangeForward
     type ForeignExchangeClassTypes =
       | ForeignExchangeBase
       | ForeignExchange
+      | ForeignExchangeSpot
       | ForeignExchangeForward
     class ForeignExchangeBase extends Asset {
+      countryCodes: any[]
       constructor(props: IForeignExchangeBase)
     }
     class ForeignExchange extends ForeignExchangeBase {
+      major?: boolean
       constructor(props: IForeignExchange)
     }
-    class ForeignExchangeForward extends ForeignExchangeBase {
+    class ForeignExchangeSpot extends ForeignExchange {
+      underlying: string
+      settlementDate: string
+      constructor(props: IForeignExchangeSpot)
+    }
+    class ForeignExchangeForward extends ForeignExchangeSpot {
+      fixingDate?: string
+      forwardRate?: string
       constructor(props: IForeignExchangeForward)
     }
 

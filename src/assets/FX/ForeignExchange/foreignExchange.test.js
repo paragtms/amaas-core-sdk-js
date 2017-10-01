@@ -1,17 +1,32 @@
 import ForeignExchange from './foreignExchange.js'
 
+const mockForeignExchangeParams = {
+  assetId: 'EURUSD',
+  assetIssuerId: 'testIssuerId',
+  assetStatus: 'Inactive',
+  description: 'test description',
+  displayName: 'test displayName',
+  currency: 'EUR',
+  countryCodes: [],
+  major: true,
+  comments: {},
+  links: {},
+  references: {}
+}
+
 describe('ForeignExchange', () => {
   describe('constructor', () => {
-    it('should set currency', () => {
-      const fx = new ForeignExchange({ currency: 'USD' })
-      expect(fx.currency).toEqual('USD')
+    it('constructs properly', () => {
+      const testForeignExchange = new ForeignExchange(mockForeignExchangeParams)
+      expect({ ...testForeignExchange }).toEqual(
+        expect.objectContaining(testForeignExchange)
+      )
     })
-  })
-  describe('serialization', () => {
-    it('should serialize properly', () => {
-      const test = new ForeignExchange({ assetId: 'USDSGD' })
-      expect(JSON.parse(JSON.stringify(test)).assetId).toBeDefined()
-      expect(JSON.parse(JSON.stringify(test)).assetId).toEqual('USDSGD')
+
+    it('defaults major', () => {
+      const majorFalseParams = { ...mockForeignExchangeParams, major: false }
+      const testForeignExchange = new ForeignExchange(majorFalseParams)
+      expect(testForeignExchange.major).toBeFalsy()
     })
   })
   describe('get currency functions', () => {
