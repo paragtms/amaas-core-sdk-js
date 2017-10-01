@@ -1,26 +1,56 @@
 import ForeignExchangeBase from './fxBase.js'
 
+const mockFXBaseParams = {
+  assetId: 'USDSGD',
+  assetManagerId: 88,
+  assetIssuerId: 'testID',
+  assetStatus: 'Inactive',
+  currency: 'USD',
+  description: 'test description',
+  displayName: 'USDSGD',
+  countryCodes: [],
+  comments: {},
+  links: {},
+  references: {}
+}
+
 describe('FXBase', () => {
   describe('constructor', () => {
-    const fxBase = new ForeignExchangeBase({ currency: 'USD' })
-    expect(fxBase.currency).toEqual('USD')
-  })
-  describe('serialization', () => {
-    it('should serialize properly', () => {
-      const test = new ForeignExchangeBase({ assetStatus: 'Active' })
-      expect(JSON.parse(JSON.stringify(test)).assetStatus).toBeDefined()
-      expect(JSON.parse(JSON.stringify(test)).assetStatus).toEqual('Active')
+    it('constructs properly', () => {
+      const fxBase = new ForeignExchangeBase(mockFXBaseParams)
+      expect({ ...fxBase }).toEqual(expect.objectContaining(mockFXBaseParams))
+    })
+
+    it('sets assetClass and assetType', () => {
+      const fxBase = new ForeignExchangeBase(mockFXBaseParams)
+      expect(fxBase.assetClass).toEqual('ForeignExchange')
+      expect(fxBase.assetType).toEqual('ForeignExchangeBase')
+    })
+
+    it('sets defaults', () => {
+      const initialParams = {
+        ...mockFXBaseParams,
+        assetManagerId: undefined,
+        assetStatus: undefined
+      }
+      const expectedResult = {
+        ...mockFXBaseParams,
+        assetManagerId: 0,
+        assetStatus: 'Active'
+      }
+      const FXBase = new ForeignExchangeBase(initialParams)
+      expect({ ...FXBase }).toEqual(expect.objectContaining(expectedResult))
     })
   })
 
   describe('class methods', () => {
     let fx
     beforeAll(() => {
-      fx = new ForeignExchangeBase({ assetId: 'EURUSD' })
+      fx = new ForeignExchangeBase(mockFXBaseParams)
     })
     it('getBaseCurrency should return base currency', () => {
-      expect(fx.getBaseCurrency()).toEqual('EUR')
-      expect(fx.getCounterCurrency()).toEqual('USD')
+      expect(fx.getBaseCurrency()).toEqual('USD')
+      expect(fx.getCounterCurrency()).toEqual('SGD')
     })
   })
 })
