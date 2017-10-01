@@ -1122,7 +1122,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       accountType?: 'Test' | 'Basic' | 'Professional' | 'Demo'
       clientId?: number
       partyId?: string
-      defaultBookOwnerId?: number
+      defaultBookOwnerId?: string
       defaultTimezone?: string
       defaultBookCloseTime?: string
       createdBy?: string
