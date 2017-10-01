@@ -88,6 +88,14 @@ declare module '@amaas/amaas-core-sdk-js' {
   }
 
   // Assets
+  export interface IAssetConfig {
+    settlementCycle: {
+      [countryCode: string]: number
+    }
+    exchangeSettlementCycleOverrides: {
+      [countryCode: string]: number
+    }
+  }
   export interface IAsset {
     assetManagerId: number
     assetId: string
@@ -668,6 +676,10 @@ declare module '@amaas/amaas-core-sdk-js' {
         { AMId, query }: { AMId: number; query: { [queryKey: string]: any } },
         callback?: Function
       ): Promise<any> | void
+      function getAssetConfig(
+        { assetClass }: { assetClass: string },
+        callback?: Function
+      ): Promise<IAssetConfig> | void
     }
     namespace Books {
       function retrieve(

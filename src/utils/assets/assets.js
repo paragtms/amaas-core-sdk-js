@@ -331,6 +331,33 @@ export function reactivate({ AMId, resourceId }, callback) {
   promise.catch(error => callback(error))
 }
 
+/**
+ * Retrieve the asset config (settlement cycle) for a particular asset class.
+ * @function reactivate
+ * @memberof module:api.Assets
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {string} params.assetClass - Asset class to retrive config for.
+ * @param {function} [callback] - Called with two arguments (error, result) on completion. `result` is the config data.
+ * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the config data.
+ */
+export function getAssetConfig({ assetClass }, callback) {
+  const params = {
+    AMaaSClass: 'assetConfig',
+    AMId: assetClass
+  }
+  let promise = retrieveData(params).then(result => {
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
 export function _parseAsset(object) {
   if (!object.assetType) {
     return new AssetClasses.Asset(object)
