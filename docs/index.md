@@ -1717,8 +1717,10 @@ Classes for the Assets service
         * [new Fund(params)](#new_module_assets.Fund_new)
     * [.ForeignExchange](#module_assets.ForeignExchange) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
         * [new ForeignExchange(params)](#new_module_assets.ForeignExchange_new)
-    * [.ForeignExchangeForward](#module_assets.ForeignExchangeForward) ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+    * [.ForeignExchangeForward](#module_assets.ForeignExchangeForward) ⇐ [<code>ForeignExchangeSpot</code>](#module_assets.ForeignExchangeSpot)
         * [new ForeignExchangeForward(params)](#new_module_assets.ForeignExchangeForward_new)
+    * [.ForeignExchangeSpot](#module_assets.ForeignExchangeSpot) ⇐ [<code>ForeignExchange</code>](#module_assets.ForeignExchange)
+        * [new ForeignExchangeSpot(params)](#new_module_assets.ForeignExchangeSpot_new)
     * [.ForeignExchangeBase](#module_assets.ForeignExchangeBase) ⇐ [<code>Asset</code>](#module_assets.Asset)
         * [new ForeignExchangeBase(params)](#new_module_assets.ForeignExchangeBase_new)
     * [.Index](#module_assets.Index) ⇐ [<code>Asset</code>](#module_assets.Asset)
@@ -2379,7 +2381,7 @@ Construct a new Fund instance
 <a name="module_assets.ForeignExchange"></a>
 
 ### assets.ForeignExchange ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
-Class representing FX
+Class representing ForeignExchange (the underlying pair used in a spo/forward asset)
 
 **Kind**: static class of [<code>assets</code>](#module_assets)  
 **Extends**: [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)  
@@ -2403,7 +2405,7 @@ Construct a new Foreign Exchange instance
 | [params.description] | <code>string</code> |  | Description of the Foreign Exchange |
 | [params.displayName] | <code>string</code> |  | Display name of the ForeignExchange |
 | params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
-| params.major | <code>boolean</code> |  | Whether this FX is major __(required)__ |
+| [params.major] | <code>boolean</code> | <code>false</code> | Whether this FX is major |
 | [params.clientId] | <code>string</code> |  | ID of the associated client |
 | [params.comments] | <code>object</code> |  | Object of Comments attached to the Foreign Exchange |
 | [params.links] | <code>object</code> |  | Object of array of Links attached to the Foreign Exchange |
@@ -2416,15 +2418,15 @@ Construct a new Foreign Exchange instance
 
 <a name="module_assets.ForeignExchangeForward"></a>
 
-### assets.ForeignExchangeForward ⇐ [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)
+### assets.ForeignExchangeForward ⇐ [<code>ForeignExchangeSpot</code>](#module_assets.ForeignExchangeSpot)
 Class representing FXForward
 
 **Kind**: static class of [<code>assets</code>](#module_assets)  
-**Extends**: [<code>ForeignExchangeBase</code>](#module_assets.ForeignExchangeBase)  
+**Extends**: [<code>ForeignExchangeSpot</code>](#module_assets.ForeignExchangeSpot)  
 <a name="new_module_assets.ForeignExchangeForward_new"></a>
 
 #### new ForeignExchangeForward(params)
-Construct a new FXForward instance
+Construct a new FXForward instance (if there is a fixingDate, it is an NDF)
 
 
 | Param | Type | Default | Description |
@@ -2438,11 +2440,11 @@ Construct a new FXForward instance
 | [params.currency] | <code>string</code> |  | Transacted currency |
 | [params.description] | <code>string</code> |  | Description of the ForeignExchangeForward |
 | [params.clientId] | <code>string</code> |  | ID of the client |
-| params.major | <code>boolean</code> |  | Whether it is a major currency or not |
 | params.countryCodes | <code>object</code> |  | An array of country codes |
 | params.settlementDate | <code>string</code> |  | The date of exchange of ownership |
 | [params.fixingDate] | <code>string</code> |  | The date of fixing exchange rate between two currencies |
 | params.forwardRate | <code>string</code> |  | Currency exchange rate |
+| params.underlying | <code>string</code> |  | AssetId of the underlying ForeignExchange |
 | [params.comments] | <code>object</code> |  | Object of Comments attached to the Non Deliverable Forward |
 | [params.links] | <code>object</code> |  | Object of array of Links attached to the Non Deliverable Forward |
 | [params.references] | <code>object</code> | <code>{ AMaaS: Reference() }</code> | Object of References associated with this Asset. * The AMaaS Reference is auto-created and populated |
@@ -2450,6 +2452,44 @@ Construct a new FXForward instance
 | [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Non Deliverable Forward |
 | [params.createdTime] | <code>date</code> |  | Time that the Non Deliverable Forward was created |
 | [params.updatedTime] | <code>date</code> |  | Time that the Non Deliverable Forward was updated |
+| [params.version] | <code>number</code> |  | Version number |
+
+<a name="module_assets.ForeignExchangeSpot"></a>
+
+### assets.ForeignExchangeSpot ⇐ [<code>ForeignExchange</code>](#module_assets.ForeignExchange)
+Class representing Spot ForeignExchange (Settles as soon as possible)
+
+**Kind**: static class of [<code>assets</code>](#module_assets)  
+**Extends**: [<code>ForeignExchange</code>](#module_assets.ForeignExchange)  
+<a name="new_module_assets.ForeignExchangeSpot_new"></a>
+
+#### new ForeignExchangeSpot(params)
+Construct a new Foreign Exchange instance
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| params | <code>object</code> |  | ForeignExchange creation options: |
+| params.assetId | <code>number</code> |  | ID of the Asset __(required)__ |
+| params.assetClass | <code>string</code> |  | Auto-set to `ForeignExchange` __(read-only)__ |
+| [params.assetType] | <code>string</code> |  | Auto-set to `ForeignExchangeSpot` __(read-only)__ |
+| [params.assetTypeDisplay] | <code>string</code> |  | Auto-set to the spaced class name (e.g. `Listed Derivative` for `ListedDerivative()`) |
+| [params.fungible] | <code>boolean</code> | <code>true</code> | Auto-set to `true` __(read-only)__ |
+| [params.assetStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | Status of the Foreign Exchange Spot |
+| [params.currency] | <code>string</code> |  | Transacted Currency for the FX pair (counterc currency) |
+| [params.description] | <code>string</code> |  | Description of the Foreign Exchange |
+| [params.displayName] | <code>string</code> |  | Display name of the ForeignExchange |
+| params.underlying | <code>string</code> |  | Underlying assetID of the ForeignExchangeBase |
+| params.settlementDate | <code>string</code> |  | Settlement date for the spot pair |
+| params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
+| [params.clientId] | <code>string</code> |  | ID of the associated client |
+| [params.comments] | <code>object</code> |  | Object of Comments attached to the Foreign Exchange |
+| [params.links] | <code>object</code> |  | Object of array of Links attached to the Foreign Exchange |
+| [params.references] | <code>object</code> | <code>{ AMaaS: Reference() }</code> | Object of References associated with the Foreign Exchange. * The AMaaS Reference is auto-created and populated |
+| [params.createdBy] | <code>string</code> |  | ID of the user that created the Foreign Exchange |
+| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Foreign Exchange |
+| [params.createdTime] | <code>date</code> |  | Time that the Foreign Exchange was created |
+| [params.updatedTime] | <code>date</code> |  | Time that the Foreign Exchange was updated |
 | [params.version] | <code>number</code> |  | Version number |
 
 <a name="module_assets.ForeignExchangeBase"></a>
@@ -2469,7 +2509,7 @@ Construct a new ForeignExchangeBase instance
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | params | <code>object</code> |  | ForeignExchangeBase creation options: |
-| [params.assetManagerId] | <code>number</code> | <code>0</code> | Auto-set to `0` except for ForeignExchangeForward. All FX classes and subclasses are treated as public Assets |
+| [params.assetManagerId] | <code>number</code> | <code>0</code> | Defaults to `0` |
 | params.assetId | <code>number</code> |  | ID of the ForeignExchangeBase __(required)__ |
 | [params.assetClass] | <code>string</code> | <code>&quot;ForeignExchange&quot;</code> | Auto-set to `ForeignExchange` __(read-only)__ |
 | [params.assetType] | <code>string</code> |  | Type of the ForeignExchangeBase. Auto-set based on the class or subclass constructor |
@@ -2480,7 +2520,6 @@ Construct a new ForeignExchangeBase instance
 | [params.description] | <code>string</code> |  | Description of the ForeignExchangeBase |
 | [params.displayName] | <code>string</code> |  | Display name of the ForeignExchangeBase |
 | params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
-| params.major | <code>boolean</code> |  | Whether this FX is major __(required)__ |
 | [params.rollPrice] | <code>boolean</code> | <code>false</code> | Auto-set to `false` __(read-only)__ |
 | [params.clientId] | <code>string</code> |  | ID of the associated client |
 | [params.comments] | <code>object</code> |  | Object of Comments attached to the ForeignExchangeBase |
@@ -3478,12 +3517,13 @@ Construct a new Book object
 | [params.bookStatus] | <code>string</code> | <code>&quot;Active&quot;</code> | status of Book |
 | [params.ownerId] | <code>number</code> |  | ID of the owner of the Book (e.g. the Trader who is responsible for the Book) |
 | [params.partyId] | <code>number</code> |  | ID of the party of which the activity being tracked belongs (e.g. Registered fund or HNWI) |
-| [params.closeTime] | <code>string</code> | <code>&quot;17:30:00&quot;</code> | Book close time. This is stored as local time, to be referenced against timezone |
-| [params.timezone] | <code>string</code> | <code>&quot;UTC&quot;</code> | Book's timezone (use this to determine absolute close time) |
+| [params.closeTime] | <code>string</code> |  | Book close time. This is stored as local time, to be referenced against timezone |
+| [params.timezone] | <code>string</code> |  | Book's timezone (use this to determine absolute close time) |
 | [params.baseCurrency] | <code>string</code> | <code>&quot;USD&quot;</code> | Base currency for the Book |
 | [params.businessUnit] | <code>string</code> |  | A business unit to associate with the Book (e.g. Emerging Markets, Equities) |
 | [params.description] | <code>string</code> |  | Description of the book |
 | [params.positions] | <code>Array</code> |  | Array of objects [{asset_id: string, quantity: number}] |
+| [params.references] | <code>object</code> |  | References for the Book (e.g. for cost centre or broker account reference) |
 | [params.createdBy] | <code>string</code> |  | ID of the user that created this object (required if creating a new Book) |
 | [params.updatedBy] | <code>string</code> |  | ID of the user that updated this object (use if amending existing Book) |
 | [params.createdTime] | <code>date</code> |  | Time that the Book was created (required if creating new Book) |
