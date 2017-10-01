@@ -333,7 +333,7 @@ export function reactivate({ AMId, resourceId }, callback) {
 
 /**
  * Retrieve the asset config (settlement cycle) for a particular asset class.
- * @function reactivate
+ * @function getAssetConfig
  * @memberof module:api.Assets
  * @static
  * @param {object} params - object of parameters:

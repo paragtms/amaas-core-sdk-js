@@ -130,6 +130,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.fieldsSearch(params, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
         * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
         * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.getAssetConfig(params, [callback])](#module_api.Assets.getAssetConfig) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Books](#module_api.Books) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Books.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, [callback])](#module_api.Books.search) ⇒ <code>Promise</code> \| <code>null</code>
@@ -434,6 +435,7 @@ Retrieve temporary credentials for pub/sub connection
     * [.fieldsSearch(params, callback)](#module_api.Assets.fieldsSearch) ⇒ <code>Promise</code> \| <code>null</code>
     * [.deactivate(params, [callback])](#module_api.Assets.deactivate) ⇒ <code>Promise</code> \| <code>null</code>
     * [.reactivate(params, [callback])](#module_api.Assets.reactivate) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.getAssetConfig(params, [callback])](#module_api.Assets.getAssetConfig) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Assets.retrieve"></a>
 
@@ -569,6 +571,20 @@ Reactivate a deactivated Asset. This will set the Asset status to 'Active'.
 | params.AMId | <code>string</code> | AMId of the Asset to be deleted |
 | params.resourceId | <code>string</code> | Asset ID of the Asset to be deleted |
 | [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the reactivated Asset instance. Omit to return Promise |
+
+<a name="module_api.Assets.getAssetConfig"></a>
+
+#### Assets.getAssetConfig(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Retrieve the asset config (settlement cycle) for a particular asset class.
+
+**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the config data.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.assetClass | <code>string</code> | Asset class to retrive config for. |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the config data. |
 
 <a name="module_api.Books"></a>
 
