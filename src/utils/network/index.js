@@ -120,13 +120,9 @@ export function insertData(
     url,
     json: data
   }
-  let query = { camelcase: true }
-  if (queryParams) {
-    for (let key in queryParams) {
-      if (queryParams.hasOwnProperty(key)) {
-        query[key] = queryParams[key].join()
-      }
-    }
+  let query = {}
+  if (typeof queryParams === 'object' && Object.keys(queryParams).length > 0) {
+    query = parseQueryParams(queryParams)
   }
   let promise = utils.makeRequest({ method: 'POST', url, data, query, stage })
   if (typeof callback !== 'function') {
