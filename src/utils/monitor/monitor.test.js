@@ -312,7 +312,7 @@ describe('retrieveActivity', () => {
     expect(result).toBeInstanceOf(Promise)
   })
 
-  it('should call callback if supplied', done => {
+  it('should call callback if supplied', () => {
     network.retrieveData.mockImplementation(() =>
       Promise.resolve({ data: testActivity })
     )
@@ -322,7 +322,7 @@ describe('retrieveActivity', () => {
     })
   })
 
-  it('callback error', done => {
+  it('callback error', () => {
     network.retrieveData.mockImplementation(() => Promise.reject('testError'))
     api.retrieveActivity({ AMId: 1 }, (error, result) => {
       expect(error).toBeDefined()
