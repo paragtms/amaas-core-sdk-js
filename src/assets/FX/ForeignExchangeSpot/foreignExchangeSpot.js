@@ -20,6 +20,7 @@ class ForeignExchangeSpot extends ForeignExchange {
    * @param {string} [params.displayName] - Display name of the ForeignExchange
    * @param {string} params.underlying - Underlying assetID of the ForeignExchangeBase
    * @param {string} params.settlementDate - Settlement date for the spot pair
+   * @param {string} params.maturityDate - Maturity date for the spot pair
    * @param {array} params.countryCodes - Array of country codes __(required)__
    * @param {string} [params.clientId] - ID of the associated client
    * @param {object} [params.comments] - Object of Comments attached to the Foreign Exchange
@@ -40,6 +41,7 @@ class ForeignExchangeSpot extends ForeignExchange {
     displayName,
     underlying,
     settlementDate,
+    maturityDate,
     currency,
     countryCodes,
     clientId,
@@ -71,6 +73,7 @@ class ForeignExchangeSpot extends ForeignExchange {
       updatedTime,
       version
     })
+    this.maturityDate = maturityDate
     this.underlying = underlying
     this.settlementDate = settlementDate
   }
