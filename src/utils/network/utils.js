@@ -169,6 +169,9 @@ export function buildURL({ AMaaSClass, AMId, resourceId, stage, apiVersion }) {
     case 'monitorItems':
       baseURL = `${getEndpoint({ stage, apiVersion })}/monitor/items`
       break
+    case 'monitorActivities':
+      baseURL = `${getEndpoint({ stage, apiVersion })}/monitor/activities`
+      break
     case 'monitorEvents':
       baseURL = `${getEndpoint({ stage, apiVersion })}/monitor/events`
       break
