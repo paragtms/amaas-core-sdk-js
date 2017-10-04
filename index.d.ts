@@ -166,7 +166,7 @@ declare module '@amaas/amaas-core-sdk-js' {
   export interface IForeignExchangeSpot extends IForeignExchange {
     maturityDate: string
     underlying: string
-    settlementDate: string
+    settlementDate?: string
   }
   export interface IForeignExchangeForward extends IForeignExchangeSpot {
     fixingDate?: string
