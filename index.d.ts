@@ -609,6 +609,13 @@ declare module '@amaas/amaas-core-sdk-js' {
         }: { AMId: number; asset: assets.AssetClassTypes | assets.IAssetTypes },
         callback?: Function
       ): Promise<assets.AssetClassTypes> | void
+      function upsert(
+        {
+          AMId,
+          asset
+        }: { AMId: number; asset: assets.AssetClassTypes | assets.IAssetTypes },
+        callback?: Function
+      ): Promise<assets.AssetClassTypes> | void
       function amend(
         {
           AMId,
