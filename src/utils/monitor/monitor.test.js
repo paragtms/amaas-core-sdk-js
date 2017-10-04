@@ -10,6 +10,7 @@ network.deleteData = jest.fn()
 
 const testItem = { assetManagerId: 1 }
 const testEvent = { assetManagerId: 1 }
+const testActivity = { assetManagerId: 1 }
 
 describe('retrieveItems', () => {
   it('should return a promise if no callback is supplied', () => {
