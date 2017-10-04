@@ -1,4 +1,10 @@
-import { insertData, patchData, retrieveData, deleteData, searchData } from '../network'
+import {
+  insertData,
+  patchData,
+  retrieveData,
+  deleteData,
+  searchData
+} from '../network'
 import { Item } from '../../monitor'
 import { Event } from '../../monitor'
 import { Activity } from '../../monitor'
@@ -50,7 +56,7 @@ export function retrieveItems({ AMId, resourceId }, callback) {
  */
 export function insertNewItem({ AMId, item }, callback) {
   let data
-  if(item) {
+  if (item) {
     data = JSON.parse(JSON.stringify(item))
   }
   const params = {
@@ -201,7 +207,7 @@ export function retrieveEvent({ AMId, resourceId }, callback) {
         result = _parseEvent(result.data)
       }
       if (typeof callback === 'function') {
-         callback(null, result)
+        callback(null, result)
       }
       return result
     }
@@ -212,7 +218,7 @@ export function retrieveEvent({ AMId, resourceId }, callback) {
   promise.catch(error => callback(error))
 }
 
- /**
+/**
  * @function insertEvent
  * @memberof module:api.Monitor
  * @static
@@ -245,7 +251,7 @@ export function insertEvent({ AMId, event }, callback) {
   promise.catch(error => callback(error))
 }
 
- /**
+/**
  * @function closeEvent
  * @memberof module:api.Monitor
  * @static
@@ -276,7 +282,7 @@ export function closeEvent({ AMId, resourceId }, callback) {
 
 /**
  * Retrieve a Monitor Activity
- * @function retrieveActivity
+ * @function retrieveActivites
  * @memberof module:api.Monitor
  * @static
  * @param {object} params - object of parameters:

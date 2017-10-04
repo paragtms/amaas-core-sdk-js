@@ -444,6 +444,24 @@ declare module '@amaas/amaas-core-sdk-js' {
     version?: number
   }
 
+  export interface IMonitorActivity {
+    assetManagerId: number
+    clientId: number
+    activityId: string
+    bookId: string
+    entity: string
+    activityType: string
+    source: string
+    message: string
+    referenceId: string
+    referenceType: string
+    createdBy: string
+    createdTime: string
+    updatedBy: string
+    updatedTime: string
+    version: number
+  }
+
   // Transactions
   export interface ITransaction {
     assetManagerId: number
@@ -835,6 +853,10 @@ declare module '@amaas/amaas-core-sdk-js' {
         { AMId, resourceId }: { AMId: number; resourceId: string },
         callback?: Function
       ): Promise<monitor.Item> | void
+      function retrieveActivities(
+        { AMId }: { AMId: number },
+        callback?: Function
+      ): Promise<[monitor.Activity | IMonitorActivity]> | void
       function retrieveEvent(
         { AMId, resourceId }: { AMId: number; resourceId?: string },
         callback?: Function
@@ -1773,6 +1795,24 @@ declare module '@amaas/amaas-core-sdk-js' {
       updatedTime?: string
       version?: number
       constructor(props: IMonitorEvent)
+    }
+
+    class Activity {
+      assetManagerId: number
+      clientId: number
+      activityId: string
+      bookId: string
+      entity: string
+      activityType: string
+      source: string
+      message: string
+      referenceId: string
+      referenceType: string
+      createdBy: string
+      createdTime: string
+      updatedBy: string
+      updatedTime: string
+      version: number
     }
   }
 
