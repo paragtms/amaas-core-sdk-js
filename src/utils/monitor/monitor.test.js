@@ -303,12 +303,12 @@ describe('closeEvent', () => {
   })
 })
 
-describe('retrieveActivity', () => {
+describe('retrieveActivities', () => {
   it('should return a promise if no callback is supplied', () => {
     network.retrieveData.mockImplementation(() =>
       Promise.resolve({ data: testActivity })
     )
-    let result = api.retrieveActivity({ AMId: 1 })
+    let result = api.retrieveActivities({ AMId: 1 })
     expect(result).toBeInstanceOf(Promise)
   })
 
@@ -316,7 +316,7 @@ describe('retrieveActivity', () => {
     network.retrieveData.mockImplementation(() =>
       Promise.resolve({ data: testActivity })
     )
-    api.retrieveActivity({ AMId: 1 }, (error, result) => {
+    api.retrieveActivities({ AMId: 1 }, (error, result) => {
       expect(result).toBeDefined()
       done()
     })
@@ -324,7 +324,7 @@ describe('retrieveActivity', () => {
 
   it('callback error', () => {
     network.retrieveData.mockImplementation(() => Promise.reject('testError'))
-    api.retrieveActivity({ AMId: 1 }, (error, result) => {
+    api.retrieveActivities({ AMId: 1 }, (error, result) => {
       expect(error).toBeDefined()
       done()
     })
@@ -335,7 +335,7 @@ describe('retrieveActivity', () => {
     network.retrieveData.mockImplementation(() =>
       Promise.resolve({ data: testActivity })
     )
-    api.retrieveActivity({ AMId: 1 }).then(result => {
+    api.retrieveActivities({ AMId: 1 }).then(result => {
       expect(result).toEqual(expectedResult)
     })
   })
