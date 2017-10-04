@@ -11,6 +11,7 @@ const mockForwardParams = {
   underlying: 'EURUSD',
   countryCodes: [],
   settlementDate: '2017-12-31',
+  maturityDate: '2017-12-31',
   fixingDate: '2017-12-15',
   forwardRate: '2.03',
   comments: {},

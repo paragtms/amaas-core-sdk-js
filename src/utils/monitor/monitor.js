@@ -321,5 +321,5 @@ export function _parseEvent(event) {
 }
 
 export function _parseActivity(activity) {
-  return new Activity(event)
+  return new Activity(activity)
 }

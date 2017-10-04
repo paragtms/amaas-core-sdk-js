@@ -164,6 +164,7 @@ declare module '@amaas/amaas-core-sdk-js' {
     major?: boolean
   }
   export interface IForeignExchangeSpot extends IForeignExchange {
+    maturityDate: string
     underlying: string
     settlementDate: string
   }
@@ -1411,6 +1412,7 @@ declare module '@amaas/amaas-core-sdk-js' {
       constructor(props: IForeignExchange)
     }
     class ForeignExchangeSpot extends ForeignExchange {
+      maturityDate: string
       underlying: string
       settlementDate: string
       constructor(props: IForeignExchangeSpot)

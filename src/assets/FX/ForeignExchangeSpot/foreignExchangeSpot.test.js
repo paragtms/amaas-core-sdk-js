@@ -8,6 +8,7 @@ const mockFXSpotParams = {
   displayName: 'test displayName',
   underlying: 'EURUSD',
   settlementDate: '2017-12-31',
+  maturityDate: '2017-12-31',
   currency: 'EUR',
   countryCodes: [],
   comments: {},

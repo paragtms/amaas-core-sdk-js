@@ -19,6 +19,7 @@ class ForeignExchangeForward extends ForeignExchangeSpot {
    * @param {string} [params.clientId] - ID of the client
    * @param {object} params.countryCodes - An array of country codes
    * @param {string} params.settlementDate - The date of exchange of ownership
+   * @param {string} params.maturityDate - Maturity Date of the FX Forward
    * @param {string} [params.fixingDate] - The date of fixing exchange rate between two currencies 
    * @param {string} params.forwardRate - Currency exchange rate
    * @param {string} params.underlying - AssetId of the underlying ForeignExchange
@@ -42,6 +43,7 @@ class ForeignExchangeForward extends ForeignExchangeSpot {
     clientId,
     countryCodes,
     settlementDate,
+    maturityDate,
     fixingDate,
     forwardRate,
     underlying,
@@ -63,6 +65,7 @@ class ForeignExchangeForward extends ForeignExchangeSpot {
       description,
       displayName,
       settlementDate,
+      maturityDate,
       underlying,
       countryCodes,
       clientId,
