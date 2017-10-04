@@ -1,6 +1,7 @@
 import { insertData, patchData, retrieveData, deleteData, searchData } from '../network'
 import { Item } from '../../monitor'
 import { Event } from '../../monitor'
+import { Activity } from '../../monitor'
 
 /**
  * Retrieve a Monitor Item
@@ -273,10 +274,46 @@ export function closeEvent({ AMId, resourceId }, callback) {
   promise.catch(error => callback(error))
 }
 
+/**
+ * Retrieve a Monitor Activity
+ * @function retrieveActivity
+ * @memberof module:api.Monitor
+ * @static
+ * @param {object} params - object of parameters:
+ * @param {number} params.assetManagerId - Asset Manager ID of the Activities to be retrieved
+ * @param {function} callback - Called with two arguments (error, result) on completion. `result` is an array of Activities or a single Activity instance. Omit to return Promise
+ * @returns {Promise|null} - If no callback supplied, returns a Promise that resolves with an array of Activities or a single Activity instance
+ */
+export function retrieveActivities({ AMId }, callback) {
+  const params = {
+    AMaaSClass: 'monitorActivities',
+    AMId
+  }
+  let promise = retrieveData(params).then(result => {
+    if (Array.isArray(result.data)) {
+      result = result.data.map(activity => _parseActivity(activity))
+    } else {
+      result = _parseActivity(result.data)
+    }
+    if (typeof callback === 'function') {
+      callback(null, result)
+    }
+    return result
+  })
+  if (typeof callback !== 'function') {
+    return promise
+  }
+  promise.catch(error => callback(error))
+}
+
 export function _parseItem(item) {
   return new Item(item)
 }
 
 export function _parseEvent(event) {
   return new Event(event)
+}
+
+export function _parseActivity(activity) {
+  return new Activity(event)
 }
