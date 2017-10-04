@@ -1,6 +1,6 @@
 import * as api from './monitor'
 import * as network from '../network'
-import { Item, Event } from '../../monitor'
+import { Item, Event, Activity } from '../../monitor'
 
 network.retrieveData = jest.fn()
 network.insertData = jest.fn()
@@ -10,6 +10,7 @@ network.deleteData = jest.fn()
 
 const testItem = { assetManagerId: 1 }
 const testEvent = { assetManagerId: 1 }
+const testActivity = { assetManagerId: 1 }
 
 describe('retrieveItems', () => {
   it('should return a promise if no callback is supplied', () => {
@@ -299,5 +300,43 @@ describe('closeEvent', () => {
       .then(res => {
         expect(res).toEqual(expectedResult)
       })
+  })
+})
+
+describe('retrieveActivities', () => {
+  it('should return a promise if no callback is supplied', () => {
+    network.retrieveData.mockImplementation(() =>
+      Promise.resolve({ data: testActivity })
+    )
+    let result = api.retrieveActivities({ AMId: 1 })
+    expect(result).toBeInstanceOf(Promise)
+  })
+
+  it('should call callback if supplied', done => {
+    network.retrieveData.mockImplementation(() =>
+      Promise.resolve({ data: testActivity })
+    )
+    api.retrieveActivities({ AMId: 1 }, (error, result) => {
+      expect(result).toBeDefined()
+      done()
+    })
+  })
+
+  it('callback error', done => {
+    network.retrieveData.mockImplementation(() => Promise.reject('testError'))
+    api.retrieveActivities({ AMId: 1 }, (error, result) => {
+      expect(error).toBeDefined()
+      done()
+    })
+  })
+
+  it('returns an Activity instance', () => {
+    const expectedResult = new Activity({ assetManagerId: 1 })
+    network.retrieveData.mockImplementation(() =>
+      Promise.resolve({ data: testActivity })
+    )
+    api.retrieveActivities({ AMId: 1 }).then(result => {
+      expect(result).toEqual(expectedResult)
+    })
   })
 })
