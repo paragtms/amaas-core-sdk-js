@@ -13,7 +13,7 @@ const mockBookParams = {
   baseCurrency: 'SGD',
   businessUnit: 'testBusinessUnit',
   description: 'test description',
-  references: 'testBrokerReferenceOnBook',
+  reference: 'testBrokerReferenceOnBook',
   positions: []
 }
 
