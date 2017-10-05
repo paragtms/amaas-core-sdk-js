@@ -2491,6 +2491,7 @@ Construct a new FXForward instance (if there is a fixingDate, it is an NDF)
 | [params.clientId] | <code>string</code> |  | ID of the client |
 | params.countryCodes | <code>object</code> |  | An array of country codes |
 | params.settlementDate | <code>string</code> |  | The date of exchange of ownership |
+| params.maturityDate | <code>string</code> |  | Maturity Date of the FX Forward |
 | [params.fixingDate] | <code>string</code> |  | The date of fixing exchange rate between two currencies |
 | params.forwardRate | <code>string</code> |  | Currency exchange rate |
 | params.underlying | <code>string</code> |  | AssetId of the underlying ForeignExchange |
@@ -2530,6 +2531,7 @@ Construct a new Foreign Exchange instance
 | [params.displayName] | <code>string</code> |  | Display name of the ForeignExchange |
 | params.underlying | <code>string</code> |  | Underlying assetID of the ForeignExchangeBase |
 | params.settlementDate | <code>string</code> |  | Settlement date for the spot pair |
+| params.maturityDate | <code>string</code> |  | Maturity date for the spot pair |
 | params.countryCodes | <code>array</code> |  | Array of country codes __(required)__ |
 | [params.clientId] | <code>string</code> |  | ID of the associated client |
 | [params.comments] | <code>object</code> |  | Object of Comments attached to the Foreign Exchange |
