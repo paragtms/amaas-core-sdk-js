@@ -1,4 +1,10 @@
-import { retrieveData, searchData, putData, patchData, insertData } from '../network'
+import {
+  retrieveData,
+  searchData,
+  putData,
+  patchData,
+  insertData
+} from '../network'
 import Book from './../../books/Book/book'
 import BookPermission from './../../books/BookPermission'
 
@@ -338,7 +344,10 @@ export function readPermission({ AMId, userAssetManagerId, bookId }, callback) {
  * @param {function} [callback] - Called with two values (error, result) on completion. `result` is the modifed Book Permission instance.
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the modified Book Permission
  */
-export function writePermission({ AMId, userAssetManagerId, bookId }, callback) {
+export function writePermission(
+  { AMId, userAssetManagerId, bookId },
+  callback
+) {
   const data = new BookPermission({
     assetManagerId: AMId,
     userAssetManagerId,
@@ -377,7 +386,10 @@ export function writePermission({ AMId, userAssetManagerId, bookId }, callback) 
  * @param {function} [callback] - Called with two values (error, result) on completion. `result` is the modifed Book Permission instance.
  * @returns {Promise|null} If no callback supplied, returns a Promise that resolves with the modified Book Permission
  */
-export function deactivatePermission({ AMId, userAssetManagerId, bookId }, callback) {
+export function deactivatePermission(
+  { AMId, userAssetManagerId, bookId },
+  callback
+) {
   const data = new BookPermission({
     assetManagerId: AMId,
     userAssetManagerId,

@@ -1,4 +1,5 @@
 import Decimal from 'decimal.js'
+import isEmpty from 'lodash/isEmpty'
 
 import { AMaaSModel } from '../../core'
 import {
@@ -181,17 +182,23 @@ class Transaction extends AMaaSModel {
       references: {
         get: () => this._references,
         set: newReferences => {
-          if (!newReferences) {
+          if (!newReferences || isEmpty(newReferences)) {
             this._references = {}
           } else {
             let newRefs = {}
+            let primaryCount = 0
             for (let ref in newReferences) {
               if (newReferences.hasOwnProperty(ref)) {
                 newRefs[ref] = new Reference(
                   Object.assign({}, newReferences[ref])
                 )
               }
+              if (newReferences[ref].referencePrimary) primaryCount++
             }
+            if (primaryCount !== 1)
+              throw new Error(
+                `Exactly 1 primary Reference must be supplied - found: ${primaryCount}`
+              )
             this._references = newRefs
           }
         },

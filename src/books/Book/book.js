@@ -1,4 +1,5 @@
 import uuid from 'uuid'
+import isEmpty from 'lodash/isEmpty'
 
 import { AMaaSModel } from '../../core'
 import { BOOK_TYPES } from './enums'
@@ -82,15 +83,22 @@ class Book extends AMaaSModel {
       references: {
         get: () => this._references,
         set: newReferences => {
-          if (newReferences) {
+          if (newReferences && !isEmpty(newReferences)) {
             let refClass = {}
+            let primaryCount = 0
             for (let referenceName in newReferences) {
               if (newReferences.hasOwnProperty(referenceName)) {
                 refClass[referenceName] = new Reference(
                   newReferences[referenceName]
                 )
+                if (newReferences[referenceName].referencePrimary)
+                  primaryCount++
               }
             }
+            if (primaryCount !== 1)
+              throw new Error(
+                `Exactly 1 primary Reference must be supplied - found: ${primaryCount}`
+              )
             this._references = refClass
           } else {
             this._references = {}

@@ -5,7 +5,6 @@ import AssetLink from '../../children/Link/AssetLink'
 
 describe('Asset', () => {
   describe('constructor', () => {
-
     it('should set default issueDate correctly', () => {
       const testAsset = new Asset({})
       const issueDate = testAsset.issueDate
@@ -19,11 +18,11 @@ describe('Asset', () => {
 
     it('should set comments as an object of <string, Comment> type', () => {
       const comments = {
-        'Office': {
+        Office: {
           commentValue: 'comment 1',
           active: true
         },
-        'Legal': {
+        Legal: {
           commentValue: 'comment 2',
           active: false
         }
@@ -39,28 +38,35 @@ describe('Asset', () => {
 
     it('should set links as an object of <string, Link> type', () => {
       const links = {
-        'Single': [{
-          linkedAssetId: 'testId',
-          active: true
-        }],
-        'Multiple': [{
-          linkedAssetId: 'testId2',
-          active: true
-        }, {
-          linkedAssetId: 'testId3',
-          active: false
-        }]
+        Single: [
+          {
+            linkedAssetId: 'testId',
+            active: true
+          }
+        ],
+        Multiple: [
+          {
+            linkedAssetId: 'testId2',
+            active: true
+          },
+          {
+            linkedAssetId: 'testId3',
+            active: false
+          }
+        ]
       }
       const testAsset = new Asset({ links })
       expect(testAsset.links.Single[0]).toBeInstanceOf(AssetLink)
     })
 
-    it('should set references correctly (inclduing the AMaaS reference)', () => {
+    it('should set references correctly', () => {
       const references = {
-        'Office': {
+        Office: {
+          referencePrimary: 1,
           referenceValue: 'testRef1'
         },
-        'Legal': {
+        Legal: {
+          referencePrimary: false,
           referenceValue: 'testRef2'
         }
       }
@@ -68,10 +74,29 @@ describe('Asset', () => {
       const testRef = new Reference({ referenceValue: 't' })
       expect(testAsset.references.Office).toBeInstanceOf(Reference)
       expect(testAsset.references.Office.referenceValue).toEqual('testRef1')
+      expect(testAsset.references.Office.referencePrimary).toBeTruthy()
+    })
+
+    it('should throw if setting invalid number of primary references', () => {
+      const params = {
+        references: {
+          Primary: { referenceValue: '1', referencePrimary: true },
+          alsoPrimary: { referenceValue: '1', referencePrimary: true }
+        }
+      }
+      const willThrow = () => {
+        const asset = new Asset(params)
+      }
+      expect(willThrow).toThrowError(
+        new Error('Exactly 1 primary Reference must be supplied - found: 2')
+      )
     })
 
     it('should stringify correctly', () => {
-      const testAsset = new Asset({ assetId: 'testId', issueDate: '2017-04-17' })
+      const testAsset = new Asset({
+        assetId: 'testId',
+        issueDate: '2017-04-17'
+      })
       expect(JSON.parse(JSON.stringify(testAsset)).assetId).toEqual('testId')
     })
   })

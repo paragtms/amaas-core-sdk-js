@@ -65,15 +65,16 @@ Class representing a Reference
 Construct a new Reference instance
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| params | <code>object</code> | Reference creation options: |
-| params.referenceValue | <code>string</code> | The identifier of this Reference (e.g. transactionId) |
-| [params.createdBy] | <code>string</code> | ID of the user that created the Reference |
-| [params.updatedBy] | <code>string</code> | ID of the user that updated the Reference |
-| [params.createdTime] | <code>date</code> | Time that the Reference was created |
-| [params.updatedTime] | <code>date</code> | Time that the Reference was updated |
-| [params.version] | <code>number</code> | Version number of the Reference |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| params | <code>object</code> |  | Reference creation options: |
+| params.referenceValue | <code>string</code> |  | The identifier of this Reference (e.g. transactionId) |
+| [params.referencePrimary] | <code>boolean</code> | <code>false</code> | Whether the Reference is primary (a parent can only have 1 primary Reference) |
+| [params.createdBy] | <code>string</code> |  | ID of the user that created the Reference |
+| [params.updatedBy] | <code>string</code> |  | ID of the user that updated the Reference |
+| [params.createdTime] | <code>date</code> |  | Time that the Reference was created |
+| [params.updatedTime] | <code>date</code> |  | Time that the Reference was updated |
+| [params.version] | <code>number</code> |  | Version number of the Reference |
 
 <a name="module_core.AMaaSModel"></a>
 

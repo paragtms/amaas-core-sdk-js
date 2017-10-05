@@ -1,3 +1,5 @@
+import isEmpty from 'lodash/isEmpty'
+
 import { AMaaSModel } from '../../core'
 import { Address, Email } from '../Children'
 import { Comment, Reference } from '../../children'
@@ -38,15 +40,15 @@ class Party extends AMaaSModel {
   constructor({
     assetManagerId,
     partyId,
-    partyStatus='Active',
-    partyClass='Party',
+    partyStatus = 'Active',
+    partyClass = 'Party',
     baseCurrency,
-    description='',
-    addresses={},
-    emails={},
-    references={},
-    comments={},
-    links={},
+    description = '',
+    addresses = {},
+    emails = {},
+    references = {},
+    comments = {},
+    links = {},
     legalName,
     displayName,
     url,
@@ -67,7 +69,7 @@ class Party extends AMaaSModel {
       _emails: { writable: true, enumerable: false },
       emails: {
         get: () => this._emails,
-        set: (newEmails) => {
+        set: newEmails => {
           if (Object.keys(newEmails).length > 0) {
             let emails = {}
             let primaryEmail = 0
@@ -93,13 +95,15 @@ class Party extends AMaaSModel {
       _addresses: { writable: true, enumerable: false },
       addresses: {
         get: () => this._addresses,
-        set: (newAddresses) => {
+        set: newAddresses => {
           if (newAddresses && Object.keys(newAddresses).length > 0) {
             let addresses = {}
             let primaryAdd = 0
             for (let type in newAddresses) {
               if (newAddresses.hasOwnProperty(type)) {
-                addresses[type] = new Address(Object.assign({}, newAddresses[type]))
+                addresses[type] = new Address(
+                  Object.assign({}, newAddresses[type])
+                )
                 if (newAddresses[type].addressPrimary) {
                   primaryAdd++
                 }
@@ -112,19 +116,28 @@ class Party extends AMaaSModel {
           } else {
             this._addresses = {}
           }
-        }, enumerable: true
+        },
+        enumerable: true
       },
       _references: { writable: true, enumerable: false },
       references: {
         get: () => this._references,
-        set: (newReferences) => {
-          if (newReferences) {
+        set: newReferences => {
+          if (newReferences && !isEmpty(newReferences)) {
             let references = {}
+            let primaryCount = 0
             for (let ref in newReferences) {
               if (newReferences.hasOwnProperty(ref)) {
-                references[ref] = new Reference(Object.assign({}, newReferences[ref]))
+                references[ref] = new Reference(
+                  Object.assign({}, newReferences[ref])
+                )
               }
+              if (newReferences[ref].referencePrimary) primaryCount++
             }
+            if (primaryCount !== 1)
+              throw new Error(
+                `Exactly 1 primary Reference must be supplied - found: ${primaryCount}`
+              )
             this._references = references
           }
         },
@@ -133,7 +146,7 @@ class Party extends AMaaSModel {
       _comments: { writable: true, enumerable: false },
       comments: {
         get: () => this._comments,
-        set: (newComments) => {
+        set: newComments => {
           if (newComments) {
             let comments = {}
             for (let ref in newComments) {
@@ -149,7 +162,7 @@ class Party extends AMaaSModel {
       _links: { writable: true, enumerable: false },
       links: {
         get: () => this._links,
-        set: (newLinks) => {
+        set: newLinks => {
           if (newLinks) {
             let links = {}
             for (let name in newLinks) {
@@ -160,7 +173,9 @@ class Party extends AMaaSModel {
                     return new PartyLink(link)
                   })
                 } else {
-                  console.warn('All Links should be Arrays: if you are seeing this message then a non-Array link has been encountered and it will be skipped for now')
+                  console.warn(
+                    'All Links should be Arrays: if you are seeing this message then a non-Array link has been encountered and it will be skipped for now'
+                  )
                 }
               }
             }
@@ -172,7 +187,7 @@ class Party extends AMaaSModel {
       _partyStatus: { writable: true, enumerable: false },
       partyStatus: {
         get: () => this._partyStatus,
-        set: (newPartyStatus) => {
+        set: newPartyStatus => {
           if (newPartyStatus) {
             if (PARTY_STATUSES.indexOf(newPartyStatus) === -1) {
               throw new Error(`Invalid Party Status: ${newPartyStatus}`)
@@ -195,7 +210,7 @@ class Party extends AMaaSModel {
     this.references = references
     this.comments = comments
     this.links = links
-    this.legalName =legalName
+    this.legalName = legalName
     this.displayName = displayName
     this.url = url
   }
@@ -238,7 +253,7 @@ class Party extends AMaaSModel {
 
   // Check if input is a valid email string
   _checkEmail(email) {
-    const regex = new RegExp('^.+@.+\..+$')
+    const regex = new RegExp('^.+@.+..+$')
     if (!regex.test(email)) {
       throw new Error('Not a valid email')
     }
