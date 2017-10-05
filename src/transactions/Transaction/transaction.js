@@ -59,17 +59,19 @@ class Transaction extends AMaaSModel {
     price,
     transactionCurrency,
     settlementCurrency,
+    grossSettlement,
+    netSettlement,
     asset,
     executionTime,
-    transactionType='Trade',
+    transactionType = 'Trade',
     transactionId,
-    transactionStatus='New',
-    charges={},
-    codes={},
-    comments={},
-    links={},
-    parties={},
-    rates={},
+    transactionStatus = 'New',
+    charges = {},
+    codes = {},
+    comments = {},
+    links = {},
+    parties = {},
+    rates = {},
     references,
     postings,
     createdBy,
@@ -89,38 +91,56 @@ class Transaction extends AMaaSModel {
       _quantity: { writable: true, enumerable: false },
       quantity: {
         get: () => this._quantity,
-        set: (newQuantity=0) => {
+        set: (newQuantity = 0) => {
           this._quantity = new Decimal(newQuantity)
-        }, enumerable: true
+        },
+        enumerable: true
       },
       _price: { writable: true, enumerable: false },
       price: {
         get: () => this._price,
-        set: (newPrice=0) => {
+        set: (newPrice = 0) => {
           this._price = new Decimal(newPrice)
-        }, enumerable: true
+        },
+        enumerable: true
       },
       _grossSettlement: { writable: true, enumerable: false },
       grossSettlement: {
-        get: () => this._grossSettlement ? this._grossSettlement : this.price.times(this.quantity),
-        set: (newGrossSettlement=0) => {
-          this._grossSettlement = new Decimal(newGrossSettlement)
-        }, enumerable: true
+        get: () =>
+          this._grossSettlement
+            ? this._grossSettlement
+            : this.price.times(this.quantity),
+        set: newGrossSettlement => {
+          this._grossSettlement = newGrossSettlement
+            ? new Decimal(newGrossSettlement)
+            : undefined
+        },
+        enumerable: true
       },
       _netSettlement: { writable: true, enumerable: false },
       netSettlement: {
-        get: () => this._netSettlement ? this._netSettlement : this.grossSettlement.minus(this.chargesNetEffect()),
-        set: (newNetSettlement=0) => {
-          this._netSettlement = new Decimal(newNetSettlement)
-        }, enumerable: true
+        get: () =>
+          this._netSettlement
+            ? this._netSettlement
+            : this.grossSettlement.minus(this.chargesNetEffect()),
+        set: newNetSettlement => {
+          this._netSettlement = newNetSettlement
+            ? new Decimal(newNetSettlement)
+            : undefined
+        },
+        enumerable: true
       },
       _transactionAction: { writable: true, enumerable: false },
       transactionAction: {
         get: () => this._transactionAction,
-        set: (newTransactionAction) => {
+        set: newTransactionAction => {
           if (newTransactionAction) {
-            if (types.TRANSACTION_ACTIONS.indexOf(newTransactionAction) === -1) {
-              throw new Error(`Invalid Transaction Action: ${newTransactionAction}`)
+            if (
+              types.TRANSACTION_ACTIONS.indexOf(newTransactionAction) === -1
+            ) {
+              throw new Error(
+                `Invalid Transaction Action: ${newTransactionAction}`
+              )
             }
             this._transactionAction = newTransactionAction
           }
@@ -130,10 +150,14 @@ class Transaction extends AMaaSModel {
       _transactionStatus: { writable: true, enumerable: false },
       transactionStatus: {
         get: () => this._transactionStatus,
-        set: (newTransactionStatus) => {
+        set: newTransactionStatus => {
           if (newTransactionStatus) {
-            if (types.TRANSACTION_STATUSES.indexOf(newTransactionStatus) === -1) {
-              throw new Error(`Invalid Transaction Status: ${newTransactionStatus}`)
+            if (
+              types.TRANSACTION_STATUSES.indexOf(newTransactionStatus) === -1
+            ) {
+              throw new Error(
+                `Invalid Transaction Status: ${newTransactionStatus}`
+              )
             }
             this._transactionStatus = newTransactionStatus
           }
@@ -143,7 +167,7 @@ class Transaction extends AMaaSModel {
       _transactionType: { writable: true, enumerable: false },
       transactionType: {
         get: () => this._transactionType,
-        set: (newTransactionType) => {
+        set: newTransactionType => {
           if (newTransactionType) {
             if (types.TRANSACTION_TYPES.indexOf(newTransactionType) === -1) {
               throw new Error(`Invalid Transaction Type: ${newTransactionType}`)
@@ -156,14 +180,16 @@ class Transaction extends AMaaSModel {
       _references: { writable: true, enumerable: false },
       references: {
         get: () => this._references,
-        set: (newReferences) => {
+        set: newReferences => {
           if (!newReferences) {
             this._references = {}
           } else {
             let newRefs = {}
             for (let ref in newReferences) {
               if (newReferences.hasOwnProperty(ref)) {
-                newRefs[ref] = new Reference(Object.assign({}, newReferences[ref]))
+                newRefs[ref] = new Reference(
+                  Object.assign({}, newReferences[ref])
+                )
               }
             }
             this._references = newRefs
@@ -174,7 +200,7 @@ class Transaction extends AMaaSModel {
       _charges: { writable: true, enumerable: false },
       charges: {
         get: () => this._charges,
-        set: (newCharges) => {
+        set: newCharges => {
           if (newCharges) {
             let charges = {}
             for (let ref in newCharges) {
@@ -190,7 +216,7 @@ class Transaction extends AMaaSModel {
       _codes: { writable: true, enumerable: false },
       codes: {
         get: () => this._codes,
-        set: (newCodes) => {
+        set: newCodes => {
           if (newCodes) {
             let codes = {}
             for (let ref in newCodes) {
@@ -206,7 +232,7 @@ class Transaction extends AMaaSModel {
       _comments: { writable: true, enumerable: false },
       comments: {
         get: () => this._comments,
-        set: (newComments) => {
+        set: newComments => {
           if (newComments) {
             let comments = {}
             for (let ref in newComments) {
@@ -222,7 +248,7 @@ class Transaction extends AMaaSModel {
       _links: { writable: true, enumerable: false },
       links: {
         get: () => this._links,
-        set: (newLinks) => {
+        set: newLinks => {
           if (newLinks) {
             let links = {}
             for (let name in newLinks) {
@@ -232,7 +258,9 @@ class Transaction extends AMaaSModel {
                   return new TransactionLink(link)
                 })
               } else {
-                console.warn('All Links should be Arrays: if you are seeing this message then a non-Array link has been encountered and it will be skipped for now')
+                console.warn(
+                  'All Links should be Arrays: if you are seeing this message then a non-Array link has been encountered and it will be skipped for now'
+                )
               }
             }
             this._links = links
@@ -243,7 +271,7 @@ class Transaction extends AMaaSModel {
       _parties: { writable: true, enumerable: false },
       parties: {
         get: () => this._parties,
-        set: (newParties) => {
+        set: newParties => {
           if (newParties) {
             let parties = {}
             for (let ref in newParties) {
@@ -259,7 +287,7 @@ class Transaction extends AMaaSModel {
       _rates: { writable: true, enumerable: false },
       rates: {
         get: () => this._rates,
-        set: (newRates) => {
+        set: newRates => {
           if (newRates) {
             let rates = {}
             for (let ref in newRates) {
@@ -284,6 +312,8 @@ class Transaction extends AMaaSModel {
     this.price = price
     this.transactionCurrency = transactionCurrency
     this.settlementCurrency = settlementCurrency
+    this.grossSettlement = grossSettlement
+    this.netSettlement = netSettlement
     this.transactionType = transactionType
     this.transactionStatus = transactionStatus
     this.executionTime = executionTime
@@ -303,7 +333,7 @@ class Transaction extends AMaaSModel {
     if (Object.keys(this.charges).length == 0) {
       return new Decimal(0)
     }
-    let netCharges = new Decimal(0);
+    let netCharges = new Decimal(0)
     for (let chargeType in this.charges) {
       if (this.charges[chargeType].netAffecting) {
         netCharges = netCharges.plus(this.charges[chargeType].chargeValue)

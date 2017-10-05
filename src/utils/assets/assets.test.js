@@ -2,6 +2,7 @@ import uuid from 'uuid'
 import {
   retrieve,
   insert,
+  upsert,
   amend,
   partialAmend,
   search,
@@ -113,6 +114,27 @@ describe('utils/assets', () => {
           AMaaSClass: 'assets',
           AMId: 1,
           data: JSON.parse(JSON.stringify(mockAsset))
+        })
+        done()
+      })
+    })
+  })
+
+  describe('upsert', () => {
+    beforeAll(() => {
+      network.insertData.mockImplementation(() => Promise.resolve(mockAsset))
+    })
+    test('with promise', () => {
+      let promise = upsert({ AMId: 1 })
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('should call insertData with correct params', done => {
+      upsert({ AMId: 1, asset: mockAsset }, (error, result) => {
+        expect(network.insertData).toHaveBeenCalledWith({
+          AMaaSClass: 'assets',
+          AMId: 1,
+          data: JSON.parse(JSON.stringify(mockAsset)),
+          queryParams: { upsert: true }
         })
         done()
       })

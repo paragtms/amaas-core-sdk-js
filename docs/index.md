@@ -123,6 +123,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
     * [.Assets](#module_api.Assets) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Assets.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insert(params, [callback])](#module_api.Assets.insert) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.upsert(params, [callback])](#module_api.Assets.upsert) ⇒ <code>Promise</code> \| <code>null</code>
         * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
         * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
@@ -164,6 +165,7 @@ API Methods. These methods enable communication with the AMaaS Database. All met
         * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
         * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
         * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
+        * [.retrieveActivites(params, callback)](#module_api.Monitor.retrieveActivites) ⇒ <code>Promise</code> \| <code>null</code>
     * [.Netting](#module_api.Netting) : <code>object</code>
         * [.retrieve(params, [callback])](#module_api.Netting.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
         * [.send(params, [callback])](#module_api.Netting.send) ⇒ <code>Promise</code> \| <code>null</code>
@@ -428,6 +430,7 @@ Retrieve temporary credentials for pub/sub connection
 * [.Assets](#module_api.Assets) : <code>object</code>
     * [.retrieve(params, [callback])](#module_api.Assets.retrieve) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insert(params, [callback])](#module_api.Assets.insert) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.upsert(params, [callback])](#module_api.Assets.upsert) ⇒ <code>Promise</code> \| <code>null</code>
     * [.amend(params, [callback])](#module_api.Assets.amend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.partialAmend(params, [callback])](#module_api.Assets.partialAmend) ⇒ <code>Promise</code> \| <code>null</code>
     * [.search(params, callback)](#module_api.Assets.search) ⇒ <code>Promise</code> \| <code>null</code>
@@ -456,6 +459,21 @@ Retrieve Asset data for specified AMId and assetId
 
 #### Assets.insert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
 Insert a new Asset into the database
+
+**Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
+**Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Asset instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.AMId | <code>number</code> | Asset Manager ID of the Asset Manager to whom the inserted Asset belongs |
+| params.asset | <code>Asset</code> | Asset instance to insert |
+| [callback] | <code>function</code> | Called with two arguments (error, result) on completion. ` result` is the inserted Asset instance. Omit to return Promise |
+
+<a name="module_api.Assets.upsert"></a>
+
+#### Assets.upsert(params, [callback]) ⇒ <code>Promise</code> \| <code>null</code>
+Upsert a new Asset into the database
 
 **Kind**: static method of [<code>Assets</code>](#module_api.Assets)  
 **Returns**: <code>Promise</code> \| <code>null</code> - If no callback supplied, returns a Promise that resolves with the inserted Asset instance  
@@ -961,6 +979,7 @@ Make request and search data
     * [.retrieveEvent(params, [callback])](#module_api.Monitor.retrieveEvent) ⇒ <code>Promise</code> \| <code>null</code>
     * [.insertEvent(params, [callback])](#module_api.Monitor.insertEvent) ⇒ <code>Promise</code> \| <code>null</code>
     * [.closeEvent(params, callback)](#module_api.Monitor.closeEvent) ⇒ <code>Promise</code> \| <code>null</code>
+    * [.retrieveActivites(params, callback)](#module_api.Monitor.retrieveActivites) ⇒ <code>Promise</code> \| <code>null</code>
 
 <a name="module_api.Monitor.retrieveItem"></a>
 
@@ -1075,6 +1094,20 @@ Close a monitor item
 | params.AMId | <code>number</code> | Asset Manager ID of the Event to close |
 | params.resourceId | <code>string</code> | Event ID to close |
 | callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is the closed Event. Omit to return promise |
+
+<a name="module_api.Monitor.retrieveActivites"></a>
+
+#### Monitor.retrieveActivites(params, callback) ⇒ <code>Promise</code> \| <code>null</code>
+Retrieve a Monitor Activity
+
+**Kind**: static method of [<code>Monitor</code>](#module_api.Monitor)  
+**Returns**: <code>Promise</code> \| <code>null</code> - - If no callback supplied, returns a Promise that resolves with an array of Activities or a single Activity instance  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | object of parameters: |
+| params.assetManagerId | <code>number</code> | Asset Manager ID of the Activities to be retrieved |
+| callback | <code>function</code> | Called with two arguments (error, result) on completion. `result` is an array of Activities or a single Activity instance. Omit to return Promise |
 
 <a name="module_api.Netting"></a>
 
@@ -3652,10 +3685,39 @@ Classes for the Monitor Service
 
 
 * [monitor](#module_monitor)
+    * [.Activity](#module_monitor.Activity) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+        * [new Activity(params)](#new_module_monitor.Activity_new)
     * [.Event](#module_monitor.Event) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
         * [new Event(params)](#new_module_monitor.Event_new)
     * [.Item](#module_monitor.Item) ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
         * [new Item(params)](#new_module_monitor.Item_new)
+
+<a name="module_monitor.Activity"></a>
+
+### monitor.Activity ⇐ [<code>AMaaSModel</code>](#module_core.AMaaSModel)
+Class representing a Monitor Item
+
+**Kind**: static class of [<code>monitor</code>](#module_monitor)  
+**Extends**: [<code>AMaaSModel</code>](#module_core.AMaaSModel)  
+<a name="new_module_monitor.Activity_new"></a>
+
+#### new Activity(params)
+Construct a new Monitor item
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| params | <code>object</code> | Item creation options: |
+| params.assetManagerId | <code>number</code> | Asset Manager ID of owner |
+| params.clientId | <code>number</code> | Client ID associated with the Monitor Item |
+| params.activityId | <code>string</code> | Activity ID associated with the Monitor Item |
+| params.bookId | <code>string</code> | Book ID associated with the Monitor Item |
+| params.entity | <code>string</code> | entity of Monitor Item |
+| params.activityType | <code>string</code> | activityType of the Monitor Item |
+| params.source | <code>string</code> | source of the Monitor Item |
+| params.message | <code>string</code> | Message attached to the Monitor item |
+| params.referenceId | <code>string</code> | referenceId associated with the Monitor Item |
+| params.referenceType | <code>string</code> | referenceType associated with the Monitor Item |
 
 <a name="module_monitor.Event"></a>
 

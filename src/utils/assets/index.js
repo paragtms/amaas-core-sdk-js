@@ -3,6 +3,28 @@
  * @memberof module:api
  */
 
-import { retrieve, insert, amend, partialAmend, search, fuzzySearch, fieldsSearch, deactivate, reactivate } from './assets.js'
+import {
+  retrieve,
+  insert,
+  upsert,
+  amend,
+  partialAmend,
+  search,
+  fuzzySearch,
+  fieldsSearch,
+  deactivate,
+  reactivate
+} from './assets.js'
 
-export { retrieve, insert, amend, partialAmend, search, fuzzySearch, fieldsSearch, deactivate, reactivate }
+export {
+  retrieve,
+  insert,
+  upsert,
+  amend,
+  partialAmend,
+  search,
+  fuzzySearch,
+  fieldsSearch,
+  deactivate,
+  reactivate
+}

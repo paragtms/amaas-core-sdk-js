@@ -36,7 +36,10 @@ export function configureAuth(config) {
  * @param {string} [resourceId]: Id of the resource being requested (e.g. book_id)
  * @param {object} [query] - Additional query parameters
 */
-export function retrieveData({ AMaaSClass, AMId, resourceId, query }, callback) {
+export function retrieveData(
+  { AMaaSClass, AMId, resourceId, query },
+  callback
+) {
   let url
   let data = {}
   // If resourceId is supplied, append to url. Otherwise, return all data for AMId
@@ -53,26 +56,33 @@ export function retrieveData({ AMaaSClass, AMId, resourceId, query }, callback) 
   if (typeof query === 'object' && Object.keys(query).length > 0) {
     queryParams = parseQueryParams(query)
   }
-  let promise = utils.makeRequest({ method: 'GET', url, query: queryParams, stage })
+  let promise = utils.makeRequest({
+    method: 'GET',
+    url,
+    query: queryParams,
+    stage
+  })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
   }
-  promise.then((response, error) => {
-    if (!error && response.status == 200) {
-      callback(null, response.body)
-    } else {
-      const statusCode = response ? response.status : ''
-      const requestError = {statusCode, error}
-      if (typeof callback === 'function') {
-        callback(requestError)
+  promise
+    .then((response, error) => {
+      if (!error && response.status == 200) {
+        callback(null, response.body)
+      } else {
+        const statusCode = response ? response.status : ''
+        const requestError = { statusCode, error }
+        if (typeof callback === 'function') {
+          callback(requestError)
+        }
       }
-    }
-  }).catch(err => {
-    if (typeof callback === 'function') {
-      return callback(err)
-    }
-  })
+    })
+    .catch(err => {
+      if (typeof callback === 'function') {
+        return callback(err)
+      }
+    })
 }
 
 /***
@@ -85,7 +95,10 @@ export function retrieveData({ AMaaSClass, AMId, resourceId, query }, callback) 
  * @param {string} AMId: Asset Manager Id (required)
  * @param {string} data: data to insert into database
 */
-export function insertData({ AMaaSClass, AMId, resourceId, data, queryParams }, callback) {
+export function insertData(
+  { AMaaSClass, AMId, resourceId, data, queryParams },
+  callback
+) {
   let url
   try {
     url = utils.buildURL({
@@ -105,33 +118,34 @@ export function insertData({ AMaaSClass, AMId, resourceId, data, queryParams }, 
   // Data is object with required key value pairs for that class
   const params = {
     url,
-    json: data 
+    json: data
   }
-  let query = { camelcase: true }
-  if (queryParams) {
-    for (let key in queryParams) {
-      if (queryParams.hasOwnProperty(key)) {
-        query[key] = queryParams[key].join()
-      }
-    }
+  let query = {}
+  if (typeof queryParams === 'object' && Object.keys(queryParams).length > 0) {
+    query = parseQueryParams(queryParams)
   }
   let promise = utils.makeRequest({ method: 'POST', url, data, query, stage })
   if (typeof callback !== 'function') {
     // return promise if callback is not provided
     return promise.then(response => response.body)
   }
-  promise.then((response, error) => {
-    let body
-    if (response) body = response.body
-    _networkCallback(error, response, body, callback)
-  }).catch(err => {
-    if (typeof callback === 'function') {
-      return callback(err)
-    }
-  })
+  promise
+    .then((response, error) => {
+      let body
+      if (response) body = response.body
+      _networkCallback(error, response, body, callback)
+    })
+    .catch(err => {
+      if (typeof callback === 'function') {
+        return callback(err)
+      }
+    })
 }
 
-export function putData({ AMaaSClass, AMId, resourceId, data, query }, callback) {
+export function putData(
+  { AMaaSClass, AMId, resourceId, data, query },
+  callback
+) {
   let url
   try {
     url = utils.buildURL({
@@ -139,7 +153,7 @@ export function putData({ AMaaSClass, AMId, resourceId, data, query }, callback)
       AMId,
       resourceId,
       stage,
-      apiVersion,
+      apiVersion
     })
   } catch (e) {
     if (typeof callback !== 'function') {
@@ -153,18 +167,23 @@ export function putData({ AMaaSClass, AMId, resourceId, data, query }, callback)
     // return promise if callback is not provided
     return promise.then(response => response.body)
   }
-  promise.then((response, error) => {
-    let body
-    if (response) body = response.body
-    _networkCallback(error, response, body, callback)
-  }).catch(err => {
-    if (typeof callback === 'function') {
-      return callback(err)
-    }
-  })
+  promise
+    .then((response, error) => {
+      let body
+      if (response) body = response.body
+      _networkCallback(error, response, body, callback)
+    })
+    .catch(err => {
+      if (typeof callback === 'function') {
+        return callback(err)
+      }
+    })
 }
 
-export function patchData({ AMaaSClass, AMId, resourceId, data, query }, callback) {
+export function patchData(
+  { AMaaSClass, AMId, resourceId, data, query },
+  callback
+) {
   let url
   try {
     url = utils.buildURL({
@@ -190,15 +209,17 @@ export function patchData({ AMaaSClass, AMId, resourceId, data, query }, callbac
     // return promise if callback is not provided
     return promise.then(response => response.body)
   }
-  promise.then((response, error) => {
-    let body
-    if (response) body = response.body
-    _networkCallback(error, response, body, callback)
-  }).catch(err => {
-    if (typeof callback === 'function') {
-      return callback(err)
-    }
-  })
+  promise
+    .then((response, error) => {
+      let body
+      if (response) body = response.body
+      _networkCallback(error, response, body, callback)
+    })
+    .catch(err => {
+      if (typeof callback === 'function') {
+        return callback(err)
+      }
+    })
 }
 
 export function deleteData({ AMaaSClass, AMId, resourceId }, callback) {
@@ -223,15 +244,17 @@ export function deleteData({ AMaaSClass, AMId, resourceId }, callback) {
     // return promise if callback is not provided
     return promise.then(response => response.body)
   }
-  promise.then((response, error) => {
-    let body
-    if (response) body = response.body
-    _networkCallback(error, response, body, callback)
-  }).catch(err => {
-    if (typeof callback === 'function') {
-      return callback(err)
-    }
-  })
+  promise
+    .then((response, error) => {
+      let body
+      if (response) body = response.body
+      _networkCallback(error, response, body, callback)
+    })
+    .catch(err => {
+      if (typeof callback === 'function') {
+        return callback(err)
+      }
+    })
 }
 
 /*
@@ -262,15 +285,17 @@ export function searchData({ AMaaSClass, AMId, query }, callback) {
     // return promise if callback is not provided
     return promise.then(response => response.body)
   }
-  promise.then((response, error) => {
-    let body
-    if (response) body = response.body
-    _networkCallback(error, response, body, callback)
-  }).catch(err => {
-    if (typeof callback === 'function') {
-      return callback(err)
-    }
-  })
+  promise
+    .then((response, error) => {
+      let body
+      if (response) body = response.body
+      _networkCallback(error, response, body, callback)
+    })
+    .catch(err => {
+      if (typeof callback === 'function') {
+        return callback(err)
+      }
+    })
 }
 
 function parseQueryParams(query) {
