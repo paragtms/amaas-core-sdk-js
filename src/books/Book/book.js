@@ -31,7 +31,7 @@ class Book extends AMaaSModel {
    * @param {string} [params.businessUnit] - A business unit to associate with the Book (e.g. Emerging Markets, Equities)
    * @param {string} [params.description] - Description of the book
    * @param {Array} [params.positions] - Array of objects [{asset_id: string, quantity: number}]
-   * @param {object} [params.references] - References for the Book (e.g. for cost centre or broker account reference)
+   * @param {object} [params.reference] - Reference for the Book
    * @param {string} [params.createdBy] - ID of the user that created this object (required if creating a new Book)
    * @param {string} [params.updatedBy] - ID of the user that updated this object (use if amending existing Book)
    * @param {date} [params.createdTime] - Time that the Book was created (required if creating new Book)
@@ -50,7 +50,7 @@ class Book extends AMaaSModel {
     baseCurrency = 'USD',
     businessUnit = '',
     description = '',
-    references = {},
+    reference = '',
     positions = [],
     createdBy,
     updatedBy,
@@ -79,33 +79,6 @@ class Book extends AMaaSModel {
         },
         enumerable: true
       },
-      _references: { writable: true, enumerable: false },
-      references: {
-        get: () => this._references,
-        set: newReferences => {
-          if (newReferences && !isEmpty(newReferences)) {
-            let refClass = {}
-            let primaryCount = 0
-            for (let referenceName in newReferences) {
-              if (newReferences.hasOwnProperty(referenceName)) {
-                refClass[referenceName] = new Reference(
-                  newReferences[referenceName]
-                )
-                if (newReferences[referenceName].referencePrimary)
-                  primaryCount++
-              }
-            }
-            if (primaryCount !== 1)
-              throw new Error(
-                `Exactly 1 primary Reference must be supplied - found: ${primaryCount}`
-              )
-            this._references = refClass
-          } else {
-            this._references = {}
-          }
-        },
-        enumerable: true
-      }
     })
     this.assetManagerId = assetManagerId
     this.bookId = bookId
@@ -119,7 +92,7 @@ class Book extends AMaaSModel {
     this.businessUnit = businessUnit
     this.description = description
     this.positions = positions
-    this.references = references
+    this.reference = reference
   }
 
   positionsByAsset() {
