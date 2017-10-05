@@ -34,6 +34,15 @@ let mockAsset = {
   assetId: 'testAssetID'
 }
 
+let mockConfig = {
+  settlementCycle: {
+    SGP: 3
+  },
+  exchangeSettlementCycleOverrides: {
+    MISX: 2
+  }
+}
+
 let mockFuzzyResult = {
   total: 25650,
   max_score: 1,
@@ -307,6 +316,25 @@ describe('utils/assets', () => {
           AMId: 1,
           resourceId: 'testID',
           data: { assetStatus: 'Active' }
+        })
+        done()
+      })
+    })
+  })
+
+  describe('getAssetConfig', () => {
+    beforeAll(() => {
+      network.retrieveData.mockImplementation(() => Promise.resolve(mockConfig))
+    })
+    test('with promise', () => {
+      let promise = getAssetConfig({})
+      expect(promise).toBeInstanceOf(Promise)
+    })
+    it('calls retrieveData with the correct params', done => {
+      getAssetConfig({ assetClass: 'Equity' }, (error, result) => {
+        expect(network.retrieveData).toHaveBeenCalledWith({
+          AMaaSClass: 'assetConfig',
+          AMId: 'Equity'
         })
         done()
       })
