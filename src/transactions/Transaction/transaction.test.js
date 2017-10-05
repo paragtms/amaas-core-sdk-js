@@ -25,14 +25,31 @@ describe('Transaction class', () => {
 
     it('should set References correctly', () => {
       const references = {
-        INT: { referenceValue: 'Internal1' },
+        INT: { referenceValue: 'Internal1', referencePrimary: 1 },
         EXT: new Reference({ referenceValue: 'External1' })
       }
       testTrans.references = references
       expect(testTrans.references.INT).toBeDefined()
       expect(testTrans.references.INT.referenceValue).toEqual('Internal1')
+      expect(testTrans.references.INT.referencePrimary).toBeTruthy()
       expect(testTrans.references.EXT).toBeDefined()
       expect(testTrans.references.EXT.referenceValue).toEqual('External1')
+      expect(testTrans.references.EXT.referencePrimary).toBeFalsy()
+    })
+
+    it('should throw if setting invalid number of primary references', () => {
+      const params = {
+        references: {
+          Primary: { referenceValue: '1', referencePrimary: true },
+          anotherPrimary: { referenceValue: '2', referencePrimary: true }
+        }
+      }
+      const willThrow = () => {
+        const trans = new Transaction(params)
+      }
+      expect(willThrow).toThrowError(
+        'Exactly 1 primary Reference must be supplied - found: 2'
+      )
     })
 
     it('should set Charges correctly', () => {

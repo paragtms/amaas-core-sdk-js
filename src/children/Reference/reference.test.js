@@ -10,9 +10,16 @@ describe('Reference', () => {
   })
   describe('constructor', () => {
     it('it should set referenceValue correctly', () => {
-        const value = 'C92US'
-        const reference = new Reference({ referenceValue: value })
-        expect(reference.referenceValue).toEqual(value)
-      })
+      const value = 'C92US'
+      const reference = new Reference({ referenceValue: value })
+      expect(reference.referenceValue).toEqual(value)
+    })
+
+    it('sets referencePrimary', () => {
+      const primaryReference = new Reference({ referencePrimary: 1 })
+      const nonPrimaryReference = new Reference({ referencePrimary: 0 })
+      expect(primaryReference.referencePrimary).toBeTruthy()
+      expect(nonPrimaryReference.referencePrimary).toBeFalsy()
+    })
   })
 })

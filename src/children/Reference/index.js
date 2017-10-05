@@ -16,7 +16,15 @@ class Reference extends AMaaSModel {
     * @param {date} [params.updatedTime] - Time that the Reference was updated
     * @param {number} [params.version] - Version number of the Reference
   */
-  constructor({ referenceValue, createdBy, updatedBy, createdTime, updatedTime, version }) {
+  constructor({
+    referenceValue,
+    referencePrimary,
+    createdBy,
+    updatedBy,
+    createdTime,
+    updatedTime,
+    version
+  }) {
     super({
       createdBy,
       updatedBy,
@@ -25,41 +33,8 @@ class Reference extends AMaaSModel {
       version
     })
     this.referenceValue = referenceValue
+    this.referencePrimary = !!referencePrimary
   }
-
-  // set active(newActive) {
-  //   switch (newActive) {
-  //     case false:
-  //       this._active = false
-  //       break
-  //     case undefined:
-  //       this._active = true
-  //       break
-  //     default:
-  //       this._active = newActive
-  //   }
-  // }
-  //
-  // get active() {
-  //   return this._active
-  // }
-
-
-  // toJSON() {
-  //   return Object.assign({}, {
-  //     active: this.active
-  //   }, this)
-    // return {
-    //   reference_value: this.referenceValue,
-    //   active: this.active,
-    //   created_by: this.createdBy,
-    //   updated_by: this.updatedBy,
-    //   created_time: this.createdTime,
-    //   updated_time: this.updatedTime,
-    //   version: this.version
-    // }
-  // }
-
 }
 
 export default Reference

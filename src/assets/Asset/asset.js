@@ -1,3 +1,5 @@
+import isEmpty from 'lodash/isEmpty'
+
 import { AMaaSModel } from '../../core'
 import { Comment, Reference } from '../../children'
 import AssetLink from '../../children/Link/AssetLink'
@@ -39,17 +41,17 @@ class Asset extends AMaaSModel {
   constructor({
     assetManagerId,
     assetId,
-    assetClass='Asset',
+    assetClass = 'Asset',
     fungible,
     assetIssuerId,
-    assetStatus='Active',
+    assetStatus = 'Active',
     countryId,
     venueId,
     currency,
     issueDate,
-    description='',
-    displayName='',
-    rollPrice=true,
+    description = '',
+    displayName = '',
+    rollPrice = true,
     clientId,
     comments,
     links,
@@ -72,7 +74,7 @@ class Asset extends AMaaSModel {
       _issueDate: { writable: true, enumerable: false },
       issueDate: {
         get: () => this._issueDate,
-        set: (newIssueDate) => {
+        set: newIssueDate => {
           // Accepts string 'YYYY-MM-DD'
           if (newIssueDate) {
             this._issueDate = newIssueDate
@@ -85,7 +87,7 @@ class Asset extends AMaaSModel {
       _comments: { writable: true, enumerable: false },
       comments: {
         get: () => this._comments,
-        set: (newComments) => {
+        set: newComments => {
           if (newComments) {
             let commentsClass = {}
             for (let name in newComments) {
@@ -103,7 +105,7 @@ class Asset extends AMaaSModel {
       _links: { writable: true, enumerable: false },
       links: {
         get: () => this._links,
-        set: (newLinks) => {
+        set: newLinks => {
           if (newLinks) {
             let linksClass = {}
             for (let name in newLinks) {
@@ -114,7 +116,9 @@ class Asset extends AMaaSModel {
                     return new AssetLink(link)
                   })
                 } else {
-                  console.warn('All Links should be Arrays: if you are seeing this message then a non-Array link has been encountered and it will be skipped for now')
+                  console.warn(
+                    'All Links should be Arrays: if you are seeing this message then a non-Array link has been encountered and it will be skipped for now'
+                  )
                 }
               }
             }
@@ -128,19 +132,26 @@ class Asset extends AMaaSModel {
       _references: { writable: true, enumerable: false },
       references: {
         get: () => this._references,
-        set: (newReferences) => {
-          if (newReferences) {
+        set: newReferences => {
+          if (newReferences && !isEmpty(newReferences)) {
             let refClass = {}
+            let primaryCount = 0
             for (let name in newReferences) {
               if (newReferences.hasOwnProperty(name)) {
                 refClass[name] = new Reference(newReferences[name])
               }
+              if (newReferences[name].referencePrimary) primaryCount++
             }
+            if (primaryCount !== 1)
+              throw new Error(
+                `Exactly 1 primary Reference must be supplied - found: ${primaryCount}`
+              )
             this._references = refClass
           } else {
             this._references = {}
           }
-        }, enumerable: true
+        },
+        enumerable: true
       }
     })
 
@@ -148,7 +159,9 @@ class Asset extends AMaaSModel {
     this.assetId = assetId
     this.assetClass = assetClass
     this.assetType = this.constructor.name
-    this.assetTypeDisplay = this.constructor.name.replace(/([A-Z])/g, ' $1').trim()
+    this.assetTypeDisplay = this.constructor.name
+      .replace(/([A-Z])/g, ' $1')
+      .trim()
     this.fungible = fungible
     this.assetIssuerId = assetIssuerId
     this.assetStatus = assetStatus
