@@ -486,6 +486,8 @@ declare module '@amaas/amaas-core-sdk-js' {
     price?: any
     transactionCurrency?: string
     settlementCurrency?: string
+    grossSettlement?: any
+    netSettlement?: any
     asset?: any
     executionTime?: string
     transactionType?:
@@ -1842,6 +1844,8 @@ declare module '@amaas/amaas-core-sdk-js' {
       price?: any
       transactionCurrency?: string
       settlementCurrency?: string
+      grossSettlement?: any
+      netSettlement?: any
       asset?: any
       executionTime?: string
       transactionType?:
